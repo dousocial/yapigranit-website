@@ -1,8 +1,16 @@
+import { fileURLToPath } from "url";
+import { dirname, resolve } from "path";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+// Resolve upward to the repo root where node_modules lives
+// Worktree path: <repo>/.claude/worktrees/<name> → 3 levels up = <repo>
+const repoRoot = resolve(__dirname, "../../..");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   turbopack: {
-    root: process.cwd()
+    root: repoRoot,
   },
   images: {
     remotePatterns: [
