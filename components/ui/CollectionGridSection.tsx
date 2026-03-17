@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 
+import { useLanguage } from "@/lib/i18n/LanguageContext";
+
 type CollectionItem = {
   id: string;
   name: string;
@@ -144,6 +146,7 @@ function IconCheck({ className }: { className?: string }) {
 }
 
 export default function CollectionGridSection({ items }: { items: CollectionItem[] }) {
+  const { t } = useLanguage();
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeFilters, setActiveFilters] = useState<Filters>({
@@ -227,7 +230,7 @@ export default function CollectionGridSection({ items }: { items: CollectionItem
           <div className="flex items-center gap-3">
             <span className="h-px w-8 bg-gold/60" />
             <h2 className="text-2xl md:text-3xl font-serif tracking-[0.2em] text-white">
-              Koleksiyon
+              {t.grid.title}
             </h2>
           </div>
 
@@ -237,7 +240,7 @@ export default function CollectionGridSection({ items }: { items: CollectionItem
               <input
                 value={searchTerm}
                 onChange={(event) => setSearchTerm(event.target.value)}
-                placeholder="Taş adı veya kod..."
+                placeholder={t.grid.searchPlaceholder}
                 className="w-72 rounded-full border border-white/10 bg-black/60 px-4 py-2 pl-10 text-sm text-white placeholder:text-white/40 focus:border-gold focus:outline-none"
               />
             </div>
@@ -260,7 +263,7 @@ export default function CollectionGridSection({ items }: { items: CollectionItem
           >
             <div className="flex items-center justify-between md:hidden mb-6">
               <span className="text-xs uppercase tracking-[0.3em] text-gold font-bold">
-                Filtreler
+                {t.grid.filters}
               </span>
               <button
                 type="button"
@@ -274,8 +277,8 @@ export default function CollectionGridSection({ items }: { items: CollectionItem
             <div className="space-y-8">
               {(
                 [
-                  ["brand", "Marka Adı"],
-                  ["color", "Renk"]
+                  ["brand", t.grid.brandName],
+                  ["color", t.grid.color]
                 ] as Array<[keyof Filters, string]>
               ).map(([key, label]) => (
                 <div key={key}>
@@ -321,7 +324,7 @@ export default function CollectionGridSection({ items }: { items: CollectionItem
                   onClick={() => setActiveFilters({ brand: [], color: [] })}
                   className="w-full border border-gold/40 text-gold text-xs uppercase tracking-[0.3em] py-3 hover:bg-gold/10 transition-colors"
                 >
-                  Filtreleri Temizle
+                  {t.grid.clearFilters}
                 </button>
               )}
             </div>
@@ -331,23 +334,23 @@ export default function CollectionGridSection({ items }: { items: CollectionItem
             <div className="flex items-center justify-between mb-6">
               <span className="text-sm text-white/60">
                 <strong className="text-white">{filteredItems.length}</strong>{" "}
-                Ürün listeleniyor
+                {t.grid.results}
               </span>
               <button
                 type="button"
                 className="flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
               >
-                Sırala <IconChevronDown className="h-4 w-4" />
+                {t.grid.sort} <IconChevronDown className="h-4 w-4" />
               </button>
             </div>
 
             {filteredItems.length === 0 ? (
                 <div className="text-center py-16 border border-white/10 bg-white/5">
                   <h3 className="text-xl font-serif mb-2 text-white">
-                    Sonuç Bulunamadı
+                    {t.grid.noResults}
                   </h3>
                   <p className="text-white/50 text-sm">
-                    Seçtiğiniz kriterlere uygun taş bulunmamaktadır.
+                    {t.grid.noResultsDesc}
                   </p>
                   {hasFilters && (
                     <button
@@ -355,7 +358,7 @@ export default function CollectionGridSection({ items }: { items: CollectionItem
                       onClick={() => setActiveFilters({ brand: [], color: [] })}
                       className="mt-4 text-gold text-xs uppercase tracking-[0.3em]"
                     >
-                      Filtreleri Temizle
+                      {t.grid.clearFilters}
                     </button>
                   )}
                 </div>
@@ -410,7 +413,7 @@ export default function CollectionGridSection({ items }: { items: CollectionItem
                     onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
                     disabled={safePage === 1}
                     className="h-9 w-9 border border-white/20 rounded-full flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed hover:border-gold/60 hover:text-gold transition-colors"
-                    aria-label="Önceki sayfa"
+                    aria-label={t.grid.prevPage}
                   >
                     ‹
                   </button>
@@ -439,7 +442,7 @@ export default function CollectionGridSection({ items }: { items: CollectionItem
                     }
                     disabled={safePage === totalPages}
                     className="h-9 w-9 border border-white/20 rounded-full flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed hover:border-gold/60 hover:text-gold transition-colors"
-                    aria-label="Sonraki sayfa"
+                    aria-label={t.grid.nextPage}
                   >
                     ›
                   </button>
@@ -453,7 +456,7 @@ export default function CollectionGridSection({ items }: { items: CollectionItem
             type="button"
             onClick={() => setIsMobileFilterOpen(false)}
             className="fixed inset-0 bg-black/70 z-50 md:hidden"
-            aria-label="Filtreleri kapat"
+            aria-label={t.grid.closeFilters}
           />
         )}
       </div>

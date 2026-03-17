@@ -7,6 +7,7 @@ import { useState } from "react";
 
 import { urlFor } from "@/lib/sanity/image";
 import type { HeroSection, HomePageData } from "@/types/sanity";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 type SplitHeroProps = {
   hero: HomePageData["hero"];
@@ -43,6 +44,7 @@ const resolveImageUrl = (source: HeroSection["backgroundImage"]) => {
 };
 
 export default function SplitHero({ hero }: SplitHeroProps) {
+  const { t } = useLanguage();
   const { leftSide, rightSide } = hero;
   const leftImageUrl = resolveImageUrl(leftSide.backgroundImage);
   const leftPoster = leftImageUrl ?? defaultLeftPoster;
@@ -51,6 +53,14 @@ export default function SplitHero({ hero }: SplitHeroProps) {
   const showLeftVideo = Boolean(leftSide.backgroundVideoUrl) && !leftVideoFailed;
   const showRightVideo =
     Boolean(rightSide.backgroundVideoUrl) && !rightVideoFailed;
+
+  // Use translated hero text (falls back to Sanity data for title/subtitle/button)
+  const leftTitle = t.hero.leftTitle || leftSide.title;
+  const leftSubtitle = t.hero.leftSubtitle || leftSide.subtitle;
+  const leftBtn = t.hero.leftBtn || leftSide.buttonText;
+  const rightTitle = t.hero.rightTitle || rightSide.title;
+  const rightSubtitle = t.hero.rightSubtitle || rightSide.subtitle;
+  const rightBtn = t.hero.rightBtn || rightSide.buttonText;
 
   return (
     <div className="split-container group flex h-screen w-full flex-col bg-black md:flex-row">
@@ -71,7 +81,7 @@ export default function SplitHero({ hero }: SplitHeroProps) {
           ) : (
             <Image
               src={leftPoster}
-              alt={leftSide.title}
+              alt={leftTitle}
               fill
               className="object-cover"
               priority
@@ -83,17 +93,17 @@ export default function SplitHero({ hero }: SplitHeroProps) {
         <div className="overlay absolute inset-0 z-10 flex items-center justify-center bg-black/60 transition-colors duration-500 hover:bg-black/50">
           <div className="content-wrapper">
             <span className="mb-3 block text-[10px] font-bold uppercase tracking-[0.2em] text-gold opacity-90 md:text-xs">
-              Mimar & Müteahhit
+              {t.hero.leftLabel}
             </span>
             <h2 className="mb-4 text-2xl font-serif font-bold leading-tight md:text-5xl">
-              {renderTextWithBreaks(leftSide.title)}
+              {renderTextWithBreaks(leftTitle)}
             </h2>
             <p className="mx-auto mb-8 max-w-sm text-xs font-medium text-gray-200 md:text-sm font-sans leading-relaxed">
-              {renderTextWithBreaks(leftSide.subtitle)}
+              {renderTextWithBreaks(leftSubtitle)}
             </p>
             <Link href={leftSide.buttonLink}>
               <button className="border border-white/40 bg-white/5 px-8 py-4 text-xs font-sans uppercase tracking-[0.2em] text-white backdrop-blur-sm transition-all duration-300 hover:bg-gold hover:text-black hover:border-gold">
-                {leftSide.buttonText}
+                {leftBtn}
               </button>
             </Link>
           </div>
@@ -121,17 +131,17 @@ export default function SplitHero({ hero }: SplitHeroProps) {
         <div className="overlay absolute inset-0 z-10 flex items-center justify-center bg-black/50 transition-colors duration-500 hover:bg-black/40">
           <div className="content-wrapper">
             <span className="mb-3 block text-[10px] font-bold uppercase tracking-[0.2em] text-gold opacity-90 md:text-xs">
-              Ev Sahibi & Tasarım
+              {t.hero.rightLabel}
             </span>
             <h2 className="mb-4 text-2xl font-serif font-bold leading-tight md:text-5xl">
-              {renderTextWithBreaks(rightSide.title)}
+              {renderTextWithBreaks(rightTitle)}
             </h2>
             <p className="mx-auto mb-8 max-w-sm text-xs font-medium text-gray-200 md:text-sm font-sans leading-relaxed">
-              {renderTextWithBreaks(rightSide.subtitle)}
+              {renderTextWithBreaks(rightSubtitle)}
             </p>
             <Link href={rightSide.buttonLink}>
               <button className="border border-white/40 bg-white/5 px-8 py-4 text-xs font-sans uppercase tracking-[0.2em] text-white backdrop-blur-sm transition-all duration-300 hover:bg-gold hover:text-black hover:border-gold">
-                {rightSide.buttonText}
+                {rightBtn}
                </button>
             </Link>
           </div>
@@ -140,17 +150,17 @@ export default function SplitHero({ hero }: SplitHeroProps) {
 
       <div className="pointer-events-none absolute bottom-0 z-40 flex w-full items-center justify-between bg-gradient-to-t from-black/90 to-transparent px-8 py-4 text-[10px] text-white/50 md:text-xs font-sans">
         <span className="pointer-events-auto cursor-default transition-colors hover:text-white">
-          (c) 2025 YAPIGRANİT A.Ş.
+          {t.hero.copyright}
         </span>
         <div className="pointer-events-auto flex space-x-6">
-          <a href="tel:+902583722250" className="transition-colors hover:text-gold">
-            T: 0 258 372 22 50
+          <a href={t.footer.phoneHref} className="transition-colors hover:text-gold">
+            {t.hero.phone}
           </a>
           <a
-            href="mailto:info@yapigranit.com"
+            href={t.footer.emailHref}
             className="hidden transition-colors hover:text-gold md:inline"
           >
-            E: info@yapigranit.com
+            {t.hero.email}
           </a>
         </div>
       </div>

@@ -5,8 +5,10 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 
 import { blogPosts } from "@/components/blog/blogPosts";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function TrendVisionSection() {
+  const { t } = useLanguage();
   const sliderRef = useRef<HTMLDivElement>(null);
 
   const scrollByCard = (direction: "next" | "prev") => {
@@ -73,21 +75,20 @@ export default function TrendVisionSection() {
           <div className="flex items-center gap-3 mb-4">
             <span className="h-px w-12 bg-gradient-to-r from-transparent via-gold/80 to-gold" />
             <span className="text-gold tracking-[0.3em] text-xs uppercase font-bold">
-              Blog & Vizyon
+              {t.trend.badge}
             </span>
           </div>
           <h2 className="text-4xl md:text-6xl font-serif text-white">
-            Tasarım{" "}
+            {t.trend.title}{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f7e7b3] via-gold to-[#b5811d]">
-              Trendleri
+              {t.trend.titleHighlight}
             </span>
             <span className="block text-3xl md:text-5xl text-white/40 font-serif italic mt-2">
-              2026
+              {t.trend.year}
             </span>
           </h2>
           <p className="text-gray-400 max-w-2xl text-base md:text-lg leading-relaxed border-l-2 border-white/10 pl-6 mt-4">
-            Daha fazla içerik için kaydırın. Sektör analizleri, bakım rehberleri
-            ve tasarım trendleri burada.
+            {t.trend.description}
           </p>
         </header>
 
@@ -107,7 +108,7 @@ export default function TrendVisionSection() {
                   <Link
                     href={item.href}
                     className="absolute inset-0 z-20"
-                    aria-label={`${item.title} rehberini oku`}
+                    aria-label={`${item.title}`}
                   />
                 )}
                 <div className="absolute inset-0">
@@ -145,7 +146,7 @@ export default function TrendVisionSection() {
                   </p>
 
                   <div className="flex items-center gap-2 text-gold text-xs uppercase tracking-[0.3em] font-bold">
-                    Okumaya Başla <span className="text-base">→</span>
+                    {t.trend.readMore} <span className="text-base">→</span>
                   </div>
                 </div>
               </article>
@@ -156,7 +157,7 @@ export default function TrendVisionSection() {
             type="button"
             onClick={() => scrollByCard("prev")}
             className="flex absolute -left-4 top-1/2 -translate-y-1/2 h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full border border-gold/40 bg-black/70 text-gold hover:bg-black/90 transition-colors"
-            aria-label="Önceki içerikler"
+            aria-label={t.trend.prevContent}
           >
             ←
           </button>
@@ -164,7 +165,7 @@ export default function TrendVisionSection() {
             type="button"
             onClick={() => scrollByCard("next")}
             className="flex absolute -right-4 top-1/2 -translate-y-1/2 h-10 w-10 md:h-11 md:w-11 items-center justify-center rounded-full border border-gold/40 bg-black/70 text-gold hover:bg-black/90 transition-colors"
-            aria-label="Sonraki içerikler"
+            aria-label={t.trend.nextContent}
           >
             →
           </button>

@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 
 import CorporateContactSection from "@/components/contact/CorporateContactSection";
@@ -5,11 +7,12 @@ import Navbar from "@/components/layout/Navbar";
 import MachineCarousel from "@/components/ui/MachineCarousel";
 import ReferenceShowcase from "@/components/ui/ReferenceShowcase";
 import XRayScanner from "@/components/ui/XRayScanner";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function CorporatePage() {
-  const whatsappMessage = encodeURIComponent(
-    "Merhaba, kurumsal proje için teknik bilgi ve teklif almak istiyorum."
-  );
+  const { t } = useLanguage();
+
+  const whatsappMessage = encodeURIComponent(t.kurumsal.whatsappMsg);
   const whatsappHref = `https://wa.me/905327443271?text=${whatsappMessage}`;
   const stackCardBase =
     "relative w-full rounded-[2.5rem] border shadow-2xl overflow-hidden isolate mx-4 md:mx-6";
@@ -33,14 +36,13 @@ export default function CorporatePage() {
 
         <div className="relative z-10 text-center max-w-4xl px-6 mt-20">
           <span className="text-gold text-xs font-bold tracking-[0.3em] uppercase mb-4 block">
-            Kurumsal Teknoloji
+            {t.kurumsal.heroBadge}
           </span>
           <h1 className="text-4xl md:text-6xl font-serif font-bold mb-6">
-            Taşta Mühendislik Disiplini
+            {t.kurumsal.heroTitle}
           </h1>
           <p className="text-gray-300 text-lg md:text-xl font-light leading-relaxed">
-            Mimarlar ve müteahhitler için; hassas üretim, kontrollü montaj ve
-            sürdürülebilir cephe çözümlerini tek çatı altında sunuyoruz.
+            {t.kurumsal.heroDesc}
           </p>
         </div>
       </section>
@@ -61,18 +63,17 @@ export default function CorporatePage() {
         <div className="container mx-auto px-6 relative">
           <div className="text-center mb-16 space-y-4">
             <span className="text-gold text-xs font-bold tracking-[0.3em] uppercase">
-              Makine Parkuru
+              {t.kurumsal.machineBadge}
             </span>
             <h2 className="text-3xl md:text-5xl font-serif font-bold leading-tight">
-              Taşı{" "}
+              {t.kurumsal.machineTitle}{" "}
               <span className="text-gold">
-                Teknolojiyle
+                {t.kurumsal.machineTitleHighlight}
               </span>{" "}
-              İşliyoruz
+              {t.kurumsal.machineTitleEnd}
             </h2>
             <p className="text-gray-300 max-w-2xl mx-auto text-lg leading-relaxed">
-              Doğal taşı, uzay endüstrisi standartlarında işleyen hassas
-              teknolojilerimizle tanışın.
+              {t.kurumsal.machineDesc}
             </p>
           </div>
 
@@ -80,7 +81,7 @@ export default function CorporatePage() {
 
           <div className="mt-16 text-center opacity-50 hover:opacity-100 transition-opacity duration-700">
             <p className="text-xs uppercase tracking-[0.5em] text-gray-500">
-              Sıfır Hata Toleransı • Yüksek Standartlar
+              {t.kurumsal.zeroTolerance}
             </p>
           </div>
         </div>
@@ -108,50 +109,34 @@ export default function CorporatePage() {
               <div className="grid gap-12 lg:grid-cols-12 lg:items-end">
                 <div className="lg:col-span-7 space-y-6">
                   <span className="text-gold text-xs font-bold tracking-[0.4em] uppercase">
-                    HİZMETLERİMİZ
+                    {t.kurumsal.catalogBadge}
                   </span>
                   <h2 className="text-4xl md:text-6xl font-serif font-bold leading-tight">
-                    Dijital Hizmet Kataloğu
+                    {t.kurumsal.catalogTitle}
                   </h2>
                   <p className="text-gray-200 text-lg leading-relaxed">
-                    Hizmetlerimizi tek bir akışta, tutarlı kartlar ve net
-                    hiyerarşiyle sunuyoruz. Her bölüm kendi içeriğine odaklanır;
-                    kayma ya da üst üste binme olmadan akıcı bir deneyim sağlar.
+                    {t.kurumsal.catalogDesc}
                   </p>
                   <div className="flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.25em] text-gold/70">
-                    <span className="rounded-full border border-gold/30 bg-black/40 px-3 py-1">
-                      Dengeli Akış
-                    </span>
-                    <span className="rounded-full border border-gold/30 bg-black/40 px-3 py-1">
-                      Net Hiyerarşi
-                    </span>
-                    <span className="rounded-full border border-gold/30 bg-black/40 px-3 py-1">
-                      Stabil Geçiş
-                    </span>
+                    {t.kurumsal.catalogTags.map((tag) => (
+                      <span key={tag} className="rounded-full border border-gold/30 bg-black/40 px-3 py-1">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
                 <div className="lg:col-span-5 space-y-6">
                   <div className="rounded-2xl border border-white/10 bg-black/70 p-5">
                     <div className="text-[10px] uppercase tracking-[0.3em] text-white/60">
-                      Katalog İndeksi
+                      {t.kurumsal.catalogIndex}
                     </div>
                     <div className="mt-4 divide-y divide-white/10 text-sm text-white/80">
-                      <div className="flex items-center justify-between py-2">
-                        <span className="text-gold/70 font-semibold">01</span>
-                        <span>Dış Cephe</span>
-                      </div>
-                      <div className="flex items-center justify-between py-2">
-                        <span className="text-gold/70 font-semibold">02</span>
-                        <span>Mutfak &amp; Banyo</span>
-                      </div>
-                      <div className="flex items-center justify-between py-2">
-                        <span className="text-gold/70 font-semibold">03</span>
-                        <span>Taş Mobilya</span>
-                      </div>
-                      <div className="flex items-center justify-between py-2">
-                        <span className="text-gold/70 font-semibold">04</span>
-                        <span>Dekoratif</span>
-                      </div>
+                      {t.kurumsal.catalogItems.map((item, i) => (
+                        <div key={item} className="flex items-center justify-between py-2">
+                          <span className="text-gold/70 font-semibold">0{i + 1}</span>
+                          <span>{item}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </div>
@@ -185,25 +170,20 @@ export default function CorporatePage() {
                       <path d="m2 12 10 5 10-5" />
                       <path d="m2 17 10 5 10-5" />
                     </svg>
-                    <span>Bölüm 01</span>
+                    <span>{t.kurumsal.section01Label}</span>
                   </div>
                   <h3 className="text-3xl md:text-5xl font-serif font-bold text-white">
-                    Dış Cephe ve Mimari Kaplama
+                    {t.kurumsal.section01Title}
                   </h3>
                   <p className="text-slate-300 text-lg leading-relaxed">
-                    Yapıların dış kabuğunda güvenlik, yalıtım ve estetiği
-                    birleştiren mühendislik çözümleri.
+                    {t.kurumsal.section01Desc}
                   </p>
                   <div className="flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.25em] text-slate-300">
-                    <span className="rounded-full border border-slate-600/70 bg-slate-800/60 px-3 py-1">
-                      Mekanik Sistem
-                    </span>
-                    <span className="rounded-full border border-slate-600/70 bg-slate-800/60 px-3 py-1">
-                      Split Face
-                    </span>
-                    <span className="rounded-full border border-slate-600/70 bg-slate-800/60 px-3 py-1">
-                      Kaplama Çözümleri
-                    </span>
+                    {t.kurumsal.section01Tags.map((tag) => (
+                      <span key={tag} className="rounded-full border border-slate-600/70 bg-slate-800/60 px-3 py-1">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
                 <div className="lg:col-span-7 grid gap-6 sm:grid-cols-2">
@@ -211,7 +191,7 @@ export default function CorporatePage() {
                     <div className="page-flip-image">
                       <Image
                         src="/images/mekanikcephe.avif"
-                        alt="Mekanik cephe sistemleri"
+                        alt={t.kurumsal.mechFacadeTitle}
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 60vw"
@@ -235,22 +215,18 @@ export default function CorporatePage() {
                           </svg>
                         </div>
                         <h4 className="text-xl font-serif font-semibold">
-                          Mekanik Cephe Sistemleri
+                          {t.kurumsal.mechFacadeTitle}
                         </h4>
                       </div>
                       <p className="mt-3 text-sm text-slate-300 leading-relaxed">
-                        Çok katlı yapılarda yapıştırma yerine 304/316 paslanmaz
-                        çelik ankrajlarla güvenli montaj sağlıyoruz. Taş ile bina
-                        arasında bırakılan hava boşluğu havalandırmalı cephe
-                        etkisi yaratır.
+                        {t.kurumsal.mechFacadeDesc}
                       </p>
                       <div className="mt-4 flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.2em] text-slate-400">
-                        <span className="rounded-full border border-slate-600/70 bg-slate-900/40 px-3 py-1">
-                          304/316 Çelik
-                        </span>
-                        <span className="rounded-full border border-slate-600/70 bg-slate-900/40 px-3 py-1">
-                          Deprem Güvenli
-                        </span>
+                        {t.kurumsal.mechFacadeTags.map((tag) => (
+                          <span key={tag} className="rounded-full border border-slate-600/70 bg-slate-900/40 px-3 py-1">
+                            {tag}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -258,7 +234,7 @@ export default function CorporatePage() {
                     <div className="page-flip-image">
                       <Image
                         src="/images/patlatma5.avif"
-                        alt="Patlatma kaplama dokusu"
+                        alt={t.kurumsal.splitFaceTitle}
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 60vw"
@@ -283,21 +259,18 @@ export default function CorporatePage() {
                           </svg>
                         </div>
                         <h4 className="text-xl font-serif font-semibold">
-                          Patlatma (Split Face)
+                          {t.kurumsal.splitFaceTitle}
                         </h4>
                       </div>
                       <p className="mt-3 text-sm text-slate-300 leading-relaxed">
-                        Doğal taşın ham dokusunu koruyan, ışık-gölge oyunlarıyla
-                        cepheye derinlik katan dekoratif kaplamalar. Dış mekan
-                        ve bahçe duvarlarında rustik görünüm sağlar.
+                        {t.kurumsal.splitFaceDesc}
                       </p>
                       <div className="mt-4 flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.2em] text-slate-400">
-                        <span className="rounded-full border border-slate-600/70 bg-slate-900/40 px-3 py-1">
-                          Derin Doku
-                        </span>
-                        <span className="rounded-full border border-slate-600/70 bg-slate-900/40 px-3 py-1">
-                          Işık-Gölge
-                        </span>
+                        {t.kurumsal.splitFaceTags.map((tag) => (
+                          <span key={tag} className="rounded-full border border-slate-600/70 bg-slate-900/40 px-3 py-1">
+                            {tag}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -305,7 +278,7 @@ export default function CorporatePage() {
                     <div className="page-flip-image">
                       <Image
                         src="/images/zemin.avif"
-                        alt="Zemin ve duvar kaplama"
+                        alt={t.kurumsal.floorWallTitle}
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 60vw"
@@ -332,7 +305,7 @@ export default function CorporatePage() {
                           </svg>
                         </div>
                         <h4 className="text-xl font-serif font-semibold">
-                          Zemin, Duvar ve Tavan Kaplama
+                          {t.kurumsal.floorWallTitle}
                         </h4>
                       </div>
                       <div className="mt-4 grid gap-3 text-sm text-slate-200">
@@ -340,30 +313,27 @@ export default function CorporatePage() {
                           <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-400" />
                           <span>
                             <span className="font-semibold text-white">
-                              Zemin:
+                              {t.kurumsal.floorLabel}
                             </span>{" "}
-                            Yoğun yaya trafiğine dayanıklı granit ve mermer
-                            döşemeler.
+                            {t.kurumsal.floorDesc}
                           </span>
                         </div>
                         <div className="flex items-start gap-2">
                           <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-400" />
                           <span>
                             <span className="font-semibold text-white">
-                              Duvar:
+                              {t.kurumsal.wallLabel}
                             </span>{" "}
-                            İç ve dış mekanlarda bookmatch veya serbest boy
-                            kaplamalar.
+                            {t.kurumsal.wallDesc}
                           </span>
                         </div>
                         <div className="flex items-start gap-2">
                           <span className="mt-2 h-1.5 w-1.5 rounded-full bg-slate-400" />
                           <span>
                             <span className="font-semibold text-white">
-                              Tavan:
+                              {t.kurumsal.ceilingLabel}
                             </span>{" "}
-                            Hafifletilmiş taş paneller veya kompozit destekli
-                            güvenli tavan çözümleri.
+                            {t.kurumsal.ceilingDesc}
                           </span>
                         </div>
                       </div>
@@ -398,25 +368,20 @@ export default function CorporatePage() {
                     >
                       <path d="M12 3c2.755 0 5 2.245 5 5 0 3.866-2.4 6.5-5 9-2.6-2.5-5-5.134-5-9 0-2.755 2.245-5 5-5z" />
                     </svg>
-                    <span>Bölüm 02</span>
+                    <span>{t.kurumsal.section02Label}</span>
                   </div>
                   <h3 className="text-3xl md:text-5xl font-serif font-bold text-slate-900">
-                    Mutfak &amp; Banyo Çözümleri
+                    {t.kurumsal.section02Title}
                   </h3>
                   <p className="text-slate-600 text-lg leading-relaxed">
-                    Islak hacimlerde hijyen, dayanıklılık ve fonksiyonelliğin
-                    buluşması.
+                    {t.kurumsal.section02Desc}
                   </p>
                   <div className="flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.25em] text-slate-500">
-                    <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
-                      Hijyen
-                    </span>
-                    <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
-                      Dayanıklılık
-                    </span>
-                    <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
-                      Fonksiyon
-                    </span>
+                    {t.kurumsal.section02Tags.map((tag) => (
+                      <span key={tag} className="rounded-full border border-slate-200 bg-white px-3 py-1">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
                 <div className="lg:col-span-7 grid gap-6 md:grid-cols-2">
@@ -424,7 +389,7 @@ export default function CorporatePage() {
                     <div className="page-flip-image">
                       <Image
                         src="/images/mutfakkahvee.avif"
-                        alt="Mutfak tezgahı"
+                        alt={t.kurumsal.kitchenCounterTitle}
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 60vw"
@@ -449,25 +414,18 @@ export default function CorporatePage() {
                           </svg>
                         </div>
                         <h4 className="text-xl font-serif font-semibold text-slate-900">
-                          Mutfak Tezgahı
+                          {t.kurumsal.kitchenCounterTitle}
                         </h4>
                       </div>
                       <p className="mt-3 text-sm text-slate-600 leading-relaxed">
-                        Çizilmez, leke tutmaz ve ısıya dayanıklı Porselen
-                        (Neolith, Dekton, Laminam) ve Kuvars (Çimstone, Belenco)
-                        tezgah uygulamaları. Asitlere karşı üstün direnç
-                        sağlayan sinterlenmiş taş teknolojisi.
+                        {t.kurumsal.kitchenCounterDesc}
                       </p>
                       <div className="mt-4 flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.2em] text-slate-500">
-                        <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
-                          Porselen
-                        </span>
-                        <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
-                          Kuvars
-                        </span>
-                        <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
-                          Sinter
-                        </span>
+                        {t.kurumsal.kitchenCounterTags.map((tag) => (
+                          <span key={tag} className="rounded-full border border-slate-200 bg-white px-3 py-1">
+                            {tag}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -475,7 +433,7 @@ export default function CorporatePage() {
                     <div className="page-flip-image">
                       <Image
                         src="/images/ada1.avif"
-                        alt="Ada mutfak ve kahve köşesi"
+                        alt={t.kurumsal.islandTitle}
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 60vw"
@@ -501,20 +459,18 @@ export default function CorporatePage() {
                           </svg>
                         </div>
                         <h4 className="text-xl font-serif font-semibold text-slate-900">
-                          Ada Mutfak &amp; Kahve Köşesi
+                          {t.kurumsal.islandTitle}
                         </h4>
                       </div>
                       <p className="mt-3 text-sm text-slate-600 leading-relaxed">
-                        Waterfall (şelale) kenar detaylarıyla zemine kadar inen
-                        ada tasarımları ve evinize özel, şık kahve istasyonları.
+                        {t.kurumsal.islandDesc}
                       </p>
                       <div className="mt-4 flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.2em] text-slate-500">
-                        <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
-                          Waterfall
-                        </span>
-                        <span className="rounded-full border border-slate-200 bg-white px-3 py-1">
-                          Özel Tasarım
-                        </span>
+                        {t.kurumsal.islandTags.map((tag) => (
+                          <span key={tag} className="rounded-full border border-slate-200 bg-white px-3 py-1">
+                            {tag}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -522,7 +478,7 @@ export default function CorporatePage() {
                     <div className="page-flip-image">
                       <Image
                         src="/images/banyoislakz1.avif"
-                        alt="Banyo ve ıslak hacim"
+                        alt={t.kurumsal.bathroomTitle}
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 60vw"
@@ -546,14 +502,12 @@ export default function CorporatePage() {
                           </svg>
                         </div>
                         <h4 className="text-xl font-serif font-semibold text-slate-900">
-                          Banyo ve Islak Hacim
+                          {t.kurumsal.bathroomTitle}
                         </h4>
                       </div>
                       <div className="mt-3 space-y-2 text-sm text-slate-600">
-                        <p>Mermer ve oniks duş tekneleri, duvar kaplamaları.</p>
-                        <p>
-                          Hilton lavabo tezgahları ve neme dayanıklı yüzeyler.
-                        </p>
+                        <p>{t.kurumsal.bathroomDesc1}</p>
+                        <p>{t.kurumsal.bathroomDesc2}</p>
                       </div>
                     </div>
                   </div>
@@ -561,7 +515,7 @@ export default function CorporatePage() {
                     <div className="page-flip-image">
                       <Image
                         src="/images/levye2.avif"
-                        alt="Entegre evye sistemleri"
+                        alt={t.kurumsal.sinkTitle}
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 60vw"
@@ -587,13 +541,11 @@ export default function CorporatePage() {
                           </svg>
                         </div>
                         <h4 className="text-xl font-serif font-semibold text-slate-900">
-                          Entegre Evye Sistemleri
+                          {t.kurumsal.sinkTitle}
                         </h4>
                       </div>
                       <p className="mt-3 text-sm text-slate-600 leading-relaxed">
-                        Tezgahla aynı malzemeden üretilen, ek yeri belli
-                        olmayan, hijyenik ve modern bütünleşik evye
-                        uygulamaları.
+                        {t.kurumsal.sinkDesc}
                       </p>
                     </div>
                   </div>
@@ -628,25 +580,20 @@ export default function CorporatePage() {
                       <path d="m2 8 10 5 10-5" />
                       <path d="m12 13 0 9" />
                     </svg>
-                    <span>Bölüm 03</span>
+                    <span>{t.kurumsal.section03Label}</span>
                   </div>
                   <h3 className="text-3xl md:text-5xl font-serif font-bold text-[#2f2215]">
-                    Özel Tasarım Taş Mobilya
+                    {t.kurumsal.section03Title}
                   </h3>
                   <p className="text-[#5c4630] text-lg leading-relaxed">
-                    CNC ve Waterjet teknolojisiyle şekillenen, kişiye özel
-                    butik ürünler.
+                    {t.kurumsal.section03Desc}
                   </p>
                   <div className="flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.25em] text-[#6b4f33]">
-                    <span className="rounded-full border border-[#b9986e] bg-[#e7d7ba]/70 px-3 py-1">
-                      Butik Üretim
-                    </span>
-                    <span className="rounded-full border border-[#b9986e] bg-[#e7d7ba]/70 px-3 py-1">
-                      CNC + Waterjet
-                    </span>
-                    <span className="rounded-full border border-[#b9986e] bg-[#e7d7ba]/70 px-3 py-1">
-                      Sıcak Doku
-                    </span>
+                    {t.kurumsal.section03Tags.map((tag) => (
+                      <span key={tag} className="rounded-full border border-[#b9986e] bg-[#e7d7ba]/70 px-3 py-1">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
                 <div className="lg:col-span-7 grid gap-6 sm:grid-cols-2">
@@ -654,7 +601,7 @@ export default function CorporatePage() {
                     <div className="page-flip-image">
                       <Image
                         src="/images/masa.avif"
-                        alt="Masa ve sehpa"
+                        alt={t.kurumsal.tableTitle}
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 60vw"
@@ -678,13 +625,11 @@ export default function CorporatePage() {
                           </svg>
                         </div>
                         <h4 className="text-xl font-serif font-semibold">
-                          Masa ve Sehpa
+                          {t.kurumsal.tableTitle}
                         </h4>
                       </div>
                       <p className="mt-3 text-sm text-[#4b3a28] leading-relaxed">
-                        Mermer, traverten veya oniks kullanılarak üretilen yemek
-                        masaları, orta sehpalar ve yan sehpalar. Leke tutmayan
-                        koruyucu sealer işlemleriyle uzun ömürlü kullanım.
+                        {t.kurumsal.tableDesc}
                       </p>
                     </div>
                   </div>
@@ -692,7 +637,7 @@ export default function CorporatePage() {
                     <div className="page-flip-image">
                       <Image
                         src="/images/dresuar.avif"
-                        alt="Dresuar ve TV ünitesi"
+                        alt={t.kurumsal.dresserTitle}
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 60vw"
@@ -717,13 +662,11 @@ export default function CorporatePage() {
                           </svg>
                         </div>
                         <h4 className="text-xl font-serif font-semibold">
-                          Dresuar ve TV Ünitesi
+                          {t.kurumsal.dresserTitle}
                         </h4>
                       </div>
                       <p className="mt-3 text-sm text-[#4b3a28] leading-relaxed">
-                        Giriş holleri için şık dresuarlar ve arkadan aydınlatmalı
-                        (onyx) veya bookmatch desenli mermer TV ünitesi arka
-                        planları.
+                        {t.kurumsal.dresserDesc}
                       </p>
                     </div>
                   </div>
@@ -731,7 +674,7 @@ export default function CorporatePage() {
                     <div className="page-flip-image">
                       <Image
                         src="/images/seperator.avif"
-                        alt="Seperatör bölücü paneller"
+                        alt={t.kurumsal.separatorTitle}
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 60vw"
@@ -756,13 +699,11 @@ export default function CorporatePage() {
                           </svg>
                         </div>
                         <h4 className="text-xl font-serif font-semibold">
-                          Seperatör (Bölücü Paneller)
+                          {t.kurumsal.separatorTitle}
                         </h4>
                       </div>
                       <p className="mt-3 text-sm text-[#4b3a28] leading-relaxed">
-                        Mekanları birbirinden ayırırken ışığı estetik şekilde
-                        filtreleyen, Waterjet ile desen verilmiş metal veya taş
-                        seperatörler.
+                        {t.kurumsal.separatorDesc}
                       </p>
                     </div>
                   </div>
@@ -795,24 +736,20 @@ export default function CorporatePage() {
                     >
                       <path d="M12 2c2 3 4 5 4 8a4 4 0 0 1-8 0c0-3 2-5 4-8Z" />
                     </svg>
-                    <span>Bölüm 04</span>
+                    <span>{t.kurumsal.section04Label}</span>
                   </div>
                   <h3 className="text-3xl md:text-5xl font-serif font-bold text-white">
-                    Dekoratif ve Tamamlayıcı Uygulamalar
+                    {t.kurumsal.section04Title}
                   </h3>
                   <p className="text-orange-100/80 text-lg leading-relaxed">
-                    Mekanlara ruh katan sanatsal dokunuşlar.
+                    {t.kurumsal.section04Desc}
                   </p>
                   <div className="flex flex-wrap gap-3 text-[11px] uppercase tracking-[0.25em] text-orange-300">
-                    <span className="rounded-full border border-orange-500/40 bg-black/60 px-3 py-1">
-                      Ateş ve Doku
-                    </span>
-                    <span className="rounded-full border border-orange-500/40 bg-black/60 px-3 py-1">
-                      Dramatik Atmosfer
-                    </span>
-                    <span className="rounded-full border border-orange-500/40 bg-black/60 px-3 py-1">
-                      Vurgu Detayları
-                    </span>
+                    {t.kurumsal.section04Tags.map((tag) => (
+                      <span key={tag} className="rounded-full border border-orange-500/40 bg-black/60 px-3 py-1">
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
                 <div className="lg:col-span-7 grid gap-6">
@@ -820,7 +757,7 @@ export default function CorporatePage() {
                     <div className="page-flip-image">
                       <Image
                         src="/images/somine3.avif"
-                        alt="Şömine yapımı"
+                        alt={t.kurumsal.fireplaceTitle}
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 60vw"
@@ -844,21 +781,18 @@ export default function CorporatePage() {
                           </svg>
                         </div>
                         <h4 className="text-xl font-serif font-semibold text-white">
-                          Şömine Yapımı
+                          {t.kurumsal.fireplaceTitle}
                         </h4>
                       </div>
                       <p className="mt-3 text-sm text-orange-100/80 leading-relaxed">
-                        Isıya dayanıklı granit veya mermer kullanılarak
-                        tasarlanan; klasik, modern veya minimalist şömine
-                        kaplamaları. CNC ile işlenmiş sütun ve taç detayları.
+                        {t.kurumsal.fireplaceDesc}
                       </p>
                       <div className="mt-4 flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.2em] text-orange-300">
-                        <span className="rounded-full border border-orange-500/40 bg-black/60 px-3 py-1">
-                          Isıya Dayanıklı
-                        </span>
-                        <span className="rounded-full border border-orange-500/40 bg-black/60 px-3 py-1">
-                          CNC Detay
-                        </span>
+                        {t.kurumsal.fireplaceTags.map((tag) => (
+                          <span key={tag} className="rounded-full border border-orange-500/40 bg-black/60 px-3 py-1">
+                            {tag}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -866,7 +800,7 @@ export default function CorporatePage() {
                     <div className="page-flip-image">
                       <Image
                         src="/images/basamakdoseme.avif"
-                        alt="Basamak döşeme"
+                        alt={t.kurumsal.stairTitle}
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, 60vw"
@@ -890,21 +824,18 @@ export default function CorporatePage() {
                           </svg>
                         </div>
                         <h4 className="text-xl font-serif font-semibold text-white">
-                          Basamak Döşeme
+                          {t.kurumsal.stairTitle}
                         </h4>
                       </div>
                       <p className="mt-3 text-sm text-orange-100/80 leading-relaxed">
-                        İç mekanlarda mermer, dış mekanlarda kaymaz granit
-                        kullanılarak yapılan rıhtlı veya rıhtsız merdiven
-                        basamakları. LED aydınlatma uyumlu çözümler.
+                        {t.kurumsal.stairDesc}
                       </p>
                       <div className="mt-4 flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.2em] text-orange-300">
-                        <span className="rounded-full border border-orange-500/40 bg-black/60 px-3 py-1">
-                          Kaymaz Granit
-                        </span>
-                        <span className="rounded-full border border-orange-500/40 bg-black/60 px-3 py-1">
-                          LED Uyumlu
-                        </span>
+                        {t.kurumsal.stairTags.map((tag) => (
+                          <span key={tag} className="rounded-full border border-orange-500/40 bg-black/60 px-3 py-1">
+                            {tag}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -924,18 +855,17 @@ export default function CorporatePage() {
           <div className="max-w-6xl mx-auto space-y-10">
             <div className="text-center space-y-4">
               <span className="text-gold text-xs font-bold tracking-[0.3em] uppercase">
-                Dijital Rölöve
+                {t.kurumsal.digitalBadge}
               </span>
               <h2 className="text-3xl md:text-5xl font-serif font-bold leading-tight">
-                Dijital İkiz ile Kusursuz Başlangıç
+                {t.kurumsal.digitalTitle}
               </h2>
               <p className="text-gray-300 max-w-2xl mx-auto text-lg leading-relaxed">
                 <span className="text-gold font-semibold">
-                  Mouse&apos;u gezdirerek tarama yapın.
+                  {t.kurumsal.digitalDesc}
                 </span>
                 <br />
-                Milimetrik hassasiyet, sıfır risk: şantiyenizi sanal ortama
-                taşıyoruz.
+                {t.kurumsal.digitalDesc2}
               </p>
             </div>
 
@@ -963,10 +893,9 @@ export default function CorporatePage() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-white font-semibold mb-2">Lazer Tarama</h3>
+                <h3 className="text-white font-semibold mb-2">{t.kurumsal.laserTitle}</h3>
                 <p className="text-sm text-gray-400">
-                  Şantiyeyi dijitalleştirip mm hassasiyetinde 3D veriye
-                  dönüştürüyoruz.
+                  {t.kurumsal.laserDesc}
                 </p>
               </div>
 
@@ -986,10 +915,9 @@ export default function CorporatePage() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-white font-semibold mb-2">Hata Analizi</h3>
+                <h3 className="text-white font-semibold mb-2">{t.kurumsal.errorAnalysisTitle}</h3>
                 <p className="text-sm text-gray-400">
-                  Proje ile saha arasındaki sapmaları montaj başlamadan tespit
-                  ediyoruz.
+                  {t.kurumsal.errorAnalysisDesc}
                 </p>
               </div>
 
@@ -1009,10 +937,9 @@ export default function CorporatePage() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-white font-semibold mb-2">Sanal Montaj</h3>
+                <h3 className="text-white font-semibold mb-2">{t.kurumsal.virtualAssemblyTitle}</h3>
                 <p className="text-sm text-gray-400">
-                  Üretim öncesi dijital ikiz üzerinde montaj yaparak fireyi
-                  sıfıra indiriyoruz.
+                  {t.kurumsal.virtualAssemblyDesc}
                 </p>
               </div>
             </div>

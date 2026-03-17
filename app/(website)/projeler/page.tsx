@@ -1,73 +1,44 @@
+"use client";
+
 import Image from "next/image";
 
 import Navbar from "@/components/layout/Navbar";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
-const timelineItems = [
+const timelineMeta = [
   {
-    year: "1994",
-    label: "Başlangıç",
-    title: "1994: Temeller Atılıyor",
-    description:
-      "Yapı Granit'in serüveni 1994 yılında başladı. Küçük bir atölyede, büyük hayallerle kurulan firmamız, ilk günden itibaren kaliteyi hedefledi.",
-    image:
-      "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=2670&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=2670&auto=format&fit=crop",
     iconClass: "fa-solid fa-hammer",
     iconWrapperClass: "bg-[#d4af37] text-white",
-    accentClass:
-      "absolute top-0 right-0 h-20 w-20 rounded-bl-full -mr-4 -mt-4 bg-[#d4af37]/10",
-    reverse: false
+    accentClass: "absolute top-0 right-0 h-20 w-20 rounded-bl-full -mr-4 -mt-4 bg-[#d4af37]/10",
+    reverse: false,
   },
   {
-    year: "2000",
-    label: "Dönüm Noktası",
-    title: "2000: Yeni Merkez & Güven",
-    description: (
-      <>
-        Mevcut merkezimize taşınmamızla birlikte edindiğimiz tecrübe ve
-        müşterilerimizin güveni, her yıl{" "}
-        <span className="font-bold text-[#d4af37]">%300 büyüme</span>{" "}
-        gerçekleştirmemizi sağladı.
-      </>
-    ),
-    image:
-      "https://images.unsplash.com/photo-1597336767351-7f9999a43a85?q=80&w=2670&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1597336767351-7f9999a43a85?q=80&w=2670&auto=format&fit=crop",
     iconClass: "fa-solid fa-chart-line",
     iconWrapperClass: "bg-[#2c2c2c] text-white",
-    accentClass:
-      "absolute top-0 left-0 h-20 w-20 rounded-br-full -ml-4 -mt-4 bg-[#2c2c2c]/5",
-    reverse: true
+    accentClass: "absolute top-0 left-0 h-20 w-20 rounded-br-full -ml-4 -mt-4 bg-[#2c2c2c]/5",
+    reverse: true,
   },
   {
-    year: "2004",
-    label: "Küresel Erişim",
-    title: "2004: Dünyaya Açılış",
-    description:
-      "Aracıları kaldırdık. Granit hammadde ihtiyacımızı dünyanın 14 farklı ülkesindeki ocak ve fabrikalardan doğrudan temin etmeye başladık. En kaliteliyi, kaynağından getirdik.",
-    image:
-      "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2600&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2600&auto=format&fit=crop",
     iconClass: "fa-solid fa-earth-americas",
     iconWrapperClass: "bg-blue-600 text-white",
-    accentClass:
-      "absolute bottom-0 right-0 h-24 w-24 rounded-tl-full -mr-4 -mb-4 bg-blue-50",
-    reverse: false
+    accentClass: "absolute bottom-0 right-0 h-24 w-24 rounded-tl-full -mr-4 -mb-4 bg-blue-50",
+    reverse: false,
   },
   {
-    year: "2005",
-    label: "İhracat ve Proje",
-    title: "2005: Almanya'ya İhracat",
-    description:
-      "Büyümemizi Almanya'ya ihracat yaparak taçlandırdık. Artık sadece malzeme tedariği değil, proje bazlı hizmet vererek kompleks yapıları hayata geçiriyoruz.",
-    image:
-      "https://images.unsplash.com/photo-1620613914072-4e449a75902f?q=80&w=2574&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1620613914072-4e449a75902f?q=80&w=2574&auto=format&fit=crop",
     iconClass: "fa-solid fa-truck-fast",
     iconWrapperClass: "bg-red-700 text-white",
-    accentClass:
-      "absolute top-0 left-0 h-20 w-20 rounded-br-full -ml-4 -mt-4 bg-red-50",
-    reverse: true
-  }
+    accentClass: "absolute top-0 left-0 h-20 w-20 rounded-br-full -ml-4 -mt-4 bg-red-50",
+    reverse: true,
+  },
 ];
 
 export default function BizKimizPage() {
+  const { t } = useLanguage();
+
   return (
     <main className="min-h-screen bg-[#fdfcf8] text-[#2c2c2c] font-sans overflow-x-hidden">
       <Navbar />
@@ -75,7 +46,7 @@ export default function BizKimizPage() {
       <header className="relative pt-28 pb-16">
         <div className="mx-auto w-full max-w-6xl px-6">
           <span className="text-xs uppercase tracking-[0.4em] text-[#b58a2a] mb-4 inline-block">
-            Biz kimiz?
+            {t.about.badge}
           </span>
           <div className="relative overflow-hidden rounded-[2.5rem] border border-black/10 bg-[#f6f2ea] shadow-2xl">
             <div className="relative aspect-[16/9]">
@@ -91,14 +62,13 @@ export default function BizKimizPage() {
           </div>
           <div className="mt-10 max-w-3xl">
             <span className="block text-[#b58a2a] font-serif italic text-lg md:text-xl mb-4">
-              1994'ten günümüze...
+              {t.about.from1994}
             </span>
             <h1 className="font-serif text-4xl md:text-6xl font-bold leading-tight mb-6">
-              Taşın Sanata Dönüştüğü Yolculuk
+              {t.about.heading}
             </h1>
             <p className="text-base md:text-lg text-[#3f3a35] leading-relaxed">
-              Doğanın en sert hediyesini, yaşam alanlarınız için zarif bir
-              dokunuşa çeviriyoruz.
+              {t.about.subheading}
             </p>
           </div>
         </div>
@@ -108,8 +78,7 @@ export default function BizKimizPage() {
         <div className="max-w-3xl mx-auto text-center">
           <i className="fa-solid fa-quote-left text-4xl text-[#d4af37]/30 mb-6" />
           <p className="text-2xl md:text-3xl font-serif leading-relaxed text-[#2c2c2c]">
-            "Bir mermer bloğuna baktığımızda sadece taş görmüyoruz; içindeki gizli
-            sanat eserini görüyoruz."
+            {t.about.quote}
           </p>
           <div className="w-24 h-1 bg-[#d4af37] mx-auto mt-8 rounded-full" />
         </div>
@@ -122,8 +91,9 @@ export default function BizKimizPage() {
         <div className="max-w-5xl mx-auto relative z-10">
           <div className="hidden md:block absolute left-1/2 top-0 -translate-x-1/2 h-full w-0.5 bg-[#e6e2dd]" />
 
-          {timelineItems.map((item, index) => {
-            const isReversed = item.reverse;
+          {t.about.timeline.map((item, index) => {
+            const meta = timelineMeta[index];
+            const isReversed = meta.reverse;
             const textClasses = isReversed
               ? "md:w-5/12 text-left order-2 md:order-3 md:pl-10"
               : "md:w-5/12 text-right order-2 md:order-1 md:pr-10";
@@ -135,12 +105,12 @@ export default function BizKimizPage() {
               <div
                 key={item.year}
                 className={`group flex flex-col md:flex-row items-center justify-between mb-24 ${
-                  index === timelineItems.length - 1 ? "mb-0" : ""
+                  index === t.about.timeline.length - 1 ? "mb-0" : ""
                 }`}
               >
                 <div className={textClasses}>
                   <div className="bg-white p-8 rounded-2xl shadow-xl border border-[#f0ede7] transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl relative overflow-hidden">
-                    <div className={item.accentClass} />
+                    <div className={meta.accentClass} />
                     <span className="text-[#d4af37] font-bold text-sm tracking-widest uppercase mb-2 block">
                       {item.label}
                     </span>
@@ -148,21 +118,29 @@ export default function BizKimizPage() {
                       {item.title}
                     </h3>
                     <p className="text-[#6b625a] leading-relaxed">
-                      {item.description}
+                      {"description" in item ? (
+                        item.description
+                      ) : (
+                        <>
+                          {item.descPre}
+                          <span className="font-bold text-[#d4af37]">{item.descHighlight}</span>
+                          {item.descPost}
+                        </>
+                      )}
                     </p>
                   </div>
                 </div>
                 <div className="md:w-2/12 flex justify-center order-1 md:order-2 mb-6 md:mb-0 relative">
                   <div
-                    className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-10 ring-4 ring-white ${item.iconWrapperClass}`}
+                    className={`w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-10 ring-4 ring-white ${meta.iconWrapperClass}`}
                   >
-                    <i className={item.iconClass} />
+                    <i className={meta.iconClass} />
                   </div>
                 </div>
                 <div className={imageClasses}>
                   <div className="relative h-64 w-full overflow-hidden rounded-2xl shadow-lg">
                     <Image
-                      src={item.image}
+                      src={meta.image}
                       alt={item.title}
                       fill
                       className="object-cover grayscale transition duration-500 group-hover:grayscale-0"
@@ -180,33 +158,31 @@ export default function BizKimizPage() {
         <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
           <h2 className="font-serif text-4xl md:text-5xl font-bold mb-8">
-            "Bir Sanat Eserine Dönüştürüyoruz"
+            {t.about.title1}
           </h2>
           <p className="text-lg md:text-xl font-light text-[#d9d2c8] mb-12 leading-relaxed">
-            Yapı Granit olarak kurulduğumuz günden beri, sektöre yıllarını vermiş
-            ustalarımız, idari personelimiz ve en son teknoloji işleme
-            makinalarımız ile tek bir amaç için çalışıyoruz: "En Güzel".
+            {t.about.desc1}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-6 border border-[#3b3b3b] rounded-xl hover:bg-[#343434] transition">
               <i className="fa-solid fa-compass-drafting text-4xl text-[#d4af37] mb-4" />
-              <h4 className="font-bold text-xl mb-2">Projelendirme</h4>
+              <h4 className="font-bold text-xl mb-2">{t.about.planning}</h4>
               <p className="text-sm text-[#bdb5ab]">
-                Mekanınıza en uygun çözümün tasarlanması.
+                {t.about.planningDesc}
               </p>
             </div>
             <div className="p-6 border border-[#3b3b3b] rounded-xl hover:bg-[#343434] transition">
               <i className="fa-solid fa-hands-holding-circle text-4xl text-[#d4af37] mb-4" />
-              <h4 className="font-bold text-xl mb-2">Ustalık</h4>
+              <h4 className="font-bold text-xl mb-2">{t.about.craftsmanship}</h4>
               <p className="text-sm text-[#bdb5ab]">
-                Taşın, sanatkar ellerde şekil bulması.
+                {t.about.craftsmanshipDesc}
               </p>
             </div>
             <div className="p-6 border border-[#3b3b3b] rounded-xl hover:bg-[#343434] transition">
               <i className="fa-regular fa-clock text-4xl text-[#d4af37] mb-4" />
-              <h4 className="font-bold text-xl mb-2">Zamanında Montaj</h4>
+              <h4 className="font-bold text-xl mb-2">{t.about.assembly}</h4>
               <p className="text-sm text-[#bdb5ab]">
-                Verilen sözlerin eksiksiz yerine getirilmesi.
+                {t.about.assemblyDesc}
               </p>
             </div>
           </div>
@@ -222,7 +198,7 @@ export default function BizKimizPage() {
             </h2>
           </div>
           <p className="text-[#8c8378] text-sm italic">
-            "Taşa hayat veriyoruz..."
+            {t.about.tagline}
           </p>
           <div className="flex gap-4">
             <a
@@ -249,7 +225,7 @@ export default function BizKimizPage() {
           </div>
         </div>
         <div className="text-center mt-8 text-xs text-[#b0a79c]">
-          &copy; 2024 Yapı Granit. Tüm hakları saklıdır.
+          &copy; {t.about.copyright}
         </div>
       </footer>
     </main>

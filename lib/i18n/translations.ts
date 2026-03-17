@@ -1,0 +1,978 @@
+export type Language = "tr" | "de" | "en";
+
+export type Translations = typeof tr;
+
+const tr = {
+  // Navigation
+  nav: {
+    corporate: "Kurumsal",
+    individual: "Bireysel",
+    blogVision: "Blog & Vizyon",
+    about: "Biz kimiz?",
+    contact: "İletişim",
+    impressum: "Impressum",
+  },
+
+  // Hero (SplitHero static labels)
+  hero: {
+    leftLabel: "Mimar & Müteahhit",
+    rightLabel: "Ev Sahibi & Tasarım",
+    phone: "T: 0 258 372 22 50",
+    email: "E: info@yapigranit.com",
+    copyright: "(c) 2025 YAPIGRANİT A.Ş.",
+    // Mock data hero content
+    leftTitle: "Mimar ve Proje Çözüm Ortaklığı",
+    leftSubtitle: "5 Eksen CNC, Waterjet Kesim ve Mekanik Cephe Sistemleri.",
+    leftBtn: "Kurumsal Çözümleri Keşfet",
+    rightTitle: "Eviniz İçin Porselen ve Doğal Taş Şıklığı",
+    rightSubtitle: "Çizilmez Porselen Tezgahlar ve Butik Doğal Taş Tasarımları.",
+    rightBtn: "Koleksiyonu İncele",
+  },
+
+  // Koleksiyon page hero
+  koleksiyon: {
+    badge: "Premium Doğal Taş",
+    heading1: "Doğanın",
+    heading2: "Sanata",
+    heading3: "Dönüştüğü Yer.",
+    description:
+      "Milyonlarca yıllık jeolojik mirası, modern mimarinin zarafetiyle buluşturuyoruz. Yaşam alanlarınız için sonsuzluk kadar dayanıklı, sanat kadar eşsiz çözümler.",
+    strongText: "sonsuzluk kadar dayanıklı",
+    exploreBtn: "Koleksiyonu Keşfet",
+    introFilm: "Tanıtım Filmi",
+    years: "Yıl",
+    featured: "Öne Çıkan",
+  },
+
+  // Collection grid
+  grid: {
+    title: "Koleksiyon",
+    searchPlaceholder: "Taş adı veya kod...",
+    filters: "Filtreler",
+    brandName: "Marka Adı",
+    color: "Renk",
+    clearFilters: "Filtreleri Temizle",
+    results: "Ürün listeleniyor",
+    noResults: "Sonuç Bulunamadı",
+    noResultsDesc: "Seçtiğiniz kriterlere uygun taş bulunmamaktadır.",
+    sort: "Sırala",
+    prevPage: "Önceki sayfa",
+    nextPage: "Sonraki sayfa",
+    closeFilters: "Filtreleri kapat",
+  },
+
+  // Stone guide section
+  guide: {
+    badge: "Rehber",
+    title: "Hangi Taş",
+    titleHighlight: "Sizin İçin",
+    titleEnd: "Uygun?",
+    description:
+      "Mutfak ve banyo tezgahlarında doğru seçim için kısa ve net bir kıyaslama.",
+    recommendation: "Öneri:",
+    materials: [
+      {
+        title: "Porselen",
+        subtitle: "Teknolojinin Zirvesi",
+        description: "Yüksek teknoloji ile sıkıştırılmış, ultra dayanıklı yüzeyler.",
+        features: ["Isı Direnci", "Çizilmezlik", "Leke Tutmaz"],
+        pros: [
+          "Ateşe ve UV ışınlarına tam direnç",
+          "Dış mekan kullanımına uygun",
+          "İnce ve hafif yapı",
+        ],
+        bestFor: "Yoğun mutfaklar & Dış mekan",
+        tag: "En Dayanıklı",
+      },
+      {
+        title: "Doğal Taş",
+        subtitle: "Doğanın Sanatı",
+        description: "Milyonlarca yılda oluşan, eşsiz ve tekrarı olmayan plakalar.",
+        features: ["Benzersizlik", "Isı Direnci", "Doğallık"],
+        pros: [
+          "Her plaka bir sanat eseri",
+          "Zamanla değerlenen estetik",
+          "Prestijli görünüm",
+        ],
+        bestFor: "Lüks banyo, şömine, salon",
+        tag: "Premium Seçim",
+      },
+      {
+        title: "Kuvars",
+        subtitle: "Pratik ve Estetik",
+        description: "Doğal kuvars minerallerinin reçine ile güçlendirilmiş hali.",
+        features: ["Hijyen", "Renk Tutarlılığı", "Esneklik"],
+        pros: [
+          "Gözeneksiz hijyenik yüzey",
+          "Bakım gerektirmez",
+          "Geniş renk seçeneği",
+        ],
+        bestFor: "Aile mutfağı & Banyo",
+        tag: "Bakımı Kolay",
+      },
+    ],
+  },
+
+  // Trend vision section
+  trend: {
+    badge: "Blog & Vizyon",
+    title: "Tasarım",
+    titleHighlight: "Trendleri",
+    year: "2026",
+    description:
+      "Daha fazla içerik için kaydırın. Sektör analizleri, bakım rehberleri ve tasarım trendleri burada.",
+    readMore: "Okumaya Başla",
+    prevContent: "Önceki içerikler",
+    nextContent: "Sonraki içerikler",
+  },
+
+  // Contact/Quote section
+  contact: {
+    title: "Projenizi",
+    titleHighlight: "Hayata Geçirelim",
+    subtitle:
+      "Hayalinizdeki mekan için ilk adımı atın. İster detaylı teklif alın, ister uzmanımızla anında görüşün.",
+    formTitle: "Hızlı Teklif Formu",
+    freeConsult: "Ücretsiz Danışmanlık",
+    projectType: "Proje Türü",
+    area: "Tahmini Ölçü",
+    stonePreference: "Taş Tercihi / Renk",
+    areaPlaceholder: "Örn: 15 m2 veya 4 metre tül",
+    name: "Ad Soyad",
+    phone: "Telefon",
+    phonePlaceholder: "05__ ___ __ __",
+    submitBtn: "Teklif İste",
+    gdpr: "Göndererek, KVKK kapsamında verilerimin işlenmesini kabul ediyorum.",
+    selectPlaceholder: "Seçiniz...",
+    projectOptions: [
+      { value: "mutfak", label: "Mutfak Tezgahı" },
+      { value: "banyo", label: "Banyo Tasarımı" },
+      { value: "zemin", label: "Zemin Döşeme" },
+      { value: "otel", label: "Otel / Ticari Proje" },
+    ],
+    stoneOptions: ["Mermer", "Granit", "Porselen", "Kuvars", "Kararsızım"],
+    successTitle: "Talebiniz Alındı!",
+    successMsg:
+      "Proje detaylarınızı inceliyoruz. En geç 24 saat içinde size özel teklifimizle dönüş yapacağız.",
+    successWithin: "24 saat içinde",
+    newForm: "Yeni Form Gönder",
+    whatsappTitle: "WhatsApp Hattı",
+    whatsappMsg:
+      "Beğendiğiniz bir modelin fotoğrafını mı çektiniz? Bize gönderin, stok durumunu ve fiyatını anında öğrenin.",
+    whatsappStart: "Sohbeti Başlat",
+    customerService: "Müşteri Hizmetleri",
+    weekdays: "Hafta içi 09:00 - 18:00",
+    showroom: "Showroom",
+    seeOnMap: "Haritada Gör",
+    showroomAddress: "Zafer Mah. Zafer Cd. No:60/1 Merkezefendi/Denizli",
+    aiOnline: "Taş Uzmanı AI",
+    aiOnlineMsg: "şu an çevrimiçi. Sorularınızı yanıtlamaya hazır.",
+    phone_tr: "0 258 372 22 50",
+    email_tr: "info@yapigranit.com",
+  },
+
+  // About/Projeler page
+  about: {
+    badge: "Biz kimiz?",
+    from1994: "1994'ten günümüze...",
+    heading: "Taşın Sanata Dönüştüğü Yolculuk",
+    subheading: "Doğanın en sert hediyesini, yaşam alanlarınız için zarif bir dokunuşa çeviriyoruz.",
+    quote:
+      "\"Bir mermer bloğuna baktığımızda sadece taş görmüyoruz; içindeki gizli sanat eserini görüyoruz.\"",
+    tagline: "\"Taşa hayat veriyoruz...\"",
+    copyright: "2024 Yapı Granit. Tüm hakları saklıdır.",
+    title1: "\"Bir Sanat Eserine Dönüştürüyoruz\"",
+    desc1:
+      "Yapı Granit olarak kurulduğumuz günden beri, sektöre yıllarını vermiş ustalarımız, idari personelimiz ve en son teknoloji işleme makinalarımız ile tek bir amaç için çalışıyoruz: \"En Güzel\".",
+    planning: "Projelendirme",
+    planningDesc: "Mekanınıza en uygun çözümün tasarlanması.",
+    craftsmanship: "Ustalık",
+    craftsmanshipDesc: "Taşın, sanatkar ellerde şekil bulması.",
+    assembly: "Zamanında Montaj",
+    assemblyDesc: "Verilen sözlerin eksiksiz yerine getirilmesi.",
+    timeline: [
+      {
+        year: "1994",
+        label: "Başlangıç",
+        title: "1994: Temeller Atılıyor",
+        description:
+          "Yapı Granit'in serüveni 1994 yılında başladı. Küçük bir atölyede, büyük hayallerle kurulan firmamız, ilk günden itibaren kaliteyi hedefledi.",
+      },
+      {
+        year: "2000",
+        label: "Dönüm Noktası",
+        title: "2000: Yeni Merkez & Güven",
+        descPre: "Mevcut merkezimize taşınmamızla birlikte edindiğimiz tecrübe ve müşterilerimizin güveni, her yıl ",
+        descHighlight: "%300 büyüme",
+        descPost: " gerçekleştirmemizi sağladı.",
+      },
+      {
+        year: "2004",
+        label: "Küresel Erişim",
+        title: "2004: Dünyaya Açılış",
+        description:
+          "Aracıları kaldırdık. Granit hammadde ihtiyacımızı dünyanın 14 farklı ülkesindeki ocak ve fabrikalardan doğrudan temin etmeye başladık. En kaliteliyi, kaynağından getirdik.",
+      },
+      {
+        year: "2005",
+        label: "İhracat ve Proje",
+        title: "2005: Almanya'ya İhracat",
+        description:
+          "Büyümemizi Almanya'ya ihracat yaparak taçlandırdık. Artık sadece malzeme tedariği değil, proje bazlı hizmet vererek kompleks yapıları hayata geçiriyoruz.",
+      },
+    ],
+  },
+
+  // Corporate/Kurumsal page
+  kurumsal: {
+    heroBadge: "Kurumsal Teknoloji",
+    heroTitle: "Taşta Mühendislik Disiplini",
+    heroDesc:
+      "Mimarlar ve müteahhitler için; hassas üretim, kontrollü montaj ve sürdürülebilir cephe çözümlerini tek çatı altında sunuyoruz.",
+    machineBadge: "Makine Parkuru",
+    machineTitle: "Taşı",
+    machineTitleHighlight: "Teknolojiyle",
+    machineTitleEnd: "İşliyoruz",
+    machineDesc:
+      "Doğal taşı, uzay endüstrisi standartlarında işleyen hassas teknolojilerimizle tanışın.",
+    zeroTolerance: "Sıfır Hata Toleransı • Yüksek Standartlar",
+    catalogBadge: "HİZMETLERİMİZ",
+    catalogTitle: "Dijital Hizmet Kataloğu",
+    catalogDesc:
+      "Hizmetlerimizi tek bir akışta, tutarlı kartlar ve net hiyerarşiyle sunuyoruz.",
+    catalogTags: ["Dengeli Akış", "Net Hiyerarşi", "Stabil Geçiş"],
+    catalogIndex: "Katalog İndeksi",
+    catalogItems: ["Dış Cephe", "Mutfak & Banyo", "Taş Mobilya", "Dekoratif"],
+    section01Label: "Bölüm 01",
+    section01Title: "Dış Cephe ve Mimari Kaplama",
+    section01Desc:
+      "Yapıların dış kabuğunda güvenlik, yalıtım ve estetiği birleştiren mühendislik çözümleri.",
+    section01Tags: ["Mekanik Sistem", "Split Face", "Kaplama Çözümleri"],
+    mechFacadeTitle: "Mekanik Cephe Sistemleri",
+    mechFacadeDesc:
+      "Çok katlı yapılarda yapıştırma yerine 304/316 paslanmaz çelik ankrajlarla güvenli montaj sağlıyoruz. Taş ile bina arasında bırakılan hava boşluğu havalandırmalı cephe etkisi yaratır.",
+    mechFacadeTags: ["304/316 Çelik", "Deprem Güvenli"],
+    splitFaceTitle: "Patlatma (Split Face)",
+    splitFaceDesc:
+      "Doğal taşın ham dokusunu koruyan, ışık-gölge oyunlarıyla cepheye derinlik katan dekoratif kaplamalar. Dış mekan ve bahçe duvarlarında rustik görünüm sağlar.",
+    splitFaceTags: ["Derin Doku", "Işık-Gölge"],
+    floorWallTitle: "Zemin, Duvar ve Tavan Kaplama",
+    floorLabel: "Zemin:",
+    floorDesc: "Yoğun yaya trafiğine dayanıklı granit ve mermer döşemeler.",
+    wallLabel: "Duvar:",
+    wallDesc: "İç ve dış mekanlarda bookmatch veya serbest boy kaplamalar.",
+    ceilingLabel: "Tavan:",
+    ceilingDesc: "Hafifletilmiş taş paneller veya kompozit destekli güvenli tavan çözümleri.",
+    section02Label: "Bölüm 02",
+    section02Title: "Mutfak & Banyo Çözümleri",
+    section02Desc: "Islak hacimlerde hijyen, dayanıklılık ve fonksiyonelliğin buluşması.",
+    section02Tags: ["Hijyen", "Dayanıklılık", "Fonksiyon"],
+    kitchenCounterTitle: "Mutfak Tezgahı",
+    kitchenCounterDesc:
+      "Çizilmez, leke tutmaz ve ısıya dayanıklı Porselen (Neolith, Dekton, Laminam) ve Kuvars (Çimstone, Belenco) tezgah uygulamaları. Asitlere karşı üstün direnç sağlayan sinterlenmiş taş teknolojisi.",
+    kitchenCounterTags: ["Porselen", "Kuvars", "Sinter"],
+    islandTitle: "Ada Mutfak & Kahve Köşesi",
+    islandDesc:
+      "Waterfall (şelale) kenar detaylarıyla zemine kadar inen ada tasarımları ve evinize özel, şık kahve istasyonları.",
+    islandTags: ["Waterfall", "Özel Tasarım"],
+    bathroomTitle: "Banyo ve Islak Hacim",
+    bathroomDesc1: "Mermer ve oniks duş tekneleri, duvar kaplamaları.",
+    bathroomDesc2: "Hilton lavabo tezgahları ve neme dayanıklı yüzeyler.",
+    sinkTitle: "Entegre Evye Sistemleri",
+    sinkDesc:
+      "Tezgahla aynı malzemeden üretilen, ek yeri belli olmayan, hijyenik ve modern bütünleşik evye uygulamaları.",
+    section03Label: "Bölüm 03",
+    section03Title: "Özel Tasarım Taş Mobilya",
+    section03Desc: "CNC ve Waterjet teknolojisiyle şekillenen, kişiye özel butik ürünler.",
+    section03Tags: ["Butik Üretim", "CNC + Waterjet", "Sıcak Doku"],
+    tableTitle: "Masa ve Sehpa",
+    tableDesc:
+      "Mermer, traverten veya oniks kullanılarak üretilen yemek masaları, orta sehpalar ve yan sehpalar. Leke tutmayan koruyucu sealer işlemleriyle uzun ömürlü kullanım.",
+    dresserTitle: "Dresuar ve TV Ünitesi",
+    dresserDesc:
+      "Giriş holleri için şık dresuarlar ve arkadan aydınlatmalı (onyx) veya bookmatch desenli mermer TV ünitesi arka planları.",
+    separatorTitle: "Seperatör (Bölücü Paneller)",
+    separatorDesc:
+      "Mekanları birbirinden ayırırken ışığı estetik şekilde filtreleyen, Waterjet ile desen verilmiş metal veya taş seperatörler.",
+    section04Label: "Bölüm 04",
+    section04Title: "Dekoratif ve Tamamlayıcı Uygulamalar",
+    section04Desc: "Mekanlara ruh katan sanatsal dokunuşlar.",
+    section04Tags: ["Ateş ve Doku", "Dramatik Atmosfer", "Vurgu Detayları"],
+    fireplaceTitle: "Şömine Yapımı",
+    fireplaceDesc:
+      "Isıya dayanıklı granit veya mermer kullanılarak tasarlanan; klasik, modern veya minimalist şömine kaplamaları. CNC ile işlenmiş sütun ve taç detayları.",
+    fireplaceTags: ["Isıya Dayanıklı", "CNC Detay"],
+    stairTitle: "Basamak Döşeme",
+    stairDesc:
+      "İç mekanlarda mermer, dış mekanlarda kaymaz granit kullanılarak yapılan rıhtlı veya rıhtsız merdiven basamakları. LED aydınlatma uyumlu çözümler.",
+    stairTags: ["Kaymaz Granit", "LED Uyumlu"],
+    digitalBadge: "Dijital Rölöve",
+    digitalTitle: "Dijital İkiz ile Kusursuz Başlangıç",
+    digitalDesc: "Mouse'u gezdirerek tarama yapın.",
+    digitalDesc2: "Milimetrik hassasiyet, sıfır risk: şantiyenizi sanal ortama taşıyoruz.",
+    laserTitle: "Lazer Tarama",
+    laserDesc: "Şantiyeyi dijitalleştirip mm hassasiyetinde 3D veriye dönüştürüyoruz.",
+    errorAnalysisTitle: "Hata Analizi",
+    errorAnalysisDesc: "Proje ile saha arasındaki sapmaları montaj başlamadan tespit ediyoruz.",
+    virtualAssemblyTitle: "Sanal Montaj",
+    virtualAssemblyDesc: "Üretim öncesi dijital ikiz üzerinde montaj yaparak fireyi sıfıra indiriyoruz.",
+    whatsappMsg:
+      "Merhaba, kurumsal proje için teknik bilgi ve teklif almak istiyorum.",
+  },
+
+  // Footer
+  footer: {
+    email: "info@yapigranit.com",
+    phone: "0 258 372 22 50",
+    phoneHref: "tel:+902583722250",
+    emailHref: "mailto:info@yapigranit.com",
+  },
+
+  // Impressum (only shown for DE)
+  impressum: {
+    title: "Impressum",
+    // This is only used in DE, but we define it for consistency
+  },
+};
+
+const de: Translations = {
+  nav: {
+    corporate: "Firmenprofil",
+    individual: "Privatkunden",
+    blogVision: "Blog & Vision",
+    about: "Über uns",
+    contact: "Kontakt",
+    impressum: "Impressum",
+  },
+
+  hero: {
+    leftLabel: "Architekt & Bauunternehmer",
+    rightLabel: "Eigentümer & Design",
+    phone: "T: +49 (0) 172 389 6084",
+    email: "E: info@yapigranit.de",
+    copyright: "(c) 2025 YAPIGRANİT GmbH",
+    leftTitle: "Ihr Partner für Architektur & Projektlösungen",
+    leftSubtitle: "5-Achsen CNC, Wasserstrahlschnitt und mechanische Fassadensysteme.",
+    leftBtn: "Unternehmenslösungen entdecken",
+    rightTitle: "Porzellane & Natursteine für Ihr Zuhause",
+    rightSubtitle: "Kratzfeste Porzellantheken und exklusive Natursteindesigns.",
+    rightBtn: "Kollektion ansehen",
+  },
+
+  koleksiyon: {
+    badge: "Premium Naturstein",
+    heading1: "Wo die Natur",
+    heading2: "zur Kunst",
+    heading3: "wird.",
+    description:
+      "Wir verbinden das geologische Erbe von Millionen Jahren mit der Eleganz moderner Architektur. Für Ihre Wohnräume: langlebige und einzigartige Lösungen.",
+    strongText: "langlebig wie die Ewigkeit",
+    exploreBtn: "Kollektion entdecken",
+    introFilm: "Einführungsfilm",
+    years: "Jahre",
+    featured: "Empfohlen",
+  },
+
+  grid: {
+    title: "Kollektion",
+    searchPlaceholder: "Steinname oder Code...",
+    filters: "Filter",
+    brandName: "Markenname",
+    color: "Farbe",
+    clearFilters: "Filter löschen",
+    results: "Produkte aufgelistet",
+    noResults: "Keine Ergebnisse gefunden",
+    noResultsDesc: "Es wurden keine Steine gefunden, die Ihren Kriterien entsprechen.",
+    sort: "Sortieren",
+    prevPage: "Vorherige Seite",
+    nextPage: "Nächste Seite",
+    closeFilters: "Filter schließen",
+  },
+
+  guide: {
+    badge: "Ratgeber",
+    title: "Welcher Stein ist",
+    titleHighlight: "der Richtige",
+    titleEnd: "für Sie?",
+    description:
+      "Ein kurzer und klarer Vergleich für die richtige Auswahl bei Küchen- und Badezimmerarbeitsplatten.",
+    recommendation: "Empfehlung:",
+    materials: [
+      {
+        title: "Porzellan",
+        subtitle: "Der Gipfel der Technologie",
+        description: "Ultra-langlebige Oberflächen, unter hohem Druck gepresst.",
+        features: ["Wärmebeständigkeit", "Kratzfestigkeit", "Fleckenresistenz"],
+        pros: [
+          "Vollständige Beständigkeit gegen Feuer und UV-Strahlen",
+          "Für den Außenbereich geeignet",
+          "Dünne und leichte Struktur",
+        ],
+        bestFor: "Intensivküchen & Außenbereich",
+        tag: "Am Haltbarsten",
+      },
+      {
+        title: "Naturstein",
+        subtitle: "Die Kunst der Natur",
+        description: "Einzigartige Platten, die über Millionen von Jahren entstanden sind.",
+        features: ["Einzigartigkeit", "Wärmebeständigkeit", "Natürlichkeit"],
+        pros: [
+          "Jede Platte ist ein Kunstwerk",
+          "Zeitlos wertvolle Ästhetik",
+          "Repräsentatives Erscheinungsbild",
+        ],
+        bestFor: "Luxusbad, Kamin, Wohnzimmer",
+        tag: "Premium Wahl",
+      },
+      {
+        title: "Quarz",
+        subtitle: "Praktisch & Ästhetisch",
+        description: "Natürliche Quarzmineralien, verstärkt mit Harz.",
+        features: ["Hygiene", "Farbkonsistenz", "Flexibilität"],
+        pros: [
+          "Porenfreie hygienische Oberfläche",
+          "Wartungsfrei",
+          "Große Farbauswahl",
+        ],
+        bestFor: "Familienküche & Badezimmer",
+        tag: "Pflegeleicht",
+      },
+    ],
+  },
+
+  trend: {
+    badge: "Blog & Vision",
+    title: "Design",
+    titleHighlight: "Trends",
+    year: "2026",
+    description:
+      "Scrollen Sie für mehr Inhalte. Branchenanalysen, Pflegeanleitungen und Designtrends hier.",
+    readMore: "Jetzt lesen",
+    prevContent: "Vorherige Inhalte",
+    nextContent: "Nächste Inhalte",
+  },
+
+  contact: {
+    title: "Lassen Sie uns Ihr",
+    titleHighlight: "Projekt umsetzen",
+    subtitle:
+      "Machen Sie den ersten Schritt für Ihren Traumraum. Fordern Sie ein detailliertes Angebot an oder sprechen Sie sofort mit unserem Experten.",
+    formTitle: "Schnelles Angebotsformular",
+    freeConsult: "Kostenlose Beratung",
+    projectType: "Projektart",
+    area: "Geschätzte Größe",
+    stonePreference: "Steinauswahl / Farbe",
+    areaPlaceholder: "z.B. 15 m² oder 4 laufende Meter",
+    name: "Vor- und Nachname",
+    phone: "Telefon",
+    phonePlaceholder: "+49 ___ _______",
+    submitBtn: "Angebot anfordern",
+    gdpr: "Mit dem Absenden stimme ich der Verarbeitung meiner Daten gemäß DSGVO zu.",
+    selectPlaceholder: "Auswählen...",
+    projectOptions: [
+      { value: "mutfak", label: "Küchenarbeitsplatte" },
+      { value: "banyo", label: "Badezimmergestaltung" },
+      { value: "zemin", label: "Bodenbelag" },
+      { value: "otel", label: "Hotel / Gewerbeprojekt" },
+    ],
+    stoneOptions: ["Marmor", "Granit", "Porzellan", "Quarz", "Unentschieden"],
+    successTitle: "Ihre Anfrage wurde erhalten!",
+    successMsg:
+      "Wir prüfen Ihre Projektdetails. Wir werden uns innerhalb von 24 Stunden mit einem individuellen Angebot bei Ihnen melden.",
+    successWithin: "innerhalb von 24 Stunden",
+    newForm: "Neues Formular senden",
+    whatsappTitle: "WhatsApp-Kanal",
+    whatsappMsg:
+      "Haben Sie ein Foto eines Modells gemacht, das Ihnen gefällt? Schicken Sie es uns, und wir informieren Sie sofort über Verfügbarkeit und Preis.",
+    whatsappStart: "Chat starten",
+    customerService: "Kundendienst",
+    weekdays: "Mo–Fr 09:00 – 18:00",
+    showroom: "Showroom",
+    seeOnMap: "Auf der Karte ansehen",
+    showroomAddress: "Frankfurter Straße 60, 53840 Troisdorf / Deutschland",
+    aiOnline: "Stein-Experte KI",
+    aiOnlineMsg: "ist gerade online. Bereit, Ihre Fragen zu beantworten.",
+    phone_tr: "+49 (0) 172 389 6084",
+    email_tr: "info@yapigranit.de",
+  },
+
+  about: {
+    badge: "Über uns",
+    from1994: "Seit 1994...",
+    heading: "Die Reise, wo Stein zur Kunst wird",
+    subheading: "Das härteste Geschenk der Natur verwandeln wir in eine elegante Note für Ihre Wohnräume.",
+    quote:
+      "\"Wenn wir einen Marmorblock betrachten, sehen wir nicht nur Stein; wir sehen das verborgene Kunstwerk in seinem Inneren.\"",
+    tagline: "\"Wir hauchen dem Stein Leben ein...\"",
+    copyright: "2024 Yapı Granit. Alle Rechte vorbehalten.",
+    title1: "\"Wir verwandeln es in ein Kunstwerk\"",
+    desc1:
+      "Seit unserer Gründung arbeiten wir bei Yapı Granit mit erfahrenen Meistern, Verwaltungspersonal und modernsten Verarbeitungsmaschinen für ein einziges Ziel: \"Das Schönste\".",
+    planning: "Projektplanung",
+    planningDesc: "Gestaltung der optimalen Lösung für Ihren Raum.",
+    craftsmanship: "Handwerkskunst",
+    craftsmanshipDesc: "Der Stein formt sich in den Händen des Künstlers.",
+    assembly: "Pünktliche Montage",
+    assemblyDesc: "Vollständige Erfüllung aller Versprechen.",
+    timeline: [
+      {
+        year: "1994",
+        label: "Gründung",
+        title: "1994: Die Grundlage wird gelegt",
+        description:
+          "Das Abenteuer von Yapı Granit begann im Jahr 1994. Gegründet in einer kleinen Werkstatt mit großen Träumen, strebte unser Unternehmen von Anfang an nach Qualität.",
+      },
+      {
+        year: "2000",
+        label: "Wendepunkt",
+        title: "2000: Neues Zentrum & Vertrauen",
+        descPre: "Mit unserem Umzug in unser heutiges Zentrum ermöglichten uns Erfahrung und Kundenvertrauen ein jährliches Wachstum von ",
+        descHighlight: "300%",
+        descPost: ".",
+      },
+      {
+        year: "2004",
+        label: "Globaler Zugang",
+        title: "2004: Öffnung zur Welt",
+        description:
+          "Wir eliminierten Zwischenhändler. Wir begannen, unseren Granitrohmaterialbedarf direkt aus Steinbrüchen und Fabriken in 14 verschiedenen Ländern zu beziehen. Das Beste direkt aus der Quelle.",
+      },
+      {
+        year: "2005",
+        label: "Export & Projekte",
+        title: "2005: Export nach Deutschland",
+        description:
+          "Wir krönten unser Wachstum mit dem Export nach Deutschland. Heute liefern wir nicht nur Materialien, sondern realisieren auch komplexe Projekte auf Projektbasis.",
+      },
+    ],
+  },
+
+  kurumsal: {
+    heroBadge: "Unternehmenstechnologie",
+    heroTitle: "Ingenieurdisziplin im Stein",
+    heroDesc:
+      "Für Architekten und Bauunternehmer bieten wir Präzisionsfertigung, kontrollierte Montage und nachhaltige Fassadenlösungen unter einem Dach.",
+    machineBadge: "Maschinenpark",
+    machineTitle: "Wir verarbeiten Stein",
+    machineTitleHighlight: "mit Technologie",
+    machineTitleEnd: "",
+    machineDesc:
+      "Lernen Sie unsere Präzisionstechnologien kennen, die Naturstein nach Industriestandards verarbeiten.",
+    zeroTolerance: "Null Fehlertoleranz • Höchste Standards",
+    catalogBadge: "UNSERE LEISTUNGEN",
+    catalogTitle: "Digitaler Leistungskatalog",
+    catalogDesc:
+      "Wir präsentieren unsere Leistungen in einem einzigen Fluss mit konsistenten Karten und klarer Hierarchie.",
+    catalogTags: ["Ausgewogener Ablauf", "Klare Hierarchie", "Stabile Übergänge"],
+    catalogIndex: "Katalogindex",
+    catalogItems: ["Außenfassade", "Küche & Bad", "Steinmöbel", "Dekorativ"],
+    section01Label: "Abschnitt 01",
+    section01Title: "Außenfassade & Architekturverkleidung",
+    section01Desc:
+      "Ingenieurtechnische Lösungen, die Sicherheit, Wärmedämmung und Ästhetik an der äußeren Hülle von Gebäuden kombinieren.",
+    section01Tags: ["Mechanisches System", "Split Face", "Verkleidungslösungen"],
+    mechFacadeTitle: "Mechanische Fassadensysteme",
+    mechFacadeDesc:
+      "Bei mehrgeschossigen Gebäuden sorgen wir statt Verklebung für sichere Montage mit 304/316-Edelstahlankern. Der zwischen Stein und Gebäude belassene Luftspalt erzeugt einen hinterlüfteten Fassadeneffekt.",
+    mechFacadeTags: ["304/316 Stahl", "Erdbebensicher"],
+    splitFaceTitle: "Spaltfläche (Split Face)",
+    splitFaceDesc:
+      "Dekorative Verkleidungen, die die rohe Textur des Natursteins bewahren und der Fassade durch Licht-Schatten-Spiele Tiefe verleihen. Rustikales Erscheinungsbild für Außenbereiche und Gartenmauern.",
+    splitFaceTags: ["Tiefe Textur", "Licht-Schatten"],
+    floorWallTitle: "Boden-, Wand- und Deckenbelag",
+    floorLabel: "Boden:",
+    floorDesc: "Granit- und Marmorbeläge, die starkem Fußgängerverkehr standhalten.",
+    wallLabel: "Wand:",
+    wallDesc: "Bookmatch- oder Freiformverkleidungen für Innen- und Außenbereiche.",
+    ceilingLabel: "Decke:",
+    ceilingDesc: "Erleichterte Steinpaneele oder komposit-gestützte sichere Deckenlösungen.",
+    section02Label: "Abschnitt 02",
+    section02Title: "Küche & Bad Lösungen",
+    section02Desc: "Hygiene, Haltbarkeit und Funktionalität in Nassbereichen vereint.",
+    section02Tags: ["Hygiene", "Haltbarkeit", "Funktion"],
+    kitchenCounterTitle: "Küchenarbeitsplatte",
+    kitchenCounterDesc:
+      "Kratzfeste, fleckenresistente und hitzebeständige Porzellantheken (Neolith, Dekton, Laminam) und Quarztheken (Çimstone, Belenco). Gesinterter Stein mit überlegener Säurebeständigkeit.",
+    kitchenCounterTags: ["Porzellan", "Quarz", "Gesintert"],
+    islandTitle: "Kücheninsel & Kaffeeecke",
+    islandDesc:
+      "Inseldesigns mit Wasserfall-Kantendetails, die bis zum Boden reichen, und individuelle, elegante Kaffeestationen.",
+    islandTags: ["Wasserfall", "Individuelles Design"],
+    bathroomTitle: "Bad & Nassbereich",
+    bathroomDesc1: "Duschbecken und Wandverkleidungen aus Marmor und Onyx.",
+    bathroomDesc2: "Hilton-Waschtischplatten und feuchtigkeitsbeständige Oberflächen.",
+    sinkTitle: "Integrierte Spülensysteme",
+    sinkDesc:
+      "Hygienische und moderne integrierte Spülenanwendungen aus dem gleichen Material wie die Arbeitsplatte, ohne sichtbare Nähte.",
+    section03Label: "Abschnitt 03",
+    section03Title: "Individuelle Steinmöbel",
+    section03Desc: "Maßgefertigte Boutique-Produkte, geformt durch CNC- und Wasserstrahltechnologie.",
+    section03Tags: ["Boutique-Fertigung", "CNC + Wasserstrahl", "Warme Textur"],
+    tableTitle: "Tisch und Beistelltisch",
+    tableDesc:
+      "Esstische, Couchtische und Beistelltische aus Marmor, Travertin oder Onyx. Langlebige Nutzung durch fleckenabweisende Schutzversiegelung.",
+    dresserTitle: "Kommode und TV-Einheit",
+    dresserDesc:
+      "Elegante Kommoden für Eingangsbereiche und Hintergrundbeleuchtete (Onyx) oder Bookmatch-gemusterte Marmor-TV-Rückwände.",
+    separatorTitle: "Raumteiler (Trennpaneele)",
+    separatorDesc:
+      "Metall- oder Steintrennwände mit Wasserstrahl-gemusterten Designs, die Räume trennen und gleichzeitig Licht ästhetisch filtern.",
+    section04Label: "Abschnitt 04",
+    section04Title: "Dekorative & Ergänzende Anwendungen",
+    section04Desc: "Künstlerische Akzente, die Räumen Leben einhauchen.",
+    section04Tags: ["Feuer & Textur", "Dramatische Atmosphäre", "Akzentdetails"],
+    fireplaceTitle: "Kaminbau",
+    fireplaceDesc:
+      "Klassische, moderne oder minimalistische Kaminverkleidungen aus hitzebeständigem Granit oder Marmor. CNC-gefräste Säulen- und Kronendetails.",
+    fireplaceTags: ["Hitzebeständig", "CNC-Detail"],
+    stairTitle: "Treppenbelag",
+    stairDesc:
+      "Treppenstufen mit oder ohne Setzstufen aus Marmor im Innenbereich und rutschfestem Granit im Außenbereich. LED-beleuchtungskompatible Lösungen.",
+    stairTags: ["Rutschfester Granit", "LED-kompatibel"],
+    digitalBadge: "Digitale Vermessung",
+    digitalTitle: "Perfekter Start mit digitalem Zwilling",
+    digitalDesc: "Fahren Sie mit der Maus, um zu scannen.",
+    digitalDesc2: "Millimetergenaue Präzision, null Risiko: Wir digitalisieren Ihre Baustelle.",
+    laserTitle: "Laserscanning",
+    laserDesc: "Wir digitalisieren die Baustelle und wandeln sie in mm-genaue 3D-Daten um.",
+    errorAnalysisTitle: "Fehleranalyse",
+    errorAnalysisDesc: "Wir erkennen Abweichungen zwischen Projekt und Baustelle, bevor die Montage beginnt.",
+    virtualAssemblyTitle: "Virtuelle Montage",
+    virtualAssemblyDesc: "Durch Montagesimulation am digitalen Zwilling vor der Produktion reduzieren wir Ausschuss auf null.",
+    whatsappMsg:
+      "Hallo, ich möchte technische Informationen und ein Angebot für ein Unternehmensprojekt erhalten.",
+  },
+
+  footer: {
+    email: "info@yapigranit.de",
+    phone: "+49 (0) 172 389 6084",
+    phoneHref: "tel:+4901723896084",
+    emailHref: "mailto:info@yapigranit.de",
+  },
+
+  impressum: {
+    title: "Impressum",
+  },
+};
+
+const en: Translations = {
+  nav: {
+    corporate: "Corporate",
+    individual: "Individual",
+    blogVision: "Blog & Vision",
+    about: "About Us",
+    contact: "Contact",
+    impressum: "Impressum",
+  },
+
+  hero: {
+    leftLabel: "Architect & Contractor",
+    rightLabel: "Homeowner & Design",
+    phone: "T: +90 258 372 22 50",
+    email: "E: info@yapigranit.com",
+    copyright: "(c) 2025 YAPIGRANİT",
+    leftTitle: "Your Partner for Architecture & Project Solutions",
+    leftSubtitle: "5-Axis CNC, Waterjet Cutting and Mechanical Facade Systems.",
+    leftBtn: "Explore Corporate Solutions",
+    rightTitle: "Porcelain & Natural Stone Elegance for Your Home",
+    rightSubtitle: "Scratch-Resistant Porcelain Countertops and Boutique Natural Stone Designs.",
+    rightBtn: "View Collection",
+  },
+
+  koleksiyon: {
+    badge: "Premium Natural Stone",
+    heading1: "Where Nature",
+    heading2: "Becomes",
+    heading3: "Art.",
+    description:
+      "We unite the geological heritage of millions of years with the elegance of modern architecture. For your living spaces: solutions as durable as eternity and as unique as art.",
+    strongText: "as durable as eternity",
+    exploreBtn: "Explore Collection",
+    introFilm: "Intro Film",
+    years: "Years",
+    featured: "Featured",
+  },
+
+  grid: {
+    title: "Collection",
+    searchPlaceholder: "Stone name or code...",
+    filters: "Filters",
+    brandName: "Brand Name",
+    color: "Color",
+    clearFilters: "Clear Filters",
+    results: "products listed",
+    noResults: "No Results Found",
+    noResultsDesc: "No stones matching your criteria were found.",
+    sort: "Sort",
+    prevPage: "Previous page",
+    nextPage: "Next page",
+    closeFilters: "Close filters",
+  },
+
+  guide: {
+    badge: "Guide",
+    title: "Which Stone Is",
+    titleHighlight: "Right",
+    titleEnd: "for You?",
+    description:
+      "A brief and clear comparison for the right choice in kitchen and bathroom countertops.",
+    recommendation: "Best for:",
+    materials: [
+      {
+        title: "Porcelain",
+        subtitle: "The Pinnacle of Technology",
+        description: "Ultra-durable surfaces compressed with high technology.",
+        features: ["Heat Resistance", "Scratch Resistance", "Stain Resistance"],
+        pros: [
+          "Full resistance to fire and UV rays",
+          "Suitable for outdoor use",
+          "Thin and lightweight structure",
+        ],
+        bestFor: "Intensive kitchens & Outdoors",
+        tag: "Most Durable",
+      },
+      {
+        title: "Natural Stone",
+        subtitle: "Nature's Art",
+        description: "Unique, unrepeatable slabs formed over millions of years.",
+        features: ["Uniqueness", "Heat Resistance", "Naturalness"],
+        pros: [
+          "Each slab is a work of art",
+          "Timeless appreciating aesthetics",
+          "Prestigious appearance",
+        ],
+        bestFor: "Luxury bath, fireplace, living room",
+        tag: "Premium Choice",
+      },
+      {
+        title: "Quartz",
+        subtitle: "Practical & Aesthetic",
+        description: "Natural quartz minerals reinforced with resin.",
+        features: ["Hygiene", "Color Consistency", "Flexibility"],
+        pros: [
+          "Non-porous hygienic surface",
+          "Maintenance-free",
+          "Wide color selection",
+        ],
+        bestFor: "Family kitchen & Bathroom",
+        tag: "Easy to Maintain",
+      },
+    ],
+  },
+
+  trend: {
+    badge: "Blog & Vision",
+    title: "Design",
+    titleHighlight: "Trends",
+    year: "2026",
+    description:
+      "Scroll for more content. Industry analyses, care guides and design trends here.",
+    readMore: "Start Reading",
+    prevContent: "Previous content",
+    nextContent: "Next content",
+  },
+
+  contact: {
+    title: "Let's Bring Your",
+    titleHighlight: "Project to Life",
+    subtitle:
+      "Take the first step for your dream space. Get a detailed quote or talk to our expert right away.",
+    formTitle: "Quick Quote Form",
+    freeConsult: "Free Consultation",
+    projectType: "Project Type",
+    area: "Estimated Size",
+    stonePreference: "Stone Preference / Color",
+    areaPlaceholder: "E.g. 15 sqm or 4 linear meters",
+    name: "Full Name",
+    phone: "Phone",
+    phonePlaceholder: "+1 ___ _______",
+    submitBtn: "Request Quote",
+    gdpr: "By submitting, I agree to the processing of my data.",
+    selectPlaceholder: "Select...",
+    projectOptions: [
+      { value: "mutfak", label: "Kitchen Countertop" },
+      { value: "banyo", label: "Bathroom Design" },
+      { value: "zemin", label: "Floor Tiling" },
+      { value: "otel", label: "Hotel / Commercial Project" },
+    ],
+    stoneOptions: ["Marble", "Granite", "Porcelain", "Quartz", "Undecided"],
+    successTitle: "Your Request Has Been Received!",
+    successMsg:
+      "We are reviewing your project details. We will get back to you with a personalized quote within 24 hours.",
+    successWithin: "within 24 hours",
+    newForm: "Send New Form",
+    whatsappTitle: "WhatsApp Line",
+    whatsappMsg:
+      "Did you take a photo of a model you like? Send it to us and we'll instantly inform you about availability and price.",
+    whatsappStart: "Start Chat",
+    customerService: "Customer Service",
+    weekdays: "Weekdays 09:00 - 18:00",
+    showroom: "Showroom",
+    seeOnMap: "View on Map",
+    showroomAddress: "Zafer Mah. Zafer Cd. No:60/1 Merkezefendi/Denizli",
+    aiOnline: "Stone Expert AI",
+    aiOnlineMsg: "is currently online. Ready to answer your questions.",
+    phone_tr: "0 258 372 22 50",
+    email_tr: "info@yapigranit.com",
+  },
+
+  about: {
+    badge: "About Us",
+    from1994: "Since 1994...",
+    heading: "The Journey Where Stone Becomes Art",
+    subheading: "We transform nature's hardest gift into an elegant touch for your living spaces.",
+    quote:
+      "\"When we look at a marble block, we don't just see stone; we see the hidden work of art within it.\"",
+    tagline: "\"We breathe life into stone...\"",
+    copyright: "2024 Yapı Granit. All rights reserved.",
+    title1: "\"We Transform It into a Work of Art\"",
+    desc1:
+      "Since our founding at Yapı Granit, we have been working with our experienced masters, administrative staff and state-of-the-art processing machines for a single purpose: \"The Most Beautiful\".",
+    planning: "Project Planning",
+    planningDesc: "Designing the most suitable solution for your space.",
+    craftsmanship: "Craftsmanship",
+    craftsmanshipDesc: "Stone taking shape in the hands of the artisan.",
+    assembly: "On-Time Installation",
+    assemblyDesc: "Complete fulfillment of all commitments.",
+    timeline: [
+      {
+        year: "1994",
+        label: "Beginning",
+        title: "1994: Laying the Foundation",
+        description:
+          "The adventure of Yapı Granit began in 1994. Founded in a small workshop with big dreams, our company aimed for quality from the very first day.",
+      },
+      {
+        year: "2000",
+        label: "Turning Point",
+        title: "2000: New Center & Trust",
+        descPre: "With our move to our current center, the experience we gained and the trust of our customers enabled us to achieve ",
+        descHighlight: "300% growth",
+        descPost: " every year.",
+      },
+      {
+        year: "2004",
+        label: "Global Reach",
+        title: "2004: Opening to the World",
+        description:
+          "We eliminated intermediaries. We began sourcing our granite raw materials directly from quarries and factories in 14 different countries. The best, from the source.",
+      },
+      {
+        year: "2005",
+        label: "Export & Projects",
+        title: "2005: Export to Germany",
+        description:
+          "We crowned our growth by exporting to Germany. Now we not only supply materials but also realize complex projects on a project basis.",
+      },
+    ],
+  },
+
+  kurumsal: {
+    heroBadge: "Corporate Technology",
+    heroTitle: "Engineering Discipline in Stone",
+    heroDesc:
+      "For architects and contractors, we offer precision manufacturing, controlled installation and sustainable facade solutions under one roof.",
+    machineBadge: "Machine Park",
+    machineTitle: "We Process Stone",
+    machineTitleHighlight: "with Technology",
+    machineTitleEnd: "",
+    machineDesc:
+      "Meet our precision technologies that process natural stone to aerospace industry standards.",
+    zeroTolerance: "Zero Error Tolerance • High Standards",
+    catalogBadge: "OUR SERVICES",
+    catalogTitle: "Digital Service Catalog",
+    catalogDesc:
+      "We present our services in a single flow with consistent cards and clear hierarchy.",
+    catalogTags: ["Balanced Flow", "Clear Hierarchy", "Stable Transitions"],
+    catalogIndex: "Catalog Index",
+    catalogItems: ["Exterior Facade", "Kitchen & Bath", "Stone Furniture", "Decorative"],
+    section01Label: "Section 01",
+    section01Title: "Exterior Facade & Architectural Cladding",
+    section01Desc:
+      "Engineering solutions that combine security, insulation and aesthetics on the outer shell of buildings.",
+    section01Tags: ["Mechanical System", "Split Face", "Cladding Solutions"],
+    mechFacadeTitle: "Mechanical Facade Systems",
+    mechFacadeDesc:
+      "For multi-story buildings, we ensure safe installation with 304/316 stainless steel anchors instead of adhesives. The air gap between stone and building creates a ventilated facade effect.",
+    mechFacadeTags: ["304/316 Steel", "Earthquake Safe"],
+    splitFaceTitle: "Split Face Cladding",
+    splitFaceDesc:
+      "Decorative cladding that preserves the raw texture of natural stone and adds depth to the facade with light-shadow play. Provides a rustic look for outdoor spaces and garden walls.",
+    splitFaceTags: ["Deep Texture", "Light-Shadow"],
+    floorWallTitle: "Floor, Wall and Ceiling Cladding",
+    floorLabel: "Floor:",
+    floorDesc: "Granite and marble flooring resistant to heavy pedestrian traffic.",
+    wallLabel: "Wall:",
+    wallDesc: "Bookmatch or free-length cladding for interior and exterior spaces.",
+    ceilingLabel: "Ceiling:",
+    ceilingDesc: "Lightened stone panels or composite-supported safe ceiling solutions.",
+    section02Label: "Section 02",
+    section02Title: "Kitchen & Bathroom Solutions",
+    section02Desc: "Hygiene, durability and functionality united in wet areas.",
+    section02Tags: ["Hygiene", "Durability", "Function"],
+    kitchenCounterTitle: "Kitchen Countertop",
+    kitchenCounterDesc:
+      "Scratch-resistant, stain-resistant and heat-resistant Porcelain (Neolith, Dekton, Laminam) and Quartz (Çimstone, Belenco) countertop applications. Sintered stone technology providing superior acid resistance.",
+    kitchenCounterTags: ["Porcelain", "Quartz", "Sintered"],
+    islandTitle: "Kitchen Island & Coffee Corner",
+    islandDesc:
+      "Island designs extending to the floor with waterfall edge details, and custom elegant coffee stations for your home.",
+    islandTags: ["Waterfall", "Custom Design"],
+    bathroomTitle: "Bathroom & Wet Area",
+    bathroomDesc1: "Marble and onyx shower trays and wall cladding.",
+    bathroomDesc2: "Hilton sink countertops and moisture-resistant surfaces.",
+    sinkTitle: "Integrated Sink Systems",
+    sinkDesc:
+      "Hygienic and modern integrated sink applications made from the same material as the countertop, with invisible seams.",
+    section03Label: "Section 03",
+    section03Title: "Custom Stone Furniture Design",
+    section03Desc: "Bespoke boutique products shaped by CNC and waterjet technology.",
+    section03Tags: ["Boutique Production", "CNC + Waterjet", "Warm Texture"],
+    tableTitle: "Table and Side Table",
+    tableDesc:
+      "Dining tables, coffee tables and side tables made from marble, travertine or onyx. Long-lasting use with stain-resistant protective sealer treatments.",
+    dresserTitle: "Dresser and TV Unit",
+    dresserDesc:
+      "Elegant dressers for entrance halls and back-lit (onyx) or bookmatch-patterned marble TV unit backgrounds.",
+    separatorTitle: "Separator (Partition Panels)",
+    separatorDesc:
+      "Metal or stone separators with waterjet-patterned designs that separate spaces while aesthetically filtering light.",
+    section04Label: "Section 04",
+    section04Title: "Decorative & Complementary Applications",
+    section04Desc: "Artistic touches that breathe life into spaces.",
+    section04Tags: ["Fire & Texture", "Dramatic Atmosphere", "Accent Details"],
+    fireplaceTitle: "Fireplace Construction",
+    fireplaceDesc:
+      "Classic, modern or minimalist fireplace cladding designed with heat-resistant granite or marble. CNC-machined column and crown details.",
+    fireplaceTags: ["Heat Resistant", "CNC Detail"],
+    stairTitle: "Stair Tiling",
+    stairDesc:
+      "Riser or open-riser stair steps using marble for interiors and non-slip granite for exteriors. LED lighting-compatible solutions.",
+    stairTags: ["Non-slip Granite", "LED Compatible"],
+    digitalBadge: "Digital Survey",
+    digitalTitle: "A Perfect Start with Digital Twin",
+    digitalDesc: "Move your mouse to scan.",
+    digitalDesc2: "Millimeter precision, zero risk: we digitize your construction site.",
+    laserTitle: "Laser Scanning",
+    laserDesc: "We digitize the construction site and convert it into mm-accurate 3D data.",
+    errorAnalysisTitle: "Error Analysis",
+    errorAnalysisDesc: "We detect deviations between the project and the site before installation begins.",
+    virtualAssemblyTitle: "Virtual Assembly",
+    virtualAssemblyDesc: "By simulating assembly on the digital twin before production, we reduce waste to zero.",
+    whatsappMsg:
+      "Hello, I would like to get technical information and a quote for a corporate project.",
+  },
+
+  footer: {
+    email: "info@yapigranit.com",
+    phone: "+90 258 372 22 50",
+    phoneHref: "tel:+902583722250",
+    emailHref: "mailto:info@yapigranit.com",
+  },
+
+  impressum: {
+    title: "Impressum",
+  },
+};
+
+export const translations: Record<Language, Translations> = { tr, de, en };

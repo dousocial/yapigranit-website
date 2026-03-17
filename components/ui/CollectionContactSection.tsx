@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { useLanguage } from "@/lib/i18n/LanguageContext";
+
 type FormState = {
   projectType: string;
   area: string;
@@ -9,8 +11,6 @@ type FormState = {
   name: string;
   phone: string;
 };
-
-const stoneOptions = ["Mermer", "Granit", "Porselen", "Kuvars", "Kararsızım"];
 
 function IconArrowRight() {
   return (
@@ -191,6 +191,8 @@ function IconMapPin() {
 }
 
 export default function CollectionContactSection() {
+  const { t } = useLanguage();
+  const stoneOptions = t.contact.stoneOptions;
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState<FormState>({
     projectType: "",
@@ -225,11 +227,10 @@ export default function CollectionContactSection() {
       <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-serif font-bold text-white">
-            Projenizi <span className="text-gold">Hayata Geçirelim</span>
+            {t.contact.title} <span className="text-gold">{t.contact.titleHighlight}</span>
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto mt-4 text-base md:text-lg">
-            Hayalinizdeki mekan için ilk adımı atın. İster detaylı teklif alın,
-            ister uzmanımızla anında görüşün.
+            {t.contact.subtitle}
           </p>
         </div>
 
@@ -241,19 +242,19 @@ export default function CollectionContactSection() {
                   <IconCheck />
                 </div>
                 <h3 className="text-2xl font-serif text-white mb-2">
-                  Talebiniz Alındı!
+                  {t.contact.successTitle}
                 </h3>
                 <p className="text-gray-400 max-w-md">
-                  Proje detaylarınızı inceliyoruz. En geç{" "}
-                  <strong className="text-white">24 saat içinde</strong> size
-                  özel teklifimizle dönüş yapacağız.
+                  {t.contact.successMsg.split(t.contact.successWithin)[0]}
+                  <strong className="text-white">{t.contact.successWithin}</strong>
+                  {t.contact.successMsg.split(t.contact.successWithin)[1]}
                 </p>
                 <button
                   type="button"
                   onClick={() => setIsSubmitted(false)}
                   className="mt-8 text-gold hover:text-white text-xs font-bold uppercase tracking-[0.3em] transition-colors"
                 >
-                  Yeni Form Gönder
+                  {t.contact.newForm}
                 </button>
               </div>
             ) : (
@@ -263,10 +264,10 @@ export default function CollectionContactSection() {
                     <span className="text-gold">
                       <IconFile />
                     </span>
-                    Hızlı Teklif Formu
+                    {t.contact.formTitle}
                   </h3>
                   <span className="text-[10px] text-gold uppercase tracking-[0.3em] font-bold bg-gold/10 px-3 py-1 rounded-full border border-gold/30">
-                    Ücretsiz Danışmanlık
+                    {t.contact.freeConsult}
                   </span>
                 </div>
 
@@ -274,7 +275,7 @@ export default function CollectionContactSection() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <label className="space-y-2">
                       <span className="text-xs text-gray-500 font-bold uppercase tracking-[0.3em] flex items-center gap-2">
-                        <IconBuilding /> Proje Türü
+                        <IconBuilding /> {t.contact.projectType}
                       </span>
                       <select
                         name="projectType"
@@ -284,25 +285,24 @@ export default function CollectionContactSection() {
                         className="w-full bg-black border border-white/10 text-white px-4 py-3 rounded-md focus:outline-none focus:border-gold transition-colors"
                       >
                         <option value="" disabled>
-                          Seçiniz...
+                          {t.contact.selectPlaceholder}
                         </option>
-                        <option value="mutfak">Mutfak Tezgahı</option>
-                        <option value="banyo">Banyo Tasarımı</option>
-                        <option value="zemin">Zemin Döşeme</option>
-                        <option value="otel">Otel / Ticari Proje</option>
+                        {t.contact.projectOptions.map((opt) => (
+                          <option key={opt.value} value={opt.value}>{opt.label}</option>
+                        ))}
                       </select>
                     </label>
 
                     <label className="space-y-2">
                       <span className="text-xs text-gray-500 font-bold uppercase tracking-[0.3em] flex items-center gap-2">
-                        <IconRuler /> Tahmini Ölçü
+                        <IconRuler /> {t.contact.area}
                       </span>
                       <input
                         type="text"
                         name="area"
                         value={formData.area}
                         onChange={handleInputChange}
-                        placeholder="Örn: 15 m2 veya 4 metre tül"
+                        placeholder={t.contact.areaPlaceholder}
                         className="w-full bg-black border border-white/10 text-white px-4 py-3 rounded-md focus:outline-none focus:border-gold transition-colors placeholder:text-white/30"
                       />
                     </label>
@@ -310,7 +310,7 @@ export default function CollectionContactSection() {
 
                   <div className="space-y-2">
                     <span className="text-xs text-gray-500 font-bold uppercase tracking-[0.3em] flex items-center gap-2">
-                      <IconPalette /> Taş Tercihi / Renk
+                      <IconPalette /> {t.contact.stonePreference}
                     </span>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                       {stoneOptions.map((option) => (
@@ -342,7 +342,7 @@ export default function CollectionContactSection() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <label className="space-y-2">
                     <span className="text-xs text-gray-500 font-bold uppercase tracking-[0.3em]">
-                      Ad Soyad
+                      {t.contact.name}
                     </span>
                     <input
                       type="text"
@@ -356,7 +356,7 @@ export default function CollectionContactSection() {
                   </label>
                   <label className="space-y-2">
                     <span className="text-xs text-gray-500 font-bold uppercase tracking-[0.3em]">
-                      Telefon
+                      {t.contact.phone}
                     </span>
                     <input
                       type="tel"
@@ -365,7 +365,7 @@ export default function CollectionContactSection() {
                       onChange={handleInputChange}
                       autoComplete="tel"
                       required
-                      placeholder="05__ ___ __ __"
+                      placeholder={t.contact.phonePlaceholder}
                       className="w-full bg-black border border-white/10 text-white px-4 py-3 rounded-md focus:outline-none focus:border-gold transition-colors placeholder:text-white/30"
                     />
                   </label>
@@ -375,12 +375,11 @@ export default function CollectionContactSection() {
                   type="submit"
                   className="w-full bg-gold text-black font-bold py-4 uppercase tracking-[0.3em] hover:bg-white transition-colors duration-300 flex items-center justify-center gap-3"
                 >
-                  Teklif İste <IconSend />
+                  {t.contact.submitBtn} <IconSend />
                 </button>
 
                 <p className="text-[10px] text-gray-500 text-center">
-                  Göndererek, KVKK kapsamında verilerimin işlenmesini kabul
-                  ediyorum.
+                  {t.contact.gdpr}
                 </p>
               </form>
             )}
@@ -399,14 +398,13 @@ export default function CollectionContactSection() {
                   <IconMessage />
                 </div>
                 <h3 className="text-2xl font-serif text-white mb-2">
-                  WhatsApp Hattı
+                  {t.contact.whatsappTitle}
                 </h3>
                 <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-                  Beğendiğiniz bir modelin fotoğrafını mı çektiniz? Bize
-                  gönderin, stok durumunu ve fiyatını anında öğrenin.
+                  {t.contact.whatsappMsg}
                 </p>
                 <div className="flex items-center gap-2 text-emerald-300 font-bold text-xs uppercase tracking-[0.3em] group-hover:text-emerald-200 transition-colors">
-                  Sohbeti Başlat <IconArrowRight />
+                  {t.contact.whatsappStart} <IconArrowRight />
                 </div>
               </div>
             </a>
@@ -414,22 +412,22 @@ export default function CollectionContactSection() {
             <div className="space-y-8 pl-4 border-l border-white/10">
               <div className="group">
                 <h4 className="text-gray-500 text-xs font-bold uppercase tracking-[0.3em] mb-2 flex items-center gap-2">
-                  <IconPhone /> Müşteri Hizmetleri
+                  <IconPhone /> {t.contact.customerService}
                 </h4>
                 <a
-                  href="tel:+902583722250"
+                  href={t.footer.phoneHref}
                   className="text-2xl font-serif text-white group-hover:text-gold transition-colors"
                 >
-                  0 258 372 22 50
+                  {t.contact.phone_tr}
                 </a>
                 <p className="text-gray-500 text-xs mt-1">
-                  Hafta içi 09:00 - 18:00
+                  {t.contact.weekdays}
                 </p>
               </div>
 
               <div className="group">
                 <h4 className="text-gray-500 text-xs font-bold uppercase tracking-[0.3em] mb-2 flex items-center gap-2">
-                  <IconMapPin /> Showroom
+                  <IconMapPin /> {t.contact.showroom}
                 </h4>
                 <a
                   href="https://maps.app.goo.gl/N32BfXN6XaTfoe5y9"
@@ -437,9 +435,9 @@ export default function CollectionContactSection() {
                   rel="noreferrer"
                   className="block text-base text-gray-300 leading-relaxed group-hover:text-white transition-colors"
                 >
-                  Zafer Mah. Zafer Cd. No:60/1 Merkezefendi/Denizli
+                  {t.contact.showroomAddress}
                   <div className="mt-3 text-gold text-xs font-bold uppercase tracking-[0.3em] flex items-center gap-2">
-                    Haritada Gör <IconArrowRight />
+                    {t.contact.seeOnMap} <IconArrowRight />
                   </div>
                 </a>
               </div>
@@ -448,8 +446,8 @@ export default function CollectionContactSection() {
             <div className="bg-black/70 p-4 rounded-xl border border-gold/20 flex items-center gap-4">
               <div className="w-2 h-2 rounded-full bg-gold animate-pulse" />
               <p className="text-xs text-gray-400">
-                <span className="text-white font-bold">Taş Uzmanı AI</span> şu
-                an çevrimiçi. Sorularınızı yanıtlamaya hazır.
+                <span className="text-white font-bold">{t.contact.aiOnline}</span>{" "}
+                {t.contact.aiOnlineMsg}
               </p>
             </div>
           </div>
