@@ -13,7 +13,7 @@ const LANGUAGES: { code: Language; label: string }[] = [
 ];
 
 export default function Navbar() {
-  const { lang, setLang, t } = useLanguage();
+  const { lang, setLang, t, isDeDomain } = useLanguage();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const navLinks = [
@@ -24,6 +24,27 @@ export default function Navbar() {
     { href: "/iletisim", label: t.nav.contact },
     ...(lang === "de" ? [{ href: "/impressum", label: t.nav.impressum }] : []),
   ];
+
+  const handleLangClick = (code: Language) => {
+    // DE button on .com → navigate to yapigranit.de
+    if (code === "de" && !isDeDomain) {
+      window.location.href = "https://yapigranit.de" + window.location.pathname;
+      return;
+    }
+    // TR or EN button on .de → navigate to yapigranit.com
+    if ((code === "tr" || code === "en") && isDeDomain) {
+      const path = window.location.pathname;
+      if (code === "en") {
+        // Set localStorage on target domain via query param won't work,
+        // so we set cookie before redirect
+        document.cookie = "yapigranit-lang=en;path=/;max-age=31536000";
+      }
+      window.location.href = "https://yapigranit.com" + path;
+      return;
+    }
+    // Same-domain language switch (TR ↔ EN on .com)
+    setLang(code);
+  };
 
   return (
     <nav className="absolute top-0 left-0 z-50 flex w-full items-center justify-between p-6 pointer-events-none bg-black/50 backdrop-blur">
@@ -55,7 +76,7 @@ export default function Navbar() {
             <span key={l.code} className="flex items-center">
               <button
                 type="button"
-                onClick={() => setLang(l.code)}
+                onClick={() => handleLangClick(l.code)}
                 className={`text-[11px] font-bold uppercase tracking-wider px-1 transition-colors ${
                   lang === l.code ? "text-gold" : "text-white/50 hover:text-white"
                 }`}
@@ -103,7 +124,7 @@ export default function Navbar() {
                 <button
                   key={l.code}
                   type="button"
-                  onClick={() => { setLang(l.code); setMobileOpen(false); }}
+                  onClick={() => { handleLangClick(l.code); setMobileOpen(false); }}
                   className={`text-xs font-bold uppercase px-2 py-1 rounded border transition-colors ${
                     lang === l.code
                       ? "border-gold text-gold"
