@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 type ProjectType = "home" | "corporate";
 
@@ -11,6 +12,7 @@ type ContactFormProps = {
 export default function ContactForm({
   defaultProjectType = "home"
 }: ContactFormProps) {
+  const { t } = useLanguage();
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [projectType, setProjectType] =
@@ -34,7 +36,7 @@ export default function ContactForm({
       });
 
       if (!res.ok) {
-        throw new Error("Bir hata oluştu");
+        throw new Error("error");
       }
 
       setStatus("success");
@@ -51,15 +53,13 @@ export default function ContactForm({
   return (
     <div className="bg-white/5 border border-white/10 p-8 backdrop-blur-md">
       <h3 className="text-2xl font-serif font-bold text-white mb-6">
-        Bize Ulaşın
+        {t.contact.contactBadge}
       </h3>
 
       {status === "success" ? (
         <div className="bg-green-900/30 border border-green-500 text-green-200 p-6 text-center">
-          <p className="font-bold text-lg mb-2">Mesajınız Alındı!</p>
-          <p className="text-sm">
-            Proje ekibimiz en kısa sürede sizinle iletişime geçecektir.
-          </p>
+          <p className="font-bold text-lg mb-2">{t.contact.successTitle}</p>
+          <p className="text-sm">{t.contact.successMsg}</p>
           <button
             onClick={() => {
               setStatus("idle");
@@ -67,7 +67,7 @@ export default function ContactForm({
             }}
             className="mt-4 text-xs underline hover:text-white"
           >
-            Yeni mesaj gönder
+            {t.contact.newForm}
           </button>
         </div>
       ) : (
@@ -80,7 +80,7 @@ export default function ContactForm({
 
           <div className="space-y-3">
             <label className="text-xs font-bold uppercase tracking-widest text-gold">
-              Proje Türü
+              {t.contact.projectType}
             </label>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <button
@@ -93,7 +93,7 @@ export default function ContactForm({
                     : "border-white/20 text-gray-300 hover:border-gold hover:text-white"
                 }`}
               >
-                Evim İçin (Mutfak/Banyo)
+                {t.contact.homeBtn}
               </button>
               <button
                 type="button"
@@ -105,7 +105,7 @@ export default function ContactForm({
                     : "border-white/20 text-gray-300 hover:border-gold hover:text-white"
                 }`}
               >
-                Kurumsal Proje (Otel/Cephe)
+                {t.contact.corporateBtn}
               </button>
             </div>
           </div>
@@ -116,7 +116,7 @@ export default function ContactForm({
                 htmlFor="name"
                 className="text-xs font-bold uppercase tracking-widest text-gold"
               >
-                Ad Soyad
+                {t.contact.name}
               </label>
               <input
                 required
@@ -124,7 +124,7 @@ export default function ContactForm({
                 id="name"
                 type="text"
                 className="w-full bg-black/50 border border-white/20 p-3 text-white focus:border-gold focus:outline-none transition-colors"
-                placeholder="İsim Soyisim"
+                placeholder={t.contact.name}
               />
             </div>
             <div className="space-y-2">
@@ -132,7 +132,7 @@ export default function ContactForm({
                 htmlFor="email"
                 className="text-xs font-bold uppercase tracking-widest text-gold"
               >
-                E-posta
+                {t.contact.emailLbl}
               </label>
               <input
                 required
@@ -140,7 +140,7 @@ export default function ContactForm({
                 id="email"
                 type="email"
                 className="w-full bg-black/50 border border-white/20 p-3 text-white focus:border-gold focus:outline-none transition-colors"
-                placeholder="info@yapigranit.com"
+                placeholder={t.contact.email_tr}
               />
             </div>
           </div>
@@ -152,7 +152,7 @@ export default function ContactForm({
                   htmlFor="homeArea"
                   className="text-xs font-bold uppercase tracking-widest text-gold"
                 >
-                  Alan
+                  {t.contact.homeAreaLbl}
                 </label>
                 <select
                   required
@@ -160,9 +160,9 @@ export default function ContactForm({
                   id="homeArea"
                   className="w-full bg-black/50 border border-white/20 p-3 text-white focus:border-gold focus:outline-none transition-colors appearance-none"
                 >
-                  <option value="mutfak">Mutfak</option>
-                  <option value="banyo">Banyo</option>
-                  <option value="diger">Diğer</option>
+                  {t.contact.areaOptions.map((opt) => (
+                    <option key={opt} value={opt.toLowerCase()}>{opt}</option>
+                  ))}
                 </select>
               </div>
               <div className="space-y-2">
@@ -170,7 +170,7 @@ export default function ContactForm({
                   htmlFor="estimatedSize"
                   className="text-xs font-bold uppercase tracking-widest text-gold"
                 >
-                  Tahmini Ölçü
+                  {t.contact.area}
                 </label>
                 <input
                   required
@@ -178,7 +178,7 @@ export default function ContactForm({
                   id="estimatedSize"
                   type="text"
                   className="w-full bg-black/50 border border-white/20 p-3 text-white focus:border-gold focus:outline-none transition-colors"
-                  placeholder="Örn: 3.2m x 0.65m"
+                  placeholder={t.contact.sizePlaceholder}
                 />
               </div>
               <div className="space-y-2 md:col-span-2">
@@ -186,14 +186,14 @@ export default function ContactForm({
                   htmlFor="stoneColor"
                   className="text-xs font-bold uppercase tracking-widest text-gold"
                 >
-                  Taş Rengi / Doku
+                  {t.contact.stoneColorLbl}
                 </label>
                 <input
                   name="stoneColor"
                   id="stoneColor"
                   type="text"
                   className="w-full bg-black/50 border border-white/20 p-3 text-white focus:border-gold focus:outline-none transition-colors"
-                  placeholder="Beyaz damar, açık gri, siyah vb."
+                  placeholder={t.contact.stoneColorPlaceholder}
                 />
               </div>
             </div>
@@ -205,7 +205,7 @@ export default function ContactForm({
                     htmlFor="companyName"
                     className="text-xs font-bold uppercase tracking-widest text-gold"
                   >
-                    Şirket Adı
+                    {t.contact.companyName}
                   </label>
                   <input
                     required
@@ -213,7 +213,7 @@ export default function ContactForm({
                     id="companyName"
                     type="text"
                     className="w-full bg-black/50 border border-white/20 p-3 text-white focus:border-gold focus:outline-none transition-colors"
-                    placeholder="Firma adı"
+                    placeholder={t.contact.companyNamePlaceholder}
                   />
                 </div>
                 <div className="space-y-2">
@@ -221,7 +221,7 @@ export default function ContactForm({
                     htmlFor="companyRole"
                     className="text-xs font-bold uppercase tracking-widest text-gold"
                   >
-                    Ünvan / Görev
+                    {t.contact.companyRole}
                   </label>
                   <input
                     required
@@ -229,7 +229,7 @@ export default function ContactForm({
                     id="companyRole"
                     type="text"
                     className="w-full bg-black/50 border border-white/20 p-3 text-white focus:border-gold focus:outline-none transition-colors"
-                    placeholder="Proje Müdürü, Satın Alma..."
+                    placeholder={t.contact.companyRolePlaceholder}
                   />
                 </div>
                 <div className="space-y-2">
@@ -237,7 +237,7 @@ export default function ContactForm({
                     htmlFor="companyPhone"
                     className="text-xs font-bold uppercase tracking-widest text-gold"
                   >
-                    Telefon
+                    {t.contact.phone}
                   </label>
                   <input
                     required
@@ -245,7 +245,7 @@ export default function ContactForm({
                     id="companyPhone"
                     type="tel"
                     className="w-full bg-black/50 border border-white/20 p-3 text-white focus:border-gold focus:outline-none transition-colors"
-                    placeholder="0 258 372 22 50"
+                    placeholder={t.contact.phonePlaceholder}
                   />
                 </div>
                 <div className="space-y-2">
@@ -253,18 +253,16 @@ export default function ContactForm({
                     htmlFor="corporateScope"
                     className="text-xs font-bold uppercase tracking-widest text-gold"
                   >
-                    Proje Tipi
+                    {t.contact.corporateScopeLbl}
                   </label>
                   <select
                     name="corporateScope"
                     id="corporateScope"
                     className="w-full bg-black/50 border border-white/20 p-3 text-white focus:border-gold focus:outline-none transition-colors appearance-none"
                   >
-                    <option value="otel">Otel</option>
-                    <option value="cephe">Cephe</option>
-                    <option value="avm">AVM</option>
-                    <option value="konut">Konut</option>
-                    <option value="diger">Diğer</option>
+                    {t.contact.corporateScopeOptions.map((opt) => (
+                      <option key={opt} value={opt.toLowerCase()}>{opt}</option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -273,7 +271,7 @@ export default function ContactForm({
                   htmlFor="projectFile"
                   className="text-xs font-bold uppercase tracking-widest text-gold"
                 >
-                  DWG / PDF Dosyası
+                  {t.contact.projectFileLbl}
                 </label>
                 <input
                   name="projectFile"
@@ -283,7 +281,7 @@ export default function ContactForm({
                   className="w-full text-sm text-gray-300 file:mr-4 file:rounded-full file:border-0 file:bg-white/10 file:px-4 file:py-2 file:text-xs file:uppercase file:tracking-[0.2em] file:text-white hover:file:bg-gold hover:file:text-stone"
                 />
                 <p className="text-[11px] text-gray-500">
-                  DWG veya PDF dosyası yükleyebilirsiniz. (Opsiyonel)
+                  {t.contact.projectFileHint}
                 </p>
               </div>
             </div>
@@ -294,17 +292,16 @@ export default function ContactForm({
               htmlFor="subject"
               className="text-xs font-bold uppercase tracking-widest text-gold"
             >
-              Konu
+              {t.contact.subjectLbl}
             </label>
             <select
               name="subject"
               id="subject"
               className="w-full bg-black/50 border border-white/20 p-3 text-white focus:border-gold focus:outline-none transition-colors appearance-none"
             >
-              <option value="teklif">Proje Teklifi Almak İstiyorum</option>
-              <option value="bilgi">Ürünler Hakkında Bilgi</option>
-              <option value="randevu">Showroom Randevusu</option>
-              <option value="diger">Diğer</option>
+              {t.contact.subjectOptions.map((opt, i) => (
+                <option key={i} value={i === 0 ? "teklif" : i === 1 ? "bilgi" : i === 2 ? "randevu" : "diger"}>{opt}</option>
+              ))}
             </select>
           </div>
 
@@ -313,7 +310,7 @@ export default function ContactForm({
               htmlFor="message"
               className="text-xs font-bold uppercase tracking-widest text-gold"
             >
-              Mesajınız
+              {t.contact.messageLbl}
             </label>
             <textarea
               required
@@ -321,7 +318,7 @@ export default function ContactForm({
               id="message"
               rows={4}
               className="w-full bg-black/50 border border-white/20 p-3 text-white focus:border-gold focus:outline-none transition-colors"
-              placeholder="Proje detayları, metraj veya özel istekleriniz..."
+              placeholder={t.contact.messagePlaceholder}
             />
           </div>
 
@@ -330,12 +327,12 @@ export default function ContactForm({
             disabled={loading}
             className="w-full bg-gold text-stone font-bold py-4 uppercase tracking-widest hover:bg-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? "Gönderiliyor..." : "Teklif İste"}
+            {loading ? t.contact.loading : t.contact.submitBtn}
           </button>
 
           {status === "error" && (
             <p className="text-red-400 text-sm text-center">
-              Bir hata oluştu. Lütfen tekrar deneyiniz.
+              {t.contact.errorMsg}
             </p>
           )}
         </form>

@@ -2,23 +2,11 @@
 
 import Image from "next/image";
 import { useRef, useState, type PointerEvent, type ReactElement } from "react";
+import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 type Brand = {
   name: string;
   icon: ReactElement;
-};
-
-type Project = {
-  id: string;
-  city: string;
-  title: string;
-  description: string;
-  image: string;
-};
-
-type Stat = {
-  value: string;
-  label: string;
 };
 
 const brands: Brand[] = [
@@ -35,11 +23,7 @@ const brands: Brand[] = [
     name: "INFINITY",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <path
-          d="M3 12c2.2-3 4.8-3 7 0s4.8 3 7 0 4.8-3 7 0"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
+        <path d="M3 12c2.2-3 4.8-3 7 0s4.8 3 7 0 4.8-3 7 0" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
     )
   },
@@ -47,11 +31,7 @@ const brands: Brand[] = [
     name: "NEOLITH",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <path
-          d="M12 3L3 21h18L12 3z"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
+        <path d="M12 3L3 21h18L12 3z" strokeWidth="1.5" strokeLinejoin="round" />
       </svg>
     )
   },
@@ -60,11 +40,7 @@ const brands: Brand[] = [
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
         <circle cx="12" cy="12" r="3" strokeWidth="1.5" />
-        <path
-          d="M12 3v3M12 18v3M3 12h3M18 12h3M5.5 5.5l2.1 2.1M16.4 16.4l2.1 2.1M18.5 5.5l-2.1 2.1M7.6 16.4l-2.1 2.1"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
+        <path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.5 5.5l2.1 2.1M16.4 16.4l2.1 2.1M18.5 5.5l-2.1 2.1M7.6 16.4l-2.1 2.1" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
     )
   },
@@ -72,11 +48,7 @@ const brands: Brand[] = [
     name: "LAMİNAM",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <path
-          d="M4 7h16M4 12h16M4 17h16"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
+        <path d="M4 7h16M4 12h16M4 17h16" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
     )
   },
@@ -84,11 +56,7 @@ const brands: Brand[] = [
     name: "NUOVOCORSO",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <path
-          d="M2 12c2.5-3.5 5.5-3.5 8 0s5.5 3.5 8 0 5.5-3.5 8 0"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
+        <path d="M2 12c2.5-3.5 5.5-3.5 8 0s5.5 3.5 8 0 5.5-3.5 8 0" strokeWidth="1.5" strokeLinecap="round" />
       </svg>
     )
   },
@@ -96,11 +64,7 @@ const brands: Brand[] = [
     name: "ANATOLIA",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <path
-          d="M3 18l6-8 4 5 3-4 5 7H3z"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
+        <path d="M3 18l6-8 4 5 3-4 5 7H3z" strokeWidth="1.5" strokeLinejoin="round" />
         <circle cx="17" cy="7" r="2" strokeWidth="1.5" />
       </svg>
     )
@@ -120,11 +84,7 @@ const brands: Brand[] = [
     name: "TECHLAM",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <path
-          d="M7 4h10l5 8-5 8H7l-5-8 5-8z"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
+        <path d="M7 4h10l5 8-5 8H7l-5-8 5-8z" strokeWidth="1.5" strokeLinejoin="round" />
         <path d="M12 8v8M9 12h6" strokeWidth="1.5" />
       </svg>
     )
@@ -152,49 +112,8 @@ const brands: Brand[] = [
   }
 ];
 
-const projects: Project[] = [
-  {
-    id: "vadi",
-    city: "DENİZLİ",
-    title: "Forum Çamlık AVM",
-    description:
-      "45.000 m² doğal taş zemin kaplaması ve havalandırmalı cephe sistemleri uygulaması.",
-    image: "/images/camlik.avif"
-  },
-  {
-    id: "royal",
-    city: "DENİZLİ",
-    title: "Skycity",
-    description:
-      "Lobi ve genel alanlar için waterjet kesim özel desenli mermer uygulamaları.",
-    image: "/images/skycity.avif"
-  },
-  {
-    id: "shard",
-    city: "DENİZLİ",
-    title: "Ahmet Hulusi Efendi Külliyesi",
-    description:
-      "Yönetici katları için bookmatch (kelebek) mermer duvar kaplamaları.",
-    image: "/images/ahekulliye.avif"
-  },
-  {
-    id: "one57",
-    city: "DENİZLİ",
-    title: "Anemon Hotel",
-    description:
-      "Banyo ve SPA alanları için tek parça Calacatta mermer uygulamaları.",
-    image: "/images/anemon.avif"
-  }
-];
-
-const stats: Stat[] = [
-  { value: "25+", label: "Yıllık Tecrübe" },
-  { value: "500+", label: "Tamamlanan Proje" },
-  { value: "12", label: "Ülkeye İhracat" },
-  { value: "%100", label: "Müşteri Memnuniyeti" }
-];
-
 export default function ReferenceShowcase() {
+  const { t } = useLanguage();
   const sliderRef = useRef<HTMLDivElement>(null);
   const isDraggingRef = useRef(false);
   const startXRef = useRef(0);
@@ -257,16 +176,14 @@ export default function ReferenceShowcase() {
       <div className="container mx-auto px-6 relative">
         <div className="text-center mb-20 space-y-4">
           <span className="text-gold text-xs font-bold tracking-[0.3em] uppercase">
-            Güçlü İş Birlikleri
+            {t.reference.badge}
           </span>
           <h2 className="text-3xl md:text-5xl font-serif font-bold leading-tight">
-            Çözüm Ortağı Olduğumuz{" "}
-            <span className="text-gold">
-              Global Markalar
-            </span>
+            {t.reference.title}{" "}
+            <span className="text-gold">{t.reference.titleHighlight}</span>
           </h2>
           <p className="text-gray-300 max-w-2xl mx-auto text-lg leading-relaxed">
-            Dünyanın en prestijli yüzey ve porselen markalarıyla çalışıyoruz.
+            {t.reference.desc}
           </p>
         </div>
 
@@ -274,10 +191,8 @@ export default function ReferenceShowcase() {
           <div
             className="overflow-hidden"
             style={{
-              maskImage:
-                "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
-              WebkitMaskImage:
-                "linear-gradient(to right, transparent, black 10%, black 90%, transparent)"
+              maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+              WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)"
             }}
           >
             <div className="flex items-center gap-16 py-8 whitespace-nowrap w-max animate-marquee">
@@ -308,31 +223,21 @@ export default function ReferenceShowcase() {
             onPointerLeave={handlePointerLeave}
             style={{ touchAction: "pan-y" }}
           >
-            {projects.map((project) => (
+            {t.reference.projects.map((project, idx) => (
               <div
-                key={project.id}
+                key={idx}
                 data-card
                 className="group relative flex-shrink-0 w-[85vw] md:w-[440px] snap-center rounded-2xl border border-white/10 bg-white/5 overflow-hidden transition-transform duration-300 hover:-translate-y-1"
-                style={
-                  {
-                    "--mouse-x": "50%",
-                    "--mouse-y": "50%"
-                  } as React.CSSProperties
-                }
+                style={{ "--mouse-x": "50%", "--mouse-y": "50%" } as React.CSSProperties}
                 onMouseMove={(event) => {
                   const rect = event.currentTarget.getBoundingClientRect();
-                  const x = event.clientX - rect.left;
-                  const y = event.clientY - rect.top;
-                  event.currentTarget.style.setProperty("--mouse-x", `${x}px`);
-                  event.currentTarget.style.setProperty("--mouse-y", `${y}px`);
+                  event.currentTarget.style.setProperty("--mouse-x", `${event.clientX - rect.left}px`);
+                  event.currentTarget.style.setProperty("--mouse-y", `${event.clientY - rect.top}px`);
                 }}
               >
                 <div
                   className="absolute inset-0 opacity-0 transition-opacity duration-500 pointer-events-none group-hover:opacity-100"
-                  style={{
-                    background:
-                      "radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(212,175,55,0.18), transparent 45%)"
-                  }}
+                  style={{ background: "radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(212,175,55,0.18), transparent 45%)" }}
                 />
                 <div className="h-72 relative overflow-hidden">
                   <Image
@@ -366,14 +271,14 @@ export default function ReferenceShowcase() {
             type="button"
             onClick={handleScrollNext}
             className="absolute right-4 top-1/2 -translate-y-1/2 flex h-10 w-10 md:h-12 md:w-12 items-center justify-center rounded-full border border-gold/40 bg-black/70 text-gold shadow-lg hover:bg-black/90 transition-colors"
-            aria-label="Sonraki projeler"
+            aria-label={t.reference.nextProjects}
           >
             →
           </button>
         </div>
 
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/10 pt-12">
-          {stats.map((stat) => (
+          {t.reference.stats.map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="text-4xl font-serif font-bold text-white mb-2">
                 {stat.value}
