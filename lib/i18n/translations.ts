@@ -11,6 +11,7 @@ const tr = {
     about: "Biz kimiz?",
     contact: "İletişim",
     impressum: "Impressum",
+    quoteBtn: "Teklif",
   },
 
   // Hero (SplitHero static labels)
@@ -199,6 +200,7 @@ const tr = {
     productionLabel: "Üretim ve Montaj",
     homeProjectBtn: "Ev Projesi",
     corporateProjectBtn: "Kurumsal",
+    whatsappHref: "https://wa.me/905327443271?text=Merhaba%2C%20mutfak%20tezgah%C4%B1%20i%C3%A7in%20bilgi%20almak%20istiyorum.",
   },
 
   // About/Projeler page
@@ -350,6 +352,56 @@ const tr = {
       "Merhaba, kurumsal proje için teknik bilgi ve teklif almak istiyorum.",
   },
 
+  machines: {
+    precisionLabel: "Hassasiyet",
+    prevLabel: "Önceki makine",
+    nextLabel: "Sonraki makine",
+    items: [
+      {
+        title: "Su Jeti (Waterjet)",
+        description: "Isısız kesim teknolojisi (Cold Cutting). Granit, porselen ve metalleri deformasyon ve çatlama riski olmadan işliyoruz.",
+        precision: "± 0.1 mm / 200mm Kalınlık",
+        tags: ["Deformasyonsuz", "Çatlama Yok"],
+        alt: "Su jeti kesim teknolojisi",
+      },
+      {
+        title: "5 Eksen CNC",
+        description: "Monoblok gövde yapısı ile titreşimsiz üretim. Karmaşık geometrik formlar, sütun başlıkları ve 3D yüzey işlemeleri.",
+        precision: "± 0.005 mm / 5 Eksen",
+        tags: ["3D Yüzeyler", "Monoblok Gövde"],
+        alt: "5 eksen CNC işleme",
+      },
+      {
+        title: "Köprü Kesme (Bridge Saw)",
+        description: "Yüksek hızlı plaka ebatlama teknolojisi. Doğal taş plakalarını, istenilen ölçülerde ve açılarda, firesiz ve gönyesinde keserek projeye hazır hale getiriyoruz.",
+        precision: "± 0.2 mm / Levha Kesim",
+        tags: ["Seri Üretim", "Gönyeli Kesim"],
+        alt: "Köprü kesme makinesi",
+      },
+      {
+        title: "Yan Kesme (Side Cutting)",
+        description: "Kusursuz kenar düzeltme işlemi. Bant halindeki taşların kenarlarını traşlayarak, ürünün tam genişliğe ulaşmasını ve montaj sırasında mükemmel birleşim sağlar.",
+        precision: "± 0.1 mm / Paralellik",
+        tags: ["Tam Ölçü", "Düzgün Kenar"],
+        alt: "Yan kesme makinesi",
+      },
+      {
+        title: "Kafa Kesme (Cross Cutting)",
+        description: "Hızlı ve hassas boylama teknolojisi. Şerit halindeki ürünlerin boylarını milimetrik hassasiyetle keserek, standart döşeme ölçülerine (fayans/plaka) getiriyoruz.",
+        precision: "± 0.5 mm / Boy Ebatlama",
+        tags: ["Standart Ebat", "Hızlı İşlem"],
+        alt: "Kafa kesme makinesi",
+      },
+      {
+        title: "PAH Makinesi (Chamfering)",
+        description: "Estetik kenar bitiş teknolojisi. Keskin taş kenarlarını açılı (pahlı) işleyerek hem estetik bir görünüm kazandırıyor hem de kenar kırılmalarına karşı dayanıklılığı artırıyoruz.",
+        precision: "45° / Açısal Parlaklık",
+        tags: ["Estetik Görünüm", "Pürüzsüz Bitiş"],
+        alt: "PAH makinesi",
+      },
+    ],
+  },
+
   // Reference showcase
   reference: {
     badge: "Güçlü İş Birlikleri",
@@ -394,6 +446,7 @@ const de: Translations = {
     about: "Über uns",
     contact: "Kontakt",
     impressum: "Impressum",
+    quoteBtn: "Angebot",
   },
 
   hero: {
@@ -575,6 +628,7 @@ const de: Translations = {
     productionLabel: "Produktion & Montage",
     homeProjectBtn: "Heimprojekt",
     corporateProjectBtn: "Unternehmen",
+    whatsappHref: "https://wa.me/491723896084?text=Hallo%2C%20ich%20m%C3%B6chte%20Informationen%20zu%20K%C3%BCchenarbeitsplatten%20erhalten.",
   },
 
   about: {
@@ -724,6 +778,56 @@ const de: Translations = {
       "Hallo, ich möchte technische Informationen und ein Angebot für ein Unternehmensprojekt erhalten.",
   },
 
+  machines: {
+    precisionLabel: "Genauigkeit",
+    prevLabel: "Vorherige Maschine",
+    nextLabel: "Nächste Maschine",
+    items: [
+      {
+        title: "Wasserstrahl (Waterjet)",
+        description: "Wärmefreie Schneidtechnologie (Cold Cutting). Wir bearbeiten Granit, Porzellan und Metalle ohne Deformations- und Rissrisiko.",
+        precision: "± 0.1 mm / 200 mm Stärke",
+        tags: ["Deformationsfrei", "Rissfrei"],
+        alt: "Wasserstrahlschneidtechnologie",
+      },
+      {
+        title: "5-Achsen CNC",
+        description: "Schwingungsfreie Produktion mit Monoblockrahmen. Komplexe geometrische Formen, Säulenkapitelle und 3D-Oberflächenbearbeitungen.",
+        precision: "± 0.005 mm / 5 Achsen",
+        tags: ["3D-Oberflächen", "Monoblockrahmen"],
+        alt: "5-Achsen-CNC-Bearbeitung",
+      },
+      {
+        title: "Brückenkreissäge (Bridge Saw)",
+        description: "Hochgeschwindigkeits-Plattenformattechnologie. Wir schneiden Natursteinplatten verlust- und rechtwinkelfrei in den gewünschten Maßen und Winkeln.",
+        precision: "± 0.2 mm / Plattenformatierung",
+        tags: ["Serienproduktion", "Rechtwinkliger Schnitt"],
+        alt: "Brückenkreissägemaschine",
+      },
+      {
+        title: "Kantenschneider (Side Cutting)",
+        description: "Perfekte Kantenrichttechnologie. Wir bearbeiten die Kanten der bandförmigen Steine, sodass das Produkt die exakte Breite erreicht und bei der Montage eine perfekte Verbindung gewährleistet wird.",
+        precision: "± 0.1 mm / Parallelität",
+        tags: ["Exaktes Maß", "Gerade Kante"],
+        alt: "Kantenschneidmaschine",
+      },
+      {
+        title: "Querschneider (Cross Cutting)",
+        description: "Schnelle und präzise Längenschneidtechnologie. Wir schneiden streifenförmige Produkte millimetergenau auf Standardverlegeformate (Fliese/Platte).",
+        precision: "± 0.5 mm / Längenformatierung",
+        tags: ["Standardformat", "Schnelle Bearbeitung"],
+        alt: "Querschneidmaschine",
+      },
+      {
+        title: "Fasenschleifmaschine (Chamfering)",
+        description: "Ästhetische Kantenabschlusstechnologie. Wir bearbeiten scharfe Steinkanten abgeschrägt – für ein ästhetisches Erscheinungsbild und erhöhte Widerstandsfähigkeit gegen Kantenbrüche.",
+        precision: "45° / Winkelglanz",
+        tags: ["Ästhetisches Erscheinungsbild", "Glatter Abschluss"],
+        alt: "Fasenschleifmaschine",
+      },
+    ],
+  },
+
   reference: {
     badge: "Starke Partnerschaften",
     title: "Globale Marken,",
@@ -731,10 +835,10 @@ const de: Translations = {
     desc: "Wir arbeiten mit den renommiertesten Oberflächen- und Porzellanmarken der Welt.",
     nextProjects: "Nächste Projekte",
     projects: [
-      { city: "DENİZLİ", title: "Forum Çamlık AVM", description: "45.000 m² Natursteinbodenbelag und hinterlüftete Fassadensystemanwendung.", image: "/images/camlik.avif" },
-      { city: "DENİZLİ", title: "Skycity", description: "Wasserstrahlgeschnittene individuelle Marmor-Musteranwendungen für Lobbys und Gemeinschaftsbereiche.", image: "/images/skycity.avif" },
-      { city: "DENİZLİ", title: "Ahmet Hulusi Efendi Külliyesi", description: "Bookmatch-Marmor-Wandverkleidungen für Führungsetagen.", image: "/images/ahekulliye.avif" },
-      { city: "DENİZLİ", title: "Anemon Hotel", description: "Einteilige Calacatta-Marmor-Anwendungen für Bad- und SPA-Bereiche.", image: "/images/anemon.avif" },
+      { city: "DENIZLI", title: "Forum Çamlık Einkaufszentrum", description: "45.000 m² Natursteinbodenbelag und hinterlüftete Fassadensystemanwendung.", image: "/images/camlik.avif" },
+      { city: "DENIZLI", title: "Skycity", description: "Wasserstrahlgeschnittene individuelle Marmor-Musteranwendungen für Lobbys und Gemeinschaftsbereiche.", image: "/images/skycity.avif" },
+      { city: "DENIZLI", title: "Ahmet Hulusi Efendi Komplex", description: "Bookmatch-Marmor-Wandverkleidungen für Führungsetagen.", image: "/images/ahekulliye.avif" },
+      { city: "DENIZLI", title: "Anemon Hotel", description: "Einteilige Calacatta-Marmor-Anwendungen für Bad- und SPA-Bereiche.", image: "/images/anemon.avif" },
     ],
     stats: [
       { value: "25+", label: "Jahre Erfahrung" },
@@ -764,6 +868,7 @@ const en: Translations = {
     about: "About Us",
     contact: "Contact",
     impressum: "Impressum",
+    quoteBtn: "Quote",
   },
 
   hero: {
@@ -945,6 +1050,7 @@ const en: Translations = {
     productionLabel: "Production & Installation",
     homeProjectBtn: "Home Project",
     corporateProjectBtn: "Corporate",
+    whatsappHref: "https://wa.me/905327443271?text=Hello%2C%20I%20would%20like%20information%20about%20kitchen%20countertops.",
   },
 
   about: {
@@ -1092,6 +1198,56 @@ const en: Translations = {
     virtualAssemblyDesc: "By simulating assembly on the digital twin before production, we reduce waste to zero.",
     whatsappMsg:
       "Hello, I would like to get technical information and a quote for a corporate project.",
+  },
+
+  machines: {
+    precisionLabel: "Precision",
+    prevLabel: "Previous machine",
+    nextLabel: "Next machine",
+    items: [
+      {
+        title: "Waterjet",
+        description: "Heat-free cutting technology (Cold Cutting). We process granite, porcelain and metals without deformation or cracking risk.",
+        precision: "± 0.1 mm / 200mm Thickness",
+        tags: ["Deformation-Free", "No Cracking"],
+        alt: "Waterjet cutting technology",
+      },
+      {
+        title: "5-Axis CNC",
+        description: "Vibration-free production with monoblock frame. Complex geometric forms, column capitals and 3D surface machining.",
+        precision: "± 0.005 mm / 5 Axes",
+        tags: ["3D Surfaces", "Monoblock Frame"],
+        alt: "5-axis CNC machining",
+      },
+      {
+        title: "Bridge Saw",
+        description: "High-speed slab sizing technology. We cut natural stone slabs to desired dimensions and angles, waste-free and square.",
+        precision: "± 0.2 mm / Slab Sizing",
+        tags: ["Mass Production", "Square Cut"],
+        alt: "Bridge saw machine",
+      },
+      {
+        title: "Side Cutting",
+        description: "Perfect edge straightening technology. We trim the edges of strip-form stones so the product reaches exact width and ensures a perfect joint during installation.",
+        precision: "± 0.1 mm / Parallelism",
+        tags: ["Exact Size", "Straight Edge"],
+        alt: "Side cutting machine",
+      },
+      {
+        title: "Cross Cutting",
+        description: "Fast and precise length-cutting technology. We cut strip-form products to millimeter accuracy, bringing them to standard tile/slab dimensions.",
+        precision: "± 0.5 mm / Length Sizing",
+        tags: ["Standard Size", "Fast Processing"],
+        alt: "Cross cutting machine",
+      },
+      {
+        title: "Chamfering Machine",
+        description: "Aesthetic edge-finishing technology. We process sharp stone edges at an angle (chamfer) for an aesthetic appearance and increased resistance to edge chipping.",
+        precision: "45° / Angular Brilliance",
+        tags: ["Aesthetic Finish", "Smooth Edge"],
+        alt: "Chamfering machine",
+      },
+    ],
   },
 
   reference: {

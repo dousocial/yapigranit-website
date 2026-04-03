@@ -4,12 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef } from "react";
 
-import { blogPosts } from "@/components/blog/blogPosts";
+import { getBlogPosts } from "@/components/blog/blogPosts";
 import { useLanguage } from "@/lib/i18n/LanguageContext";
 
 export default function TrendVisionSection() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const sliderRef = useRef<HTMLDivElement>(null);
+  const blogPosts = getBlogPosts(lang);
 
   const scrollByCard = (direction: "next" | "prev") => {
     const slider = sliderRef.current;

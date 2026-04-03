@@ -387,7 +387,7 @@ export default function CollectionContactSection() {
 
           <div className="lg:col-span-4 flex flex-col justify-between space-y-10">
             <a
-              href="https://wa.me/905327443271?text=Merhaba,%20mutfak%20tezgah%C4%B1%20i%C3%A7in%20bilgi%20almak%20istiyorum."
+              href={t.contact.whatsappHref}
               target="_blank"
               rel="noreferrer"
               className="bg-gradient-to-br from-emerald-900/30 via-black to-black border border-emerald-500/30 p-8 rounded-2xl relative overflow-hidden group hover:border-emerald-400/60 transition-colors"
