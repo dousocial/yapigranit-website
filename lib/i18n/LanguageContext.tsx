@@ -29,20 +29,20 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     const onDeDomain = DE_DOMAINS.includes(hostname);
     setIsDeDomain(onDeDomain);
 
-    if (onDeDomain) {
-      // On yapigranit.de → always German
-      setLangState("de");
-      return;
-    }
-
-    // On yapigranit.com / localhost → check localStorage
+    // Check localStorage for a previously chosen language
     try {
       const stored = localStorage.getItem("yapigranit-lang") as Language | null;
-      if (stored && ["tr", "en"].includes(stored)) {
+      if (stored && ["tr", "de", "en"].includes(stored)) {
         setLangState(stored);
+        return;
       }
     } catch {
       // ignore
+    }
+
+    // Default: German on .de, Turkish elsewhere
+    if (onDeDomain) {
+      setLangState("de");
     }
   }, []);
 

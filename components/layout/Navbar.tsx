@@ -31,18 +31,7 @@ export default function Navbar() {
       window.location.href = "https://yapigranit.de" + window.location.pathname;
       return;
     }
-    // TR or EN button on .de → navigate to yapigranit.com
-    if ((code === "tr" || code === "en") && isDeDomain) {
-      const path = window.location.pathname;
-      if (code === "en") {
-        // Set localStorage on target domain via query param won't work,
-        // so we set cookie before redirect
-        document.cookie = "yapigranit-lang=en;path=/;max-age=31536000";
-      }
-      window.location.href = "https://yapigranit.com" + path;
-      return;
-    }
-    // Same-domain language switch (TR ↔ EN on .com)
+    // All language switches (including TR/EN on .de) → switch in-place
     setLang(code);
   };
 
