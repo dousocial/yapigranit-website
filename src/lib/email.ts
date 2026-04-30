@@ -16,7 +16,6 @@ export async function sendMail({
   replyTo?: string;
 }) {
   if (!resend) {
-    // eslint-disable-next-line no-console
     console.log("[Email — RESEND_API_KEY not set, skipping]", subject);
     return { ok: true, skipped: true };
   }

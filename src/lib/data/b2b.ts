@@ -1,6 +1,5 @@
 import {
   Building2,
-  HeadphonesIcon,
   Truck,
   Layers,
   TrendingUp,

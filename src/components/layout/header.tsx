@@ -15,6 +15,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { SiteSearch } from "@/components/search/site-search";
 import { navigation } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -90,7 +91,10 @@ export function Header() {
             })}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1">
+            {/* Site search */}
+            <SiteSearch className="hidden md:flex" />
+
             {/* Language switcher */}
             <div className="hidden md:block relative">
               <button
@@ -140,12 +144,15 @@ export function Header() {
               </AnimatePresence>
             </div>
 
-            <Button asChild size="md" className="hidden sm:inline-flex">
+            <Button asChild size="md" className="hidden sm:inline-flex ml-2">
               <Link href="/teklif">
                 Teklif Alın
                 <ArrowUpRight />
               </Link>
             </Button>
+
+            {/* Mobile search */}
+            <SiteSearch className="md:hidden" />
 
             {/* Mobile burger */}
             <button
