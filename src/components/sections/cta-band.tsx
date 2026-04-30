@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 
@@ -14,7 +14,7 @@ export function CtaBand() {
         <div className="grid grid-cols-1 md:grid-cols-2 bg-surface-muted overflow-hidden">
           <div className="relative aspect-[5/4] md:aspect-auto md:min-h-[420px] bg-surface-darker">
             <Image
-              src="https://images.unsplash.com/photo-1604147706283-d7119b5b822c?auto=format&fit=crop&w=1400&q=80"
+              src="/images/sections/cta-bg.webp"
               alt="Mermer doku"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import {
   ArrowRight,
@@ -93,7 +93,7 @@ export function HeroHome() {
           >
             <div className="absolute inset-0 lg:-mr-8 xl:-mr-16 overflow-hidden rounded-sm">
               <Image
-                src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1600&q=80"
+                src="/images/sections/hero-home.webp"
                 alt="Premium mermer mutfak uygulaması"
                 fill
                 priority

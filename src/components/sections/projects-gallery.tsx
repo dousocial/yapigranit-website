@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { ArrowRight, Filter, ChevronDown, Building2 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";

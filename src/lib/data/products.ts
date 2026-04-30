@@ -25,8 +25,7 @@ export const products: Product[] = [
       "İnce ve hafif yapı",
     ],
     bestUse: "Yoğun mutfaklar & dış mekan",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80",
+    image: "/images/products/urun-porselen.webp",
   },
   {
     slug: "mermer",
@@ -42,8 +41,7 @@ export const products: Product[] = [
       "Prestijli görünüm",
     ],
     bestUse: "Lüks banyo, şömine, salon",
-    image:
-      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=900&q=80",
+    image: "/images/products/urun-mermer.webp",
   },
   {
     slug: "kuvars",
@@ -59,8 +57,7 @@ export const products: Product[] = [
       "Geniş renk seçeneği",
     ],
     bestUse: "Aile mutfağı & banyo",
-    image:
-      "https://images.unsplash.com/photo-1604147706283-d7119b5b822c?auto=format&fit=crop&w=900&q=80",
+    image: "/images/products/urun-ozel.webp",
   },
   {
     slug: "granit",
@@ -75,7 +72,6 @@ export const products: Product[] = [
       "Doğa kaynaklı zengin renk skalası",
     ],
     bestUse: "Cephe, zemin, basamak",
-    image:
-      "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=900&q=80",
+    image: "/images/products/urun-granit.webp",
   },
 ];

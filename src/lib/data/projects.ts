@@ -45,11 +45,10 @@ export const projects: Project[] = [
       "Doğal taş zemin kaplaması ve havalandırmalı mekanik cephe sistemleri uygulaması.",
     summary:
       "45.000 m² doğal taş zemin kaplaması ve havalandırmalı cephe sistemleri uygulaması ile Denizli'nin önde gelen alışveriş merkezi projesi.",
-    cover:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
+    cover: "/images/projects/proje-maslak.webp",
     gallery: [
-      "https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&w=1600&q=80",
-      "https://images.unsplash.com/photo-1604147495798-57beb5d6af73?auto=format&fit=crop&w=1600&q=80",
+      "/images/projects/proje-arkestra.webp",
+      "/images/projects/proje-bodrum-villa.webp",
     ],
   },
   {
@@ -65,10 +64,9 @@ export const projects: Project[] = [
       "Lobi ve genel alanlar için waterjet kesim özel desenli mermer uygulamaları.",
     summary:
       "Lobi ve genel alanlar için waterjet kesim özel desenli mermer uygulamaları. Karmaşık geometrik desenlerle prestijli giriş atmosferi.",
-    cover:
-      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+    cover: "/images/projects/proje-zorlu.webp",
     gallery: [
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1600&q=80",
+      "/images/projects/proje-rixos-cover.webp",
     ],
   },
   {
@@ -84,10 +82,9 @@ export const projects: Project[] = [
       "Yönetici katları için bookmatch (kelebek) mermer duvar kaplamaları.",
     summary:
       "Yönetici katları için bookmatch kelebek desenli mermer duvar kaplamaları. Simetrik damar kurgusuyla mekana sanat eseri etkisi katan uygulama.",
-    cover:
-      "https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1200&q=80",
+    cover: "/images/projects/proje-adalet.webp",
     gallery: [
-      "https://images.unsplash.com/photo-1604147706283-d7119b5b822c?auto=format&fit=crop&w=1600&q=80",
+      "/images/projects/proje-rixos-3.webp",
     ],
   },
   {
@@ -102,11 +99,10 @@ export const projects: Project[] = [
     scope: "Banyo ve SPA alanları için tek parça Calacatta mermer uygulamaları.",
     summary:
       "Banyo ve SPA alanları için tek parça Calacatta mermer uygulamaları. Lüks otel deneyiminin hammaddesi olarak doğal taşın gücü.",
-    cover:
-      "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1200&q=80",
+    cover: "/images/projects/proje-rixos-cover.webp",
     gallery: [
-      "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1600&q=80",
-      "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1600&q=80",
+      "/images/projects/proje-four-seasons.webp",
+      "/images/projects/proje-rixos-2.webp",
     ],
   },
 ];

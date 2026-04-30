@@ -48,8 +48,7 @@ export const services: Service[] = [
     ],
     tags: ["304/316 Çelik", "Deprem Güvenli", "Havalandırmalı"],
     icon: Building2,
-    image:
-      "https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&w=800&q=80",
+    image: "/images/services/hizmet-uygulama.webp",
   },
   {
     slug: "mutfak-tezgahi",
@@ -67,8 +66,7 @@ export const services: Service[] = [
     ],
     tags: ["Porselen", "Kuvars", "Sinter Taş"],
     icon: ChefHat,
-    image:
-      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80",
+    image: "/images/services/hizmet-malzeme.webp",
   },
   {
     slug: "banyo-islak-hacim",
@@ -86,8 +84,7 @@ export const services: Service[] = [
     ],
     tags: ["Hijyen", "Bookmatch", "Tek Parça"],
     icon: Bath,
-    image:
-      "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=800&q=80",
+    image: "/images/services/hizmet-kalite.webp",
   },
   {
     slug: "somine-yapimi",
@@ -105,8 +102,7 @@ export const services: Service[] = [
     ],
     tags: ["Isıya Dayanıklı", "CNC Detay"],
     icon: Flame,
-    image:
-      "https://images.unsplash.com/photo-1604147495798-57beb5d6af73?auto=format&fit=crop&w=800&q=80",
+    image: "/images/services/hizmet-destek.webp",
   },
   {
     slug: "basamak-doseme",
@@ -124,8 +120,7 @@ export const services: Service[] = [
     ],
     tags: ["Kaymaz Granit", "LED Uyumlu"],
     icon: StepForward,
-    image:
-      "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=800&q=80",
+    image: "/images/services/hizmet-lojistik.webp",
   },
   {
     slug: "bes-eksen-cnc",
@@ -143,8 +138,7 @@ export const services: Service[] = [
     ],
     tags: ["3D Yüzey", "Monoblok", "Hassas İşleme"],
     icon: Cpu,
-    image:
-      "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=800&q=80",
+    image: "/images/services/hizmet-uretim.webp",
   },
   {
     slug: "waterjet-kesim",
@@ -162,8 +156,7 @@ export const services: Service[] = [
     ],
     tags: ["Cold Cutting", "Deformasyonsuz", "Çatlama Yok"],
     icon: Droplets,
-    image:
-      "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800&q=80",
+    image: "/images/services/hizmet-tasarim.webp",
   },
   {
     slug: "dijital-roleve",
@@ -181,7 +174,6 @@ export const services: Service[] = [
     ],
     tags: ["Lazer Tarama", "Sanal Montaj", "Sıfır Fire"],
     icon: ScanLine,
-    image:
-      "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=80",
+    image: "/images/services/hizmet-kesif.webp",
   },
 ];

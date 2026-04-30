@@ -12,7 +12,7 @@ export function StatsBand({ variant = "default" }: StatsBandProps) {
   return (
     <section className="bg-surface-darker text-on-dark relative overflow-hidden">
       <div
-        className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1604147706283-d7119b5b822c?auto=format&fit=crop&w=2000&q=60')] bg-cover bg-center opacity-15"
+        className="absolute inset-0 bg-[url('/images/sections/stats-bg.webp')] bg-cover bg-center opacity-15"
         aria-hidden
       />
       <div className="absolute inset-0 bg-gradient-to-r from-surface-darker via-surface-darker/90 to-surface-darker/70" />
