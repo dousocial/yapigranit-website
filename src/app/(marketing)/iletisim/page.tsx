@@ -57,7 +57,7 @@ export default function IletisimPage() {
           { label: "Anasayfa", href: "/" },
           { label: "İletişim" },
         ]}
-        image="https://images.unsplash.com/photo-1556909114-aabb1f8ee8c8?auto=format&fit=crop&w=1600&q=80"
+        image="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80"
         imageAlt="Yapı Granit showroom"
       />
 

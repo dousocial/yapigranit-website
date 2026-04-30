@@ -35,7 +35,7 @@ export const services: Service[] = [
     ],
     icon: Search,
     image:
-      "https://images.unsplash.com/photo-1556909114-44e3e9399a2c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80",
   },
   {
     slug: "malzeme-secimi",

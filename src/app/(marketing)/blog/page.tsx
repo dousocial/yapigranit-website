@@ -21,7 +21,7 @@ export default function BlogPage() {
           { label: "Anasayfa", href: "/" },
           { label: "Blog" },
         ]}
-        image="https://images.unsplash.com/photo-1556909114-aabb1f8ee8c8?auto=format&fit=crop&w=1600&q=80"
+        image="https://images.unsplash.com/photo-1604147495798-57beb5d6af73?auto=format&fit=crop&w=1600&q=80"
         imageAlt="Yapı Granit blog"
       />
 

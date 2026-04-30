@@ -73,7 +73,7 @@ export const blogPosts: BlogPost[] = [
     date: "2026-03-28",
     readMinutes: 5,
     cover:
-      "https://images.unsplash.com/photo-1523413555719-e2f0b3c8de32?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&w=900&q=80",
   },
   {
     slug: "porselen-yuzeyler-nerelerde-kullanilir",
@@ -97,7 +97,7 @@ export const blogPosts: BlogPost[] = [
     date: "2026-03-18",
     readMinutes: 6,
     cover:
-      "https://images.unsplash.com/photo-1556909114-aabb1f8ee8c8?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1604147495798-57beb5d6af73?auto=format&fit=crop&w=900&q=80",
   },
   {
     slug: "mutfak-tezgahi-seciminde-dikkat",
@@ -169,6 +169,6 @@ export const blogPosts: BlogPost[] = [
     date: "2026-02-15",
     readMinutes: 5,
     cover:
-      "https://images.unsplash.com/photo-1523413555719-e2f0b3c8de32?auto=format&fit=crop&w=900&q=80",
+      "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=900&q=80",
   },
 ];
