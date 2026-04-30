@@ -9,6 +9,7 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { Lightbox } from "@/components/ui/lightbox";
 import { projects } from "@/lib/data/projects";
 
 interface Props {
@@ -142,23 +143,16 @@ export default async function ProjectDetailPage({ params }: Props) {
         <section className="bg-surface-muted py-16 lg:py-20">
           <Container size="wide">
             <Eyebrow>Galeri</Eyebrow>
-            <h3 className="display-md text-ink mt-3 mb-10">Proje görselleri</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-              {project.gallery.map((img, i) => (
-                <div
-                  key={i}
-                  className="relative aspect-[4/3] overflow-hidden bg-surface"
-                >
-                  <Image
-                    src={img}
-                    alt={`${project.title} - görsel ${i + 1}`}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover"
-                  />
-                </div>
-              ))}
-            </div>
+            <h3 className="display-md text-ink mt-3 mb-3">Proje görselleri</h3>
+            <p className="text-[0.85rem] text-ink-soft mb-10">
+              Görsele tıklayarak büyütebilir, ok tuşları veya kaydırma ile
+              gezinebilirsiniz.
+            </p>
+            <Lightbox
+              images={project.gallery}
+              alt={project.title}
+              className="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6"
+            />
           </Container>
         </section>
       )}
