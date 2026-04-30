@@ -18,7 +18,7 @@ const schema = z.object({
   categoryLabel: z.string().min(1),
   type: z.string().min(1),
   location: z.string().min(1),
-  year: z.coerce.number().min(1990).max(2100),
+  year: z.number().min(1990).max(2100),
   material: z.string().min(1),
   area: z.string().optional(),
   scope: z.string().min(2),
@@ -136,7 +136,7 @@ export function ProjectForm({
       </div>
       <div className="grid grid-cols-2 gap-5">
         <Field label="Yıl" error={errors.year?.message}>
-          <Input type="number" {...register("year")} />
+          <Input type="number" {...register("year", { valueAsNumber: true })} />
         </Field>
         <Field label="Metraj" error={errors.area?.message}>
           <Input {...register("area")} placeholder="12.500 m²" />

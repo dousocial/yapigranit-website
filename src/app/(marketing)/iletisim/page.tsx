@@ -195,7 +195,7 @@ export default function IletisimPage() {
 interface InfoCardProps {
   icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
   title: string;
-  lines: string[];
+  lines: readonly string[];
   actionLabel?: string;
   actionHref?: string;
   external?: boolean;

@@ -34,7 +34,7 @@ export function Header() {
   }, []);
 
   React.useEffect(() => {
-    setMobileOpen(false);
+    React.startTransition(() => setMobileOpen(false));
   }, [pathname]);
 
   const isActive = (href: string) =>
