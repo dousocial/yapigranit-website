@@ -19,6 +19,8 @@ const sans = Inter({
 // Admin paneli sadece TR'de — i18n provider sabit TR locale ile sağlanıyor.
 // Bu, marketing tarafındaki ortak komponentler (Logo, Button vb.) için
 // gerekli context'i sağlar.
+export const dynamic = "force-dynamic";
+
 export default async function AdminRootLayout({
   children,
 }: {

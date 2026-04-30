@@ -1,7 +1,13 @@
 "use client";
 
 import * as React from "react";
-import { Link, usePathname } from "@/i18n/navigation";
+import { useParams } from "next/navigation";
+import { useTranslations } from "next-intl";
+import {
+  Link,
+  usePathname,
+  useRouter,
+} from "@/i18n/navigation";
 import {
   ChevronDown,
   Globe,
@@ -15,16 +21,57 @@ import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { SiteSearch } from "@/components/search/site-search";
-import { navigation } from "@/lib/site";
+import { routing, localeLabels, type Locale } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
+
+interface NavItem {
+  key: "home" | "corporate" | "products" | "services" | "projects" | "blog" | "contact";
+  href: string;
+  children?: { href: string; nameKey: string; descKey?: string }[];
+}
+
+const navItems: NavItem[] = [
+  { key: "home", href: "/" },
+  { key: "corporate", href: "/kurumsal" },
+  {
+    key: "products",
+    href: "/urunler",
+    children: [
+      { href: "/urunler/porselen", nameKey: "Footer.links.porselen", descKey: "porselenDesc" },
+      { href: "/urunler/mermer", nameKey: "Footer.links.mermer", descKey: "mermerDesc" },
+      { href: "/urunler/kuvars", nameKey: "Footer.links.kuvars", descKey: "kuvarsDesc" },
+      { href: "/urunler/granit", nameKey: "Footer.links.granit", descKey: "granitDesc" },
+      { href: "/urunler", nameKey: "Footer.links.allProducts" },
+    ],
+  },
+  { key: "services", href: "/hizmetler" },
+  { key: "projects", href: "/projeler" },
+  { key: "blog", href: "/blog" },
+  { key: "contact", href: "/iletisim" },
+];
+
+const productDescKeys: Record<string, string> = {
+  "/urunler/porselen": "Hero.eyebrow",
+  "/urunler/mermer": "Hero.eyebrow",
+  "/urunler/kuvars": "Hero.eyebrow",
+  "/urunler/granit": "Hero.eyebrow",
+};
+void productDescKeys;
 
 export function Header() {
   const pathname = usePathname();
+  const router = useRouter();
+  const params = useParams();
+  const t = useTranslations("Nav");
+  const tMega = useTranslations("MegaMenu");
+  const tFooter = useTranslations("Footer.links");
+
+  const currentLocale = (params.locale as Locale) ?? routing.defaultLocale;
+
   const [scrolled, setScrolled] = React.useState(false);
   const [productsOpen, setProductsOpen] = React.useState(false);
   const [langOpen, setLangOpen] = React.useState(false);
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [lang, setLang] = React.useState<"tr" | "en" | "de">("tr");
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -38,9 +85,12 @@ export function Header() {
   }, [pathname]);
 
   const isActive = (href: string) =>
-    href === "/"
-      ? pathname === "/"
-      : pathname.startsWith(href);
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  function changeLocale(next: Locale) {
+    setLangOpen(false);
+    router.replace(pathname, { locale: next });
+  }
 
   return (
     <header
@@ -57,18 +107,22 @@ export function Header() {
 
           {/* Desktop Nav */}
           <nav
-            aria-label="Ana navigasyon"
+            aria-label={t("ariaPrimary")}
             className="hidden lg:flex items-center gap-1"
           >
-            {navigation.main.map((item) => {
-              if ("children" in item && item.children) {
+            {navItems.map((item) => {
+              if (item.children) {
                 return (
                   <DropdownItem
                     key={item.href}
-                    item={item}
+                    href={item.href}
+                    label={t(item.key)}
+                    children={item.children}
                     open={productsOpen}
                     onOpenChange={setProductsOpen}
                     active={isActive(item.href)}
+                    tFooter={tFooter}
+                    tMega={tMega}
                   />
                 );
               }
@@ -84,7 +138,7 @@ export function Header() {
                       : "text-ink hover:text-gold-deep",
                   )}
                 >
-                  {item.label}
+                  {t(item.key)}
                 </Link>
               );
             })}
@@ -102,9 +156,12 @@ export function Header() {
                 className="flex items-center gap-1.5 px-3 py-2 text-[0.85rem] font-medium text-ink hover:text-gold-deep transition-colors"
                 aria-haspopup="menu"
                 aria-expanded={langOpen}
+                aria-label={t("language")}
               >
                 <Globe className="size-4" />
-                <span className="uppercase tracking-wider">{lang}</span>
+                <span className="uppercase tracking-wider">
+                  {localeLabels[currentLocale]}
+                </span>
                 <ChevronDown
                   className={cn(
                     "size-3.5 transition-transform",
@@ -121,21 +178,18 @@ export function Header() {
                     transition={{ duration: 0.15 }}
                     className="absolute right-0 top-full mt-2 min-w-[120px] bg-surface border border-line shadow-md rounded-md py-1.5"
                   >
-                    {navigation.languages.map((l) => (
+                    {routing.locales.map((l) => (
                       <button
-                        key={l.code}
-                        onClick={() => {
-                          setLang(l.code as typeof lang);
-                          setLangOpen(false);
-                        }}
+                        key={l}
+                        onClick={() => changeLocale(l)}
                         className={cn(
                           "block w-full text-left px-4 py-2 text-[0.85rem] hover:bg-surface-muted transition-colors",
-                          lang === l.code
+                          currentLocale === l
                             ? "text-gold-deep font-medium"
                             : "text-ink",
                         )}
                       >
-                        {l.label}
+                        {localeLabels[l]}
                       </button>
                     ))}
                   </motion.div>
@@ -145,7 +199,7 @@ export function Header() {
 
             <Button asChild size="md" className="hidden sm:inline-flex ml-2">
               <Link href="/teklif">
-                Teklif Alın
+                {t("getQuote")}
                 <ArrowUpRight />
               </Link>
             </Button>
@@ -157,7 +211,7 @@ export function Header() {
             <button
               onClick={() => setMobileOpen(true)}
               className="lg:hidden p-2 -mr-2 text-ink hover:text-gold-deep transition-colors"
-              aria-label="Menü"
+              aria-label={t("openMenu")}
             >
               <Menu className="size-6" />
             </button>
@@ -171,8 +225,9 @@ export function Header() {
           <MobileMenu
             onClose={() => setMobileOpen(false)}
             isActive={isActive}
-            lang={lang}
-            setLang={setLang}
+            currentLocale={currentLocale}
+            onLocaleChange={changeLocale}
+            t={t}
           />
         )}
       </AnimatePresence>
@@ -181,14 +236,27 @@ export function Header() {
 }
 
 interface DropdownItemProps {
-  item: typeof navigation.main[number];
+  href: string;
+  label: string;
+  children: NavItem["children"];
   open: boolean;
   onOpenChange: (open: boolean) => void;
   active: boolean;
+  tFooter: ReturnType<typeof useTranslations<"Footer.links">>;
+  tMega: ReturnType<typeof useTranslations<"MegaMenu">>;
 }
 
-function DropdownItem({ item, open, onOpenChange, active }: DropdownItemProps) {
-  if (!("children" in item) || !item.children) return null;
+function DropdownItem({
+  href,
+  label,
+  children,
+  open,
+  onOpenChange,
+  active,
+  tFooter,
+  tMega,
+}: DropdownItemProps) {
+  if (!children) return null;
 
   return (
     <div
@@ -197,16 +265,14 @@ function DropdownItem({ item, open, onOpenChange, active }: DropdownItemProps) {
       onMouseLeave={() => onOpenChange(false)}
     >
       <Link
-        href={item.href}
+        href={href}
         data-active={active}
         className={cn(
           "flex items-center gap-1 px-4 py-2 text-[0.92rem] font-medium transition-colors underline-grow",
-          active
-            ? "text-gold-deep"
-            : "text-ink hover:text-gold-deep",
+          active ? "text-gold-deep" : "text-ink hover:text-gold-deep",
         )}
       >
-        {item.label}
+        {label}
         <ChevronDown
           className={cn(
             "size-3.5 transition-transform mt-0.5",
@@ -227,42 +293,37 @@ function DropdownItem({ item, open, onOpenChange, active }: DropdownItemProps) {
             <div className="w-[640px] bg-surface border border-line shadow-lg rounded-lg overflow-hidden">
               <div className="grid grid-cols-2">
                 <div className="p-6 border-r border-line">
-                  <p className="eyebrow mb-4">Ürün Grupları</p>
+                  <p className="eyebrow mb-4">{tMega("productGroups")}</p>
                   <ul className="space-y-2.5">
-                    {item.children.map((child) => (
-                      <li key={child.href}>
-                        <Link
-                          href={child.href}
-                          className="group block py-1.5"
-                        >
-                          <div className="flex items-baseline justify-between">
-                            <span className="font-display text-[1.15rem] text-ink group-hover:text-gold-deep transition-colors">
-                              {child.label}
-                            </span>
-                            <ArrowUpRight className="size-3.5 text-ink-soft opacity-0 -translate-x-2 transition-all group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-gold-deep" />
-                          </div>
-                          {"description" in child && child.description && (
-                            <p className="text-[0.8rem] text-ink-soft mt-0.5">
-                              {child.description}
-                            </p>
-                          )}
-                        </Link>
-                      </li>
-                    ))}
+                    {children.map((child) => {
+                      // nameKey is "Footer.links.<key>"; we already have tFooter scoped
+                      const subKey = child.nameKey.replace("Footer.links.", "");
+                      return (
+                        <li key={child.href}>
+                          <Link href={child.href} className="group block py-1.5">
+                            <div className="flex items-baseline justify-between">
+                              <span className="font-display text-[1.15rem] text-ink group-hover:text-gold-deep transition-colors">
+                                {tFooter(subKey as Parameters<typeof tFooter>[0])}
+                              </span>
+                              <ArrowUpRight className="size-3.5 text-ink-soft opacity-0 -translate-x-2 transition-all group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-gold-deep" />
+                            </div>
+                          </Link>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
                 <div className="p-6 bg-surface-muted/50">
-                  <p className="eyebrow mb-4">Mimar & Müteahhitler İçin</p>
+                  <p className="eyebrow mb-4">{tMega("forArchitects")}</p>
                   <h4 className="font-display text-[1.4rem] text-ink leading-tight mb-3">
-                    Projenize özel numune talep edin.
+                    {tMega("sampleHeading")}
                   </h4>
                   <p className="text-[0.85rem] text-ink-muted leading-relaxed mb-5">
-                    Mermer, granit ve porselen yüzeylerden ücretsiz numune setiyle
-                    projelerinize doğru malzemeyi seçin.
+                    {tMega("sampleBody")}
                   </p>
                   <Button asChild size="sm" variant="outline">
                     <Link href="/numune-talep">
-                      Numune Talep Et
+                      {tMega("sampleCta")}
                       <ArrowUpRight />
                     </Link>
                   </Button>
@@ -279,11 +340,19 @@ function DropdownItem({ item, open, onOpenChange, active }: DropdownItemProps) {
 interface MobileMenuProps {
   onClose: () => void;
   isActive: (href: string) => boolean;
-  lang: "tr" | "en" | "de";
-  setLang: (l: "tr" | "en" | "de") => void;
+  currentLocale: Locale;
+  onLocaleChange: (l: Locale) => void;
+  t: ReturnType<typeof useTranslations<"Nav">>;
 }
 
-function MobileMenu({ onClose, isActive, lang, setLang }: MobileMenuProps) {
+function MobileMenu({
+  onClose,
+  isActive,
+  currentLocale,
+  onLocaleChange,
+  t,
+}: MobileMenuProps) {
+  const tFooter = useTranslations("Footer.links");
   const [productsOpen, setProductsOpen] = React.useState(false);
 
   return (
@@ -310,22 +379,22 @@ function MobileMenu({ onClose, isActive, lang, setLang }: MobileMenuProps) {
           <button
             onClick={onClose}
             className="p-2 -mr-2 text-ink hover:text-gold-deep"
-            aria-label="Kapat"
+            aria-label={t("closeMenu")}
           >
             <X className="size-6" />
           </button>
         </div>
 
         <nav className="flex-1 px-6 py-8 space-y-1">
-          {navigation.main.map((item) => {
-            if ("children" in item && item.children) {
+          {navItems.map((item) => {
+            if (item.children) {
               return (
                 <div key={item.href}>
                   <button
                     onClick={() => setProductsOpen((s) => !s)}
                     className="w-full flex items-center justify-between py-3 text-[1.05rem] font-medium text-ink"
                   >
-                    {item.label}
+                    {t(item.key)}
                     <ChevronDown
                       className={cn(
                         "size-4 transition-transform",
@@ -342,16 +411,24 @@ function MobileMenu({ onClose, isActive, lang, setLang }: MobileMenuProps) {
                         transition={{ duration: 0.2 }}
                         className="overflow-hidden pl-4 border-l border-line ml-1"
                       >
-                        {item.children.map((child) => (
-                          <li key={child.href}>
-                            <Link
-                              href={child.href}
-                              className="block py-2 text-[0.95rem] text-ink-muted hover:text-gold-deep"
-                            >
-                              {child.label}
-                            </Link>
-                          </li>
-                        ))}
+                        {item.children.map((child) => {
+                          const subKey = child.nameKey.replace(
+                            "Footer.links.",
+                            "",
+                          );
+                          return (
+                            <li key={child.href}>
+                              <Link
+                                href={child.href}
+                                className="block py-2 text-[0.95rem] text-ink-muted hover:text-gold-deep"
+                              >
+                                {tFooter(
+                                  subKey as Parameters<typeof tFooter>[0],
+                                )}
+                              </Link>
+                            </li>
+                          );
+                        })}
                       </motion.ul>
                     )}
                   </AnimatePresence>
@@ -369,7 +446,7 @@ function MobileMenu({ onClose, isActive, lang, setLang }: MobileMenuProps) {
                     : "text-ink hover:text-gold-deep",
                 )}
               >
-                {item.label}
+                {t(item.key)}
               </Link>
             );
           })}
@@ -377,24 +454,24 @@ function MobileMenu({ onClose, isActive, lang, setLang }: MobileMenuProps) {
 
         <div className="px-6 py-6 border-t border-line space-y-4">
           <div className="flex items-center gap-2">
-            {navigation.languages.map((l) => (
+            {routing.locales.map((l) => (
               <button
-                key={l.code}
-                onClick={() => setLang(l.code as typeof lang)}
+                key={l}
+                onClick={() => onLocaleChange(l)}
                 className={cn(
                   "px-3 py-1.5 text-[0.8rem] font-medium uppercase tracking-wider rounded transition-colors",
-                  lang === l.code
+                  currentLocale === l
                     ? "bg-ink text-on-dark"
                     : "text-ink-muted hover:text-ink",
                 )}
               >
-                {l.label}
+                {localeLabels[l]}
               </button>
             ))}
           </div>
           <Button asChild size="lg" className="w-full">
             <Link href="/teklif">
-              Teklif Alın
+              {t("getQuote")}
               <ArrowUpRight />
             </Link>
           </Button>

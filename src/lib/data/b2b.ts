@@ -17,164 +17,67 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
+// All keys reference messages.json — TR fallbacks live there.
+
 export interface B2BFeature {
-  title: string;
-  description: string;
+  titleKey: string; // "B2BFeatures.<keyTitle>"
+  descKey: string; // "B2BFeatures.<keyDesc>"
   icon: LucideIcon;
 }
 
 export const b2bFeatures: B2BFeature[] = [
-  {
-    title: "Mekanik Cephe Sistemleri",
-    description:
-      "304/316 paslanmaz çelik ankrajlarla güvenli, havalandırmalı cephe çözümleri.",
-    icon: Building2,
-  },
-  {
-    title: "5 Eksen CNC & Waterjet",
-    description:
-      "± 0.005 mm hassasiyet, karmaşık geometriler ve isısız kesim teknolojisi.",
-    icon: Factory,
-  },
-  {
-    title: "Dijital Rölöve",
-    description:
-      "Lazer tarama ile sahanın 3D modeli, sanal montaj ile sıfır fire.",
-    icon: TrendingUp,
-  },
-  {
-    title: "Numune & Seçim Desteği",
-    description:
-      "Doğru ürün seçimi için Dekton, Neolith, Florim numune ve uzman desteği.",
-    icon: Layers,
-  },
-  {
-    title: "Lojistik & Teslimat",
-    description: "12 ülkeye ihracat tecrübesiyle güvenli ve zamanında teslimat.",
-    icon: Truck,
-  },
-  {
-    title: "Sürekli Tedarik Güvencesi",
-    description:
-      "14 farklı ülkeden doğrudan temin ile büyük ölçekli projelere kesintisiz arz.",
-    icon: PackageCheck,
-  },
+  { titleKey: "mekanikCepheTitle", descKey: "mekanikCepheDesc", icon: Building2 },
+  { titleKey: "cncTitle", descKey: "cncDesc", icon: Factory },
+  { titleKey: "rolveTitle", descKey: "rolveDesc", icon: TrendingUp },
+  { titleKey: "sampleTitle", descKey: "sampleDesc", icon: Layers },
+  { titleKey: "logisticsTitle", descKey: "logisticsDesc", icon: Truck },
+  { titleKey: "supplyTitle", descKey: "supplyDesc", icon: PackageCheck },
 ];
 
 export interface WhyUs {
-  title: string;
-  description: string;
+  titleKey: string;
+  descKey: string;
   icon: LucideIcon;
 }
 
 export const whyUs: WhyUs[] = [
+  { titleKey: "experienceTitle", descKey: "experienceDesc", icon: Award },
+  { titleKey: "teamTitle", descKey: "teamDesc", icon: Users2 },
+  { titleKey: "techTitle", descKey: "techDesc", icon: Factory },
+  { titleKey: "ontimeTitle", descKey: "ontimeDesc", icon: Clock4 },
   {
-    title: "25+ Yıllık Tecrübe",
-    description: "1994'ten bugüne taşı işleyen ustalık ve mühendislik birikimi.",
-    icon: Award,
-  },
-  {
-    title: "Deneyimli Uzman Kadro",
-    description: "Sektöre yıllarını vermiş ustalar ve teknik ekip.",
-    icon: Users2,
-  },
-  {
-    title: "Teknolojik Üretim",
-    description: "5 Eksen CNC, Waterjet, Bridge Saw ve Lazer Tarama altyapısı.",
-    icon: Factory,
-  },
-  {
-    title: "Zamanında Teslimat",
-    description: "Verilen sözlerin eksiksiz yerine getirilmesi prensibi.",
-    icon: Clock4,
-  },
-  {
-    title: "%100 Müşteri Memnuniyeti",
-    description: "Her projede kalite ve süreç odaklı yaklaşım.",
+    titleKey: "satisfactionTitle",
+    descKey: "satisfactionDesc",
     icon: Heart,
   },
 ];
 
 export interface BrandValue {
-  title: string;
-  description: string;
+  titleKey: string;
+  descKey: string;
   icon: LucideIcon;
 }
 
 export const brandValues: BrandValue[] = [
-  {
-    title: "Kalite",
-    description:
-      "En iyi malzeme ve ustalığı, her projede standart olarak sunarız.",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Güven",
-    description:
-      "1994'ten bu yana kazandığımız güveni, her projede yeniden üretiyoruz.",
-    icon: Handshake,
-  },
-  {
-    title: "Yenilik",
-    description:
-      "5 Eksen CNC'den dijital rölöveye, sektörün öncü teknolojilerini kullanıyoruz.",
-    icon: Lightbulb,
-  },
-  {
-    title: "Sürdürülebilirlik",
-    description:
-      "Atık yönetimi ve döngüsel üretimle doğaya karşı sorumluluğumuzun farkındayız.",
-    icon: Leaf,
-  },
-  {
-    title: "Çözüm Odaklılık",
-    description:
-      "Mekanınıza en uygun çözümü tasarlıyor, taşa sanatkar ellerle hayat veriyoruz.",
-    icon: Sparkles,
-  },
+  { titleKey: "qualityTitle", descKey: "qualityDesc", icon: ShieldCheck },
+  { titleKey: "trustTitle", descKey: "trustDesc", icon: Handshake },
+  { titleKey: "innovationTitle", descKey: "innovationDesc", icon: Lightbulb },
+  { titleKey: "sustainTitle", descKey: "sustainDesc", icon: Leaf },
+  { titleKey: "solutionTitle", descKey: "solutionDesc", icon: Sparkles },
 ];
 
 export interface TimelineItem {
   year: string;
-  title: string;
-  description: string;
+  // both year-prefixed keys: "y1994Title", "y1994Desc"
+  titleKey: string;
+  descKey: string;
 }
 
 export const timeline: TimelineItem[] = [
-  {
-    year: "1994",
-    title: "Temeller Atılıyor",
-    description:
-      "Yapı Granit'in serüveni 1994 yılında başladı. Küçük bir atölyede, büyük hayallerle kurulan firmamız, ilk günden itibaren kaliteyi hedefledi.",
-  },
-  {
-    year: "2000",
-    title: "Yeni Merkez & Güven",
-    description:
-      "Mevcut merkezimize taşınmamızla birlikte edindiğimiz tecrübe ve müşterilerimizin güveni, her yıl %300 büyüme gerçekleştirmemizi sağladı.",
-  },
-  {
-    year: "2004",
-    title: "Dünyaya Açılış",
-    description:
-      "Aracıları kaldırdık. Granit hammadde ihtiyacımızı dünyanın 14 farklı ülkesindeki ocak ve fabrikalardan doğrudan temin etmeye başladık.",
-  },
-  {
-    year: "2005",
-    title: "Almanya'ya İhracat",
-    description:
-      "Büyümemizi Almanya'ya ihracat yaparak taçlandırdık. Artık sadece malzeme tedariği değil, proje bazlı hizmet vererek kompleks yapıları hayata geçiriyoruz.",
-  },
-  {
-    year: "2015",
-    title: "Teknolojik Yatırım",
-    description:
-      "5 Eksen CNC, Waterjet ve Bridge Saw makinalarımızla üretim altyapımızı uzay endüstrisi standartlarına taşıdık.",
-  },
-  {
-    year: "2026",
-    title: "Bugün",
-    description:
-      "12 ülkeye ihracat, 500+ tamamlanan proje ve 25+ yıllık birikimle Denizli'den dünyaya taş işleyen bir mühendislik markası.",
-  },
+  { year: "1994", titleKey: "y1994Title", descKey: "y1994Desc" },
+  { year: "2000", titleKey: "y2000Title", descKey: "y2000Desc" },
+  { year: "2004", titleKey: "y2004Title", descKey: "y2004Desc" },
+  { year: "2005", titleKey: "y2005Title", descKey: "y2005Desc" },
+  { year: "2015", titleKey: "y2015Title", descKey: "y2015Desc" },
+  { year: "2026", titleKey: "y2026Title", descKey: "y2026Desc" },
 ];

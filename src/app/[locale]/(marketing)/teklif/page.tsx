@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
-import {
-  CheckCircle2,
-  Clock4,
-  Users2,
-  Award,
-} from "lucide-react";
+import { CheckCircle2, Clock4, Users2, Award } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { PageHero } from "@/components/sections/page-hero";
 import { Container } from "@/components/ui/container";
@@ -12,72 +9,84 @@ import { Reveal } from "@/components/ui/reveal";
 import { QuoteForm } from "@/components/sections/quote-form";
 import { QuoteCalculator } from "@/components/sections/quote-calculator";
 
-export const metadata: Metadata = {
-  title: "Teklif Alın",
-  description:
-    "Projeniz için Yapı Granit'ten ücretsiz fiyat teklifi alın. B2B projelerde ölçü, malzeme ve detay bilgilerinizi paylaşın.",
-  alternates: { canonical: "/teklif" },
-};
+interface Props {
+  params: Promise<{ locale: string }>;
+}
 
-const benefits = [
-  {
-    icon: Clock4,
-    title: "24 Saatte Geri Dönüş",
-    description: "Talebinize en geç 24 saat içinde detaylı dönüş yaparız.",
-  },
-  {
-    icon: Award,
-    title: "Projeye Özel Fiyatlandırma",
-    description: "Her projeye özel ölçü, malzeme ve teknik detay analizi.",
-  },
-  {
-    icon: Users2,
-    title: "Uzman Teknik Destek",
-    description: "Mimar ve müteahhitlere özel danışmanlık.",
-  },
-  {
-    icon: CheckCircle2,
-    title: "Ücretsiz Keşif",
-    description: "İstanbul ve çevresinde ücretsiz yerinde keşif imkanı.",
-  },
-];
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Pages.quote" });
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: {
+      canonical: locale === "tr" ? "/teklif" : `/${locale}/teklif`,
+    },
+  };
+}
 
-export default function TeklifPage() {
+export default async function TeklifPage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  return <TeklifContent />;
+}
+
+function TeklifContent() {
+  const t = useTranslations("Pages.quote");
+  const tNav = useTranslations("Nav");
+
+  const benefits: {
+    icon: typeof Clock4;
+    titleKey: "benefit24h" | "benefitProject" | "benefitExpert" | "benefitSurvey";
+    descKey: "benefit24hDesc" | "benefitProjectDesc" | "benefitExpertDesc" | "benefitSurveyDesc";
+  }[] = [
+    { icon: Clock4, titleKey: "benefit24h", descKey: "benefit24hDesc" },
+    { icon: Award, titleKey: "benefitProject", descKey: "benefitProjectDesc" },
+    { icon: Users2, titleKey: "benefitExpert", descKey: "benefitExpertDesc" },
+    {
+      icon: CheckCircle2,
+      titleKey: "benefitSurvey",
+      descKey: "benefitSurveyDesc",
+    },
+  ];
+
   return (
     <>
       <PageHero
-        title="Projeniz için teklif alın."
-        description="Bilgilerinizi paylaşın, projenize özel fiyatlandırmayı en kısa sürede iletelim."
+        title={t("title")}
+        description={t("description")}
         breadcrumb={[
-          { label: "Anasayfa", href: "/" },
-          { label: "Teklif Alın" },
+          { label: tNav("home"), href: "/" },
+          { label: tNav("getQuote") },
         ]}
-        image="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1600&q=80"
-        imageAlt="Teklif sürecimiz"
+        image="/images/hero/hero-teklif.webp"
+        imageAlt={t("title")}
       />
 
       <section className="bg-background py-16 lg:py-20">
         <Container size="wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
             <Reveal className="lg:col-span-4">
-              <p className="eyebrow">Süreç</p>
+              <p className="eyebrow">{t("processEyebrow")}</p>
               <h2 className="display-md text-ink mt-3 text-balance">
-                Doğru çözüm, hızlı geri dönüş.
+                {t("processTitle")}
               </h2>
               <div className="w-12 h-px bg-gold mt-5 mb-7" />
 
               <ul className="space-y-6">
                 {benefits.map((b) => (
-                  <li key={b.title} className="flex items-start gap-4">
+                  <li key={b.titleKey} className="flex items-start gap-4">
                     <div className="size-10 grid place-items-center bg-surface-muted text-gold-deep shrink-0">
                       <b.icon className="size-5" strokeWidth={1.5} />
                     </div>
                     <div>
                       <h4 className="font-display text-[1.1rem] text-ink">
-                        {b.title}
+                        {t(b.titleKey)}
                       </h4>
                       <p className="text-[0.85rem] text-ink-muted leading-relaxed mt-1">
-                        {b.description}
+                        {t(b.descKey)}
                       </p>
                     </div>
                   </li>

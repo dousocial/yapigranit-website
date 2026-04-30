@@ -1,18 +1,20 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { Mail, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { Container } from "@/components/ui/container";
 
 export function NewsletterBand() {
+  const t = useTranslations("Pages.blog");
   const [email, setEmail] = React.useState("");
   const [loading, setLoading] = React.useState(false);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      toast.error("Geçerli bir e-posta adresi girin.");
+      toast.error(t("newsletterInvalid"));
       return;
     }
     setLoading(true);
@@ -23,12 +25,10 @@ export function NewsletterBand() {
         body: JSON.stringify({ email }),
       });
       if (!res.ok) throw new Error();
-      toast.success(
-        "Teşekkürler, Yapı Granit içeriklerinden haberdar olacaksınız.",
-      );
+      toast.success(t("newsletterSuccess"));
       setEmail("");
     } catch {
-      toast.error("Bir hata oluştu. Lütfen tekrar deneyin.");
+      toast.error(t("newsletterError"));
     } finally {
       setLoading(false);
     }
@@ -45,11 +45,10 @@ export function NewsletterBand() {
             </div>
             <div>
               <h3 className="font-display text-[1.6rem] text-on-dark leading-tight">
-                Yeniliklerden haberdar olun
+                {t("newsletterTitle")}
               </h3>
               <p className="mt-1 text-[0.88rem] text-on-dark-muted">
-                Doğal taş dünyasındaki gelişmeler, projelerimiz ve yeni
-                içeriklerden ilk siz haberdar olun.
+                {t("newsletterDesc")}
               </p>
             </div>
           </div>
@@ -62,7 +61,7 @@ export function NewsletterBand() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="E-posta adresinizi girin"
+              placeholder={t("newsletterPlaceholder")}
               className="flex-1 h-13 px-5 bg-on-dark/5 border border-line-dark text-on-dark placeholder:text-on-dark-soft focus:outline-none focus:border-gold transition-colors text-[0.92rem]"
             />
             <button
@@ -70,7 +69,7 @@ export function NewsletterBand() {
               disabled={loading}
               className="h-13 px-7 bg-gold hover:bg-gold-soft text-ink font-medium uppercase tracking-wider text-[0.78rem] flex items-center justify-center gap-2 transition-colors disabled:opacity-60"
             >
-              {loading ? "Gönderiliyor..." : "Abone Ol"}
+              {loading ? t("newsletterSending") : t("newsletterButton")}
               {!loading && <ArrowRight className="size-4" />}
             </button>
           </form>

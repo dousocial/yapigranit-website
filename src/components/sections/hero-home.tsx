@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import {
@@ -20,13 +21,15 @@ import { Container } from "@/components/ui/container";
 import { siteConfig } from "@/lib/site";
 
 const trustPills = [
-  { icon: Award, label: "25+ Yıllık Tecrübe" },
-  { icon: ShieldCheck, label: "5 Eksen CNC & Waterjet" },
-  { icon: Clock4, label: "12 Ülkeye İhracat" },
-  { icon: Sparkles, label: "%100 Müşteri Memnuniyeti" },
+  { icon: Award, key: "trustExperience" as const },
+  { icon: ShieldCheck, key: "trustTechnology" as const },
+  { icon: Clock4, key: "trustExport" as const },
+  { icon: Sparkles, key: "trustSatisfaction" as const },
 ];
 
 export function HeroHome() {
+  const t = useTranslations("Hero");
+
   return (
     <section className="relative bg-surface-darker text-on-dark overflow-hidden">
       <div className="absolute inset-0 marble-bg opacity-50" aria-hidden />
@@ -35,21 +38,21 @@ export function HeroHome() {
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 pt-12 pb-16 lg:pt-20 lg:pb-24 min-h-[760px] lg:min-h-[820px]">
           {/* Left text */}
           <div className="lg:col-span-6 flex flex-col justify-center pt-4 lg:pt-12">
-            <p className="eyebrow text-gold mb-4">Premium Doğal Taş</p>
+            <p className="eyebrow text-gold mb-4">{t("eyebrow")}</p>
             <motion.h1
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
               className="display-xl text-on-dark text-balance"
             >
-              Doğanın
+              {t("titlePart1")}
               <br />
               <span className="italic font-light text-gold">
-                sanata
+                {t("titlePart2")}
               </span>{" "}
-              dönüştüğü
+              {t("titlePart3")}
               <br />
-              yer.
+              {t("titlePart4")}
             </motion.h1>
 
             <motion.p
@@ -58,9 +61,7 @@ export function HeroHome() {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="mt-8 max-w-[460px] text-[1.02rem] text-on-dark-muted leading-relaxed"
             >
-              Milyonlarca yıllık jeolojik mirası, modern mimarinin zarafetiyle
-              buluşturuyoruz. Yaşam alanlarınız için sonsuzluk kadar dayanıklı,
-              sanat kadar eşsiz çözümler.
+              {t("description")}
             </motion.p>
 
             <motion.div
@@ -71,13 +72,13 @@ export function HeroHome() {
             >
               <Button asChild size="lg">
                 <Link href="/urunler">
-                  Koleksiyonu Keşfet
+                  {t("ctaPrimary")}
                   <ArrowRight />
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline-light">
                 <Link href="/projeler">
-                  Projeleri Gör
+                  {t("ctaSecondary")}
                   <ArrowRight />
                 </Link>
               </Button>
@@ -94,7 +95,7 @@ export function HeroHome() {
             <div className="absolute inset-0 lg:-mr-8 xl:-mr-16 overflow-hidden rounded-sm">
               <Image
                 src="/images/sections/hero-home.webp"
-                alt="Premium mermer mutfak uygulaması"
+                alt={t("eyebrow")}
                 fill
                 priority
                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -119,12 +120,12 @@ export function HeroHome() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-4">
               {trustPills.map((pill) => (
                 <div
-                  key={pill.label}
+                  key={pill.key}
                   className="flex items-center gap-3 text-on-dark-muted"
                 >
                   <pill.icon className="size-4 text-gold shrink-0" />
                   <span className="text-[0.85rem] font-medium">
-                    {pill.label}
+                    {t(pill.key)}
                   </span>
                 </div>
               ))}
@@ -172,10 +173,10 @@ export function HeroHome() {
             ?.scrollIntoView({ behavior: "smooth" });
         }}
         className="hidden lg:flex absolute right-6 bottom-10 flex-col items-center gap-2 text-on-dark-muted hover:text-gold transition-colors group"
-        aria-label="Aşağı in"
+        aria-label={t("scrollDown")}
       >
         <span className="text-[0.65rem] tracking-[0.2em] uppercase rotate-90 origin-bottom-right translate-y-12 -translate-x-2">
-          Aşağı In
+          {t("scrollDown")}
         </span>
         <motion.div
           animate={{ y: [0, 6, 0] }}

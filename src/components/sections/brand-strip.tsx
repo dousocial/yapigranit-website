@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { brands } from "@/lib/data/brands";
@@ -11,6 +12,7 @@ export function BrandStrip({
   variant = "light",
   showHeader = true,
 }: BrandStripProps) {
+  const t = useTranslations("BrandStrip");
   // Marquee için listeyi 2 kere tekrar et — kesintisiz akış
   const loop = [...brands, ...brands];
 
@@ -32,7 +34,7 @@ export function BrandStrip({
         {showHeader && (
           <div className="text-center mb-10 max-w-[680px] mx-auto">
             <Eyebrow variant={isDark ? "light" : "gold"}>
-              Güçlü İş Birlikleri
+              {t("eyebrow")}
             </Eyebrow>
             <h2
               className={
@@ -41,7 +43,7 @@ export function BrandStrip({
                   : "display-md text-ink mt-3 text-balance"
               }
             >
-              Çözüm ortağı olduğumuz global markalar
+              {t("title")}
             </h2>
             <p
               className={
@@ -50,8 +52,7 @@ export function BrandStrip({
                   : "mt-4 text-[0.92rem] text-ink-muted"
               }
             >
-              Dünyanın en prestijli sinterlenmiş porselen, kuvars ve büyük ebat
-              yüzey markalarıyla çalışıyoruz.
+              {t("description")}
             </p>
           </div>
         )}

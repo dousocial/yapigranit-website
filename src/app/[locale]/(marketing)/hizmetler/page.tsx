@@ -2,83 +2,111 @@ import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { PageHero } from "@/components/sections/page-hero";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
-import { services } from "@/lib/data/services";
+import { services, localizedService } from "@/lib/data/services";
 import { whyUs } from "@/lib/data/b2b";
+import type { Locale } from "@/i18n/routing";
 
-export const metadata: Metadata = {
-  title: "Hizmetler",
-  description:
-    "Keşif, malzeme seçimi, üretim, uygulama ve satış sonrası destek — projenizin her aşamasında profesyonel hizmet.",
-  alternates: { canonical: "/hizmetler" },
-};
+interface Props {
+  params: Promise<{ locale: string }>;
+}
 
-export default function HizmetlerPage() {
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Pages.services" });
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: {
+      canonical: locale === "tr" ? "/hizmetler" : `/${locale}/hizmetler`,
+    },
+  };
+}
+
+export default async function HizmetlerPage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  return <HizmetlerContent />;
+}
+
+function HizmetlerContent() {
+  const t = useTranslations("Pages.services");
+  const tNav = useTranslations("Nav");
+  const tWhyUs = useTranslations("WhyUs");
+  const tCommon = useTranslations("Common");
+  const locale = useLocale() as Locale;
+
   return (
     <>
       <PageHero
-        title="Hizmetlerimiz"
-        description="Doğal taşın estetiğini, profesyonel işçilik ve yenilikçi çözümlerle buluşturuyoruz."
+        title={t("title")}
+        description={t("description")}
         breadcrumb={[
-          { label: "Anasayfa", href: "/" },
-          { label: "Hizmetler" },
+          { label: tNav("home"), href: "/" },
+          { label: t("metaTitle") },
         ]}
         image="/images/hero/hero-hizmetler.webp"
-        imageAlt="Hizmet sürecimiz"
+        imageAlt={t("title")}
       />
 
       <section className="bg-surface-muted py-20 lg:py-28">
         <Container size="wide">
           <Reveal className="text-center max-w-[640px] mx-auto mb-16">
             <h2 className="display-md text-ink text-balance">
-              Projenizin her aşamasında yanınızdayız.
+              {t("introTitle")}
             </h2>
             <div className="w-12 h-px bg-gold mt-6 mx-auto" />
             <p className="mt-6 text-[0.95rem] text-ink-muted leading-relaxed">
-              Keşiften uygulamaya, üretimden teslimata kadar tüm süreçlerde size
-              değer katan çözümler sunuyoruz.
+              {t("introDesc")}
             </p>
           </Reveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
-            {services.map((service, idx) => (
-              <Reveal key={service.slug} delay={(idx % 4) * 0.06}>
-                <Link
-                  href={`/hizmetler/${service.slug}`}
-                  className="group block bg-surface overflow-hidden h-full flex flex-col"
-                >
-                  <div className="relative aspect-[5/4] overflow-hidden bg-surface-darker">
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      fill
-                      sizes="(max-width: 1024px) 50vw, 25vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-surface-darker/40 to-transparent" />
-                    <div className="absolute top-4 left-4 size-10 grid place-items-center bg-surface-darker text-gold rounded-full">
-                      <service.icon className="size-5" strokeWidth={1.5} />
+            {services.map((service, idx) => {
+              const l = localizedService(service, locale);
+              return (
+                <Reveal key={service.slug} delay={(idx % 4) * 0.06}>
+                  <Link
+                    href={`/hizmetler/${service.slug}`}
+                    className="group block bg-surface overflow-hidden h-full flex flex-col"
+                  >
+                    <div className="relative aspect-[5/4] overflow-hidden bg-surface-darker">
+                      <Image
+                        src={service.image}
+                        alt={l.title}
+                        fill
+                        sizes="(max-width: 1024px) 50vw, 25vw"
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-surface-darker/40 to-transparent" />
+                      <div className="absolute top-4 left-4 size-10 grid place-items-center bg-surface-darker text-gold rounded-full">
+                        <service.icon className="size-5" strokeWidth={1.5} />
+                      </div>
                     </div>
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col">
-                    <span className="text-[0.78rem] uppercase tracking-[0.18em] text-gold-deep">
-                      {service.number}
-                    </span>
-                    <h3 className="font-display text-[1.3rem] text-ink mt-2 group-hover:text-gold-deep transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="mt-3 text-[0.86rem] text-ink-muted leading-relaxed flex-1">
-                      {service.description}
-                    </p>
-                    <ArrowRight className="mt-5 size-4 text-ink-soft transition-all group-hover:text-gold-deep group-hover:translate-x-1" />
-                  </div>
-                </Link>
-              </Reveal>
-            ))}
+                    <div className="p-6 flex-1 flex flex-col">
+                      <span className="text-[0.78rem] uppercase tracking-[0.18em] text-gold-deep">
+                        {service.number}
+                      </span>
+                      <h3 className="font-display text-[1.3rem] text-ink mt-2 group-hover:text-gold-deep transition-colors">
+                        {l.title}
+                      </h3>
+                      <p className="mt-3 text-[0.86rem] text-ink-muted leading-relaxed flex-1">
+                        {l.description}
+                      </p>
+                      <ArrowRight className="mt-5 size-4 text-ink-soft transition-all group-hover:text-gold-deep group-hover:translate-x-1" />
+                    </div>
+                  </Link>
+                </Reveal>
+              );
+            })}
           </div>
         </Container>
       </section>
@@ -90,22 +118,25 @@ export default function HizmetlerPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             <Reveal className="lg:col-span-3">
               <h3 className="display-md text-on-dark text-balance">
-                Neden Yapı Granit?
+                {t("whyUsTitle")}
               </h3>
             </Reveal>
             <div className="lg:col-span-9 grid grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-4">
-              {whyUs.map((item, idx) => (
-                <Reveal key={item.title} delay={idx * 0.06}>
-                  <div className="text-center lg:text-left">
-                    <div className="size-9 grid place-items-center text-gold mx-auto lg:mx-0 mb-3 group">
-                      <item.icon className="size-7" strokeWidth={1.4} />
+              {whyUs.map((item, idx) => {
+                type WhyUsKey = Parameters<typeof tWhyUs>[0];
+                return (
+                  <Reveal key={item.titleKey} delay={idx * 0.06}>
+                    <div className="text-center lg:text-left">
+                      <div className="size-9 grid place-items-center text-gold mx-auto lg:mx-0 mb-3 group">
+                        <item.icon className="size-7" strokeWidth={1.4} />
+                      </div>
+                      <p className="text-[0.85rem] font-medium text-on-dark leading-snug">
+                        {tWhyUs(item.titleKey as WhyUsKey)}
+                      </p>
                     </div>
-                    <p className="text-[0.85rem] font-medium text-on-dark leading-snug">
-                      {item.title}
-                    </p>
-                  </div>
-                </Reveal>
-              ))}
+                  </Reveal>
+                );
+              })}
             </div>
           </div>
         </Container>
@@ -125,18 +156,20 @@ export default function HizmetlerPage() {
         <Container size="wide" className="relative">
           <div className="grid lg:grid-cols-2 gap-10 items-center py-20 lg:py-24">
             <h3 className="display-md text-ink text-balance">
-              Projeniz için doğru çözümlerle değer yaratmaya hazırız.
+              {t("ctaTitle")}
             </h3>
             <div className="flex flex-wrap items-center gap-3 lg:justify-end">
               <Button asChild size="lg">
                 <Link href="/teklif">
-                  Teklif Formu
+                  {t("ctaPrimary")}
                   <ArrowRight />
                 </Link>
               </Button>
-              <span className="text-ink-soft text-[0.85rem] mx-1">veya</span>
+              <span className="text-ink-soft text-[0.85rem] mx-1">
+                {tCommon("or")}
+              </span>
               <Button asChild size="lg" variant="outline">
-                <Link href="/iletisim">Bize Ulaşın</Link>
+                <Link href="/iletisim">{t("ctaSecondary")}</Link>
               </Button>
             </div>
           </div>

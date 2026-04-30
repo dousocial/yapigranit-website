@@ -1,12 +1,14 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { MessageCircle, Phone, X, ArrowUp } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export function FloatingActions() {
+  const t = useTranslations("FloatingActions");
   const [open, setOpen] = React.useState(false);
   const [showTop, setShowTop] = React.useState(false);
 
@@ -27,7 +29,7 @@ export function FloatingActions() {
             exit={{ opacity: 0, y: 20 }}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="size-11 grid place-items-center bg-surface-dark text-on-dark hover:bg-ink shadow-md rounded-full border border-line-dark"
-            aria-label="Yukarı çık"
+            aria-label={t("scrollTop")}
           >
             <ArrowUp className="size-4" />
           </motion.button>
@@ -45,21 +47,21 @@ export function FloatingActions() {
           >
             <a
               href={`https://wa.me/${siteConfig.contact.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(
-                "Merhaba, Yapı Granit web sitenizden ulaşıyorum. Projem için bilgi almak istiyorum.",
+                t("whatsappMessage"),
               )}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 bg-[#25D366] hover:bg-[#1DA851] text-white pl-4 pr-5 h-12 rounded-full shadow-lg text-[0.85rem] font-medium"
             >
               <MessageCircle className="size-5" />
-              WhatsApp
+              {t("whatsapp")}
             </a>
             <a
               href={`tel:${siteConfig.contact.phones[0].replace(/\s/g, "")}`}
               className="flex items-center gap-3 bg-surface-dark hover:bg-ink text-on-dark pl-4 pr-5 h-12 rounded-full shadow-lg text-[0.85rem] font-medium"
             >
               <Phone className="size-4" />
-              Telefon
+              {t("phone")}
             </a>
           </motion.div>
         )}
@@ -71,7 +73,7 @@ export function FloatingActions() {
           "size-14 grid place-items-center bg-gold hover:bg-gold-soft text-ink shadow-lg rounded-full transition-all",
           open && "rotate-90",
         )}
-        aria-label={open ? "Kapat" : "İletişim seçenekleri"}
+        aria-label={open ? t("close") : t("openOptions")}
       >
         {open ? (
           <X className="size-5" />

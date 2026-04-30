@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { PageHero } from "@/components/sections/page-hero";
 import { StatsBand } from "@/components/sections/stats-band";
@@ -12,25 +14,46 @@ import { Reveal } from "@/components/ui/reveal";
 import { Timeline } from "@/components/sections/timeline";
 import { brandValues } from "@/lib/data/b2b";
 
-export const metadata: Metadata = {
-  title: "Kurumsal",
-  description:
-    "Yapı Granit hakkında, vizyon ve misyonumuz, değerlerimiz ve 20+ yıllık tecrübeyle şekillenen yolculuğumuz.",
-  alternates: { canonical: "/kurumsal" },
-};
+interface Props {
+  params: Promise<{ locale: string }>;
+}
 
-export default function KurumsalPage() {
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Pages.corporate" });
+  return {
+    title: t("metaTitle"),
+    description: t("metaDescription"),
+    alternates: {
+      canonical: locale === "tr" ? "/kurumsal" : `/${locale}/kurumsal`,
+    },
+  };
+}
+
+export default async function KurumsalPage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  return <KurumsalContent />;
+}
+
+function KurumsalContent() {
+  const t = useTranslations("Pages.corporate");
+  const tValues = useTranslations("Values");
+  const tNav = useTranslations("Nav");
+
   return (
     <>
       <PageHero
-        title="Taşta Mühendislik Disiplini"
-        description="1994'ten bu yana mimar ve müteahhitler için; hassas üretim, kontrollü montaj ve sürdürülebilir cephe çözümlerini tek çatı altında sunuyoruz."
+        title={t("title")}
+        description={t("description")}
         breadcrumb={[
-          { label: "Anasayfa", href: "/" },
-          { label: "Kurumsal" },
+          { label: tNav("home"), href: "/" },
+          { label: t("metaTitle") },
         ]}
-        image="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80"
-        imageAlt="Yapı Granit showroom"
+        image="/images/hero/hero-kurumsal.webp"
+        imageAlt="YAPIGRANİT"
       />
 
       {/* Hakkımızda */}
@@ -38,40 +61,34 @@ export default function KurumsalPage() {
         <Container size="wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
             <Reveal className="lg:col-span-6">
-              <Eyebrow>Hakkımızda</Eyebrow>
+              <Eyebrow>{t("aboutEyebrow")}</Eyebrow>
               <h2 className="display-lg mt-4 text-ink text-balance">
-                Bir sanat eserine dönüştürüyoruz.
+                {t("aboutTitle")}
               </h2>
               <div className="w-12 h-px bg-gold mt-6" />
               <p className="mt-6 italic text-[1.02rem] text-ink leading-relaxed border-l-2 border-gold pl-5">
-                &quot;Bir mermer bloğuna baktığımızda sadece taş görmüyoruz;
-                içindeki gizli sanat eserini görüyoruz.&quot;
+                &quot;{t("aboutQuote")}&quot;
               </p>
               <div className="mt-7 space-y-5 text-[0.96rem] text-ink-muted leading-relaxed">
-                <p>
-                  Yapı Granit olarak kurulduğumuz günden beri, sektöre yıllarını
-                  vermiş ustalarımız, idari personelimiz ve en son teknoloji
-                  işleme makinalarımız ile tek bir amaç için çalışıyoruz:{" "}
-                  <strong className="text-ink">&quot;En Güzel&quot;</strong>.
-                </p>
+                <p>{t("aboutPara1")}</p>
                 <ul className="space-y-2 text-ink">
                   <li>
-                    <strong>Projelendirme</strong> — Mekanınıza en uygun
-                    çözümün tasarlanması.
+                    <strong>{t("principleProjectingTitle")}</strong> —{" "}
+                    {t("principleProjectingDesc")}
                   </li>
                   <li>
-                    <strong>Ustalık</strong> — Taşın, sanatkar ellerde şekil
-                    bulması.
+                    <strong>{t("principleCraftTitle")}</strong> —{" "}
+                    {t("principleCraftDesc")}
                   </li>
                   <li>
-                    <strong>Zamanında Montaj</strong> — Verilen sözlerin eksiksiz
-                    yerine getirilmesi.
+                    <strong>{t("principleDeliveryTitle")}</strong> —{" "}
+                    {t("principleDeliveryDesc")}
                   </li>
                 </ul>
               </div>
               <Button asChild size="lg" variant="dark" className="mt-8">
                 <Link href="/projeler">
-                  Projelerimizi İnceleyin
+                  {t("ctaSeeProjects")}
                   <ArrowRight />
                 </Link>
               </Button>
@@ -81,7 +98,7 @@ export default function KurumsalPage() {
               <div className="relative aspect-[5/4] overflow-hidden">
                 <Image
                   src="/images/sections/kurumsal-fabrika.webp"
-                  alt="Yapı Granit üretim tesisi"
+                  alt=""
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
@@ -94,7 +111,6 @@ export default function KurumsalPage() {
 
       <StatsBand />
 
-      {/* Timeline */}
       <Timeline />
 
       {/* Değerler */}
@@ -102,28 +118,31 @@ export default function KurumsalPage() {
         <Container size="wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
             <Reveal className="lg:col-span-4">
-              <Eyebrow>Değerlerimiz</Eyebrow>
+              <Eyebrow>{t("valuesEyebrow")}</Eyebrow>
               <h2 className="display-lg mt-4 text-ink text-balance">
-                İşimizin temelini oluşturan değerler.
+                {t("valuesTitle")}
               </h2>
             </Reveal>
 
             <div className="lg:col-span-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {brandValues.map((value, idx) => (
-                <Reveal key={value.title} delay={idx * 0.06}>
-                  <div className="group">
-                    <div className="size-11 grid place-items-center text-gold-deep mb-5 transition-transform group-hover:scale-110">
-                      <value.icon className="size-7" strokeWidth={1.4} />
+              {brandValues.map((value, idx) => {
+                type ValuesKey = Parameters<typeof tValues>[0];
+                return (
+                  <Reveal key={value.titleKey} delay={idx * 0.06}>
+                    <div className="group">
+                      <div className="size-11 grid place-items-center text-gold-deep mb-5 transition-transform group-hover:scale-110">
+                        <value.icon className="size-7" strokeWidth={1.4} />
+                      </div>
+                      <h3 className="font-display text-[1.25rem] text-ink mb-2">
+                        {tValues(value.titleKey as ValuesKey)}
+                      </h3>
+                      <p className="text-[0.88rem] text-ink-muted leading-relaxed">
+                        {tValues(value.descKey as ValuesKey)}
+                      </p>
                     </div>
-                    <h3 className="font-display text-[1.25rem] text-ink mb-2">
-                      {value.title}
-                    </h3>
-                    <p className="text-[0.88rem] text-ink-muted leading-relaxed">
-                      {value.description}
-                    </p>
-                  </div>
-                </Reveal>
-              ))}
+                  </Reveal>
+                );
+              })}
             </div>
           </div>
         </Container>
@@ -133,7 +152,7 @@ export default function KurumsalPage() {
       <section className="relative bg-surface-darker text-on-dark overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1800&q=70"
+            src="/images/sections/kurumsal-cta-bg.webp"
             alt=""
             fill
             sizes="100vw"
@@ -144,15 +163,15 @@ export default function KurumsalPage() {
         <Container size="wide" className="relative">
           <div className="grid lg:grid-cols-2 gap-10 items-center py-20 lg:py-24">
             <h2 className="display-lg text-on-dark text-balance">
-              Birlikte değer üretmeye hazırız.
+              {t("closeTitle")}
             </h2>
             <div className="lg:text-right">
               <p className="text-[0.95rem] text-on-dark-muted mb-6 lg:max-w-[420px] lg:ml-auto">
-                Projeleriniz için doğru çözümü birlikte tasarlayalım.
+                {t("closeDesc")}
               </p>
               <Button asChild size="lg">
                 <Link href="/teklif">
-                  Teklif Alın
+                  {t("closeCta")}
                   <ArrowRight />
                 </Link>
               </Button>

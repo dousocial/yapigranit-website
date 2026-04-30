@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { Command } from "cmdk";
 import {
@@ -28,6 +29,7 @@ interface SiteSearchProps {
 
 export function SiteSearch({ variant = "icon", className }: SiteSearchProps) {
   const router = useRouter();
+  const t = useTranslations("Search");
   const [open, setOpen] = React.useState(false);
   const [query, setQuery] = React.useState("");
 
@@ -70,7 +72,7 @@ export function SiteSearch({ variant = "icon", className }: SiteSearchProps) {
             "flex items-center gap-1.5 px-3 py-2 text-[0.85rem] font-medium text-ink hover:text-gold-deep transition-colors",
             className,
           )}
-          aria-label="Arama"
+          aria-label={t("buttonAriaLabel")}
         >
           <SearchIcon className="size-4" />
           <span className="hidden xl:inline-flex items-center gap-1.5 text-ink-soft">
@@ -88,7 +90,7 @@ export function SiteSearch({ variant = "icon", className }: SiteSearchProps) {
           )}
         >
           <SearchIcon className="size-4" />
-          <span className="flex-1 text-left">Sitede ara...</span>
+          <span className="flex-1 text-left">{t("triggerPlaceholder")}</span>
           <kbd className="text-[0.7rem] font-mono px-1.5 py-0.5 bg-surface border border-line rounded">
             ⌘K
           </kbd>
@@ -113,14 +115,14 @@ export function SiteSearch({ variant = "icon", className }: SiteSearchProps) {
               onClick={(e) => e.stopPropagation()}
               className="w-full max-w-[640px] bg-background border border-line shadow-lg rounded-md overflow-hidden"
             >
-              <Command label="Sitede arama" shouldFilter={true}>
+              <Command label={t("ariaLabel")} shouldFilter={true}>
                 <div className="flex items-center gap-3 px-5 h-14 border-b border-line">
                   <SearchIcon className="size-4 text-ink-soft shrink-0" />
                   <Command.Input
                     autoFocus
                     value={query}
                     onValueChange={setQuery}
-                    placeholder="Mermer tezgah, proje, blog yazısı, hizmet ara..."
+                    placeholder={t("inputPlaceholder")}
                     className="flex-1 h-full bg-transparent text-[0.95rem] text-ink placeholder:text-ink-soft focus:outline-none"
                   />
                   <kbd className="hidden sm:inline-block text-[0.7rem] font-mono px-2 py-1 bg-surface-muted border border-line rounded text-ink-soft">
@@ -129,7 +131,7 @@ export function SiteSearch({ variant = "icon", className }: SiteSearchProps) {
                   <button
                     onClick={close}
                     className="sm:hidden p-1 -mr-1 text-ink-soft hover:text-ink"
-                    aria-label="Kapat"
+                    aria-label={t("buttonAriaLabel")}
                   >
                     <X className="size-4" />
                   </button>
@@ -138,7 +140,7 @@ export function SiteSearch({ variant = "icon", className }: SiteSearchProps) {
                 <Command.List className="max-h-[60vh] overflow-y-auto py-2">
                   <Command.Empty className="px-5 py-10 text-center">
                     <p className="text-ink-soft text-[0.92rem]">
-                      &quot;{query}&quot; için sonuç bulunamadı.
+                      &quot;{query}&quot; {t("emptyResult")}
                     </p>
                     <Link
                       href="/iletisim"
@@ -146,36 +148,36 @@ export function SiteSearch({ variant = "icon", className }: SiteSearchProps) {
                       className="mt-4 inline-flex items-center gap-2 text-[0.85rem] text-gold-deep hover:text-gold"
                     >
                       <Phone className="size-3.5" />
-                      Bize ulaşın
+                      {t("emptyContact")}
                       <ArrowRight className="size-3.5" />
                     </Link>
                   </Command.Empty>
 
                   {!query && (
-                    <Command.Group heading="Hızlı Erişim">
+                    <Command.Group heading={t("groupQuickAccess")}>
                       <SearchItem
                         onSelect={() => navigate("/teklif")}
                         icon={<FileText className="size-4" />}
-                        title="Teklif Al"
-                        subtitle="Projeniz için hızlı teklif formu"
+                        title={t("quickQuoteTitle")}
+                        subtitle={t("quickQuoteDesc")}
                       />
                       <SearchItem
                         onSelect={() => navigate("/numune-talep")}
                         icon={<Layers className="size-4" />}
-                        title="Numune Talep Et"
-                        subtitle="Mimar ve tasarımcılar için ücretsiz numune"
+                        title={t("quickSampleTitle")}
+                        subtitle={t("quickSampleDesc")}
                       />
                       <SearchItem
                         onSelect={() => navigate("/iletisim")}
                         icon={<Phone className="size-4" />}
-                        title="İletişim"
-                        subtitle="Showroom, telefon, e-posta"
+                        title={t("quickContactTitle")}
+                        subtitle={t("quickContactDesc")}
                       />
                     </Command.Group>
                   )}
 
                   {/* Hizmetler */}
-                  <Command.Group heading="Hizmetler">
+                  <Command.Group heading={t("groupServices")}>
                     {services.map((s) => (
                       <SearchItem
                         key={s.slug}
@@ -189,7 +191,7 @@ export function SiteSearch({ variant = "icon", className }: SiteSearchProps) {
                   </Command.Group>
 
                   {/* Ürünler */}
-                  <Command.Group heading="Ürünler">
+                  <Command.Group heading={t("groupProducts")}>
                     {products.map((p) => (
                       <SearchItem
                         key={p.slug}
@@ -203,7 +205,7 @@ export function SiteSearch({ variant = "icon", className }: SiteSearchProps) {
                   </Command.Group>
 
                   {/* Projeler */}
-                  <Command.Group heading="Projeler">
+                  <Command.Group heading={t("groupProjects")}>
                     {projects.map((p) => (
                       <SearchItem
                         key={p.slug}
@@ -217,7 +219,7 @@ export function SiteSearch({ variant = "icon", className }: SiteSearchProps) {
                   </Command.Group>
 
                   {/* Blog */}
-                  <Command.Group heading="Blog">
+                  <Command.Group heading={t("groupBlog")}>
                     {blogPosts.map((b) => (
                       <SearchItem
                         key={b.slug}
@@ -225,7 +227,7 @@ export function SiteSearch({ variant = "icon", className }: SiteSearchProps) {
                         onSelect={() => navigate(`/blog/${b.slug}`)}
                         icon={<FileText className="size-4" />}
                         title={b.title}
-                        subtitle={`${b.categoryLabel} · ${b.readMinutes} dk okuma`}
+                        subtitle={`${b.categoryLabel} · ${b.readMinutes} dk`}
                       />
                     ))}
                   </Command.Group>
@@ -235,14 +237,14 @@ export function SiteSearch({ variant = "icon", className }: SiteSearchProps) {
                   <span className="flex items-center gap-3">
                     <span className="flex items-center gap-1">
                       <kbd className="font-mono px-1 py-0.5 bg-surface border border-line rounded">↑↓</kbd>
-                      gez
+                      {t("navigate")}
                     </span>
                     <span className="flex items-center gap-1">
                       <kbd className="font-mono px-1 py-0.5 bg-surface border border-line rounded">↵</kbd>
-                      seç
+                      {t("select")}
                     </span>
                   </span>
-                  <span>YAPIGRANİT Arama</span>
+                  <span>{t("footerLabel")}</span>
                 </div>
               </Command>
             </motion.div>

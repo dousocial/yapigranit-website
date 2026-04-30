@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { HeroHome } from "@/components/sections/hero-home";
 import { ProductsGrid } from "@/components/sections/products-grid";
@@ -8,14 +9,31 @@ import { ProjectsCarousel } from "@/components/sections/projects-carousel";
 import { StatsBand } from "@/components/sections/stats-band";
 import { CtaBand } from "@/components/sections/cta-band";
 
-export const metadata: Metadata = {
-  title: "Doğanın Sanata Dönüştüğü Yer — Doğal Taş, Mermer, Porselen",
-  description:
-    "1994'ten bu yana mimar ve müteahhitler için 5 Eksen CNC, Waterjet kesim ve Mekanik Cephe Sistemleri. 25+ yıllık tecrübe, 12 ülkeye ihracat, %100 müşteri memnuniyeti.",
-  alternates: { canonical: "/" },
-};
+interface Props {
+  params: Promise<{ locale: string }>;
+}
 
-export default function HomePage() {
+export async function generateMetadata({
+  params,
+}: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Hero" });
+  const tSite = await getTranslations({ locale, namespace: "Site" });
+
+  return {
+    title: `${t("titlePart1")} ${t("titlePart2")} ${t("titlePart3")} ${t("titlePart4")}`.replace(
+      /\.\s*$/,
+      "",
+    ),
+    description: tSite("description"),
+    alternates: { canonical: locale === "tr" ? "/" : `/${locale}` },
+  };
+}
+
+export default async function HomePage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   return (
     <>
       <HeroHome />

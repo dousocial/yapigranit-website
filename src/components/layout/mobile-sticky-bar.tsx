@@ -1,12 +1,14 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { Phone, MessageCircle, MapPin, FileText } from "lucide-react";
 import { siteConfig } from "@/lib/site";
 
 export function MobileStickyBar() {
   const pathname = usePathname();
+  const t = useTranslations("MobileBar");
 
   // Admin'de gösterme
   if (pathname.startsWith("/admin")) return null;
@@ -16,17 +18,15 @@ export function MobileStickyBar() {
   const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${siteConfig.contact.map.lat},${siteConfig.contact.map.lng}`;
 
   const items = [
-    { href: `tel:${phone}`, label: "Ara", icon: Phone },
+    { href: `tel:${phone}`, label: t("call"), icon: Phone },
     {
-      href: `https://wa.me/${wa}?text=${encodeURIComponent(
-        "Merhaba, Yapı Granit web sitenizden ulaşıyorum.",
-      )}`,
-      label: "WhatsApp",
+      href: `https://wa.me/${wa}?text=${encodeURIComponent(t("whatsappMessage"))}`,
+      label: t("whatsapp"),
       icon: MessageCircle,
       external: true,
     },
-    { href: mapsUrl, label: "Yol Tarifi", icon: MapPin, external: true },
-    { href: "/teklif", label: "Teklif", icon: FileText, primary: true },
+    { href: mapsUrl, label: t("directions"), icon: MapPin, external: true },
+    { href: "/teklif", label: t("quote"), icon: FileText, primary: true },
   ];
 
   return (

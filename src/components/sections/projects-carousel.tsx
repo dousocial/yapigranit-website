@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -9,10 +10,14 @@ import useEmblaCarousel from "embla-carousel-react";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Reveal } from "@/components/ui/reveal";
-import { projects } from "@/lib/data/projects";
+import { projects, localizedProject } from "@/lib/data/projects";
+import type { Locale } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 export function ProjectsCarousel() {
+  const t = useTranslations("ProjectsCarousel");
+  const locale = useLocale() as Locale;
+
   const [emblaRef, embla] = useEmblaCarousel({
     align: "start",
     dragFree: true,
@@ -37,15 +42,15 @@ export function ProjectsCarousel() {
       <Container size="wide">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-10 lg:mb-12">
           <Reveal className="lg:col-span-5">
-            <Eyebrow>Projeler</Eyebrow>
+            <Eyebrow>{t("eyebrow")}</Eyebrow>
             <h2 className="display-lg mt-4 text-ink text-balance">
-              Hayata geçirdiğimiz seçkin projeler.
+              {t("title")}
             </h2>
             <Link
               href="/projeler"
               className="mt-6 inline-flex items-center gap-2 text-[0.78rem] font-medium uppercase tracking-[0.18em] text-gold-deep hover:text-gold transition-colors group"
             >
-              Tüm Projeleri Gör
+              {t("ctaSeeAll")}
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </Reveal>
@@ -54,7 +59,7 @@ export function ProjectsCarousel() {
             <button
               onClick={() => embla?.scrollPrev()}
               disabled={!canPrev}
-              aria-label="Önceki proje"
+              aria-label={t("prev")}
               className={cn(
                 "size-11 grid place-items-center border transition-all",
                 canPrev
@@ -67,7 +72,7 @@ export function ProjectsCarousel() {
             <button
               onClick={() => embla?.scrollNext()}
               disabled={!canNext}
-              aria-label="Sonraki proje"
+              aria-label={t("next")}
               className={cn(
                 "size-11 grid place-items-center transition-all",
                 canNext
@@ -87,7 +92,7 @@ export function ProjectsCarousel() {
                 key={project.slug}
                 className="flex-[0_0_85%] sm:flex-[0_0_60%] md:flex-[0_0_45%] lg:flex-[0_0_32%]"
               >
-                <ProjectCard project={project} />
+                <ProjectCard project={project} locale={locale} />
               </div>
             ))}
           </div>
@@ -97,7 +102,14 @@ export function ProjectsCarousel() {
   );
 }
 
-function ProjectCard({ project }: { project: typeof projects[number] }) {
+function ProjectCard({
+  project,
+  locale,
+}: {
+  project: typeof projects[number];
+  locale: Locale;
+}) {
+  const l = localizedProject(project, locale);
   return (
     <Link
       href={`/projeler/${project.slug}`}
@@ -106,7 +118,7 @@ function ProjectCard({ project }: { project: typeof projects[number] }) {
       <div className="relative aspect-[5/4] overflow-hidden bg-surface-muted">
         <Image
           src={project.cover}
-          alt={project.title}
+          alt={l.title}
           fill
           sizes="(max-width: 768px) 85vw, 32vw"
           className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
@@ -115,11 +127,9 @@ function ProjectCard({ project }: { project: typeof projects[number] }) {
         <div className="absolute inset-x-0 bottom-0 p-5 flex items-end justify-between text-on-dark">
           <div>
             <h3 className="font-display text-[1.4rem] leading-tight">
-              {project.title}
+              {l.title}
             </h3>
-            <p className="text-[0.8rem] text-on-dark-muted mt-1">
-              {project.type}
-            </p>
+            <p className="text-[0.8rem] text-on-dark-muted mt-1">{l.type}</p>
           </div>
           <div className="size-9 grid place-items-center bg-on-dark/15 backdrop-blur-sm rounded-full transition-transform group-hover:translate-x-1">
             <ArrowRight className="size-3.5" />

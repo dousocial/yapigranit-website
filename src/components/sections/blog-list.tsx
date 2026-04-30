@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import {
@@ -13,24 +14,32 @@ import {
 import { motion, AnimatePresence } from "motion/react";
 
 import { Container } from "@/components/ui/container";
-import { blogCategories, blogPosts } from "@/lib/data/blog";
+import { blogCategories, blogPosts, localizedPost } from "@/lib/data/blog";
+import type { Locale } from "@/i18n/routing";
 import { cn, formatDateShort } from "@/lib/utils";
 
 type Sort = "newest" | "popular" | "category" | "shortest" | "longest";
 
-const sortOptions: { value: Sort; label: string }[] = [
-  { value: "newest", label: "En Yeni" },
-  { value: "popular", label: "En Çok Okunan" },
-  { value: "category", label: "Kategoriye Göre" },
-  { value: "shortest", label: "Kısa Yazılar" },
-  { value: "longest", label: "Uzun Yazılar" },
-];
-
 export function BlogList() {
+  const t = useTranslations("Pages.blog");
+  const tCommon = useTranslations("Common");
+  const locale = useLocale() as Locale;
+
+  const dateLocale =
+    locale === "en" ? "en-US" : locale === "de" ? "de-DE" : "tr-TR";
+
   const [category, setCategory] = React.useState<string>("all");
   const [search, setSearch] = React.useState("");
   const [sort, setSort] = React.useState<Sort>("newest");
   const [sortOpen, setSortOpen] = React.useState(false);
+
+  const sortOptions: { value: Sort; labelKey: Parameters<typeof t>[0] }[] = [
+    { value: "newest", labelKey: "sortNewest" },
+    { value: "popular", labelKey: "sortPopular" },
+    { value: "category", labelKey: "sortCategory" },
+    { value: "shortest", labelKey: "sortShortest" },
+    { value: "longest", labelKey: "sortLongest" },
+  ];
 
   const posts = React.useMemo(() => {
     let filtered = blogPosts;
@@ -38,12 +47,14 @@ export function BlogList() {
       filtered = filtered.filter((p) => p.category === category);
     if (search.trim().length >= 3) {
       const q = search.trim().toLowerCase();
-      filtered = filtered.filter(
-        (p) =>
-          p.title.toLowerCase().includes(q) ||
-          p.excerpt.toLowerCase().includes(q) ||
-          p.categoryLabel.toLowerCase().includes(q),
-      );
+      filtered = filtered.filter((p) => {
+        const l = localizedPost(p, locale);
+        return (
+          l.title.toLowerCase().includes(q) ||
+          l.excerpt.toLowerCase().includes(q) ||
+          l.categoryLabel.toLowerCase().includes(q)
+        );
+      });
     }
     const sorted = [...filtered];
     switch (sort) {
@@ -56,7 +67,11 @@ export function BlogList() {
         sorted.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
         break;
       case "category":
-        sorted.sort((a, b) => a.categoryLabel.localeCompare(b.categoryLabel));
+        sorted.sort((a, b) =>
+          localizedPost(a, locale).categoryLabel.localeCompare(
+            localizedPost(b, locale).categoryLabel,
+          ),
+        );
         break;
       case "shortest":
         sorted.sort((a, b) => a.readMinutes - b.readMinutes);
@@ -66,7 +81,7 @@ export function BlogList() {
         break;
     }
     return sorted;
-  }, [category, search, sort]);
+  }, [category, search, sort, locale]);
 
   return (
     <section className="bg-background py-16 lg:py-20">
@@ -85,7 +100,7 @@ export function BlogList() {
                     : "text-ink-muted hover:text-ink",
                 )}
               >
-                {cat.label}
+                {cat.label[locale] ?? cat.label.tr}
               </button>
             ))}
           </div>
@@ -97,7 +112,7 @@ export function BlogList() {
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Blog yazılarında ara..."
+                placeholder={t("searchPlaceholder")}
                 className="w-full h-11 pl-11 pr-4 bg-surface border border-line text-[0.88rem] text-ink placeholder:text-ink-soft focus:outline-none focus:border-gold"
               />
             </div>
@@ -108,7 +123,7 @@ export function BlogList() {
                 onBlur={() => setTimeout(() => setSortOpen(false), 120)}
                 className="flex items-center gap-2 h-11 px-5 bg-ink text-on-dark text-[0.85rem] hover:bg-surface-darker transition-colors"
               >
-                {sortOptions.find((s) => s.value === sort)?.label}
+                {t(sortOptions.find((s) => s.value === sort)!.labelKey)}
                 <ChevronDown
                   className={cn(
                     "size-3.5 transition-transform",
@@ -139,7 +154,7 @@ export function BlogList() {
                             : "text-ink",
                         )}
                       >
-                        {s.label}
+                        {t(s.labelKey)}
                       </button>
                     ))}
                   </motion.div>
@@ -153,7 +168,7 @@ export function BlogList() {
         <AnimatePresence mode="popLayout">
           <motion.div
             layout
-            key={`${category}-${sort}-${search}`}
+            key={`${category}-${sort}-${search}-${locale}`}
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6"
           >
             {posts.map((post, idx) => (
@@ -165,7 +180,14 @@ export function BlogList() {
                 exit={{ opacity: 0, y: 16 }}
                 transition={{ duration: 0.4, delay: (idx % 8) * 0.04 }}
               >
-                <BlogCard post={post} />
+                <BlogCard
+                  post={post}
+                  locale={locale}
+                  dateLocale={dateLocale}
+                  minReadLabel={tCommon("minRead", {
+                    minutes: post.readMinutes,
+                  })}
+                />
               </motion.article>
             ))}
           </motion.div>
@@ -173,9 +195,7 @@ export function BlogList() {
 
         {posts.length === 0 && (
           <div className="text-center py-20">
-            <p className="text-ink-muted">
-              Aradığınız kriterlere uygun yazı bulunamadı.
-            </p>
+            <p className="text-ink-muted">{t("noResults")}</p>
           </div>
         )}
       </Container>
@@ -183,7 +203,18 @@ export function BlogList() {
   );
 }
 
-function BlogCard({ post }: { post: typeof blogPosts[number] }) {
+function BlogCard({
+  post,
+  locale,
+  dateLocale,
+  minReadLabel,
+}: {
+  post: typeof blogPosts[number];
+  locale: Locale;
+  dateLocale: string;
+  minReadLabel: string;
+}) {
+  const l = localizedPost(post, locale);
   return (
     <Link
       href={`/blog/${post.slug}`}
@@ -192,7 +223,7 @@ function BlogCard({ post }: { post: typeof blogPosts[number] }) {
       <div className="relative aspect-[4/3] overflow-hidden bg-surface-muted">
         <Image
           src={post.cover}
-          alt={post.title}
+          alt={l.title}
           fill
           sizes="(max-width: 640px) 100vw, 25vw"
           className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
@@ -200,23 +231,23 @@ function BlogCard({ post }: { post: typeof blogPosts[number] }) {
       </div>
       <div className="p-5 flex-1 flex flex-col">
         <span className="text-[0.7rem] uppercase tracking-[0.15em] text-gold-deep font-medium mb-3">
-          {post.categoryLabel}
+          {l.categoryLabel}
         </span>
         <h3 className="font-display text-[1.15rem] text-ink leading-snug group-hover:text-gold-deep transition-colors text-balance">
-          {post.title}
+          {l.title}
         </h3>
         <p className="mt-3 text-[0.82rem] text-ink-muted leading-relaxed line-clamp-3">
-          {post.excerpt}
+          {l.excerpt}
         </p>
         <div className="mt-5 pt-4 border-t border-line flex items-center justify-between text-[0.75rem] text-ink-soft">
           <div className="flex items-center gap-3">
             <span className="flex items-center gap-1.5">
               <Calendar className="size-3" />
-              {formatDateShort(post.date)}
+              {formatDateShort(post.date, dateLocale)}
             </span>
             <span className="flex items-center gap-1.5">
               <Clock className="size-3" />
-              {post.readMinutes} dk okuma
+              {minReadLabel}
             </span>
           </div>
           <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1 text-gold-deep" />

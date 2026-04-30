@@ -1,17 +1,72 @@
+import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Instagram, Linkedin, Youtube, MapPin, Phone, Mail } from "lucide-react";
 
 import { Logo } from "@/components/brand/logo";
 import { Container } from "@/components/ui/container";
-import { navigation, siteConfig } from "@/lib/site";
+import { siteConfig } from "@/lib/site";
+
+interface FooterLink {
+  href: string;
+  key: Parameters<ReturnType<typeof useTranslations<"Footer.links">>>[0];
+}
+
+const footerSections: {
+  titleKey: Parameters<ReturnType<typeof useTranslations<"Footer">>>[0];
+  links: FooterLink[];
+}[] = [
+  {
+    titleKey: "corporate",
+    links: [
+      { href: "/kurumsal#hakkimizda", key: "about" },
+      { href: "/kurumsal#vizyon", key: "vision" },
+      { href: "/kurumsal#degerler", key: "values" },
+      { href: "/kurumsal#surdurulebilirlik", key: "sustainability" },
+      { href: "/kariyer", key: "career" },
+    ],
+  },
+  {
+    titleKey: "products",
+    links: [
+      { href: "/urunler/porselen", key: "porselen" },
+      { href: "/urunler/mermer", key: "mermer" },
+      { href: "/urunler/kuvars", key: "kuvars" },
+      { href: "/urunler/granit", key: "granit" },
+      { href: "/urunler", key: "allProducts" },
+    ],
+  },
+  {
+    titleKey: "services",
+    links: [
+      { href: "/hizmetler/mekanik-cephe-sistemleri", key: "mekanikCephe" },
+      { href: "/hizmetler/mutfak-tezgahi", key: "mutfakTezgahi" },
+      { href: "/hizmetler/banyo-islak-hacim", key: "banyo" },
+      { href: "/hizmetler/somine-yapimi", key: "somine" },
+      { href: "/hizmetler/bes-eksen-cnc", key: "besEksenCnc" },
+    ],
+  },
+  {
+    titleKey: "projects",
+    links: [
+      { href: "/projeler", key: "allProjects" },
+      { href: "/projeler?kategori=oteller", key: "hotelProjects" },
+      { href: "/projeler?kategori=konut", key: "residenceProjects" },
+      { href: "/projeler?kategori=ticari", key: "commercialProjects" },
+      { href: "/projeler?kategori=kamusal", key: "publicProjects" },
+    ],
+  },
+];
+
+const legalLinks: FooterLink[] = [
+  { href: "/gizlilik", key: "privacy" },
+  { href: "/kvkk", key: "kvkk" },
+  { href: "/kullanim-sartlari", key: "terms" },
+];
 
 export function Footer() {
-  const sections: { title: string; key: keyof typeof navigation.footer }[] = [
-    { title: "Kurumsal", key: "kurumsal" },
-    { title: "Ürünler", key: "urunler" },
-    { title: "Hizmetler", key: "hizmetler" },
-    { title: "Projeler", key: "projeler" },
-  ];
+  const tFooter = useTranslations("Footer");
+  const tLinks = useTranslations("Footer.links");
+  const tSite = useTranslations("Site");
 
   return (
     <footer className="bg-surface-darker text-on-dark relative">
@@ -23,11 +78,10 @@ export function Footer() {
           <div className="lg:col-span-3">
             <Logo variant="light" />
             <p className="mt-5 italic text-[0.95rem] text-gold/90 max-w-[280px]">
-              {siteConfig.slogan}
+              {tSite("slogan")}
             </p>
             <p className="mt-4 text-[0.88rem] text-on-dark-muted leading-relaxed max-w-[280px]">
-              1994&apos;ten bu yana doğal taşı, modern mimarinin zarafetiyle
-              buluşturuyoruz.
+              {tFooter("brandIntro")}
             </p>
             <div className="mt-6 flex items-center gap-2">
               <SocialLink
@@ -49,17 +103,19 @@ export function Footer() {
           </div>
 
           {/* Link sections */}
-          {sections.map((section) => (
-            <div key={section.key} className="lg:col-span-2">
-              <h4 className="eyebrow text-gold mb-5">{section.title}</h4>
+          {footerSections.map((section) => (
+            <div key={section.titleKey} className="lg:col-span-2">
+              <h4 className="eyebrow text-gold mb-5">
+                {tFooter(section.titleKey)}
+              </h4>
               <ul className="space-y-2.5">
-                {navigation.footer[section.key].map((link) => (
+                {section.links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
                       className="text-[0.9rem] text-on-dark-muted hover:text-gold transition-colors"
                     >
-                      {link.label}
+                      {tLinks(link.key)}
                     </Link>
                   </li>
                 ))}
@@ -69,7 +125,7 @@ export function Footer() {
 
           {/* Contact */}
           <div className="lg:col-span-3">
-            <h4 className="eyebrow text-gold mb-5">İletişim</h4>
+            <h4 className="eyebrow text-gold mb-5">{tFooter("contact")}</h4>
             <div className="space-y-4">
               <div className="flex gap-3">
                 <MapPin className="size-4 text-gold shrink-0 mt-0.5" />
@@ -110,24 +166,25 @@ export function Footer() {
 
         <div className="border-t border-line-dark py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-[0.8rem] text-on-dark-soft">
-            © {new Date().getFullYear()} Yapı Granit. Tüm hakları saklıdır.
+            © {new Date().getFullYear()} {siteConfig.name}.{" "}
+            {tFooter("rights")}
           </p>
           <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            {navigation.legal.map((item) => (
+            {legalLinks.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
                   className="text-[0.8rem] text-on-dark-soft hover:text-gold transition-colors"
                 >
-                  {item.label}
+                  {tLinks(item.key)}
                 </Link>
               </li>
             ))}
           </ul>
           <p className="text-[0.8rem] text-on-dark-soft">
-            Web Tasarım:{" "}
+            {tFooter("webDesign")}{" "}
             <Link href="/" className="text-gold hover:text-gold-soft">
-              Yapı Granit Dijital
+              {tFooter("webDesignBy")}
             </Link>
           </p>
         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { motion } from "motion/react";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -9,24 +10,24 @@ import { timeline } from "@/lib/data/b2b";
 import { cn } from "@/lib/utils";
 
 export function Timeline() {
+  const t = useTranslations("Timeline");
   const [active, setActive] = React.useState(0);
+
+  type TimelineKey = Parameters<typeof t>[0];
 
   return (
     <section className="bg-background py-20 lg:py-28">
       <Container size="wide">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 mb-12">
           <Reveal className="lg:col-span-4">
-            <Eyebrow>Yolculuğumuz</Eyebrow>
+            <Eyebrow>{t("eyebrow")}</Eyebrow>
             <h2 className="display-lg mt-4 text-ink text-balance">
-              Güçlü bir geçmiş, daha sağlam bir gelecek.
+              {t("title")}
             </h2>
           </Reveal>
           <div className="lg:col-span-8 hidden lg:flex items-end">
             <p className="text-[0.95rem] text-ink-muted leading-relaxed max-w-[480px]">
-              1994&apos;ten bu yana doğal taş ve yüzey çözümlerinde sektöre yön
-              veren bir uzmanlık birikimi geliştiriyoruz. Aracıyı kaldırıp 14
-              ülkeden hammaddeyi doğrudan getiren ve Almanya başta olmak üzere
-              12 ülkeye ihracat yapan bir mühendislik ekibiyiz.
+              {t("introText")}
             </p>
           </div>
         </div>
@@ -76,7 +77,7 @@ export function Timeline() {
                       {item.year}
                     </div>
                     <p className="text-[0.85rem] text-ink-muted leading-relaxed mt-2">
-                      {item.description}
+                      {t(item.descKey as TimelineKey)}
                     </p>
                   </div>
                 </button>
@@ -102,7 +103,7 @@ export function Timeline() {
                   {item.year}
                 </div>
                 <p className="text-[0.88rem] text-ink-muted leading-relaxed mt-1">
-                  {item.description}
+                  {t(item.descKey as TimelineKey)}
                 </p>
               </motion.li>
             ))}

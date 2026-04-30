@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
 import { ArrowRight, Filter, ChevronDown, Building2 } from "lucide-react";
@@ -11,22 +12,29 @@ import { Button } from "@/components/ui/button";
 import {
   projects as allProjects,
   projectCategories,
+  localizedProject,
 } from "@/lib/data/projects";
+import type { Locale } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
-const yearOptions = [
-  { value: "all", label: "Tüm Yıllar" },
-  { value: "2026", label: "2026" },
-  { value: "2025", label: "2025" },
-  { value: "2024", label: "2024" },
-  { value: "2023", label: "2023" },
-  { value: "2022", label: "2022 ve öncesi" },
-];
-
 export function ProjectsGallery() {
+  const t = useTranslations("Pages.projects");
+  const locale = useLocale() as Locale;
   const [category, setCategory] = React.useState<string>("all");
   const [year, setYear] = React.useState<string>("all");
   const [yearOpen, setYearOpen] = React.useState(false);
+
+  const yearOptions = React.useMemo(
+    () => [
+      { value: "all", label: t("filterYear") },
+      { value: "2026", label: "2026" },
+      { value: "2025", label: "2025" },
+      { value: "2024", label: "2024" },
+      { value: "2023", label: "2023" },
+      { value: "2022", label: t("yearAndOlder", { year: 2022 }) },
+    ],
+    [t],
+  );
 
   const projects = React.useMemo(() => {
     return allProjects.filter((p) => {
@@ -55,7 +63,7 @@ export function ProjectsGallery() {
                     : "text-ink-muted hover:text-ink",
                 )}
               >
-                {cat.label}
+                {cat.label[locale] ?? cat.label.tr}
               </button>
             ))}
           </div>
@@ -108,7 +116,7 @@ export function ProjectsGallery() {
 
             <Button variant="dark" size="md">
               <Filter className="size-3.5" />
-              Filtrele
+              {t("filterButton")}
             </Button>
           </div>
         </div>
@@ -129,21 +137,24 @@ export function ProjectsGallery() {
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.4, delay: (idx % 6) * 0.05 }}
               >
-                <ProjectCard project={project} />
+                <ProjectCard project={project} locale={locale} />
               </motion.div>
             ))}
 
             {/* CTA card */}
-            <motion.div layout className="bg-surface-darker text-on-dark p-10 lg:p-12 flex flex-col justify-center">
+            <motion.div
+              layout
+              className="bg-surface-darker text-on-dark p-10 lg:p-12 flex flex-col justify-center"
+            >
               <div className="size-12 grid place-items-center bg-on-dark/10 text-gold mb-5 rounded">
                 <Building2 className="size-6" />
               </div>
               <p className="font-display text-[1.4rem] text-on-dark leading-snug mb-6">
-                Sizin projeniz de bir sonraki başarı hikayemiz olsun.
+                {t("ctaCardTitle")}
               </p>
               <Button asChild size="md" className="self-start">
                 <Link href="/teklif">
-                  Teklif Formu
+                  {t("ctaCardButton")}
                   <ArrowRight />
                 </Link>
               </Button>
@@ -153,9 +164,7 @@ export function ProjectsGallery() {
 
         {projects.length === 0 && (
           <div className="text-center py-20">
-            <p className="text-ink-muted">
-              Seçtiğiniz filtrelere uygun proje bulunamadı.
-            </p>
+            <p className="text-ink-muted">{t("noResults")}</p>
           </div>
         )}
       </Container>
@@ -163,7 +172,14 @@ export function ProjectsGallery() {
   );
 }
 
-function ProjectCard({ project }: { project: typeof allProjects[number] }) {
+function ProjectCard({
+  project,
+  locale,
+}: {
+  project: typeof allProjects[number];
+  locale: Locale;
+}) {
+  const l = localizedProject(project, locale);
   return (
     <Link
       href={`/projeler/${project.slug}`}
@@ -172,7 +188,7 @@ function ProjectCard({ project }: { project: typeof allProjects[number] }) {
       <div className="relative aspect-[4/3] overflow-hidden bg-surface-muted">
         <Image
           src={project.cover}
-          alt={project.title}
+          alt={l.title}
           fill
           sizes="(max-width: 768px) 100vw, 33vw"
           className="object-cover transition-transform duration-700 group-hover:scale-[1.05]"
@@ -181,10 +197,10 @@ function ProjectCard({ project }: { project: typeof allProjects[number] }) {
         <div className="absolute inset-x-0 bottom-0 p-5 flex items-end justify-between text-on-dark">
           <div>
             <h3 className="font-display text-[1.4rem] leading-tight">
-              {project.title}
+              {l.title}
             </h3>
             <p className="text-[0.8rem] text-on-dark-muted mt-1">
-              {project.categoryLabel}
+              {l.categoryLabel}
             </p>
           </div>
           <div className="size-9 grid place-items-center bg-on-dark/15 backdrop-blur-sm rounded-full transition-transform group-hover:translate-x-1">
