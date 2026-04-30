@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -10,35 +11,35 @@ import { toast } from "sonner";
 import { Input, Textarea } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
-const subjects = [
-  { value: "teklif", label: "Teklif Talebi" },
-  { value: "mimar-muteahhit", label: "Mimar / Müteahhit Projesi" },
-  { value: "mutfak-tezgahi", label: "Mutfak Tezgâhı" },
-  { value: "banyo-zemin", label: "Banyo / Zemin Uygulaması" },
-  { value: "cephe", label: "Cephe Kaplama" },
-  { value: "numune", label: "Ürün / Numune Talebi" },
-  { value: "satis-sonrasi", label: "Satış Sonrası Destek" },
-  { value: "diger", label: "Diğer" },
+const subjectKeys = [
+  "subjectQuote",
+  "subjectArchitect",
+  "subjectKitchen",
+  "subjectBath",
+  "subjectFacade",
+  "subjectSample",
+  "subjectAfterSale",
+  "subjectOther",
 ] as const;
 
-const contactSchema = z.object({
-  name: z.string().min(2, "Lütfen adınızı girin."),
-  email: z.string().email("Geçerli bir e-posta adresi girin."),
-  phone: z.string().min(7, "Size ulaşabilmemiz için telefon numaranızı girin."),
-  subject: z.string().min(1, "Bir konu seçin."),
-  message: z.string().min(10, "Mesajınız çok kısa."),
-  consent: z
-    .boolean()
-    .refine(
-      (v) => v === true,
-      "Devam etmek için aydınlatma metnini onaylamalısınız.",
-    ),
-});
-
-type ContactValues = z.infer<typeof contactSchema>;
-
 export function ContactForm({ className }: { className?: string }) {
+  const t = useTranslations("Forms");
   const [subjectOpen, setSubjectOpen] = React.useState(false);
+
+  const contactSchema = React.useMemo(
+    () =>
+      z.object({
+        name: z.string().min(2, t("errorName")),
+        email: z.string().email(t("errorEmail")),
+        phone: z.string().min(7, t("errorPhone")),
+        subject: z.string().min(1, t("errorSubject")),
+        message: z.string().min(10, t("errorMessage")),
+        consent: z.boolean().refine((v) => v === true, t("errorKvkk")),
+      }),
+    [t],
+  );
+
+  type ContactValues = z.infer<typeof contactSchema>;
 
   const {
     register,
@@ -69,26 +70,30 @@ export function ContactForm({ className }: { className?: string }) {
         body: JSON.stringify(values),
       });
       if (!res.ok) throw new Error();
-      toast.success("Mesajınız iletildi. En kısa sürede dönüş yapacağız.");
+      toast.success(t("successContact"));
       reset();
     } catch {
-      toast.error("Mesaj gönderilemedi. Lütfen tekrar deneyin.");
+      toast.error(t("errorContact"));
     }
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={cn("space-y-5", className)} noValidate>
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={cn("space-y-5", className)}
+      noValidate
+    >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <Field error={errors.name?.message}>
           <Input
-            placeholder="Adınız Soyadınız *"
+            placeholder={`${t("labelName")} *`}
             {...register("name")}
           />
         </Field>
         <Field error={errors.email?.message}>
           <Input
             type="email"
-            placeholder="E-posta Adresiniz *"
+            placeholder={`${t("labelEmail")} *`}
             {...register("email")}
           />
         </Field>
@@ -97,7 +102,7 @@ export function ContactForm({ className }: { className?: string }) {
         <Field error={errors.phone?.message}>
           <Input
             type="tel"
-            placeholder="Telefon Numaranız *"
+            placeholder={`${t("labelPhone")} *`}
             {...register("phone")}
           />
         </Field>
@@ -113,23 +118,23 @@ export function ContactForm({ className }: { className?: string }) {
               )}
             >
               {subject
-                ? subjects.find((s) => s.value === subject)?.label
-                : "Konu *"}
+                ? t(subject as (typeof subjectKeys)[number])
+                : `${t("labelSubject")} *`}
               <ChevronDown className="size-4 text-ink-soft" />
             </button>
             {subjectOpen && (
               <div className="absolute left-0 right-0 top-full mt-1 bg-surface border border-line shadow-md z-10 max-h-[260px] overflow-y-auto">
-                {subjects.map((s) => (
+                {subjectKeys.map((key) => (
                   <button
-                    key={s.value}
+                    key={key}
                     type="button"
                     onClick={() => {
-                      setValue("subject", s.value, { shouldValidate: true });
+                      setValue("subject", key, { shouldValidate: true });
                       setSubjectOpen(false);
                     }}
                     className="block w-full text-left px-4 py-2.5 text-[0.85rem] text-ink hover:bg-surface-muted"
                   >
-                    {s.label}
+                    {t(key)}
                   </button>
                 ))}
               </div>
@@ -139,7 +144,11 @@ export function ContactForm({ className }: { className?: string }) {
       </div>
 
       <Field error={errors.message?.message}>
-        <Textarea placeholder="Mesajınız *" rows={4} {...register("message")} />
+        <Textarea
+          placeholder={`${t("labelMessage")} *`}
+          rows={4}
+          {...register("message")}
+        />
       </Field>
 
       <div>
@@ -150,11 +159,11 @@ export function ContactForm({ className }: { className?: string }) {
             className="size-4 mt-0.5 accent-gold border-line-strong"
           />
           <span className="text-[0.82rem] text-ink-muted group-hover:text-ink transition-colors">
-            Kişisel verilerin işlenmesine ilişkin{" "}
+            {t("labelKvkk")}{" "}
             <a href="/kvkk" className="text-gold-deep underline-grow">
-              aydınlatma metnini
+              {t("labelKvkkLink")}
             </a>{" "}
-            okudum.
+            {t("labelKvkkSuffix")}
           </span>
         </label>
         {errors.consent?.message && (
@@ -169,7 +178,7 @@ export function ContactForm({ className }: { className?: string }) {
         disabled={isSubmitting}
         className="inline-flex items-center justify-center gap-2 h-13 px-8 bg-gold hover:bg-gold-soft text-ink font-medium uppercase tracking-wider text-[0.78rem] transition-colors disabled:opacity-60"
       >
-        {isSubmitting ? "Gönderiliyor..." : "Mesaj Gönder"}
+        {isSubmitting ? t("buttonSending") : t("buttonSend")}
         <ArrowRight className="size-4" />
       </button>
     </form>
