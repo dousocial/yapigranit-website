@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  passwordHash String
+  role         String   @default("admin")
+  createdAt    DateTime @default(now())
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String
+  subject   String
+  message   String
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+}
+
+model Quote {
+  id              String   @id @default(cuid())
+  customerType    String
+  companyName     String?
+  name            String
+  email           String
+  phone           String
+  city            String
+  projectType     String
+  applicationArea String
+  material        String
+  area            String?
+  deadline        String?
+  message         String?
+  fileNames       String?
+  status          String   @default("new")
+  createdAt       DateTime @default(now())
+}
+
+model Project {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  title         String
+  category      String
+  categoryLabel String
+  type          String
+  location      String
+  year          Int
+  material      String
+  area          String?
+  scope         String
+  summary       String
+  cover         String
+  gallery       String?
+  published     Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model BlogPost {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  title         String
+  excerpt       String
+  body          String
+  category      String
+  categoryLabel String
+  cover         String
+  readMinutes   Int      @default(4)
+  featured      Boolean  @default(false)
+  published     Boolean  @default(true)
+  publishedAt   DateTime @default(now())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
