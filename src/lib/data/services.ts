@@ -1,152 +1,187 @@
 import {
-  Search,
-  Layers,
-  PenTool,
-  Ruler,
-  Hammer,
-  ShieldCheck,
-  Truck,
-  Headphones,
+  Building2,
+  ChefHat,
+  Bath,
+  Flame,
+  StepForward,
+  Cpu,
+  Droplets,
+  ScanLine,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export interface Service {
   slug: string;
   number: string;
+  category: "cephe" | "mutfak-banyo" | "mobilya" | "dekoratif" | "teknoloji";
+  categoryLabel: string;
   title: string;
   description: string;
   details: string[];
+  tags: string[];
   icon: LucideIcon;
   image: string;
 }
 
+export const serviceCategories = [
+  { slug: "cephe", label: "Dış Cephe & Mimari Kaplama" },
+  { slug: "mutfak-banyo", label: "Mutfak & Banyo Çözümleri" },
+  { slug: "mobilya", label: "Özel Tasarım Taş Mobilya" },
+  { slug: "dekoratif", label: "Dekoratif Uygulamalar" },
+  { slug: "teknoloji", label: "Üretim Teknolojileri" },
+] as const;
+
 export const services: Service[] = [
   {
-    slug: "kesif-danismanlik",
+    slug: "mekanik-cephe-sistemleri",
     number: "01",
-    title: "Keşif & Danışmanlık",
+    category: "cephe",
+    categoryLabel: "Dış Cephe & Mimari Kaplama",
+    title: "Mekanik Cephe Sistemleri",
     description:
-      "Projenizin ihtiyaçlarını analiz ediyor, doğru malzeme ve çözüm önerileriyle değer yaratıyoruz.",
+      "Çok katlı yapılarda yapıştırma yerine 304/316 paslanmaz çelik ankrajlarla güvenli montaj sağlıyoruz. Taş ile bina arasında bırakılan hava boşluğu havalandırmalı cephe etkisi yaratır.",
     details: [
-      "Saha ziyareti ve ölçü kontrolü",
-      "Proje gereksinim analizi",
-      "Malzeme uygunluk değerlendirmesi",
-      "Bütçe ve zaman planlaması",
+      "304/316 paslanmaz çelik ankraj sistemleri",
+      "Havalandırmalı cephe çözümü",
+      "Deprem güvenli statik tasarım",
+      "Yalıtım uyumlu detay çözümleri",
     ],
-    icon: Search,
+    tags: ["304/316 Çelik", "Deprem Güvenli", "Havalandırmalı"],
+    icon: Building2,
     image:
-      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1486718448742-163732cd1544?auto=format&fit=crop&w=800&q=80",
   },
   {
-    slug: "malzeme-secimi",
+    slug: "mutfak-tezgahi",
     number: "02",
-    title: "Malzeme Seçimi",
+    category: "mutfak-banyo",
+    categoryLabel: "Mutfak & Banyo Çözümleri",
+    title: "Mutfak Tezgahı (Porselen & Kuvars)",
     description:
-      "Mermer, granit, porselen ve özel yüzey seçeneklerimizle projeleriniz için en uygun malzemeyi belirliyoruz.",
+      "Çizilmez, leke tutmaz ve ısıya dayanıklı Porselen (Neolith, Dekton, Laminam) ve Kuvars (Çimstone, Belenco) tezgah uygulamaları. Asitlere karşı üstün direnç sağlayan sinterlenmiş taş teknolojisi.",
     details: [
-      "Numune ve örnek uygulama",
-      "Renk, doku ve desen seçimi",
-      "Performans ve dayanıklılık değerlendirmesi",
-      "Sürdürülebilirlik kriterleri",
+      "Sinterlenmiş porselen yüzey uygulaması",
+      "Çimstone & Belenco kuvars tezgahlar",
+      "Waterfall (şelale) ada tasarımı",
+      "Entegre evye sistemleri",
     ],
-    icon: Layers,
+    tags: ["Porselen", "Kuvars", "Sinter Taş"],
+    icon: ChefHat,
     image:
-      "https://images.unsplash.com/photo-1604147706283-d7119b5b822c?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=80",
   },
   {
-    slug: "proje-tasarim",
+    slug: "banyo-islak-hacim",
     number: "03",
-    title: "Proje Tasarım & Çizim",
+    category: "mutfak-banyo",
+    categoryLabel: "Mutfak & Banyo Çözümleri",
+    title: "Banyo & Islak Hacim",
     description:
-      "Teknik çizimler ve 3D görsellemeler ile projenizi daha üretime başlamadan önce detaylıca planlıyoruz.",
+      "Mermer ve oniks duş tekneleri, duvar kaplamaları, Hilton lavabo tezgahları ve neme dayanıklı yüzeyler. Islak hacimlerde hijyen, dayanıklılık ve fonksiyonelliğin buluşması.",
     details: [
-      "DWG / 3D teknik çizim",
-      "Detaylı kesit ve plan",
-      "Damarlı malzeme yerleşim simülasyonu",
-      "Ön onay ve revizyon süreci",
+      "Tek parça mermer / oniks duş teknesi",
+      "Hilton lavabo tezgahı",
+      "Bookmatch banyo duvar kaplaması",
+      "Neme dayanıklı sealer uygulaması",
     ],
-    icon: PenTool,
+    tags: ["Hijyen", "Bookmatch", "Tek Parça"],
+    icon: Bath,
+    image:
+      "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    slug: "somine-yapimi",
+    number: "04",
+    category: "dekoratif",
+    categoryLabel: "Dekoratif Uygulamalar",
+    title: "Şömine Yapımı",
+    description:
+      "Isıya dayanıklı granit veya mermer kullanılarak tasarlanan; klasik, modern veya minimalist şömine kaplamaları. CNC ile işlenmiş sütun ve taç detayları.",
+    details: [
+      "Isıya dayanıklı malzeme seçimi",
+      "Klasik / modern / minimalist tasarım",
+      "CNC ile sütun ve taç detayları",
+      "Yerinde montaj koordinasyonu",
+    ],
+    tags: ["Isıya Dayanıklı", "CNC Detay"],
+    icon: Flame,
+    image:
+      "https://images.unsplash.com/photo-1604147495798-57beb5d6af73?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    slug: "basamak-doseme",
+    number: "05",
+    category: "dekoratif",
+    categoryLabel: "Dekoratif Uygulamalar",
+    title: "Basamak Döşeme & Merdiven",
+    description:
+      "İç mekanlarda mermer, dış mekanlarda kaymaz granit kullanılarak yapılan rıhtlı veya rıhtsız merdiven basamakları. LED aydınlatma uyumlu çözümler.",
+    details: [
+      "Mermer iç mekan basamak",
+      "Kaymaz granit dış mekan basamak",
+      "Rıhtlı / rıhtsız sistem",
+      "LED aydınlatma uyumlu detay",
+    ],
+    tags: ["Kaymaz Granit", "LED Uyumlu"],
+    icon: StepForward,
+    image:
+      "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    slug: "bes-eksen-cnc",
+    number: "06",
+    category: "teknoloji",
+    categoryLabel: "Üretim Teknolojileri",
+    title: "5 Eksen CNC İşleme",
+    description:
+      "Monoblok gövde yapısı ile titreşimsiz üretim. ± 0.005 mm hassasiyetle karmaşık geometrik formlar, sütun başlıkları ve 3D yüzey işlemeleri.",
+    details: [
+      "± 0.005 mm hassasiyet",
+      "Monoblok gövde yapısı, titreşimsiz",
+      "Karmaşık geometri & 3D yüzey",
+      "Sütun başlığı, taç, dekoratif form üretimi",
+    ],
+    tags: ["3D Yüzey", "Monoblok", "Hassas İşleme"],
+    icon: Cpu,
     image:
       "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=800&q=80",
   },
   {
-    slug: "olcu-uretim",
-    number: "04",
-    title: "Ölçü & Üretim",
+    slug: "waterjet-kesim",
+    number: "07",
+    category: "teknoloji",
+    categoryLabel: "Üretim Teknolojileri",
+    title: "Waterjet (Su Jeti) Kesim",
     description:
-      "Son teknoloji makinelerimizle, yüksek hassasiyet ve kalite standartlarında üretim gerçekleştiriyoruz.",
+      "Isısız kesim teknolojisi (Cold Cutting). Granit, porselen ve metalleri deformasyon ve çatlama riski olmadan, ± 0.1 mm hassasiyetle 200 mm kalınlığa kadar işliyoruz.",
     details: [
-      "Lazer ve dijital ölçüm",
-      "5 Eksen CNC işleme",
-      "Waterjet kesim",
-      "Kenar profil ve cila",
+      "± 0.1 mm hassasiyet",
+      "200 mm kalınlığa kadar kesim",
+      "Isısız kesim — deformasyon yok",
+      "Karmaşık desen ve mozaik üretimi",
     ],
-    icon: Ruler,
+    tags: ["Cold Cutting", "Deformasyonsuz", "Çatlama Yok"],
+    icon: Droplets,
     image:
       "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800&q=80",
   },
   {
-    slug: "uygulama",
-    number: "05",
-    title: "Uygulama",
+    slug: "dijital-roleve",
+    number: "08",
+    category: "teknoloji",
+    categoryLabel: "Üretim Teknolojileri",
+    title: "Dijital Rölöve & Lazer Tarama",
     description:
-      "Deneyimli ekibimizle montaj ve uygulama süreçlerini titizlikle gerçekleştiriyoruz.",
+      "Şantiyeyi dijitalleştirip mm hassasiyetinde 3D veriye dönüştürüyoruz. Üretim öncesi dijital ikiz üzerinde montaj yaparak fireyi sıfıra indiriyoruz.",
     details: [
-      "Profesyonel montaj ekibi",
-      "Yapıştırıcı ve derz uygulaması",
-      "Hassasiyet kontrol ve düzlem testi",
-      "Detay birleşimleri",
+      "Lazer tarama ile sahanın 3D modeli",
+      "Proje–saha sapma analizi",
+      "Sanal montaj & fire önleme",
+      "Üretim öncesi onay süreci",
     ],
-    icon: Hammer,
-    image:
-      "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    slug: "kalite-kontrol",
-    number: "06",
-    title: "Kalite Kontrol",
-    description:
-      "Üretimin her aşamasında kalite kontrol süreçleriyle, uzun ömürlü ve kusursuz çözümler sunuyoruz.",
-    details: [
-      "Hammadde kalite kontrolü",
-      "Üretim sürecinde periyodik kontrol",
-      "Final kalite testi",
-      "Ambalaj öncesi inceleme",
-    ],
-    icon: ShieldCheck,
+    tags: ["Lazer Tarama", "Sanal Montaj", "Sıfır Fire"],
+    icon: ScanLine,
     image:
       "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    slug: "lojistik-teslimat",
-    number: "07",
-    title: "Lojistik & Teslimat",
-    description:
-      "Zamanında ve güvenli teslimat anlayışıyla, projenizin takvimine değer katıyoruz.",
-    details: [
-      "Özel ambalaj ve sevkiyat",
-      "Yurt içi ve yurt dışı lojistik",
-      "Sigortalı taşıma",
-      "Saha teslim koordinasyonu",
-    ],
-    icon: Truck,
-    image:
-      "https://images.unsplash.com/photo-1577563908411-5077b6dc7624?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    slug: "satis-sonrasi-destek",
-    number: "08",
-    title: "Satış Sonrası Destek",
-    description:
-      "Uygulama sonrası bakım, destek ve garanti hizmetlerimizle her zaman yanınızdayız.",
-    details: [
-      "Bakım ve temizlik danışmanlığı",
-      "Garanti süresince teknik destek",
-      "Yenileme ve cila hizmetleri",
-      "Acil tamir desteği",
-    ],
-    icon: Headphones,
-    image:
-      "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=800&q=80",
   },
 ];

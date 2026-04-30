@@ -51,8 +51,8 @@ export default function IletisimPage() {
   return (
     <>
       <PageHero
-        title="İletişime geçin, projenizi birlikte gerçekleştirelim."
-        description="Ekibimiz, ihtiyaçlarınıza en uygun çözümleri sunmak için her zaman hazır."
+        title="Projenizi hayata geçirelim."
+        description="Hayalinizdeki mekan için ilk adımı atın. İster detaylı teklif alın, ister uzmanımızla anında görüşün — Denizli'deki showroomumuz ve teknik ekibimizle yanınızdayız."
         breadcrumb={[
           { label: "Anasayfa", href: "/" },
           { label: "İletişim" },

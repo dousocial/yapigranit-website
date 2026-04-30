@@ -7,37 +7,37 @@ export interface Stat {
 
 export const stats: Stat[] = [
   {
-    value: 20,
+    value: 25,
     suffix: "+",
-    label: "Yıllık Deneyim",
-    description: "Sektörde 2004'ten beri",
+    label: "Yıllık Tecrübe",
+    description: "Sektörde 1994'ten beri",
   },
   {
-    value: 1000,
+    value: 500,
     suffix: "+",
     label: "Tamamlanan Proje",
-    description: "Konut, otel, ticari ve özel üretim projeleri",
+    description: "Konut, otel, ticari ve kamusal projeler",
   },
   {
-    value: 50,
-    suffix: "+",
-    label: "Uzman Ekip",
-    description: "Tasarım, üretim ve uygulama uzmanı",
-  },
-  {
-    value: 30,
-    suffix: "+",
+    value: 12,
+    suffix: "",
     label: "Ülkeye İhracat",
-    description: "Avrupa, Orta Doğu ve global pazarlara",
+    description: "Almanya başta olmak üzere global pazarlar",
+  },
+  {
+    value: 100,
+    suffix: "%",
+    label: "Müşteri Memnuniyeti",
+    description: "Kalite, teslimat ve süreç odaklı",
   },
 ];
 
-export const statsExtended = [
+export const statsExtended: Stat[] = [
   ...stats,
   {
-    value: 98,
-    suffix: "%",
-    label: "Müşteri Memnuniyeti",
-    description: "Kalite ve teslimat süreçlerinde",
+    value: 14,
+    suffix: "",
+    label: "Hammadde Ülkesi",
+    description: "Doğrudan ocak ve fabrikalardan tedarik",
   },
 ];

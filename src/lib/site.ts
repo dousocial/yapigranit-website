@@ -1,28 +1,28 @@
 export const siteConfig = {
-  name: "Yapı Granit",
+  name: "YAPIGRANİT",
+  legalName: "YAPIGRANİT A.Ş.",
   tagline: "Doğal Taş & Yüzey Çözümleri",
-  url: "https://yapigranit.com.tr",
+  slogan: "Taşa hayat veriyoruz...",
+  url: "https://yapigranit.com",
   description:
-    "Doğal taşın estetiğini, profesyonel işçilik ve yenilikçi çözümlerle buluşturuyoruz.",
+    "Doğanın sanata dönüştüğü yer. Mimar ve müteahhitler için 5 Eksen CNC, Waterjet Kesim ve Mekanik Cephe Sistemleri. Bireysel projeler için çizilmez porselen tezgahlar ve butik doğal taş tasarımları.",
   contact: {
     address: {
-      line1: "İstanbul Deri Organize Sanayi Bölgesi",
-      line2: "Bölgesi D.O.S.B. Mah. 11. Yol No:1",
-      city: "Tuzla / İstanbul",
+      line1: "Zafer Mah. Zafer Cd.",
+      line2: "No:60/1 Merkezefendi",
+      city: "Denizli",
     },
-    phones: ["+90 216 384 56 57", "+90 216 394 16 80"],
+    phones: ["0 258 372 22 50"],
     emails: {
-      info: "info@yapigranit.com.tr",
-      project: "proje@yapigranit.com.tr",
+      info: "info@yapigranit.com",
+      project: "info@yapigranit.com",
     },
-    workHours: [
-      { days: "Pazartesi - Cuma", hours: "08:30 - 18:00" },
-      { days: "Cumartesi", hours: "09:00 - 14:00" },
-    ],
-    whatsapp: "+902163845657",
+    workHours: [{ days: "Hafta içi", hours: "09:00 - 18:00" }],
+    whatsapp: "+902583722250",
     map: {
-      lat: 40.8456,
-      lng: 29.3158,
+      // Merkezefendi / Denizli — Zafer Caddesi yaklaşık koordinat
+      lat: 37.7726,
+      lng: 29.0865,
     },
   },
   social: {
@@ -31,10 +31,11 @@ export const siteConfig = {
     youtube: "https://youtube.com/@yapigranit",
   },
   metrics: {
-    yearsExperience: 20,
-    projectsCompleted: 1000,
+    yearsExperience: 25,
+    projectsCompleted: 500,
     expertTeam: 50,
-    countriesExported: 30,
+    countriesExported: 12,
+    customerSatisfaction: 100,
   },
 } as const;
 
@@ -46,10 +47,10 @@ export const navigation = {
       label: "Ürünler",
       href: "/urunler",
       children: [
-        { label: "Mermer", href: "/urunler/mermer", description: "Doğal ve şık" },
+        { label: "Porselen", href: "/urunler/porselen", description: "Teknolojinin zirvesi" },
+        { label: "Doğal Taş (Mermer)", href: "/urunler/mermer", description: "Doğanın sanatı" },
+        { label: "Kuvars", href: "/urunler/kuvars", description: "Pratik ve estetik" },
         { label: "Granit", href: "/urunler/granit", description: "Dayanıklı ve güçlü" },
-        { label: "Porselen", href: "/urunler/porselen", description: "Modern ve fonksiyonel" },
-        { label: "Özel Yüzeyler", href: "/urunler/ozel-yuzeyler", description: "Projenize özel çözümler" },
         { label: "Tüm Ürünler", href: "/urunler" },
       ],
     },
@@ -67,18 +68,18 @@ export const navigation = {
       { label: "Kariyer", href: "/kariyer" },
     ],
     urunler: [
-      { label: "Mermer", href: "/urunler/mermer" },
-      { label: "Granit", href: "/urunler/granit" },
       { label: "Porselen", href: "/urunler/porselen" },
-      { label: "Özel Yüzeyler", href: "/urunler/ozel-yuzeyler" },
+      { label: "Mermer (Doğal Taş)", href: "/urunler/mermer" },
+      { label: "Kuvars", href: "/urunler/kuvars" },
+      { label: "Granit", href: "/urunler/granit" },
       { label: "Tüm Ürünler", href: "/urunler" },
     ],
     hizmetler: [
-      { label: "Keşif & Danışmanlık", href: "/hizmetler#kesif" },
-      { label: "Ölçü & Üretim", href: "/hizmetler#olcu" },
-      { label: "Uygulama", href: "/hizmetler#uygulama" },
-      { label: "Lojistik & Teslimat", href: "/hizmetler#lojistik" },
-      { label: "Satış Sonrası Destek", href: "/hizmetler#satis-sonrasi" },
+      { label: "Mekanik Cephe Sistemleri", href: "/hizmetler/mekanik-cephe-sistemleri" },
+      { label: "Mutfak Tezgahı", href: "/hizmetler/mutfak-tezgahi" },
+      { label: "Banyo & Islak Hacim", href: "/hizmetler/banyo-islak-hacim" },
+      { label: "Şömine Yapımı", href: "/hizmetler/somine-yapimi" },
+      { label: "5 Eksen CNC İşleme", href: "/hizmetler/bes-eksen-cnc" },
     ],
     projeler: [
       { label: "Tüm Projeler", href: "/projeler" },

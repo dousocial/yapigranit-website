@@ -22,8 +22,11 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-3">
             <Logo variant="light" />
-            <p className="mt-6 text-[0.92rem] text-on-dark-muted leading-relaxed max-w-[280px]">
-              Doğal taş estetiğini, profesyonel işçilik ve yenilikçi çözümlerle
+            <p className="mt-5 italic text-[0.95rem] text-gold/90 max-w-[280px]">
+              {siteConfig.slogan}
+            </p>
+            <p className="mt-4 text-[0.88rem] text-on-dark-muted leading-relaxed max-w-[280px]">
+              1994&apos;ten bu yana doğal taşı, modern mimarinin zarafetiyle
               buluşturuyoruz.
             </p>
             <div className="mt-6 flex items-center gap-2">

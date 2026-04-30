@@ -23,8 +23,8 @@ export default function KurumsalPage() {
   return (
     <>
       <PageHero
-        title="Kurumsal"
-        description="Doğal taşın zamansız güzelliğini, profesyonel işçilik ve sürdürülebilir üretim anlayışıyla projelerinize taşıyoruz."
+        title="Taşta Mühendislik Disiplini"
+        description="1994'ten bu yana mimar ve müteahhitler için; hassas üretim, kontrollü montaj ve sürdürülebilir cephe çözümlerini tek çatı altında sunuyoruz."
         breadcrumb={[
           { label: "Anasayfa", href: "/" },
           { label: "Kurumsal" },
@@ -40,25 +40,38 @@ export default function KurumsalPage() {
             <Reveal className="lg:col-span-6">
               <Eyebrow>Hakkımızda</Eyebrow>
               <h2 className="display-lg mt-4 text-ink text-balance">
-                Taşa değer katan bir uzmanlık hikayesi.
+                Bir sanat eserine dönüştürüyoruz.
               </h2>
               <div className="w-12 h-px bg-gold mt-6" />
+              <p className="mt-6 italic text-[1.02rem] text-ink leading-relaxed border-l-2 border-gold pl-5">
+                &quot;Bir mermer bloğuna baktığımızda sadece taş görmüyoruz;
+                içindeki gizli sanat eserini görüyoruz.&quot;
+              </p>
               <div className="mt-7 space-y-5 text-[0.96rem] text-ink-muted leading-relaxed">
                 <p>
-                  Yapı Granit olarak, doğal taş, mermer, granit ve porselen
-                  yüzeylerde sektörün ihtiyaçlarına yenilikçi çözümler sunuyoruz.
-                  Mimari yapı firmalarına, atölyelerden yatırımcılara kadar geniş
-                  bir iş ortaklığı ağıyla, estetik ve teknik beklentileri en üst
-                  seviyede karşılıyoruz.
+                  Yapı Granit olarak kurulduğumuz günden beri, sektöre yıllarını
+                  vermiş ustalarımız, idari personelimiz ve en son teknoloji
+                  işleme makinalarımız ile tek bir amaç için çalışıyoruz:{" "}
+                  <strong className="text-ink">&quot;En Güzel&quot;</strong>.
                 </p>
-                <p>
-                  Modern teknolojimiz, deneyimli ekibimiz ve kalite odaklı üretim
-                  anlayışımızla, her projeye uzun ömürlü değer katıyoruz.
-                </p>
+                <ul className="space-y-2 text-ink">
+                  <li>
+                    <strong>Projelendirme</strong> — Mekanınıza en uygun
+                    çözümün tasarlanması.
+                  </li>
+                  <li>
+                    <strong>Ustalık</strong> — Taşın, sanatkar ellerde şekil
+                    bulması.
+                  </li>
+                  <li>
+                    <strong>Zamanında Montaj</strong> — Verilen sözlerin eksiksiz
+                    yerine getirilmesi.
+                  </li>
+                </ul>
               </div>
               <Button asChild size="lg" variant="dark" className="mt-8">
                 <Link href="/projeler">
-                  Bizi Tanıyın
+                  Projelerimizi İnceleyin
                   <ArrowRight />
                 </Link>
               </Button>

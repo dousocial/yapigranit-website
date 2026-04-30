@@ -23,8 +23,10 @@ export function Timeline() {
           </Reveal>
           <div className="lg:col-span-8 hidden lg:flex items-end">
             <p className="text-[0.95rem] text-ink-muted leading-relaxed max-w-[480px]">
-              2004&apos;ten bu yana doğal taş ve yüzey çözümlerinde sektöre yön
-              veren bir uzmanlık birikimi geliştiriyoruz.
+              1994&apos;ten bu yana doğal taş ve yüzey çözümlerinde sektöre yön
+              veren bir uzmanlık birikimi geliştiriyoruz. Aracıyı kaldırıp 14
+              ülkeden hammaddeyi doğrudan getiren ve Almanya başta olmak üzere
+              12 ülkeye ihracat yapan bir mühendislik ekibiyiz.
             </p>
           </div>
         </div>

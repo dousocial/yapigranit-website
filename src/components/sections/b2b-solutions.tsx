@@ -15,17 +15,19 @@ export function B2BSolutions() {
       <Container size="wide" className="relative">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
           <Reveal className="lg:col-span-5">
-            <Eyebrow variant="light">B2B Çözümlerimiz</Eyebrow>
+            <Eyebrow variant="light">Mimar & Müteahhit</Eyebrow>
             <h2 className="display-lg mt-4 text-on-dark text-balance">
-              İş ortaklarımız için uçtan uca profesyonel çözümler.
+              Mimar ve proje çözüm ortaklığı.
             </h2>
-            <p className="mt-6 text-[0.95rem] text-on-dark-muted leading-relaxed max-w-[420px]">
-              Mimarlar, müteahhitler, yapı firmaları ve atölyeler için
-              ihtiyaca özel üretim, teknik destek ve lojistik hizmetleri sunuyoruz.
+            <p className="mt-6 text-[0.95rem] text-on-dark-muted leading-relaxed max-w-[440px]">
+              5 Eksen CNC, Waterjet Kesim ve Mekanik Cephe Sistemleri ile
+              karmaşık geometrileri ve büyük ölçekli projeleri tek elden
+              hayata geçiriyoruz. Lazer rölöveden sanal montaja, fireyi sıfıra
+              indiren bir mühendislik akışı.
             </p>
             <Button asChild variant="outline-light" size="lg" className="mt-8">
               <Link href="/hizmetler">
-                B2B Çözümlerimiz
+                Kurumsal Çözümleri Keşfet
                 <ArrowRight />
               </Link>
             </Button>

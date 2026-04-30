@@ -10,6 +10,11 @@ import {
   Factory,
   Clock4,
   Heart,
+  ShieldCheck,
+  Handshake,
+  Lightbulb,
+  Leaf,
+  Sparkles,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -21,33 +26,38 @@ export interface B2BFeature {
 
 export const b2bFeatures: B2BFeature[] = [
   {
-    title: "Proje Odaklı Üretim",
-    description: "Projelerinize özel ölçü, ebat ve kalınlıkta üretim çözümleri.",
+    title: "Mekanik Cephe Sistemleri",
+    description:
+      "304/316 paslanmaz çelik ankrajlarla güvenli, havalandırmalı cephe çözümleri.",
     icon: Building2,
   },
   {
-    title: "Teknik Destek",
-    description: "Keşiften uygulamaya teknik ekibimiz yanınızda.",
-    icon: HeadphonesIcon,
+    title: "5 Eksen CNC & Waterjet",
+    description:
+      "± 0.005 mm hassasiyet, karmaşık geometriler ve isısız kesim teknolojisi.",
+    icon: Factory,
   },
   {
-    title: "Lojistik & Teslimat",
-    description: "Zamanında ve güvenli teslimat anlayışı.",
-    icon: Truck,
-  },
-  {
-    title: "Numune & Seçim Desteği",
-    description: "Doğru ürün seçimi için numune ve uzman desteği.",
-    icon: Layers,
-  },
-  {
-    title: "Rekabetçi Fiyatlandırma",
-    description: "Kaliteden ödün vermeden rekabetçi çözümler.",
+    title: "Dijital Rölöve",
+    description:
+      "Lazer tarama ile sahanın 3D modeli, sanal montaj ile sıfır fire.",
     icon: TrendingUp,
   },
   {
+    title: "Numune & Seçim Desteği",
+    description:
+      "Doğru ürün seçimi için Dekton, Neolith, Florim numune ve uzman desteği.",
+    icon: Layers,
+  },
+  {
+    title: "Lojistik & Teslimat",
+    description: "12 ülkeye ihracat tecrübesiyle güvenli ve zamanında teslimat.",
+    icon: Truck,
+  },
+  {
     title: "Sürekli Tedarik Güvencesi",
-    description: "Büyük ölçekli projeler için sürekli stok ve tedarik güvencesi.",
+    description:
+      "14 farklı ülkeden doğrudan temin ile büyük ölçekli projelere kesintisiz arz.",
     icon: PackageCheck,
   },
 ];
@@ -60,28 +70,28 @@ export interface WhyUs {
 
 export const whyUs: WhyUs[] = [
   {
-    title: "Yüksek Kalite Standartları",
-    description: "ISO sertifikalı üretim süreçleri ve sıkı kalite kontrol.",
+    title: "25+ Yıllık Tecrübe",
+    description: "1994'ten bugüne taşı işleyen ustalık ve mühendislik birikimi.",
     icon: Award,
   },
   {
     title: "Deneyimli Uzman Kadro",
-    description: "Sektörde 20+ yıl tecrübeli teknik ekip.",
+    description: "Sektöre yıllarını vermiş ustalar ve teknik ekip.",
     icon: Users2,
   },
   {
-    title: "Teknolojik Üretim Altyapısı",
-    description: "5 Eksen CNC, Waterjet ve özel ölçü üretim olanakları.",
+    title: "Teknolojik Üretim",
+    description: "5 Eksen CNC, Waterjet, Bridge Saw ve Lazer Tarama altyapısı.",
     icon: Factory,
   },
   {
     title: "Zamanında Teslimat",
-    description: "Planlı koordinasyon ve takvime uygun teslim süreci.",
+    description: "Verilen sözlerin eksiksiz yerine getirilmesi prensibi.",
     icon: Clock4,
   },
   {
-    title: "Müşteri Odaklı Yaklaşım",
-    description: "Her proje için özel iletişim ve destek.",
+    title: "%100 Müşteri Memnuniyeti",
+    description: "Her projede kalite ve süreç odaklı yaklaşım.",
     icon: Heart,
   },
 ];
@@ -92,32 +102,35 @@ export interface BrandValue {
   icon: LucideIcon;
 }
 
-import { ShieldCheck, Handshake, Lightbulb, Leaf, Sparkles } from "lucide-react";
-
 export const brandValues: BrandValue[] = [
   {
     title: "Kalite",
-    description: "En iyi malzeme ve işçiliği, her projede standart olarak sunarız.",
+    description:
+      "En iyi malzeme ve ustalığı, her projede standart olarak sunarız.",
     icon: ShieldCheck,
   },
   {
     title: "Güven",
-    description: "İş ortaklarımızla uzun vadeli, şeffaf ve sürdürülebilir ilişkiler kurarız.",
+    description:
+      "1994'ten bu yana kazandığımız güveni, her projede yeniden üretiyoruz.",
     icon: Handshake,
   },
   {
     title: "Yenilik",
-    description: "Teknolojik gelişmeleri takip eder, üretim ve hizmetlerimizi sürekli geliştiririz.",
+    description:
+      "5 Eksen CNC'den dijital rölöveye, sektörün öncü teknolojilerini kullanıyoruz.",
     icon: Lightbulb,
   },
   {
     title: "Sürdürülebilirlik",
-    description: "Doğaya ve gelecek nesillere karşı sorumluluğumuzun farkındayız.",
+    description:
+      "Atık yönetimi ve döngüsel üretimle doğaya karşı sorumluluğumuzun farkındayız.",
     icon: Leaf,
   },
   {
     title: "Çözüm Odaklılık",
-    description: "Her projeye özel, ihtiyaca uygun ve etkin çözümler üretiriz.",
+    description:
+      "Mekanınıza en uygun çözümü tasarlıyor, taşa sanatkar ellerle hayat veriyoruz.",
     icon: Sparkles,
   },
 ];
@@ -130,33 +143,39 @@ export interface TimelineItem {
 
 export const timeline: TimelineItem[] = [
   {
+    year: "1994",
+    title: "Temeller Atılıyor",
+    description:
+      "Yapı Granit'in serüveni 1994 yılında başladı. Küçük bir atölyede, büyük hayallerle kurulan firmamız, ilk günden itibaren kaliteyi hedefledi.",
+  },
+  {
+    year: "2000",
+    title: "Yeni Merkez & Güven",
+    description:
+      "Mevcut merkezimize taşınmamızla birlikte edindiğimiz tecrübe ve müşterilerimizin güveni, her yıl %300 büyüme gerçekleştirmemizi sağladı.",
+  },
+  {
     year: "2004",
-    title: "Kuruluş",
-    description: "Yapı Granit'in temelleri İstanbul'da atıldı.",
+    title: "Dünyaya Açılış",
+    description:
+      "Aracıları kaldırdık. Granit hammadde ihtiyacımızı dünyanın 14 farklı ülkesindeki ocak ve fabrikalardan doğrudan temin etmeye başladık.",
   },
   {
-    year: "2008",
-    title: "Üretim Genişlemesi",
-    description: "Doğal taş ve mermer sektöründe üretim kapasitemiz artırıldı.",
+    year: "2005",
+    title: "Almanya'ya İhracat",
+    description:
+      "Büyümemizi Almanya'ya ihracat yaparak taçlandırdık. Artık sadece malzeme tedariği değil, proje bazlı hizmet vererek kompleks yapıları hayata geçiriyoruz.",
   },
   {
-    year: "2012",
+    year: "2015",
     title: "Teknolojik Yatırım",
-    description: "CNC ve ileri üretim teknolojilerine yatırım yapıldı.",
-  },
-  {
-    year: "2016",
-    title: "Uluslararası Projeler",
-    description: "Yurt içi ve yurt dışı büyük ölçekli projelerde yer almaya başladık.",
-  },
-  {
-    year: "2020",
-    title: "Sürdürülebilirlik",
-    description: "Sürdürülebilir ve çevre dostu üretim anlayışını kurumsal yapımıza entegre ettik.",
+    description:
+      "5 Eksen CNC, Waterjet ve Bridge Saw makinalarımızla üretim altyapımızı uzay endüstrisi standartlarına taşıdık.",
   },
   {
     year: "2026",
-    title: "Global Genişleme",
-    description: "Daha geniş üretim alanı ve global iş ortaklıklarıyla büyümeye devam ediyoruz.",
+    title: "Bugün",
+    description:
+      "12 ülkeye ihracat, 500+ tamamlanan proje ve 25+ yıllık birikimle Denizli'den dünyaya taş işleyen bir mühendislik markası.",
   },
 ];

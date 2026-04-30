@@ -20,10 +20,10 @@ import { Container } from "@/components/ui/container";
 import { siteConfig } from "@/lib/site";
 
 const trustPills = [
-  { icon: Award, label: "20+ Yıllık Deneyim" },
-  { icon: ShieldCheck, label: "Yüksek Kalite Standartları" },
-  { icon: Clock4, label: "Zamanında Teslimat" },
-  { icon: Sparkles, label: "Projeye Özel Çözümler" },
+  { icon: Award, label: "25+ Yıllık Tecrübe" },
+  { icon: ShieldCheck, label: "5 Eksen CNC & Waterjet" },
+  { icon: Clock4, label: "12 Ülkeye İhracat" },
+  { icon: Sparkles, label: "%100 Müşteri Memnuniyeti" },
 ];
 
 export function HeroHome() {
@@ -35,31 +35,32 @@ export function HeroHome() {
         <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 pt-12 pb-16 lg:pt-20 lg:pb-24 min-h-[760px] lg:min-h-[820px]">
           {/* Left text */}
           <div className="lg:col-span-6 flex flex-col justify-center pt-4 lg:pt-12">
+            <p className="eyebrow text-gold mb-4">Premium Doğal Taş</p>
             <motion.h1
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
               className="display-xl text-on-dark text-balance"
             >
-              Doğal taşın
-              <br />
-              estetiğini,
-              <br />
-              ustalığımızla
+              Doğanın
               <br />
               <span className="italic font-light text-gold">
-                buluşturuyoruz.
-              </span>
+                sanata
+              </span>{" "}
+              dönüştüğü
+              <br />
+              yer.
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="mt-8 max-w-[440px] text-[1.02rem] text-on-dark-muted leading-relaxed"
+              className="mt-8 max-w-[460px] text-[1.02rem] text-on-dark-muted leading-relaxed"
             >
-              Mimari projeleriniz için premium doğal taş, mermer, granit ve
-              porselen yüzey çözümleri.
+              Milyonlarca yıllık jeolojik mirası, modern mimarinin zarafetiyle
+              buluşturuyoruz. Yaşam alanlarınız için sonsuzluk kadar dayanıklı,
+              sanat kadar eşsiz çözümler.
             </motion.p>
 
             <motion.div
@@ -70,7 +71,7 @@ export function HeroHome() {
             >
               <Button asChild size="lg">
                 <Link href="/urunler">
-                  Ürünleri İncele
+                  Koleksiyonu Keşfet
                   <ArrowRight />
                 </Link>
               </Button>
