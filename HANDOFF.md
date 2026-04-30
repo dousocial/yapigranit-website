@@ -2,7 +2,7 @@
 
 > Bu doküman, proje yarıdan devam edenlerin (sen / yeni Claude session'ı) hızlıca hâkim olması için yazıldı.
 >
-> **Son commit:** `50088e4` — feat: mobil sticky bar + proje galeri lightbox
+> **Son commit:** `8ead62c` — feat: faz 7-A — 404/loading/error sayfaları + lint/typecheck/build düzeltmeleri
 
 ---
 
@@ -291,14 +291,14 @@ yapigranit-web/
 
 ## 6. Eksik / Sırada Olan İşler (Faz 7)
 
-### A — Polish (öncelikli, kısa süre)
-- [ ] **`src/app/not-found.tsx`** — 404 sayfası (brand tutarlı)
-- [ ] **`src/app/loading.tsx`** — Global loading skeleton
-- [ ] **`src/app/error.tsx`** — Error boundary (development + production stack)
-- [ ] **`src/app/(marketing)/blog/loading.tsx`** ve diğer route loading'leri
-- [ ] **Lint çalıştır + düzelt** — `npm run lint`
-- [ ] **Type check** — `npx tsc --noEmit`
-- [ ] **Build verification** — `npm run build` (production build hatasız mı?)
+### A — Polish ✅ TAMAMLANDI (commit: 8ead62c)
+- [x] **`src/app/not-found.tsx`** — 404 sayfası (brand tutarlı, header+footer+nav)
+- [x] **`src/app/loading.tsx`** — Global loading skeleton
+- [x] **`src/app/error.tsx`** — Error boundary (dev stack + reset butonu)
+- [x] **`src/app/(marketing)/blog/loading.tsx`** ve `projeler/loading.tsx`
+- [x] **Lint** — 0 hata (7 pre-existing warning, benim kodumdan değil)
+- [x] **Type check** — 0 hata
+- [x] **Build** — Başarılı (tüm sayfalar statik/SSG olarak build edildi)
 
 ### B — UX Geliştirmeleri (orta süre)
 - [ ] **Site içi arama** — Cmd/Ctrl + K dialog (cmdk paketi zaten kurulu)
