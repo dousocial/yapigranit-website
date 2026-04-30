@@ -42,10 +42,13 @@ export default async function AdminProjelerPage() {
             key: "title",
             header: "Başlık",
             render: (p) => (
-              <div>
+              <Link
+                href={`/admin/projeler/${p.id}`}
+                className="block hover:text-gold-deep"
+              >
                 <div className="font-medium">{p.title}</div>
                 <div className="text-[0.75rem] text-ink-soft">{p.slug}</div>
-              </div>
+              </Link>
             ),
           },
           { key: "category", header: "Kategori", render: (p) => p.categoryLabel },

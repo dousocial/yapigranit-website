@@ -25,7 +25,13 @@ const schema = z.object({
 
 type Values = z.infer<typeof schema>;
 
-export function BlogForm({ initial }: { initial?: Partial<Values> }) {
+export function BlogForm({
+  initial,
+  postId,
+}: {
+  initial?: Partial<Values>;
+  postId?: string;
+}) {
   const router = useRouter();
   const {
     register,
@@ -61,8 +67,10 @@ export function BlogForm({ initial }: { initial?: Partial<Values> }) {
 
   async function onSubmit(values: Values) {
     try {
-      const res = await fetch("/api/admin/blog", {
-        method: "POST",
+      const url = postId ? `/api/admin/blog/${postId}` : "/api/admin/blog";
+      const method = postId ? "PATCH" : "POST";
+      const res = await fetch(url, {
+        method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...values,
@@ -70,11 +78,27 @@ export function BlogForm({ initial }: { initial?: Partial<Values> }) {
         }),
       });
       if (!res.ok) throw new Error();
-      toast.success("Yazı kaydedildi.");
+      toast.success(postId ? "Yazı güncellendi." : "Yazı kaydedildi.");
       router.push("/admin/blog");
       router.refresh();
     } catch {
       toast.error("Kayıt sırasında bir hata oluştu.");
+    }
+  }
+
+  async function onDelete() {
+    if (!postId) return;
+    if (!confirm("Bu yazıyı silmek istediğinizden emin misiniz?")) return;
+    try {
+      const res = await fetch(`/api/admin/blog/${postId}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error();
+      toast.success("Yazı silindi.");
+      router.push("/admin/blog");
+      router.refresh();
+    } catch {
+      toast.error("Silme sırasında bir hata oluştu.");
     }
   }
 
@@ -120,9 +144,24 @@ export function BlogForm({ initial }: { initial?: Partial<Values> }) {
         </label>
       </div>
 
-      <Button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Kaydediliyor..." : "Yazıyı Kaydet"}
-      </Button>
+      <div className="flex items-center justify-between pt-2">
+        <Button type="submit" disabled={isSubmitting}>
+          {isSubmitting
+            ? "Kaydediliyor..."
+            : postId
+              ? "Değişiklikleri Kaydet"
+              : "Yazıyı Kaydet"}
+        </Button>
+        {postId && (
+          <button
+            type="button"
+            onClick={onDelete}
+            className="text-[0.85rem] text-red-600 hover:text-red-700 underline-grow"
+          >
+            Sil
+          </button>
+        )}
+      </div>
     </form>
   );
 }

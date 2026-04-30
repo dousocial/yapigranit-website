@@ -72,6 +72,22 @@ model Project {
   updatedAt     DateTime @updatedAt
 }
 
+model SampleRequest {
+  id           String   @id @default(cuid())
+  customerType String
+  companyName  String?
+  name         String
+  email        String
+  phone        String
+  address      String
+  city         String
+  projectType  String
+  materials    String
+  notes        String?
+  status       String   @default("new")
+  createdAt    DateTime @default(now())
+}
+
 model BlogPost {
   id            String   @id @default(cuid())
   slug          String   @unique

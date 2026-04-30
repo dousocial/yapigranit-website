@@ -7,6 +7,7 @@ import {
   FileText,
   Mail,
   LogOut,
+  Package,
 } from "lucide-react";
 
 import { auth, signOut } from "@/auth";
@@ -17,6 +18,7 @@ const items = [
   { href: "/admin/projeler", label: "Projeler", icon: FolderKanban },
   { href: "/admin/blog", label: "Blog", icon: Newspaper },
   { href: "/admin/teklifler", label: "Teklifler", icon: FileText },
+  { href: "/admin/numune", label: "Numune Talepleri", icon: Package },
   { href: "/admin/iletisim", label: "İletişim", icon: MessageSquare },
   { href: "/admin/abone", label: "Bülten", icon: Mail },
 ];

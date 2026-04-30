@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import { Toaster } from "sonner";
 import { OrganizationJsonLd, LocalBusinessJsonLd } from "@/components/seo/structured-data";
+import { Analytics } from "@/components/seo/analytics";
 import "./globals.css";
 
 const display = Cormorant_Garamond({
@@ -60,8 +61,16 @@ export default function RootLayout({
       lang="tr"
       className={`${display.variable} ${sans.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="preconnect" href="https://images.unsplash.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://connect.facebook.net" />
+        <meta name="theme-color" content="#0e0d0c" />
+      </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {children}
+        <Analytics />
         <OrganizationJsonLd />
         <LocalBusinessJsonLd />
         <Toaster

@@ -30,7 +30,13 @@ const schema = z.object({
 
 type Values = z.infer<typeof schema>;
 
-export function ProjectForm({ initial }: { initial?: Partial<Values> }) {
+export function ProjectForm({
+  initial,
+  projectId,
+}: {
+  initial?: Partial<Values>;
+  projectId?: string;
+}) {
   const router = useRouter();
   const {
     register,
@@ -70,17 +76,37 @@ export function ProjectForm({ initial }: { initial?: Partial<Values> }) {
 
   async function onSubmit(values: Values) {
     try {
-      const res = await fetch("/api/admin/projects", {
-        method: "POST",
+      const url = projectId
+        ? `/api/admin/projects/${projectId}`
+        : "/api/admin/projects";
+      const method = projectId ? "PATCH" : "POST";
+      const res = await fetch(url, {
+        method,
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
       });
       if (!res.ok) throw new Error();
-      toast.success("Proje kaydedildi.");
+      toast.success(projectId ? "Proje güncellendi." : "Proje kaydedildi.");
       router.push("/admin/projeler");
       router.refresh();
     } catch {
       toast.error("Kayıt sırasında bir hata oluştu.");
+    }
+  }
+
+  async function onDelete() {
+    if (!projectId) return;
+    if (!confirm("Bu projeyi silmek istediğinizden emin misiniz?")) return;
+    try {
+      const res = await fetch(`/api/admin/projects/${projectId}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error();
+      toast.success("Proje silindi.");
+      router.push("/admin/projeler");
+      router.refresh();
+    } catch {
+      toast.error("Silme sırasında bir hata oluştu.");
     }
   }
 
@@ -136,9 +162,24 @@ export function ProjectForm({ initial }: { initial?: Partial<Values> }) {
         <span className="text-[0.9rem] text-ink">Yayında</span>
       </label>
 
-      <Button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Kaydediliyor..." : "Projeyi Kaydet"}
-      </Button>
+      <div className="flex items-center justify-between pt-2">
+        <Button type="submit" disabled={isSubmitting}>
+          {isSubmitting
+            ? "Kaydediliyor..."
+            : projectId
+              ? "Değişiklikleri Kaydet"
+              : "Projeyi Kaydet"}
+        </Button>
+        {projectId && (
+          <button
+            type="button"
+            onClick={onDelete}
+            className="text-[0.85rem] text-red-600 hover:text-red-700 underline-grow"
+          >
+            Sil
+          </button>
+        )}
+      </div>
     </form>
   );
 }

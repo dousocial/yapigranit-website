@@ -1,68 +1,67 @@
 import type { Metadata } from "next";
 import {
-  CheckCircle2,
-  Clock4,
-  Users2,
-  Award,
+  PackageCheck,
+  Truck,
+  Layers,
+  Palette,
 } from "lucide-react";
 
 import { PageHero } from "@/components/sections/page-hero";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
-import { QuoteForm } from "@/components/sections/quote-form";
-import { QuoteCalculator } from "@/components/sections/quote-calculator";
+import { SampleRequestForm } from "@/components/sections/sample-request-form";
 
 export const metadata: Metadata = {
-  title: "Teklif Alın",
+  title: "Numune Talep Et",
   description:
-    "Projeniz için Yapı Granit'ten ücretsiz fiyat teklifi alın. B2B projelerde ölçü, malzeme ve detay bilgilerinizi paylaşın.",
-  alternates: { canonical: "/teklif" },
+    "Mermer, granit ve porselen yüzeylerden ücretsiz numune setiyle projelerinize doğru malzemeyi seçin.",
+  alternates: { canonical: "/numune-talep" },
 };
 
 const benefits = [
   {
-    icon: Clock4,
-    title: "24 Saatte Geri Dönüş",
-    description: "Talebinize en geç 24 saat içinde detaylı dönüş yaparız.",
+    icon: Palette,
+    title: "Renk ve Doku Karşılaştırma",
+    description: "Numune setiyle malzeme tonlarını projenizde değerlendirin.",
   },
   {
-    icon: Award,
-    title: "Projeye Özel Fiyatlandırma",
-    description: "Her projeye özel ölçü, malzeme ve teknik detay analizi.",
+    icon: Layers,
+    title: "Profesyonel Numune Seti",
+    description: "Mermer, granit ve porselen kategorilerinden seçim hakkı.",
   },
   {
-    icon: Users2,
-    title: "Uzman Teknik Destek",
-    description: "Mimar ve müteahhitlere özel danışmanlık.",
+    icon: Truck,
+    title: "Ücretsiz Kargo",
+    description: "Mimar ve müteahhit ofis adreslerine ücretsiz teslimat.",
   },
   {
-    icon: CheckCircle2,
-    title: "Ücretsiz Keşif",
-    description: "İstanbul ve çevresinde ücretsiz yerinde keşif imkanı.",
+    icon: PackageCheck,
+    title: "Hızlı Hazırlık",
+    description: "Talep sonrası 2-3 iş günü içinde kargolanır.",
   },
 ];
 
-export default function TeklifPage() {
+export default function SampleRequestPage() {
   return (
     <>
       <PageHero
-        title="Projeniz için teklif alın."
-        description="Bilgilerinizi paylaşın, projenize özel fiyatlandırmayı en kısa sürede iletelim."
+        title="Numune Talep Et"
+        description="Projenize en uygun yüzeyi seçmenize yardımcı oluyoruz. Birkaç dakikada numune setinizi talep edin."
         breadcrumb={[
           { label: "Anasayfa", href: "/" },
-          { label: "Teklif Alın" },
+          { label: "Numune Talep" },
         ]}
-        image="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?auto=format&fit=crop&w=1600&q=80"
-        imageAlt="Teklif sürecimiz"
+        image="https://images.unsplash.com/photo-1604147706283-d7119b5b822c?auto=format&fit=crop&w=1600&q=80"
+        imageAlt="Numune koleksiyonu"
       />
 
       <section className="bg-background py-16 lg:py-20">
         <Container size="wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
             <Reveal className="lg:col-span-4">
-              <p className="eyebrow">Süreç</p>
+              <p className="eyebrow">Mimarlar İçin</p>
               <h2 className="display-md text-ink mt-3 text-balance">
-                Doğru çözüm, hızlı geri dönüş.
+                Doğru malzemenin yolu numuneden geçer.
               </h2>
               <div className="w-12 h-px bg-gold mt-5 mb-7" />
 
@@ -87,14 +86,12 @@ export default function TeklifPage() {
 
             <Reveal delay={0.15} className="lg:col-span-8">
               <div className="bg-surface border border-line p-8 lg:p-10">
-                <QuoteForm />
+                <SampleRequestForm />
               </div>
             </Reveal>
           </div>
         </Container>
       </section>
-
-      <QuoteCalculator />
     </>
   );
 }

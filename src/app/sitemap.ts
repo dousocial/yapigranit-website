@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/blog",
     "/iletisim",
     "/teklif",
+    "/numune-talep",
     "/kvkk",
     "/gizlilik",
     "/kullanim-sartlari",
