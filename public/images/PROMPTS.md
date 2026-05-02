@@ -28,6 +28,8 @@ Her bir görsel için promptu **kopyala-yapıştır** ile ChatGPT'ye gönder. T�
 > Hedef klasör: `public/images/hero/`  
 > Boyut: 16:9 yatay, geniş kompozisyon
 
+## A1 · `hero-kurumsal`  ✅ ZATEN ÜRETİLDİ
+> Şu an `~/Downloads/hero-kurumsal.webp` konumunda. Lütfen `Desktop/yapigranit-web/public/images/hero/` klasörüne taşıyın.
 
 ## A2 · `hero-iletisim`
 ```
