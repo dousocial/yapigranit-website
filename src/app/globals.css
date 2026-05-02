@@ -221,20 +221,28 @@
     width: 100%;
   }
 
-  /* ==== Hero (anasayfa) — full-bleed background + staged text reveal ==== */
+  /* ==== Hero (anasayfa) — full-bleed background + staged text reveal ====
+     Note: opacity starts at 1 (so content stays visible if animations are
+     paused — e.g. background tabs where CSS animations don't advance).
+     Animation provides the entrance polish on top. */
   .hero-bg-fade {
-    animation: heroBgIn 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
-    will-change: opacity, transform;
+    /* Subtle zoom-in only — opacity stays at 1 so the image is always
+       visible, even on background-tab loads where animations pause. */
+    animation: heroBgIn 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
   }
   @keyframes heroBgIn {
-    from { opacity: 0; transform: scale(1.06); }
-    to   { opacity: 1; transform: scale(1); }
+    from { transform: scale(1.06); }
+    to   { transform: scale(1); }
   }
   .hero-title { text-shadow: 0 2px 28px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.4); }
   .hero-desc  { text-shadow: 0 1px 8px rgba(0,0,0,0.55); }
   .hero-fade-1, .hero-fade-2, .hero-fade-3, .hero-fade-4, .hero-fade-5 {
-    opacity: 0;
-    animation: heroTextIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    /* No fill-mode: element stays at natural styles (opacity:1) when
+       animation isn't running. Only during the animation does it pulse from
+       opacity:0 → 1. Safer than 'forwards/backwards' which stick at the
+       start state on paused/background tabs. */
+    animation: heroTextIn 0.85s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: opacity, transform;
   }
   .hero-fade-1 { animation-delay: 0.1s; }
