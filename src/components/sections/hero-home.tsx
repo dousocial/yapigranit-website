@@ -58,40 +58,6 @@ export function HeroHome() {
         />
       </div>
 
-      <style>{`
-        .hero-bg-fade {
-          animation: heroBgIn 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
-          will-change: opacity, transform;
-        }
-        @keyframes heroBgIn {
-          from { opacity: 0; transform: scale(1.06); }
-          to { opacity: 1; transform: scale(1); }
-        }
-        .hero-title { text-shadow: 0 2px 28px rgba(0,0,0,0.55), 0 1px 4px rgba(0,0,0,0.4); }
-        .hero-desc  { text-shadow: 0 1px 8px rgba(0,0,0,0.55); }
-        .hero-fade-1, .hero-fade-2, .hero-fade-3, .hero-fade-4, .hero-fade-5 {
-          opacity: 0;
-          animation: heroTextIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-          will-change: opacity, transform;
-        }
-        .hero-fade-1 { animation-delay: 0.1s; }
-        .hero-fade-2 { animation-delay: 0.2s; }
-        .hero-fade-3 { animation-delay: 0.4s; }
-        .hero-fade-4 { animation-delay: 0.55s; }
-        .hero-fade-5 { animation-delay: 0.7s; }
-        @keyframes heroTextIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .hero-bg-fade,
-          .hero-fade-1, .hero-fade-2, .hero-fade-3, .hero-fade-4, .hero-fade-5 {
-            animation: none;
-            opacity: 1;
-          }
-        }
-      `}</style>
-
       <Container size="wide" className="relative z-10">
         <div className="flex flex-col justify-center pt-12 pb-16 lg:pt-24 lg:pb-28 min-h-[760px] lg:min-h-[820px]">
           <div className="max-w-[640px]">
@@ -197,15 +163,6 @@ export function HeroHome() {
         <div className="scroll-cue-bounce">
           <ArrowDown className="size-4 mt-12 drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]" />
         </div>
-        <style>{`
-          .scroll-cue-bounce {
-            animation: scrollCueBounce 1.8s ease-in-out infinite;
-          }
-          @keyframes scrollCueBounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(6px); }
-          }
-        `}</style>
       </button>
     </section>
   );

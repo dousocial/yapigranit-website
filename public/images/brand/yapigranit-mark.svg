@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke-linejoin="round" stroke-linecap="round">
+  <!-- Diamond/gem outer outline (5-sided) -->
+  <path d="M28 18 L72 18 L92 38 L50 84 L8 38 Z"
+        stroke="currentColor" stroke-width="6" fill="none"/>
+  <!-- Y letter -->
+  <path d="M34 30 L50 52 L66 30"
+        stroke="currentColor" stroke-width="7" fill="none"/>
+  <path d="M50 52 L50 70"
+        stroke="currentColor" stroke-width="7" fill="none"/>
+</svg>
