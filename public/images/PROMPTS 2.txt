@@ -231,7 +231,7 @@ Fotogerçekçi premium kurumsal görsel, 4:3 yatay. Endüstriyel sevkiyat sahnes
 
 ## F8 · `hizmet-destek`
 ```
-
+Fotogerçekçi premium kurumsal görsel, 4:3 yatay. Mermer bakım/cila yakın çekim detay: cilalı mermer yüzey üzerinde profesyonel cila aleti veya yumuşak mikrofiber bez, parlayan yansıma, sıcak yumuşak aydınlatma, premium hizmet hissi, sade temiz kompozisyon. HİÇBİR yazı, marka olmasın. İnsan figürü olmasın (eldivenli el detayı kabul). 4K hiper detaylı.
 ```
 
 ---
