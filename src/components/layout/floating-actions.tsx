@@ -6,6 +6,7 @@ import { MessageCircle, Phone, X, ArrowUp } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { siteConfig } from "@/lib/site";
 import { cn } from "@/lib/utils";
+import { trackContact } from "@/lib/tracking";
 
 export function FloatingActions() {
   const t = useTranslations("FloatingActions");
@@ -20,7 +21,7 @@ export function FloatingActions() {
   }, []);
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
+    <div className="fixed bottom-[84px] lg:bottom-6 right-4 lg:right-6 z-40 flex flex-col items-end gap-3">
       <AnimatePresence>
         {showTop && (
           <motion.button
@@ -51,6 +52,7 @@ export function FloatingActions() {
               )}`}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => trackContact({ method: "whatsapp", source: "floating" })}
               className="flex items-center gap-3 bg-[#25D366] hover:bg-[#1DA851] text-white pl-4 pr-5 h-12 rounded-full shadow-lg text-[0.85rem] font-medium"
             >
               <MessageCircle className="size-5" />
@@ -58,6 +60,7 @@ export function FloatingActions() {
             </a>
             <a
               href={`tel:${siteConfig.contact.phones[0].replace(/\s/g, "")}`}
+              onClick={() => trackContact({ method: "phone", source: "floating" })}
               className="flex items-center gap-3 bg-surface-dark hover:bg-ink text-on-dark pl-4 pr-5 h-12 rounded-full shadow-lg text-[0.85rem] font-medium"
             >
               <Phone className="size-4" />

@@ -26,8 +26,8 @@ export const siteConfig = {
     },
   },
   social: {
-    instagram: "https://instagram.com/yapigranit",
-    linkedin: "https://linkedin.com/company/yapigranit",
+    instagram: "https://www.instagram.com/yapigranitmermer/",
+    linkedin: "https://www.linkedin.com/company/yapigrani%CC%87t-mermer-sanayi-ve-ticaret-a-%C5%9F/",
     youtube: "https://youtube.com/@yapigranit",
   },
   metrics: {

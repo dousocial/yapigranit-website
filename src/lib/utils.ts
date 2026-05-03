@@ -5,6 +5,20 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
+/**
+ * HTML metakarakterlerini escape eder. E-posta HTML'lerine kullanıcı verisi
+ * eklerken HTML injection'ı önler.
+ */
+export function escapeHtml(input: string | undefined | null): string {
+  if (!input) return "";
+  return String(input)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export function formatDate(input: string | Date, locale = "tr-TR") {
   const date = typeof input === "string" ? new Date(input) : input;
   return new Intl.DateTimeFormat(locale, {

@@ -9,14 +9,17 @@ import {
   Building2,
   Ruler,
   ShieldCheck,
+  MessageCircle,
+  Languages,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { PageHero } from "@/components/sections/page-hero";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { ContactForm } from "@/components/sections/contact-form";
+import { Testimonials } from "@/components/sections/testimonials";
 import { siteConfig } from "@/lib/site";
 
 interface Props {
@@ -46,6 +49,8 @@ export default async function IletisimPage({ params }: Props) {
 function IletisimContent() {
   const t = useTranslations("Pages.contact");
   const tNav = useTranslations("Nav");
+  const locale = useLocale();
+  const showTeam = locale === "de" || locale === "en";
 
   const trustItems: {
     icon: typeof Users2;
@@ -132,6 +137,8 @@ function IletisimContent() {
         </Container>
       </section>
 
+      {showTeam && <TeamContactsSection locale={locale} />}
+
       {/* Form + Map */}
       <section className="bg-background py-16 lg:py-20">
         <Container size="wide">
@@ -176,7 +183,7 @@ function IletisimContent() {
                     href={`https://www.google.com/maps/dir/?api=1&destination=${siteConfig.contact.map.lat},${siteConfig.contact.map.lng}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-[0.78rem] font-medium uppercase tracking-[0.15em] text-gold-deep hover:text-gold"
+                    className="inline-flex items-center min-h-11 py-2 gap-1.5 text-[0.78rem] font-medium uppercase tracking-[0.15em] text-gold-deep hover:text-gold"
                   >
                     {t("mapInDirections")}
                     <ArrowRight className="size-3.5" />
@@ -187,6 +194,8 @@ function IletisimContent() {
           </div>
         </Container>
       </section>
+
+      <Testimonials variant="light" />
 
       {/* Trust */}
       <section className="bg-surface-darker text-on-dark py-14 lg:py-16 relative overflow-hidden">
@@ -249,12 +258,160 @@ function InfoCard({
           href={actionHref}
           target={external ? "_blank" : undefined}
           rel={external ? "noopener noreferrer" : undefined}
-          className="mt-5 inline-flex items-center gap-1.5 text-[0.78rem] font-medium uppercase tracking-[0.15em] text-gold hover:text-gold-soft self-start"
+          className="mt-5 inline-flex items-center min-h-11 py-2 gap-1.5 text-[0.78rem] font-medium uppercase tracking-[0.15em] text-gold hover:text-gold-soft self-start"
         >
           {actionLabel}
           <ArrowRight className="size-3.5" />
         </a>
       )}
     </div>
+  );
+}
+
+/* ────────────────────────────────────────────────────────────
+ * Team Contacts (Almanya satış ekibi) — sadece /de ve /en'de
+ * ──────────────────────────────────────────────────────────── */
+
+interface TeamMember {
+  name: string;
+  role: string;
+  phone: string;
+  whatsapp: string;
+  email: string;
+  languages: string[];
+}
+
+const teamMembers: TeamMember[] = [
+  {
+    name: "Halil Gülçer",
+    role: "Marketing & Sales",
+    phone: "+90 545 310 8547",
+    whatsapp: "+90 545 310 8547",
+    email: "h.gulcer@yapigranit.de",
+    languages: ["Deutsch", "Niederländisch", "Englisch", "Türkisch"],
+  },
+  {
+    name: "Merve Yikilmaz",
+    role: "Marketing & Sales",
+    phone: "+90 533 133 4256",
+    whatsapp: "+90 533 133 4256",
+    email: "m.yikilmaz@yapigranit.de",
+    languages: ["Niederländisch", "Englisch", "Türkisch"],
+  },
+];
+
+const teamI18n = {
+  de: {
+    eyebrow: "Ihr Ansprechpartner",
+    title: "Unser Team in Deutschland",
+    description:
+      "Wir stehen Ihnen persönlich zur Verfügung – auf Deutsch, Englisch und weiteren Sprachen.",
+    languages: "Sprachen",
+    languagesMap: {
+      Deutsch: "Deutsch",
+      Niederländisch: "Niederländisch",
+      Englisch: "Englisch",
+      Türkisch: "Türkisch",
+    } as Record<string, string>,
+  },
+  en: {
+    eyebrow: "Your Contact",
+    title: "Our Team in Germany",
+    description:
+      "We are personally available — in German, English, and other languages.",
+    languages: "Languages",
+    languagesMap: {
+      Deutsch: "German",
+      Niederländisch: "Dutch",
+      Englisch: "English",
+      Türkisch: "Turkish",
+    } as Record<string, string>,
+  },
+};
+
+function TeamContactsSection({ locale }: { locale: string }) {
+  const tx = teamI18n[locale as "de" | "en"] ?? teamI18n.en;
+
+  return (
+    <section className="bg-surface-darker text-on-dark py-16 lg:py-20 relative overflow-hidden">
+      <div className="absolute inset-0 marble-bg opacity-40" aria-hidden />
+      <Container size="wide" className="relative">
+        <Reveal>
+          <p className="text-[0.78rem] uppercase tracking-[0.22em] text-gold font-medium">
+            {tx.eyebrow}
+          </p>
+          <h2 className="display-lg mt-3 text-on-dark text-balance">
+            {tx.title}
+          </h2>
+          <p className="mt-5 text-[0.95rem] text-on-dark-muted leading-relaxed max-w-[640px]">
+            {tx.description}
+          </p>
+        </Reveal>
+
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6">
+          {teamMembers.map((m, idx) => (
+            <Reveal key={m.email} delay={idx * 0.08}>
+              <div className="bg-on-dark/[0.03] border border-on-dark/15 p-7 lg:p-8 h-full flex flex-col">
+                <span className="self-start inline-block px-4 py-1.5 text-[0.68rem] uppercase tracking-[0.22em] border border-on-dark/40 rounded-full text-on-dark-muted">
+                  {m.role}
+                </span>
+                <h3 className="font-display text-[1.6rem] lg:text-[1.8rem] text-on-dark mt-7">
+                  {m.name}
+                </h3>
+
+                <div className="mt-7 space-y-3 text-[0.92rem]">
+                  <a
+                    href={`https://wa.me/${m.whatsapp.replace(/\D/g, "")}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 text-on-dark hover:text-gold transition-colors group"
+                  >
+                    <span className="size-9 grid place-items-center rounded-full bg-[#25D366]/15 text-[#25D366] group-hover:bg-[#25D366]/25 transition-colors">
+                      <MessageCircle className="size-4" strokeWidth={1.6} />
+                    </span>
+                    <span>{m.whatsapp}</span>
+                  </a>
+                  <a
+                    href={`tel:${m.phone.replace(/\s/g, "")}`}
+                    className="flex items-center gap-3 text-on-dark hover:text-gold transition-colors group"
+                  >
+                    <span className="size-9 grid place-items-center rounded-full bg-on-dark/10 group-hover:bg-on-dark/20 transition-colors">
+                      <Phone className="size-4" strokeWidth={1.6} />
+                    </span>
+                    <span>{m.phone}</span>
+                  </a>
+                  <a
+                    href={`mailto:${m.email}`}
+                    className="flex items-center gap-3 text-on-dark hover:text-gold transition-colors group"
+                  >
+                    <span className="size-9 grid place-items-center rounded-full bg-on-dark/10 group-hover:bg-on-dark/20 transition-colors">
+                      <Mail className="size-4" strokeWidth={1.6} />
+                    </span>
+                    <span>{m.email}</span>
+                  </a>
+                </div>
+
+                <div className="mt-7 pt-6 border-t border-on-dark/15">
+                  <p className="text-[0.7rem] uppercase tracking-[0.22em] text-on-dark-soft mb-3 inline-flex items-center gap-2">
+                    <Languages className="size-3.5" strokeWidth={1.6} />
+                    {tx.languages}
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    {m.languages.map((lang) => (
+                      <span
+                        key={lang}
+                        className="px-3 py-1.5 text-[0.78rem] bg-on-dark/[0.06] border border-on-dark/20 text-on-dark-muted"
+                      >
+                        {tx.languagesMap[lang] ?? lang}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </Container>
+    </section>
   );
 }

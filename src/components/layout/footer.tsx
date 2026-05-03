@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Instagram, Linkedin, Youtube, MapPin, Phone, Mail } from "lucide-react";
 
@@ -67,9 +67,14 @@ export function Footer() {
   const tFooter = useTranslations("Footer");
   const tLinks = useTranslations("Footer.links");
   const tSite = useTranslations("Site");
+  const locale = useLocale();
+  const visibleLegalLinks =
+    locale === "de"
+      ? [...legalLinks, { href: "/impressum", key: "impressum" as const }]
+      : legalLinks;
 
   return (
-    <footer className="bg-surface-darker text-on-dark relative">
+    <footer className="bg-surface-darker text-on-dark relative pb-[88px] lg:pb-0">
       <div className="absolute inset-0 marble-bg opacity-40" aria-hidden />
 
       <Container size="wide" className="relative">
@@ -108,12 +113,12 @@ export function Footer() {
               <h4 className="eyebrow text-gold mb-5">
                 {tFooter(section.titleKey)}
               </h4>
-              <ul className="space-y-2.5">
+              <ul className="space-y-1">
                 {section.links.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-[0.9rem] text-on-dark-muted hover:text-gold transition-colors"
+                      className="inline-flex items-center min-h-11 py-2 text-[0.9rem] text-on-dark-muted hover:text-gold transition-colors"
                     >
                       {tLinks(link.key)}
                     </Link>
@@ -138,13 +143,13 @@ export function Footer() {
                 </p>
               </div>
               <div className="flex gap-3">
-                <Phone className="size-4 text-gold shrink-0 mt-0.5" />
-                <div className="text-[0.88rem] text-on-dark-muted">
+                <Phone className="size-4 text-gold shrink-0 mt-3" />
+                <div className="text-[0.88rem] text-on-dark-muted flex flex-col">
                   {siteConfig.contact.phones.map((p) => (
                     <a
                       key={p}
                       href={`tel:${p.replace(/\s/g, "")}`}
-                      className="block hover:text-gold transition-colors"
+                      className="inline-flex items-center min-h-11 py-2 hover:text-gold transition-colors"
                     >
                       {p}
                     </a>
@@ -152,10 +157,10 @@ export function Footer() {
                 </div>
               </div>
               <div className="flex gap-3">
-                <Mail className="size-4 text-gold shrink-0 mt-0.5" />
+                <Mail className="size-4 text-gold shrink-0 mt-3" />
                 <a
                   href={`mailto:${siteConfig.contact.emails.info}`}
-                  className="text-[0.88rem] text-on-dark-muted hover:text-gold transition-colors"
+                  className="inline-flex items-center min-h-11 py-2 text-[0.88rem] text-on-dark-muted hover:text-gold transition-colors"
                 >
                   {siteConfig.contact.emails.info}
                 </a>
@@ -169,21 +174,24 @@ export function Footer() {
             © {new Date().getFullYear()} {siteConfig.name}.{" "}
             {tFooter("rights")}
           </p>
-          <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            {legalLinks.map((item) => (
+          <ul className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            {visibleLegalLinks.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="text-[0.8rem] text-on-dark-soft hover:text-gold transition-colors"
+                  className="inline-flex items-center min-h-11 py-2 px-1 text-[0.8rem] text-on-dark-soft hover:text-gold transition-colors"
                 >
                   {tLinks(item.key)}
                 </Link>
               </li>
             ))}
           </ul>
-          <p className="text-[0.8rem] text-on-dark-soft">
+          <p className="text-[0.8rem] text-on-dark-soft inline-flex items-center min-h-11 py-2 gap-1">
             {tFooter("webDesign")}{" "}
-            <Link href="/" className="text-gold hover:text-gold-soft">
+            <Link
+              href="/"
+              className="inline-flex items-center min-h-11 py-2 text-gold hover:text-gold-soft"
+            >
               {tFooter("webDesignBy")}
             </Link>
           </p>
@@ -208,7 +216,7 @@ function SocialLink({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="size-9 grid place-items-center border border-line-dark hover:border-gold hover:text-gold text-on-dark-muted transition-colors"
+      className="size-11 grid place-items-center border border-line-dark hover:border-gold hover:text-gold text-on-dark-muted transition-colors"
     >
       {icon}
     </a>

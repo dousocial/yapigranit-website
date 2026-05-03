@@ -10,6 +10,8 @@ import { toast } from "sonner";
 
 import { Input, Textarea } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { trackLead } from "@/lib/tracking";
+import { Link } from "@/i18n/navigation";
 
 // project type values + EN/DE/TR labels via simple lookup
 const projectTypeLabels: Record<
@@ -180,6 +182,7 @@ export function QuoteForm() {
         body: formData,
       });
       if (!res.ok) throw new Error();
+      trackLead({ formName: "quote", value: 100 });
       toast.success(t("successQuote"));
       reset();
       setFiles([]);
@@ -371,9 +374,9 @@ export function QuoteForm() {
           />
           <span className="text-[0.82rem] text-ink-muted group-hover:text-ink">
             {t("labelKvkk")}{" "}
-            <a href="/kvkk" className="text-gold-deep underline-grow">
+            <Link href="/kvkk" className="text-gold-deep underline-grow">
               {t("labelKvkkLink")}
-            </a>{" "}
+            </Link>{" "}
             {t("labelKvkkSuffix")}
           </span>
         </label>

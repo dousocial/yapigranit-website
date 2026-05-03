@@ -3,6 +3,7 @@ import { z } from "zod";
 
 import { prisma } from "@/lib/prisma";
 import { renderRows, sendMail } from "@/lib/email";
+import { escapeHtml } from "@/lib/utils";
 
 const schema = z.object({
   name: z.string().min(2),
@@ -10,7 +11,11 @@ const schema = z.object({
   phone: z.string().min(5),
   subject: z.string().min(1),
   message: z.string().min(5),
-  consent: z.union([z.boolean(), z.literal("true")]).transform(Boolean),
+  // KVKK onayı zorunlu — true olmalı, sadece boolean dönüştürmek yetmez
+  consent: z
+    .union([z.boolean(), z.literal("true")])
+    .transform(Boolean)
+    .refine((v) => v === true, { message: "KVKK onayı gereklidir" }),
 });
 
 export async function POST(req: Request) {
@@ -48,7 +53,7 @@ export async function POST(req: Request) {
           })}
         </table>
         <h3>Mesaj</h3>
-        <p>${parsed.message.replace(/\n/g, "<br>")}</p>
+        <p>${escapeHtml(parsed.message).replace(/\n/g, "<br>")}</p>
       `,
     });
 

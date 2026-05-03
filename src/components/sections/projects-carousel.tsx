@@ -48,7 +48,7 @@ export function ProjectsCarousel() {
             </h2>
             <Link
               href="/projeler"
-              className="mt-6 inline-flex items-center gap-2 text-[0.78rem] font-medium uppercase tracking-[0.18em] text-gold-deep hover:text-gold transition-colors group"
+              className="mt-6 inline-flex items-center min-h-11 py-2 gap-2 text-[0.78rem] font-medium uppercase tracking-[0.18em] text-gold-deep hover:text-gold transition-colors group"
             >
               {t("ctaSeeAll")}
               <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />

@@ -20,7 +20,9 @@
     "language": "Dil",
     "search": "Arama",
     "skipToContent": "İçeriğe geç",
-    "logoAriaLabel": "YAPIGRANİT Anasayfa"
+    "logoAriaLabel": "YAPIGRANİT Anasayfa",
+    "machinePark": "Makine Parkuru",
+    "impressum": "Impressum"
   },
   "MegaMenu": {
     "productGroups": "Ürün Grupları",
@@ -62,7 +64,8 @@
       "publicProjects": "Kamusal Yapılar",
       "privacy": "Gizlilik Politikası",
       "kvkk": "KVKK",
-      "terms": "Kullanım Şartları"
+      "terms": "Kullanım Şartları",
+      "impressum": "Impressum"
     }
   },
   "Hero": {
@@ -74,11 +77,13 @@
     "description": "Milyonlarca yıllık jeolojik mirası, modern mimarinin zarafetiyle buluşturuyoruz. Yaşam alanlarınız için sonsuzluk kadar dayanıklı, sanat kadar eşsiz çözümler.",
     "ctaPrimary": "Koleksiyonu Keşfet",
     "ctaSecondary": "Projeleri Gör",
-    "trustExperience": "25+ Yıllık Tecrübe",
+    "trustExperience": "32+ Yıllık Tecrübe",
     "trustTechnology": "5 Eksen CNC & Waterjet",
     "trustExport": "12 Ülkeye İhracat",
     "trustSatisfaction": "%100 Müşteri Memnuniyeti",
-    "scrollDown": "Aşağı in"
+    "scrollDown": "Aşağı in",
+    "primaryCta": "Projemi Fiyatlandır",
+    "secondaryCta": "Ücretsiz Numune İste"
   },
   "ProductsGrid": {
     "eyebrow": "Ürün Gruplarımız",
@@ -133,7 +138,8 @@
     "eyebrow": "Teklif Alın",
     "title": "Projeniz için hemen teklif alın.",
     "description": "Projenize özel fiyatlandırma almak ve detaylı bilgi için formu doldurun. Ekibimiz en kısa sürede size dönüş yapsın.",
-    "ctaForm": "Teklif Formu"
+    "ctaForm": "Projemi Fiyatlandır",
+    "ctaSampleNow": "Ücretsiz Numune İste"
   },
   "FloatingActions": {
     "openOptions": "İletişim seçenekleri",
@@ -187,7 +193,7 @@
       "title": "Taşta Mühendislik Disiplini",
       "description": "1994'ten bu yana mimar ve müteahhitler için; hassas üretim, kontrollü montaj ve sürdürülebilir cephe çözümlerini tek çatı altında sunuyoruz.",
       "metaTitle": "Kurumsal",
-      "metaDescription": "YAPIGRANİT hakkında, vizyon ve misyonumuz, değerlerimiz ve 25+ yıllık tecrübeyle şekillenen yolculuğumuz.",
+      "metaDescription": "YAPIGRANİT hakkında, vizyon ve misyonumuz, değerlerimiz ve 32+ yıllık tecrübeyle şekillenen yolculuğumuz.",
       "aboutEyebrow": "Hakkımızda",
       "aboutTitle": "Bir sanat eserine dönüştürüyoruz.",
       "aboutQuote": "Bir mermer bloğuna baktığımızda sadece taş görmüyoruz; içindeki gizli sanat eserini görüyoruz.",
@@ -219,7 +225,7 @@
       "detailNumberLabel": "Hizmet",
       "detailProcessTitle": "Sürecimiz",
       "detailCtaPrimary": "Teklif Alın",
-      "detailCtaSecondary": "Bilgi Al",
+      "detailCtaSecondary": "Ücretsiz Numune İste",
       "detailOtherTitle": "Diğer Hizmetlerimiz",
       "detailOtherCta": "Tüm Hizmetler"
     },
@@ -480,7 +486,7 @@
     "y2015Title": "Teknolojik Yatırım",
     "y2015Desc": "5 Eksen CNC, Waterjet ve Bridge Saw makinalarımızla üretim altyapımızı uzay endüstrisi standartlarına taşıdık.",
     "y2026Title": "Bugün",
-    "y2026Desc": "12 ülkeye ihracat, 500+ tamamlanan proje ve 25+ yıllık birikimle Denizli'den dünyaya taş işleyen bir mühendislik markası."
+    "y2026Desc": "12 ülkeye ihracat, 3000+ tamamlanan proje ve 32+ yıllık birikimle Denizli'den dünyaya taş işleyen bir mühendislik markası."
   },
   "Values": {
     "qualityTitle": "Kalite",
@@ -495,7 +501,7 @@
     "solutionDesc": "Mekanınıza en uygun çözümü tasarlıyor, taşa sanatkar ellerle hayat veriyoruz."
   },
   "WhyUs": {
-    "experienceTitle": "25+ Yıllık Tecrübe",
+    "experienceTitle": "32+ Yıllık Tecrübe",
     "experienceDesc": "1994'ten bugüne taşı işleyen ustalık ve mühendislik birikimi.",
     "teamTitle": "Deneyimli Uzman Kadro",
     "teamDesc": "Sektöre yıllarını vermiş ustalar ve teknik ekip.",

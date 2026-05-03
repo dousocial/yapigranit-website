@@ -3,6 +3,7 @@ import { z } from "zod";
 
 import { prisma } from "@/lib/prisma";
 import { renderRows, sendMail } from "@/lib/email";
+import { escapeHtml } from "@/lib/utils";
 
 const schema = z.object({
   customerType: z.enum(["bireysel", "kurumsal"]),
@@ -15,7 +16,11 @@ const schema = z.object({
   projectType: z.string().min(1),
   materials: z.string().min(1),
   notes: z.string().optional(),
-  consent: z.union([z.boolean(), z.literal("true")]).transform(Boolean),
+  // KVKK onayı zorunlu — true olmalı
+  consent: z
+    .union([z.boolean(), z.literal("true")])
+    .transform(Boolean)
+    .refine((v) => v === true, { message: "KVKK onayı gereklidir" }),
 });
 
 export async function POST(req: Request) {
@@ -62,7 +67,7 @@ export async function POST(req: Request) {
         </table>
         ${
           parsed.notes
-            ? `<h3>Notlar</h3><p>${parsed.notes.replace(/\n/g, "<br>")}</p>`
+            ? `<h3>Notlar</h3><p>${escapeHtml(parsed.notes).replace(/\n/g, "<br>")}</p>`
             : ""
         }
       `,

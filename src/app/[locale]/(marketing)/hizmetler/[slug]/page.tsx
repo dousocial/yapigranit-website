@@ -7,6 +7,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 import { PageHero } from "@/components/sections/page-hero";
+import { DigitalScan } from "@/components/sections/digital-scan";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
@@ -76,6 +77,8 @@ function ServiceContent({ slug }: { slug: string }) {
         imageAlt={l.title}
       />
 
+      {service.slug === "dijital-roleve" && <DigitalScan />}
+
       <section className="bg-background py-20 lg:py-28">
         <Container size="wide">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
@@ -128,6 +131,7 @@ function ServiceContent({ slug }: { slug: string }) {
                   src={service.image}
                   alt={l.title}
                   fill
+                  priority
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover"
                 />

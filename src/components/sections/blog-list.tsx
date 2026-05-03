@@ -175,10 +175,8 @@ export function BlogList() {
               <motion.article
                 key={post.slug}
                 layout
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 16 }}
-                transition={{ duration: 0.4, delay: (idx % 8) * 0.04 }}
+                className="reveal-in"
+                style={{ animationDelay: `${(idx % 8) * 0.04}s` }}
               >
                 <BlogCard
                   post={post}

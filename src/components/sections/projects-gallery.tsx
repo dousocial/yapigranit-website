@@ -51,16 +51,16 @@ export function ProjectsGallery() {
       <Container size="wide">
         {/* Filters */}
         <div className="flex flex-wrap items-center justify-between gap-4 py-6 border-y border-line mb-8 lg:mb-10">
-          <div className="flex flex-wrap gap-1 -mx-1 overflow-x-auto scrollbar-hide flex-1">
+          <div className="flex flex-wrap gap-2 overflow-x-auto scrollbar-hide flex-1">
             {projectCategories.map((cat) => (
               <button
                 key={cat.slug}
                 onClick={() => setCategory(cat.slug)}
                 className={cn(
-                  "px-4 py-2 text-[0.78rem] font-medium uppercase tracking-[0.12em] transition-all whitespace-nowrap",
+                  "inline-flex items-center min-h-11 px-4 py-2 text-[0.78rem] font-medium uppercase tracking-[0.12em] transition-all whitespace-nowrap rounded-full border",
                   category === cat.slug
-                    ? "bg-gold text-ink"
-                    : "text-ink-muted hover:text-ink",
+                    ? "bg-gold text-ink border-gold"
+                    : "text-ink-muted border-line hover:text-ink hover:border-line-strong",
                 )}
               >
                 {cat.label[locale] ?? cat.label.tr}
@@ -132,10 +132,8 @@ export function ProjectsGallery() {
               <motion.div
                 key={project.slug}
                 layout
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 20 }}
-                transition={{ duration: 0.4, delay: (idx % 6) * 0.05 }}
+                className="reveal-in"
+                style={{ animationDelay: `${(idx % 6) * 0.05}s` }}
               >
                 <ProjectCard project={project} locale={locale} />
               </motion.div>

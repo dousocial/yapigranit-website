@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { Command } from "cmdk";
 import {
@@ -16,10 +16,11 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
-import { blogPosts } from "@/lib/data/blog";
-import { projects } from "@/lib/data/projects";
-import { products } from "@/lib/data/products";
-import { services } from "@/lib/data/services";
+import { blogPosts, localizedPost } from "@/lib/data/blog";
+import { projects, localizedProject } from "@/lib/data/projects";
+import { products, localizedProduct, localizedProductTagline } from "@/lib/data/products";
+import { services, localizedService } from "@/lib/data/services";
+import type { Locale } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 interface SiteSearchProps {
@@ -30,6 +31,8 @@ interface SiteSearchProps {
 export function SiteSearch({ variant = "icon", className }: SiteSearchProps) {
   const router = useRouter();
   const t = useTranslations("Search");
+  const tCommon = useTranslations("Common");
+  const locale = useLocale() as Locale;
   const [open, setOpen] = React.useState(false);
   const [query, setQuery] = React.useState("");
 
@@ -69,17 +72,12 @@ export function SiteSearch({ variant = "icon", className }: SiteSearchProps) {
         <button
           onClick={() => setOpen(true)}
           className={cn(
-            "flex items-center gap-1.5 px-3 py-2 text-[0.85rem] font-medium text-ink hover:text-gold-deep transition-colors",
+            "flex items-center justify-center gap-1.5 min-w-11 min-h-11 px-3 py-2 text-[0.85rem] font-medium text-ink hover:text-gold-deep transition-colors",
             className,
           )}
           aria-label={t("buttonAriaLabel")}
         >
           <SearchIcon className="size-4" />
-          <span className="hidden xl:inline-flex items-center gap-1.5 text-ink-soft">
-            <kbd className="text-[0.65rem] font-mono px-1.5 py-0.5 bg-surface-muted border border-line rounded">
-              ⌘K
-            </kbd>
-          </span>
         </button>
       ) : (
         <button
@@ -178,58 +176,72 @@ export function SiteSearch({ variant = "icon", className }: SiteSearchProps) {
 
                   {/* Hizmetler */}
                   <Command.Group heading={t("groupServices")}>
-                    {services.map((s) => (
-                      <SearchItem
-                        key={s.slug}
-                        value={`${s.title} ${s.description} ${s.tags.join(" ")}`}
-                        onSelect={() => navigate(`/hizmetler/${s.slug}`)}
-                        icon={<Wrench className="size-4" />}
-                        title={s.title}
-                        subtitle={s.categoryLabel}
-                      />
-                    ))}
+                    {services.map((s) => {
+                      const ls = localizedService(s, locale);
+                      return (
+                        <SearchItem
+                          key={s.slug}
+                          value={`${ls.title} ${ls.description} ${ls.tags.join(" ")}`}
+                          onSelect={() => navigate(`/hizmetler/${s.slug}`)}
+                          icon={<Wrench className="size-4" />}
+                          title={ls.title}
+                          subtitle={ls.categoryLabel}
+                        />
+                      );
+                    })}
                   </Command.Group>
 
                   {/* Ürünler */}
                   <Command.Group heading={t("groupProducts")}>
-                    {products.map((p) => (
-                      <SearchItem
-                        key={p.slug}
-                        value={`${p.name} ${p.tagline} ${p.description}`}
-                        onSelect={() => navigate(`/urunler/${p.slug}`)}
-                        icon={<Layers className="size-4" />}
-                        title={p.name}
-                        subtitle={p.tagline}
-                      />
-                    ))}
+                    {products.map((p) => {
+                      const lp = localizedProduct(p, locale);
+                      const tagline = localizedProductTagline(p, locale);
+                      return (
+                        <SearchItem
+                          key={p.slug}
+                          value={`${lp.name} ${tagline} ${lp.description ?? ""}`}
+                          onSelect={() => navigate(`/urunler/${p.slug}`)}
+                          icon={<Layers className="size-4" />}
+                          title={lp.name}
+                          subtitle={tagline}
+                        />
+                      );
+                    })}
                   </Command.Group>
 
                   {/* Projeler */}
                   <Command.Group heading={t("groupProjects")}>
-                    {projects.map((p) => (
-                      <SearchItem
-                        key={p.slug}
-                        value={`${p.title} ${p.location} ${p.material.join(" ")} ${p.summary}`}
-                        onSelect={() => navigate(`/projeler/${p.slug}`)}
-                        icon={<Building2 className="size-4" />}
-                        title={p.title}
-                        subtitle={`${p.categoryLabel} · ${p.location} · ${p.year}`}
-                      />
-                    ))}
+                    {projects.map((p) => {
+                      const lp = localizedProject(p, locale);
+                      return (
+                        <SearchItem
+                          key={p.slug}
+                          value={`${lp.title} ${p.location} ${lp.material.join(" ")} ${lp.summary}`}
+                          onSelect={() => navigate(`/projeler/${p.slug}`)}
+                          icon={<Building2 className="size-4" />}
+                          title={lp.title}
+                          subtitle={`${lp.categoryLabel} · ${p.location} · ${p.year}`}
+                        />
+                      );
+                    })}
                   </Command.Group>
 
                   {/* Blog */}
                   <Command.Group heading={t("groupBlog")}>
-                    {blogPosts.map((b) => (
-                      <SearchItem
-                        key={b.slug}
-                        value={`${b.title} ${b.subtitle ?? ""} ${b.excerpt} ${b.categoryLabel}`}
-                        onSelect={() => navigate(`/blog/${b.slug}`)}
-                        icon={<FileText className="size-4" />}
-                        title={b.title}
-                        subtitle={`${b.categoryLabel} · ${b.readMinutes} dk`}
-                      />
-                    ))}
+                    {blogPosts.map((b) => {
+                      const lb = localizedPost(b, locale);
+                      const minLabel = tCommon("minRead", { minutes: b.readMinutes });
+                      return (
+                        <SearchItem
+                          key={b.slug}
+                          value={`${lb.title} ${lb.subtitle ?? ""} ${lb.excerpt} ${lb.categoryLabel}`}
+                          onSelect={() => navigate(`/blog/${b.slug}`)}
+                          icon={<FileText className="size-4" />}
+                          title={lb.title}
+                          subtitle={`${lb.categoryLabel} · ${minLabel}`}
+                        />
+                      );
+                    })}
                   </Command.Group>
                 </Command.List>
 

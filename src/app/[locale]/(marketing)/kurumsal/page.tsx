@@ -148,25 +148,39 @@ function KurumsalContent() {
         </Container>
       </section>
 
-      {/* Closing CTA */}
+      {/* Closing CTA — full-bleed dark marble */}
       <section className="relative bg-surface-darker text-on-dark overflow-hidden">
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0" aria-hidden>
           <Image
             src="/images/sections/kurumsal-cta-bg.webp"
             alt=""
             fill
             sizes="100vw"
-            className="object-cover opacity-25"
+            className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-surface-darker via-surface-darker/90 to-surface-darker/50" />
+          {/* Two-layer vignette: left for title, right keeps stone visible */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(105deg, rgba(8,7,10,0.78) 0%, rgba(8,7,10,0.5) 38%, rgba(8,7,10,0.18) 65%, rgba(8,7,10,0.05) 100%)",
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to top, rgba(8,7,10,0.6) 0%, rgba(8,7,10,0) 35%, rgba(8,7,10,0) 70%, rgba(8,7,10,0.32) 100%)",
+            }}
+          />
         </div>
-        <Container size="wide" className="relative">
-          <div className="grid lg:grid-cols-2 gap-10 items-center py-20 lg:py-24">
-            <h2 className="display-lg text-on-dark text-balance">
+        <Container size="wide" className="relative z-10">
+          <div className="grid lg:grid-cols-2 gap-10 items-center py-20 lg:py-28 min-h-[380px] lg:min-h-[460px]">
+            <h2 className="display-lg text-on-dark text-balance hero-title">
               {t("closeTitle")}
             </h2>
             <div className="lg:text-right">
-              <p className="text-[0.95rem] text-on-dark-muted mb-6 lg:max-w-[420px] lg:ml-auto">
+              <p className="text-[0.95rem] text-on-dark-muted mb-6 lg:max-w-[420px] lg:ml-auto hero-desc">
                 {t("closeDesc")}
               </p>
               <Button asChild size="lg">

@@ -12,29 +12,46 @@ export function CtaBand() {
   const t = useTranslations("Cta");
 
   return (
-    <section className="bg-background">
-      <Container size="wide" className="px-0 sm:px-6 md:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 bg-surface-muted overflow-hidden">
-          <div className="relative aspect-[5/4] md:aspect-auto md:min-h-[420px] bg-surface-darker">
-            <Image
-              src="/images/sections/cta-bg.webp"
-              alt=""
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover"
-            />
-            <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-1/3 bg-gold" />
-          </div>
+    <section className="relative bg-surface-darker text-on-dark overflow-hidden">
+      {/* Full-bleed background image */}
+      <div className="absolute inset-0 z-0" aria-hidden>
+        <Image
+          src="/images/sections/cta-bg.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        {/* Soft directional vignette — readability without hiding image.
+            Inverted from PageHero so the text on the RIGHT is legible. */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(255deg, rgba(8,7,10,0.78) 0%, rgba(8,7,10,0.5) 38%, rgba(8,7,10,0.18) 65%, rgba(8,7,10,0.05) 100%)",
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(8,7,10,0.6) 0%, rgba(8,7,10,0) 35%, rgba(8,7,10,0) 70%, rgba(8,7,10,0.32) 100%)",
+          }}
+        />
+      </div>
 
-          <Reveal className="flex flex-col justify-center p-10 md:p-14 lg:p-16">
-            <Eyebrow>{t("eyebrow")}</Eyebrow>
-            <h2 className="display-lg mt-4 text-ink text-balance">
+      <Container size="wide" className="relative z-10">
+        <div className="flex flex-col items-end justify-center pt-16 pb-20 lg:pt-24 lg:pb-28 min-h-[420px] lg:min-h-[520px]">
+          <Reveal className="max-w-[560px] text-right ml-auto">
+            <Eyebrow variant="light">{t("eyebrow")}</Eyebrow>
+            <h2 className="display-lg mt-4 text-on-dark text-balance hero-title">
               {t("title")}
             </h2>
-            <p className="mt-5 text-[0.95rem] text-ink-muted leading-relaxed max-w-[400px]">
+            <div className="w-12 h-px bg-gold mt-7 ml-auto" />
+            <p className="mt-6 text-[0.98rem] text-on-dark-muted leading-relaxed max-w-[440px] ml-auto hero-desc">
               {t("description")}
             </p>
-            <Button asChild size="lg" className="mt-8 self-start">
+            <Button asChild size="lg" className="mt-8">
               <Link href="/teklif">
                 {t("ctaForm")}
                 <ArrowRight />

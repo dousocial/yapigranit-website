@@ -21,6 +21,21 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
+    keywords: [
+      "yapı granit projeleri",
+      "denizli mermer projeleri",
+      "doğal taş projeleri",
+      "mekanik cephe kaplama projeleri",
+      "cnc taş kaplama projeleri",
+      "külliye cephe kaplama",
+      "cami cephe kaplama",
+      "avm zemin kaplama",
+      "otel mermer uygulama",
+      "konut mermer uygulama",
+      "merdiven asansör mermer kaplama",
+      "doğal taş cephe kaplama",
+      "taş cephe sistemleri",
+    ],
     alternates: {
       canonical: locale === "tr" ? "/projeler" : `/${locale}/projeler`,
     },

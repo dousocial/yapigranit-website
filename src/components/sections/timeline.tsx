@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { useTranslations } from "next-intl";
-import { motion } from "motion/react";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Reveal } from "@/components/ui/reveal";
@@ -90,13 +89,10 @@ export function Timeline() {
         <div className="lg:hidden">
           <ol className="relative border-l-2 border-line-strong pl-6 space-y-8">
             {timeline.map((item, idx) => (
-              <motion.li
+              <li
                 key={item.year}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.05 }}
-                className="relative"
+                className="reveal-in relative"
+                style={{ animationDelay: `${idx * 0.05}s` }}
               >
                 <span className="absolute -left-[31px] top-1 size-4 rounded-full bg-gold ring-4 ring-background" />
                 <div className="font-display text-[1.5rem] text-ink">
@@ -105,7 +101,7 @@ export function Timeline() {
                 <p className="text-[0.88rem] text-ink-muted leading-relaxed mt-1">
                   {t(item.descKey as TimelineKey)}
                 </p>
-              </motion.li>
+              </li>
             ))}
           </ol>
         </div>

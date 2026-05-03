@@ -8,6 +8,9 @@ import { BrandStrip } from "@/components/sections/brand-strip";
 import { ProjectsCarousel } from "@/components/sections/projects-carousel";
 import { StatsBand } from "@/components/sections/stats-band";
 import { CtaBand } from "@/components/sections/cta-band";
+import { DigitalScan } from "@/components/sections/digital-scan";
+import { Testimonials } from "@/components/sections/testimonials";
+import { LeadMagnet } from "@/components/sections/lead-magnet";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -26,6 +29,25 @@ export async function generateMetadata({
       "",
     ),
     description: tSite("description"),
+    keywords: [
+      "yapı granit",
+      "yapıgranit",
+      "denizli doğal taş",
+      "denizli mermer",
+      "denizli granit",
+      "doğal taş cephe kaplama",
+      "mekanik cephe kaplama",
+      "mermer cephe kaplama",
+      "granit cephe uygulama",
+      "taş cephe sistemleri",
+      "cnc taş kaplama",
+      "cnc işlemli duvar kaplama",
+      "külliye cephe kaplama",
+      "cami cephe kaplama",
+      "avm zemin kaplama",
+      "otel mermer uygulama",
+      "porselen kaplama",
+    ],
     alternates: { canonical: locale === "tr" ? "/" : `/${locale}` },
   };
 }
@@ -39,8 +61,11 @@ export default async function HomePage({ params }: Props) {
       <HeroHome />
       <ProductsGrid />
       <B2BSolutions />
+      <DigitalScan />
       <BrandStrip />
       <ProjectsCarousel />
+      <Testimonials />
+      <LeadMagnet />
       <StatsBand />
       <CtaBand />
     </>

@@ -103,3 +103,153 @@ export function BreadcrumbJsonLd({
     />
   );
 }
+
+/**
+ * Article schema — blog/rehber yazıları için.
+ * Google Search Console'da rich result olarak yayın tarihi, yazar, görsel görünür.
+ */
+export function ArticleJsonLd({
+  headline,
+  description,
+  image,
+  datePublished,
+  dateModified,
+  url,
+  authorName = siteConfig.name,
+  category,
+}: {
+  headline: string;
+  description: string;
+  image: string;
+  datePublished: string;
+  dateModified?: string;
+  url: string;
+  authorName?: string;
+  category?: string;
+}) {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline,
+    description,
+    image: image.startsWith("http") ? image : `${siteConfig.url}${image}`,
+    datePublished,
+    dateModified: dateModified ?? datePublished,
+    author: {
+      "@type": "Organization",
+      name: authorName,
+      url: siteConfig.url,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteConfig.url}/logo.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url.startsWith("http") ? url : `${siteConfig.url}${url}`,
+    },
+    ...(category && { articleSection: category }),
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+}
+
+/**
+ * Product schema — ürün detay sayfaları için.
+ * Google Shopping ve rich snippet'lerde fiyat, marka, görsel görünür.
+ */
+export function ProductJsonLd({
+  name,
+  description,
+  image,
+  brand = siteConfig.name,
+  category,
+  url,
+  sku,
+  material,
+}: {
+  name: string;
+  description: string;
+  image: string | string[];
+  brand?: string;
+  category?: string;
+  url: string;
+  sku?: string;
+  material?: string;
+}) {
+  const images = Array.isArray(image) ? image : [image];
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name,
+    description,
+    image: images.map((src) =>
+      src.startsWith("http") ? src : `${siteConfig.url}${src}`,
+    ),
+    brand: {
+      "@type": "Brand",
+      name: brand,
+    },
+    ...(category && { category }),
+    ...(sku && { sku }),
+    ...(material && { material }),
+    url: url.startsWith("http") ? url : `${siteConfig.url}${url}`,
+    offers: {
+      "@type": "Offer",
+      url: url.startsWith("http") ? url : `${siteConfig.url}${url}`,
+      availability: "https://schema.org/InStock",
+      priceCurrency: "TRY",
+      priceSpecification: {
+        "@type": "PriceSpecification",
+        priceCurrency: "TRY",
+      },
+      seller: {
+        "@type": "Organization",
+        name: siteConfig.name,
+      },
+    },
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+}
+
+/**
+ * FAQ schema — sayfaların sonunda kullan.
+ * Google sonuçlarında akordeon biçiminde direkt görünür → CTR önemli ölçüde artar.
+ */
+export function FaqJsonLd({
+  questions,
+}: {
+  questions: { question: string; answer: string }[];
+}) {
+  const data = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: questions.map((q) => ({
+      "@type": "Question",
+      name: q.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: q.answer,
+      },
+    })),
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+    />
+  );
+}

@@ -86,7 +86,7 @@ export const blogPosts: BlogPost[] = [
     categoryLabel: "Dekorasyon Trendleri",
     date: "2026-04-12",
     readMinutes: 7,
-    cover: "/images/blog/blog-mermer-mi-granit-mi.webp",
+    cover: "/images/blog/neo-deco-mermer-gorunumlu-porselen-2026/hero.webp",
     featured: true,
     i18n: {
       en: {
@@ -115,7 +115,7 @@ export const blogPosts: BlogPost[] = [
     categoryLabel: "Tasarım & Üretim",
     date: "2026-04-08",
     readMinutes: 8,
-    cover: "/images/blog/blog-dogal-tas-trendleri.webp",
+    cover: "/images/blog/atolye-urun-fikirleri-mermer-porselen/hero.webp",
     i18n: {
       en: {
         title: "Workshop Product Ideas: Marble & Porcelain",
@@ -143,7 +143,7 @@ export const blogPosts: BlogPost[] = [
     categoryLabel: "İç Mimari & Dekorasyon",
     date: "2026-04-03",
     readMinutes: 8,
-    cover: "/images/blog/blog-banyo-tasarim.webp",
+    cover: "/images/blog/mermer-porselen-kombinasyonu-tasarim-fikirleri/hero.webp",
     i18n: {
       en: {
         title: "Design Ideas with Marble and Porcelain Combinations",
@@ -171,7 +171,7 @@ export const blogPosts: BlogPost[] = [
     categoryLabel: "İç Mimari & Tasarım",
     date: "2026-03-28",
     readMinutes: 6,
-    cover: "/images/blog/blog-cephe-kaplama.webp",
+    cover: "/images/blog/bookmatch-doganin-senfonisi/hero.webp",
     i18n: {
       en: {
         title: "Bookmatch: Nature's Symphony",
@@ -199,7 +199,7 @@ export const blogPosts: BlogPost[] = [
     categoryLabel: "Mimari & İç Mekan",
     date: "2026-03-22",
     readMinutes: 9,
-    cover: "/images/blog/blog-porselen-yuzey.webp",
+    cover: "/images/blog/mermer-porselenin-mimaride-kullanimi/hero.webp",
     i18n: {
       en: {
         title: "Marble and Porcelain in Architecture",
@@ -227,7 +227,7 @@ export const blogPosts: BlogPost[] = [
     categoryLabel: "Sanat & Zanaat",
     date: "2026-03-18",
     readMinutes: 6,
-    cover: "/images/blog/blog-bakim.webp",
+    cover: "/images/blog/porselen-desenleme-sanati-teknikleri/hero.webp",
     i18n: {
       en: {
         title: "The Art and Techniques of Porcelain Patterning",
@@ -255,7 +255,7 @@ export const blogPosts: BlogPost[] = [
     categoryLabel: "Tasarım & İşletme",
     date: "2026-03-12",
     readMinutes: 9,
-    cover: "/images/blog/blog-mutfak-tezgahi.webp",
+    cover: "/images/blog/musteri-talepleri-ozel-tasarim-surecleri/hero.webp",
     i18n: {
       en: {
         title: "Custom Design Processes Based on Customer Requests",
@@ -283,7 +283,7 @@ export const blogPosts: BlogPost[] = [
     categoryLabel: "İç Mimari & Dekorasyon",
     date: "2026-03-07",
     readMinutes: 6,
-    cover: "/images/blog/blog-otel-luks.webp",
+    cover: "/images/blog/waterfall-tasarim-akiskan-yuzeyler/hero.webp",
     i18n: {
       en: {
         title: "Waterfall Design: Flowing Surfaces",
@@ -311,7 +311,7 @@ export const blogPosts: BlogPost[] = [
     categoryLabel: "Doğal Taş & Mimari",
     date: "2026-03-02",
     readMinutes: 7,
-    cover: "/images/blog/blog-buyuk-ebat.webp",
+    cover: "/images/blog/mermer-tasarim-teknikleri-isleme-yontemleri/hero.webp",
     i18n: {
       en: {
         title: "Marble Design Techniques and Processing Methods",
@@ -339,7 +339,7 @@ export const blogPosts: BlogPost[] = [
     categoryLabel: "Malzeme Rehberi",
     date: "2026-02-25",
     readMinutes: 8,
-    cover: "/images/blog/blog-mermer-mi-granit-mi.webp",
+    cover: "/images/blog/mermer-porselen-malzemelerinin-ozellikleri/hero.webp",
     i18n: {
       en: {
         title: "Properties of Marble and Porcelain Materials",
@@ -367,7 +367,7 @@ export const blogPosts: BlogPost[] = [
     categoryLabel: "Seçim Rehberi",
     date: "2026-02-18",
     readMinutes: 6,
-    cover: "/images/blog/blog-bakim.webp",
+    cover: "/images/blog/mermer-vs-porselen/hero.webp",
     i18n: {
       en: {
         title: "Marble vs Porcelain",
@@ -395,7 +395,7 @@ export const blogPosts: BlogPost[] = [
     categoryLabel: "Bakım & Koruma",
     date: "2026-02-12",
     readMinutes: 7,
-    cover: "/images/blog/blog-bakim.webp",
+    cover: "/images/blog/yuzey-bakim-rehberi/hero.webp",
     i18n: {
       en: {
         title: "Surface Care Guide",
@@ -423,7 +423,7 @@ export const blogPosts: BlogPost[] = [
     categoryLabel: "Sürdürülebilirlik & Endüstri",
     date: "2026-02-05",
     readMinutes: 7,
-    cover: "/images/blog/blog-dis-mekan.webp",
+    cover: "/images/blog/mermer-atolyesi-surdurulebilir-uretim/hero.webp",
     i18n: {
       en: {
         title: "Sustainable Production and Waste Management in Marble Workshops",
@@ -451,7 +451,7 @@ export const blogPosts: BlogPost[] = [
     categoryLabel: "Dijital Pazarlama",
     date: "2026-01-28",
     readMinutes: 9,
-    cover: "/images/blog/blog-ofis.webp",
+    cover: "/images/blog/mermer-porselen-pazarlama-stratejileri/hero.webp",
     i18n: {
       en: {
         title: "Marketing Strategies for Marble & Porcelain Products",

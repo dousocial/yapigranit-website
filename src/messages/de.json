@@ -20,7 +20,9 @@
     "language": "Sprache",
     "search": "Suche",
     "skipToContent": "Zum Inhalt springen",
-    "logoAriaLabel": "YAPIGRANİT Startseite"
+    "logoAriaLabel": "YAPIGRANİT Startseite",
+    "machinePark": "Maschinenpark",
+    "impressum": "Impressum"
   },
   "MegaMenu": {
     "productGroups": "Produktgruppen",
@@ -62,7 +64,8 @@
       "publicProjects": "Öffentliche Bauten",
       "privacy": "Datenschutzrichtlinie",
       "kvkk": "Datenschutz (KVKK)",
-      "terms": "Nutzungsbedingungen"
+      "terms": "Nutzungsbedingungen",
+      "impressum": "Impressum"
     }
   },
   "Hero": {
@@ -74,11 +77,13 @@
     "description": "Wir verbinden Millionen Jahre geologisches Erbe mit der Eleganz moderner Architektur. Lösungen so beständig wie Stein, so einzigartig wie Kunst — für Ihre Lebensräume.",
     "ctaPrimary": "Kollektion entdecken",
     "ctaSecondary": "Projekte ansehen",
-    "trustExperience": "25+ Jahre Erfahrung",
+    "trustExperience": "32+ Jahre Erfahrung",
     "trustTechnology": "5-Achs-CNC & Wasserstrahl",
     "trustExport": "Export in 12 Länder",
     "trustSatisfaction": "100% Kundenzufriedenheit",
-    "scrollDown": "Nach unten scrollen"
+    "scrollDown": "Nach unten scrollen",
+    "primaryCta": "Mein Projekt kalkulieren",
+    "secondaryCta": "Kostenloses Muster anfordern"
   },
   "ProductsGrid": {
     "eyebrow": "Unsere Produktgruppen",
@@ -133,7 +138,8 @@
     "eyebrow": "Angebot anfragen",
     "title": "Holen Sie heute ein Angebot für Ihr Projekt ein.",
     "description": "Füllen Sie das Formular für projektspezifische Preise und Detailinformationen aus. Unser Team meldet sich schnellstmöglich.",
-    "ctaForm": "Angebotsformular"
+    "ctaForm": "Mein Projekt kalkulieren",
+    "ctaSampleNow": "Kostenloses Muster anfordern"
   },
   "FloatingActions": {
     "openOptions": "Kontaktoptionen",
@@ -187,7 +193,7 @@
       "title": "Ingenieurdisziplin in Stein",
       "description": "Seit 1994 — präzise Fertigung, kontrollierte Montage und nachhaltige Fassadenlösungen unter einem Dach für Architekten und Bauunternehmer.",
       "metaTitle": "Unternehmen",
-      "metaDescription": "Über YAPIGRANİT — unsere Vision und Mission, Werte und unser durch 25+ Jahre Erfahrung geprägter Werdegang.",
+      "metaDescription": "Über YAPIGRANİT — unsere Vision und Mission, Werte und unser durch 32+ Jahre Erfahrung geprägter Werdegang.",
       "aboutEyebrow": "Über uns",
       "aboutTitle": "Wir verwandeln ihn in ein Kunstwerk.",
       "aboutQuote": "Wenn wir einen Marmorblock betrachten, sehen wir nicht nur Stein — wir sehen das verborgene Kunstwerk darin.",
@@ -219,7 +225,7 @@
       "detailNumberLabel": "Leistung",
       "detailProcessTitle": "Unser Prozess",
       "detailCtaPrimary": "Angebot anfragen",
-      "detailCtaSecondary": "Information erhalten",
+      "detailCtaSecondary": "Kostenloses Muster",
       "detailOtherTitle": "Weitere Leistungen",
       "detailOtherCta": "Alle Leistungen"
     },
@@ -480,7 +486,7 @@
     "y2015Title": "Technologieinvestition",
     "y2015Desc": "Mit unseren 5-Achs-CNC-, Wasserstrahl- und Brückensägen-Maschinen haben wir unsere Produktionsinfrastruktur auf Standards der Raumfahrtindustrie angehoben.",
     "y2026Title": "Heute",
-    "y2026Desc": "Export in 12 Länder, mit 500+ abgeschlossenen Projekten und 25+ Jahren Akkumulation — eine Ingenieursmarke, die Stein von Denizli in die Welt verarbeitet."
+    "y2026Desc": "Export in 12 Länder, mit 3000+ abgeschlossenen Projekten und 32+ Jahren Akkumulation — eine Ingenieursmarke, die Stein von Denizli in die Welt verarbeitet."
   },
   "Values": {
     "qualityTitle": "Qualität",
@@ -495,7 +501,7 @@
     "solutionDesc": "Wir entwerfen die passendste Lösung für Ihren Raum — Stein wird mit Meisterhänden zum Leben erweckt."
   },
   "WhyUs": {
-    "experienceTitle": "25+ Jahre Erfahrung",
+    "experienceTitle": "32+ Jahre Erfahrung",
     "experienceDesc": "Handwerkskunst und Ingenieurwesen seit 1994.",
     "teamTitle": "Erfahrenes Expertenteam",
     "teamDesc": "Meister und technisches Personal mit jahrelanger Hingabe.",

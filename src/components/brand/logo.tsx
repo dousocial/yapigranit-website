@@ -1,6 +1,13 @@
 import Image from "next/image";
+import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
+
+const TAGLINES: Record<string, string> = {
+  tr: "Doğal Taş & Yüzey Çözümleri",
+  en: "Natural Stone & Surface Solutions",
+  de: "Natursteine",
+};
 
 interface LogoProps {
   className?: string;
@@ -23,6 +30,8 @@ export function Logo({
   size = 52,
 }: LogoProps) {
   const onDark = variant === "light";
+  const locale = useLocale();
+  const tagline = TAGLINES[locale] ?? TAGLINES.tr;
 
   return (
     <Link
@@ -68,7 +77,7 @@ export function Logo({
                 onDark ? "text-on-dark-soft" : "text-ink-soft",
               )}
             >
-              Doğal Taş & Yüzey Çözümleri
+              {tagline}
             </span>
           )}
         </span>

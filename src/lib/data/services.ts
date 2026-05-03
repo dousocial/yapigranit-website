@@ -88,7 +88,7 @@ export const services: Service[] = [
     ],
     tags: ["304/316 Çelik", "Deprem Güvenli", "Havalandırmalı"],
     icon: Building2,
-    image: "/images/services/hizmet-uygulama.webp",
+    image: "/images/services/mekanik-cephe.webp",
     i18n: {
       en: {
         title: "Mechanical Façade Systems",
@@ -134,7 +134,7 @@ export const services: Service[] = [
     ],
     tags: ["Porselen", "Kuvars", "Sinter Taş"],
     icon: ChefHat,
-    image: "/images/services/hizmet-uygulama.webp",
+    image: "/images/services/mutfak-tezgahi.webp",
     i18n: {
       en: {
         title: "Kitchen Countertop (Porcelain & Quartz)",
@@ -180,7 +180,7 @@ export const services: Service[] = [
     ],
     tags: ["Hijyen", "Bookmatch", "Tek Parça"],
     icon: Bath,
-    image: "/images/services/hizmet-uygulama.webp",
+    image: "/images/services/banyo-islak-hacim.webp",
     i18n: {
       en: {
         title: "Bathroom & Wet Areas",
@@ -226,7 +226,7 @@ export const services: Service[] = [
     ],
     tags: ["Isıya Dayanıklı", "CNC Detay"],
     icon: Flame,
-    image: "/images/services/hizmet-uygulama.webp",
+    image: "/images/services/somine-yapimi.webp",
     i18n: {
       en: {
         title: "Fireplace Construction",
@@ -318,7 +318,7 @@ export const services: Service[] = [
     ],
     tags: ["3D Yüzey", "Monoblok", "Hassas İşleme"],
     icon: Cpu,
-    image: "/images/services/hizmet-uygulama.webp",
+    image: "/images/machinery/5-eksen-cnc.webp",
     i18n: {
       en: {
         title: "5-Axis CNC Machining",
@@ -364,7 +364,7 @@ export const services: Service[] = [
     ],
     tags: ["Cold Cutting", "Deformasyonsuz", "Çatlama Yok"],
     icon: Droplets,
-    image: "/images/services/hizmet-uygulama.webp",
+    image: "/images/machinery/waterjet.webp",
     i18n: {
       en: {
         title: "Waterjet Cutting",
@@ -410,7 +410,7 @@ export const services: Service[] = [
     ],
     tags: ["Lazer Tarama", "Sanal Montaj", "Sıfır Fire"],
     icon: ScanLine,
-    image: "/images/services/hizmet-uygulama.webp",
+    image: "/images/services/dijital-roleve.webp",
     i18n: {
       en: {
         title: "Digital Surveying & Laser Scanning",

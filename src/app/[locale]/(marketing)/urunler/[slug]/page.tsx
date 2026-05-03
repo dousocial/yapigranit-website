@@ -11,9 +11,15 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import {
+  ProductJsonLd,
+  BreadcrumbJsonLd,
+  FaqJsonLd,
+} from "@/components/seo/structured-data";
 import { products, localizedProduct } from "@/lib/data/products";
 import { projects, localizedProject } from "@/lib/data/projects";
 import { routing, type Locale } from "@/i18n/routing";
+import { siteConfig } from "@/lib/site";
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>;
@@ -84,8 +90,86 @@ function ProductContent({ slug }: { slug: string }) {
     "benefitInstallation",
   ];
 
+  const productUrl =
+    locale === "tr"
+      ? `${siteConfig.url}/urunler/${product.slug}`
+      : `${siteConfig.url}/${locale}/urunler/${product.slug}`;
+
+  // Ürün-spesifik SSS — locale aware
+  const productFaq = [
+    {
+      question:
+        locale === "en"
+          ? `Is ${l.name} suitable for kitchen countertops?`
+          : locale === "de"
+          ? `Ist ${l.name} für Küchenarbeitsplatten geeignet?`
+          : `${l.name} mutfak tezgahı için uygun mudur?`,
+      answer:
+        locale === "en"
+          ? `Yes — ${l.name} can be used in kitchens. Check the product specifications for heat, scratch, and stain resistance details.`
+          : locale === "de"
+          ? `Ja — ${l.name} kann in Küchen verwendet werden. Prüfen Sie die Produktspezifikationen.`
+          : `Evet — ${l.name} mutfaklarda kullanılabilir. Isı, çizilme ve leke direnci için ürün teknik özelliklerini inceleyin.`,
+    },
+    {
+      question:
+        locale === "en"
+          ? `What slab sizes are available for ${l.name}?`
+          : locale === "de"
+          ? `Welche Plattengrößen sind bei ${l.name} verfügbar?`
+          : `${l.name} hangi plaka ebatlarında üretiliyor?`,
+      answer:
+        locale === "en"
+          ? "Standard slabs are available in sizes up to 320×160 cm. Custom dimensions are possible for project-specific requirements."
+          : locale === "de"
+          ? "Standardplatten sind in Größen bis zu 320×160 cm erhältlich. Sonderformate für projektspezifische Anforderungen möglich."
+          : "Standart plakalar 320×160 cm'ye kadar boyutlarda mevcuttur. Projeye özel ölçüler için iletişime geçin.",
+    },
+    {
+      question:
+        locale === "en"
+          ? "Can I request a sample before ordering?"
+          : locale === "de"
+          ? "Kann ich vor der Bestellung ein Muster anfordern?"
+          : "Sipariş öncesi numune talep edebilir miyim?",
+      answer:
+        locale === "en"
+          ? "Yes — we provide free samples for architects and contractors. Visit our sample request page to order."
+          : locale === "de"
+          ? "Ja — wir bieten kostenlose Muster für Architekten und Bauunternehmer. Besuchen Sie unsere Musterbestellseite."
+          : "Evet — mimar ve müteahhitler için ücretsiz numune gönderiyoruz. Numune talep sayfamızı ziyaret edin.",
+    },
+  ];
+
   return (
     <>
+      <ProductJsonLd
+        name={l.name}
+        description={l.description ?? l.tagline ?? ""}
+        image={product.image}
+        category={l.tagline ?? "Doğal Taş"}
+        url={productUrl}
+        sku={product.slug.toUpperCase()}
+        material={l.tagline}
+      />
+      <BreadcrumbJsonLd
+        items={[
+          { label: tNav("home"), href: locale === "tr" ? "/" : `/${locale}` },
+          {
+            label: tNav("products"),
+            href: locale === "tr" ? "/urunler" : `/${locale}/urunler`,
+          },
+          {
+            label: l.name,
+            href:
+              locale === "tr"
+                ? `/urunler/${product.slug}`
+                : `/${locale}/urunler/${product.slug}`,
+          },
+        ]}
+      />
+      <FaqJsonLd questions={productFaq} />
+
       <PageHero
         title={l.name}
         description={l.description}
@@ -143,6 +227,7 @@ function ProductContent({ slug }: { slug: string }) {
                   src={product.image}
                   alt={l.name}
                   fill
+                  priority
                   sizes="(max-width: 1024px) 100vw, 40vw"
                   className="object-cover"
                 />

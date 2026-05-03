@@ -20,7 +20,9 @@
     "language": "Language",
     "search": "Search",
     "skipToContent": "Skip to content",
-    "logoAriaLabel": "YAPIGRANİT Home"
+    "logoAriaLabel": "YAPIGRANİT Home",
+    "machinePark": "Machinery",
+    "impressum": "Imprint"
   },
   "MegaMenu": {
     "productGroups": "Product Groups",
@@ -62,7 +64,8 @@
       "publicProjects": "Public Buildings",
       "privacy": "Privacy Policy",
       "kvkk": "Data Protection (KVKK)",
-      "terms": "Terms of Use"
+      "terms": "Terms of Use",
+      "impressum": "Impressum"
     }
   },
   "Hero": {
@@ -74,11 +77,13 @@
     "description": "We bring together millions of years of geological heritage with the elegance of modern architecture. Solutions as eternal as stone, as unique as art for your living spaces.",
     "ctaPrimary": "Explore the Collection",
     "ctaSecondary": "View Projects",
-    "trustExperience": "25+ Years of Experience",
+    "trustExperience": "32+ Years of Experience",
     "trustTechnology": "5-Axis CNC & Waterjet",
     "trustExport": "Exports to 12 Countries",
     "trustSatisfaction": "100% Customer Satisfaction",
-    "scrollDown": "Scroll down"
+    "scrollDown": "Scroll down",
+    "primaryCta": "Get My Project Priced",
+    "secondaryCta": "Request Free Sample"
   },
   "ProductsGrid": {
     "eyebrow": "Our Product Groups",
@@ -133,7 +138,8 @@
     "eyebrow": "Get a Quote",
     "title": "Get a quote for your project today.",
     "description": "Fill in the form for project-specific pricing and detailed information. Our team will get back to you as soon as possible.",
-    "ctaForm": "Quote Form"
+    "ctaForm": "Get My Project Priced",
+    "ctaSampleNow": "Request Free Sample"
   },
   "FloatingActions": {
     "openOptions": "Contact options",
@@ -187,7 +193,7 @@
       "title": "Engineering Discipline in Stone",
       "description": "Since 1994 — precision manufacturing, controlled installation and sustainable façade solutions under one roof for architects and contractors.",
       "metaTitle": "Corporate",
-      "metaDescription": "About YAPIGRANİT — our vision and mission, values and journey shaped by 25+ years of experience.",
+      "metaDescription": "About YAPIGRANİT — our vision and mission, values and journey shaped by 32+ years of experience.",
       "aboutEyebrow": "About Us",
       "aboutTitle": "We turn it into a work of art.",
       "aboutQuote": "When we look at a marble block we don't just see stone — we see the hidden artwork inside.",
@@ -219,7 +225,7 @@
       "detailNumberLabel": "Service",
       "detailProcessTitle": "Our Process",
       "detailCtaPrimary": "Get a Quote",
-      "detailCtaSecondary": "Get Information",
+      "detailCtaSecondary": "Request Free Sample",
       "detailOtherTitle": "Other Services",
       "detailOtherCta": "All Services"
     },
@@ -480,7 +486,7 @@
     "y2015Title": "Technology Investment",
     "y2015Desc": "With our 5-Axis CNC, Waterjet and Bridge Saw machines we elevated our production infrastructure to space-industry standards.",
     "y2026Title": "Today",
-    "y2026Desc": "Exporting to 12 countries, with 500+ completed projects and 25+ years of accumulation — an engineering brand processing stone from Denizli to the world."
+    "y2026Desc": "Exporting to 12 countries, with 3000+ completed projects and 32+ years of accumulation — an engineering brand processing stone from Denizli to the world."
   },
   "Values": {
     "qualityTitle": "Quality",
@@ -495,7 +501,7 @@
     "solutionDesc": "We design the most suitable solution for your space — bringing stone to life with master hands."
   },
   "WhyUs": {
-    "experienceTitle": "25+ Years of Experience",
+    "experienceTitle": "32+ Years of Experience",
     "experienceDesc": "Craftsmanship and engineering accumulated since 1994.",
     "teamTitle": "Experienced Expert Team",
     "teamDesc": "Master craftsmen and technical staff with years of dedication.",

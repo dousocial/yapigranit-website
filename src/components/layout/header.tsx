@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { createPortal } from "react-dom";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import {
@@ -25,7 +26,16 @@ import { routing, localeLabels, type Locale } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 interface NavItem {
-  key: "home" | "corporate" | "products" | "services" | "projects" | "blog" | "contact";
+  key:
+    | "home"
+    | "corporate"
+    | "products"
+    | "services"
+    | "machinePark"
+    | "projects"
+    | "blog"
+    | "contact"
+    | "impressum";
   href: string;
   children?: { href: string; nameKey: string; descKey?: string }[];
 }
@@ -45,6 +55,7 @@ const navItems: NavItem[] = [
     ],
   },
   { key: "services", href: "/hizmetler" },
+  { key: "machinePark", href: "/makine-parkuru" },
   { key: "projects", href: "/projeler" },
   { key: "blog", href: "/blog" },
   { key: "contact", href: "/iletisim" },
@@ -67,6 +78,12 @@ export function Header() {
   const tFooter = useTranslations("Footer.links");
 
   const currentLocale = (params.locale as Locale) ?? routing.defaultLocale;
+
+  // .de locale'de Impressum nav öğesini göster
+  const visibleNavItems: NavItem[] =
+    currentLocale === "de"
+      ? [...navItems, { key: "impressum", href: "/impressum" }]
+      : navItems;
 
   const [scrolled, setScrolled] = React.useState(false);
   const [productsOpen, setProductsOpen] = React.useState(false);
@@ -110,14 +127,14 @@ export function Header() {
             aria-label={t("ariaPrimary")}
             className="hidden lg:flex items-center gap-1"
           >
-            {navItems.map((item) => {
+            {visibleNavItems.map((item) => {
               if (item.children) {
                 return (
                   <DropdownItem
                     key={item.href}
                     href={item.href}
                     label={t(item.key)}
-                    children={item.children}
+                    items={item.children}
                     open={productsOpen}
                     onOpenChange={setProductsOpen}
                     active={isActive(item.href)}
@@ -210,7 +227,7 @@ export function Header() {
             {/* Mobile burger */}
             <button
               onClick={() => setMobileOpen(true)}
-              className="lg:hidden p-2 -mr-2 text-ink hover:text-gold-deep transition-colors"
+              className="lg:hidden grid place-items-center min-w-11 min-h-11 -mr-2 text-ink hover:text-gold-deep transition-colors"
               aria-label={t("openMenu")}
             >
               <Menu className="size-6" />
@@ -225,6 +242,7 @@ export function Header() {
           <MobileMenu
             onClose={() => setMobileOpen(false)}
             isActive={isActive}
+            navItems={visibleNavItems}
             currentLocale={currentLocale}
             onLocaleChange={changeLocale}
             t={t}
@@ -238,7 +256,7 @@ export function Header() {
 interface DropdownItemProps {
   href: string;
   label: string;
-  children: NavItem["children"];
+  items: NavItem["children"];
   open: boolean;
   onOpenChange: (open: boolean) => void;
   active: boolean;
@@ -249,14 +267,14 @@ interface DropdownItemProps {
 function DropdownItem({
   href,
   label,
-  children,
+  items,
   open,
   onOpenChange,
   active,
   tFooter,
   tMega,
 }: DropdownItemProps) {
-  if (!children) return null;
+  if (!items) return null;
 
   return (
     <div
@@ -295,7 +313,7 @@ function DropdownItem({
                 <div className="p-6 border-r border-line">
                   <p className="eyebrow mb-4">{tMega("productGroups")}</p>
                   <ul className="space-y-2.5">
-                    {children.map((child) => {
+                    {items.map((child) => {
                       // nameKey is "Footer.links.<key>"; we already have tFooter scoped
                       const subKey = child.nameKey.replace("Footer.links.", "");
                       return (
@@ -340,6 +358,7 @@ function DropdownItem({
 interface MobileMenuProps {
   onClose: () => void;
   isActive: (href: string) => boolean;
+  navItems: NavItem[];
   currentLocale: Locale;
   onLocaleChange: (l: Locale) => void;
   t: ReturnType<typeof useTranslations<"Nav">>;
@@ -348,6 +367,7 @@ interface MobileMenuProps {
 function MobileMenu({
   onClose,
   isActive,
+  navItems,
   currentLocale,
   onLocaleChange,
   t,
@@ -355,13 +375,23 @@ function MobileMenu({
   const tFooter = useTranslations("Footer.links");
   const [productsOpen, setProductsOpen] = React.useState(false);
 
-  return (
+  React.useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
+  // SSR'da document yok — portal'ı sadece client'ta oluştur
+  if (typeof document === "undefined") return null;
+
+  const content = (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
-      className="fixed inset-0 z-50 lg:hidden"
+      className="fixed inset-0 z-[100] lg:hidden"
     >
       <div
         className="absolute inset-0 bg-ink/40 backdrop-blur-sm"
@@ -378,7 +408,7 @@ function MobileMenu({
           <Logo withTagline={false} />
           <button
             onClick={onClose}
-            className="p-2 -mr-2 text-ink hover:text-gold-deep"
+            className="grid place-items-center min-w-11 min-h-11 -mr-2 text-ink hover:text-gold-deep"
             aria-label={t("closeMenu")}
           >
             <X className="size-6" />
@@ -479,4 +509,6 @@ function MobileMenu({
       </motion.aside>
     </motion.div>
   );
+
+  return createPortal(content, document.body);
 }

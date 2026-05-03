@@ -10,6 +10,8 @@ import { toast } from "sonner";
 
 import { Input, Textarea } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { trackLead } from "@/lib/tracking";
+import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 
 const materialOptionsLabels: Record<
@@ -141,6 +143,7 @@ export function SampleRequestForm() {
         }),
       });
       if (!res.ok) throw new Error();
+      trackLead({ formName: "sample-request", value: 50 });
       toast.success(t("successSample"));
       reset();
     } catch {
@@ -283,9 +286,9 @@ export function SampleRequestForm() {
           />
           <span className="text-[0.82rem] text-ink-muted">
             {t("labelKvkk")}{" "}
-            <a href="/kvkk" className="text-gold-deep underline-grow">
+            <Link href="/kvkk" className="text-gold-deep underline-grow">
               {t("labelKvkkLink")}
-            </a>{" "}
+            </Link>{" "}
             {t("labelKvkkSuffix")}
           </span>
         </label>

@@ -25,6 +25,22 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
+    keywords: [
+      "yapı granit hizmetleri",
+      "doğal taş cephe kaplama",
+      "mekanik cephe kaplama",
+      "mermer cephe kaplama",
+      "granit cephe uygulama",
+      "cnc taş kaplama",
+      "cnc işlemli duvar kaplama",
+      "taş cephe sistemleri",
+      "dış cephe taş uygulama",
+      "zemin kaplama uygulamaları",
+      "merdiven kaplama",
+      "asansör kaplama",
+      "tezgah uygulaması",
+      "denizli doğal taş hizmetleri",
+    ],
     alternates: {
       canonical: locale === "tr" ? "/hizmetler" : `/${locale}/hizmetler`,
     },
@@ -70,7 +86,9 @@ function HizmetlerContent() {
           </Reveal>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4">
-            {services.map((service, idx) => {
+            {services
+              .filter((s) => s.category !== "teknoloji")
+              .map((service, idx) => {
               const l = localizedService(service, locale);
               return (
                 <Reveal key={service.slug} delay={(idx % 4) * 0.06}>
@@ -108,6 +126,37 @@ function HizmetlerContent() {
               );
             })}
           </div>
+
+          {/* Makine Parkuru bağlantı bandı */}
+          <Reveal delay={0.1} className="mt-16 lg:mt-20">
+            <Link
+              href="/makine-parkuru"
+              className="group block bg-surface-darker text-on-dark p-8 lg:p-10 hover:bg-ink transition-colors"
+            >
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+                <div className="lg:col-span-9">
+                  <p className="text-[0.78rem] uppercase tracking-[0.18em] text-gold mb-3">
+                    {locale === "en" ? "Production Technology" : locale === "de" ? "Fertigungstechnologie" : "Üretim Teknolojisi"}
+                  </p>
+                  <h3 className="font-display text-[1.6rem] lg:text-[2rem] text-on-dark text-balance">
+                    {locale === "en"
+                      ? "Discover our machinery — waterjet, 5-axis CNC, bridge saw and more"
+                      : locale === "de"
+                      ? "Entdecken Sie unseren Maschinenpark — Wasserstrahl, 5-Achsen-CNC, Brückensäge und mehr"
+                      : "Makine parkurumuzu keşfedin — su jeti, 5 eksen CNC, köprü kesme ve daha fazlası"}
+                  </h3>
+                </div>
+                <div className="lg:col-span-3 lg:text-right">
+                  <span className="inline-flex items-center gap-2 text-gold group-hover:text-gold-soft transition-colors">
+                    <span className="text-[0.85rem] font-medium uppercase tracking-[0.18em]">
+                      {tNav("machinePark")}
+                    </span>
+                    <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </Reveal>
         </Container>
       </section>
 
@@ -142,20 +191,34 @@ function HizmetlerContent() {
         </Container>
       </section>
 
-      {/* CTA */}
-      <section className="relative bg-background overflow-hidden">
-        <div className="absolute inset-0 z-0">
+      {/* CTA — full-bleed dark stone */}
+      <section className="relative bg-surface-darker text-on-dark overflow-hidden">
+        <div className="absolute inset-0 z-0" aria-hidden>
           <Image
             src="/images/sections/hizmetler-cta-bg.webp"
             alt=""
             fill
             sizes="100vw"
-            className="object-cover opacity-30"
+            className="object-cover"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(105deg, rgba(8,7,10,0.78) 0%, rgba(8,7,10,0.5) 38%, rgba(8,7,10,0.18) 65%, rgba(8,7,10,0.05) 100%)",
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to top, rgba(8,7,10,0.6) 0%, rgba(8,7,10,0) 35%, rgba(8,7,10,0) 70%, rgba(8,7,10,0.32) 100%)",
+            }}
           />
         </div>
-        <Container size="wide" className="relative">
-          <div className="grid lg:grid-cols-2 gap-10 items-center py-20 lg:py-24">
-            <h3 className="display-md text-ink text-balance">
+        <Container size="wide" className="relative z-10">
+          <div className="grid lg:grid-cols-2 gap-10 items-center py-20 lg:py-28 min-h-[380px] lg:min-h-[460px]">
+            <h3 className="display-md text-on-dark text-balance hero-title">
               {t("ctaTitle")}
             </h3>
             <div className="flex flex-wrap items-center gap-3 lg:justify-end">
@@ -165,10 +228,10 @@ function HizmetlerContent() {
                   <ArrowRight />
                 </Link>
               </Button>
-              <span className="text-ink-soft text-[0.85rem] mx-1">
+              <span className="text-on-dark-soft text-[0.85rem] mx-1">
                 {tCommon("or")}
               </span>
-              <Button asChild size="lg" variant="outline">
+              <Button asChild size="lg" variant="outline-light">
                 <Link href="/iletisim">{t("ctaSecondary")}</Link>
               </Button>
             </div>

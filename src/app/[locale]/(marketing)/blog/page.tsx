@@ -43,7 +43,7 @@ function BlogContent() {
           { label: tNav("home"), href: "/" },
           { label: tNav("blog") },
         ]}
-        image="/images/sections/blog-hero.webp"
+        image="/images/hero/hero-kurumsal.webp"
         imageAlt={t("title")}
       />
 

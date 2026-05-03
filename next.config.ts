@@ -1,7 +1,11 @@
 import type { NextConfig } from "next";
+import path from "path";
 import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
+
+// Turbopack root için projenin çalıştığı dizin
+const projectRoot = path.resolve(process.cwd());
 
 const nextConfig: NextConfig = {
   images: {
@@ -16,6 +20,10 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizePackageImports: ["lucide-react", "motion"],
+  },
+  // Turbopack workspace root — multi-lockfile uyarısını giderir
+  turbopack: {
+    root: projectRoot,
   },
   poweredByHeader: false,
   compress: true,

@@ -9,9 +9,19 @@ interface LightboxProps {
   images: string[];
   alt: string;
   className?: string;
+  /**
+   * If true, the first thumbnail in the grid loads with `priority` so that
+   * Next.js can mark it as the LCP candidate on detail pages.
+   */
+  priorityFirst?: boolean;
 }
 
-export function Lightbox({ images, alt, className }: LightboxProps) {
+export function Lightbox({
+  images,
+  alt,
+  className,
+  priorityFirst = false,
+}: LightboxProps) {
   const [openIndex, setOpenIndex] = React.useState<number | null>(null);
 
   const close = React.useCallback(() => setOpenIndex(null), []);
@@ -68,6 +78,7 @@ export function Lightbox({ images, alt, className }: LightboxProps) {
               src={src}
               alt={`${alt} - ${i + 1}`}
               fill
+              priority={priorityFirst && i === 0}
               sizes="(max-width: 768px) 100vw, 50vw"
               className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
             />

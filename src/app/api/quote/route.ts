@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { renderRows, sendMail } from "@/lib/email";
+import { escapeHtml } from "@/lib/utils";
 
 const schema = z.object({
   customerType: z.enum(["bireysel", "kurumsal"]),
@@ -16,7 +17,11 @@ const schema = z.object({
   area: z.string().optional(),
   deadline: z.string().optional(),
   message: z.string().optional(),
-  consent: z.union([z.boolean(), z.literal("true")]).transform(Boolean),
+  // KVKK onayı zorunlu — true olmalı
+  consent: z
+    .union([z.boolean(), z.literal("true")])
+    .transform(Boolean)
+    .refine((v) => v === true, { message: "KVKK onayı gereklidir" }),
 });
 
 export async function POST(req: Request) {
@@ -79,7 +84,7 @@ export async function POST(req: Request) {
         </table>
         ${
           parsed.message
-            ? `<h3>Not</h3><p>${parsed.message.replace(/\n/g, "<br>")}</p>`
+            ? `<h3>Not</h3><p>${escapeHtml(parsed.message).replace(/\n/g, "<br>")}</p>`
             : ""
         }
       `,
@@ -97,4 +102,5 @@ export async function POST(req: Request) {
   }
 }
 
-export const config = { runtime: "nodejs" };
+// Next 16 syntax (deprecated: `export const config = { runtime: "nodejs" }`)
+export const runtime = "nodejs";

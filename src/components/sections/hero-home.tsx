@@ -61,16 +61,16 @@ export function HeroHome() {
       <Container size="wide" className="relative z-10">
         <div className="flex flex-col justify-center pt-12 pb-16 lg:pt-24 lg:pb-28 min-h-[760px] lg:min-h-[820px]">
           <div className="max-w-[640px]">
-            <p className="eyebrow text-gold mb-4 hero-fade-1">
+            <p className="eyebrow text-gold mb-4 hero-fade-1 drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)]">
               {t("eyebrow")}
             </p>
             <h1 className="display-xl text-on-dark text-balance hero-title hero-fade-2">
-              {t("titlePart1")}
+              {t("titlePart1")}{" "}
               <br />
-              <span className="italic font-light text-gold">
+              <span className="italic font-light text-gold whitespace-nowrap">
                 {t("titlePart2")}
               </span>{" "}
-              {t("titlePart3")}
+              {t("titlePart3")}{" "}
               <br />
               {t("titlePart4")}
             </h1>
@@ -81,14 +81,14 @@ export function HeroHome() {
 
             <div className="mt-10 flex flex-wrap items-center gap-4 hero-fade-4">
               <Button asChild size="lg">
-                <Link href="/urunler">
-                  {t("ctaPrimary")}
+                <Link href="/teklif">
+                  {t("primaryCta")}
                   <ArrowRight />
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline-light">
-                <Link href="/projeler">
-                  {t("ctaSecondary")}
+                <Link href="/numune-talep">
+                  {t("secondaryCta")}
                   <ArrowRight />
                 </Link>
               </Button>

@@ -3,12 +3,15 @@
 import * as React from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { Calculator, ArrowRight } from "lucide-react";
+import { Calculator, ArrowRight, Lock, Mail } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Reveal } from "@/components/ui/reveal";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { trackLead } from "@/lib/tracking";
 import type { Locale } from "@/i18n/routing";
 
 const applicationOptions = [
@@ -61,6 +64,76 @@ export function QuoteCalculator() {
 
   type AppKey = (typeof applicationOptions)[number]["value"];
   type MatKey = (typeof materialOptions)[number]["value"];
+
+  // Email gate state
+  const [email, setEmail] = React.useState("");
+  const [unlocked, setUnlocked] = React.useState(false);
+  const [submitting, setSubmitting] = React.useState(false);
+  const [error, setError] = React.useState(false);
+
+  async function handleUnlock(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email || submitting) return;
+    setSubmitting(true);
+    setError(false);
+    try {
+      const res = await fetch("/api/lead-magnet", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          name: email.split("@")[0],
+          asset: `quote-estimate-${application}-${material}-${area}m2`,
+        }),
+      });
+      if (!res.ok) throw new Error();
+      trackLead({
+        formName: "quote-calculator",
+        value: estimate?.max ?? 0,
+        currency: usingTry ? "TRY" : locale === "en" ? "USD" : "EUR",
+      });
+      setUnlocked(true);
+    } catch {
+      setError(true);
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  // Lokalize gate metinleri
+  const gateText = {
+    tr: {
+      eyebrow: "Detayli Maliyeti Gör",
+      title: "Hesaplamanı görmek için e-postanı bırak",
+      hint: "Sonucu sana e-posta ile de gönderelim — sonra ihtiyaç olduğunda elinin altında olsun.",
+      placeholder: "ornek@firma.com",
+      submit: "Maliyeti Görüntüle",
+      submitting: "Hesaplanıyor...",
+      error: "Bir sorun oluştu, lütfen tekrar deneyin.",
+      privacy: "E-postan 3. taraflarla paylaşılmaz.",
+    },
+    en: {
+      eyebrow: "View Detailed Estimate",
+      title: "Drop your email to see the estimate",
+      hint: "We'll also email it to you so you have it when needed.",
+      placeholder: "you@company.com",
+      submit: "View Estimate",
+      submitting: "Calculating...",
+      error: "Something went wrong, please try again.",
+      privacy: "Your email is not shared with third parties.",
+    },
+    de: {
+      eyebrow: "Detaillierten Kostenvoranschlag anzeigen",
+      title: "Hinterlassen Sie Ihre E-Mail, um den Voranschlag zu sehen",
+      hint: "Wir senden Ihnen den Kostenvoranschlag auch per E-Mail.",
+      placeholder: "sie@firma.de",
+      submit: "Kostenvoranschlag anzeigen",
+      submitting: "Wird berechnet...",
+      error: "Es ist ein Fehler aufgetreten, bitte erneut versuchen.",
+      privacy: "Ihre E-Mail wird nicht an Dritte weitergegeben.",
+    },
+  };
+  const gx = gateText[locale as "tr" | "en" | "de"] ?? gateText.tr;
 
   return (
     <section className="bg-surface-muted py-20 lg:py-24">
@@ -163,7 +236,7 @@ export function QuoteCalculator() {
                 </div>
               </div>
 
-              {estimate && (
+              {estimate && unlocked && (
                 <div className="mt-8 p-6 bg-surface-darker text-on-dark">
                   <p className="text-[0.78rem] uppercase tracking-[0.18em] text-gold mb-2">
                     {t("resultLabel")}
@@ -180,6 +253,76 @@ export function QuoteCalculator() {
                     {t("resultCta")}
                     <ArrowRight className="size-4" />
                   </Link>
+                </div>
+              )}
+
+              {estimate && !unlocked && (
+                <div className="mt-8 relative bg-surface-darker text-on-dark overflow-hidden">
+                  {/* Bulanık önizleme */}
+                  <div className="px-6 pt-6 pb-4 select-none">
+                    <p className="text-[0.78rem] uppercase tracking-[0.18em] text-gold mb-2">
+                      {t("resultLabel")}
+                    </p>
+                    <p
+                      className="font-display text-[2.4rem] text-on-dark leading-none"
+                      style={{ filter: "blur(8px)", userSelect: "none" }}
+                      aria-hidden
+                    >
+                      {estimate.min.toLocaleString(numberLocale)}{" "}
+                      {currencySymbol} –{" "}
+                      {estimate.max.toLocaleString(numberLocale)}{" "}
+                      {currencySymbol}
+                    </p>
+                  </div>
+
+                  {/* Email gate */}
+                  <div className="px-6 pb-6 pt-2 border-t border-on-dark/15">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Lock className="size-3.5 text-gold" strokeWidth={1.6} />
+                      <span className="text-[0.7rem] uppercase tracking-[0.2em] text-gold">
+                        {gx.eyebrow}
+                      </span>
+                    </div>
+                    <p className="font-display text-[1.05rem] text-on-dark mb-1">
+                      {gx.title}
+                    </p>
+                    <p className="text-[0.82rem] text-on-dark-muted mb-4">
+                      {gx.hint}
+                    </p>
+                    <form
+                      onSubmit={handleUnlock}
+                      className="flex flex-col sm:flex-row gap-2"
+                      noValidate
+                    >
+                      <div className="relative flex-1">
+                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-on-dark-muted pointer-events-none" />
+                        <Input
+                          type="email"
+                          required
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder={gx.placeholder}
+                          className="bg-on-dark/5 border-on-dark/20 text-on-dark pl-10 placeholder:text-on-dark-soft"
+                        />
+                      </div>
+                      <Button
+                        type="submit"
+                        disabled={submitting}
+                        className="whitespace-nowrap"
+                      >
+                        {submitting ? gx.submitting : gx.submit}
+                        <ArrowRight className="size-4" />
+                      </Button>
+                    </form>
+                    {error && (
+                      <p className="mt-2 text-[0.78rem] text-red-300">
+                        {gx.error}
+                      </p>
+                    )}
+                    <p className="mt-3 text-[0.7rem] text-on-dark-soft">
+                      {gx.privacy}
+                    </p>
+                  </div>
                 </div>
               )}
             </div>
