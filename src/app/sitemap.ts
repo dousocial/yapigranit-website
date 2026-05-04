@@ -3,11 +3,9 @@ import { products } from "@/lib/data/products";
 import { projects } from "@/lib/data/projects";
 import { services } from "@/lib/data/services";
 import { blogPosts } from "@/lib/data/blog";
-import { siteConfig } from "@/lib/site";
-import { routing } from "@/i18n/routing";
+import { canonicalFor } from "@/lib/i18n-urls";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = siteConfig.url;
   const now = new Date();
 
   const staticPaths = [
@@ -30,16 +28,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   function localized(path: string) {
-    // Path with no locale (default tr)
-    const trUrl = `${base}${path}`;
     return {
-      url: trUrl,
-      languages: Object.fromEntries(
-        routing.locales.map((l) => [
-          l,
-          l === routing.defaultLocale ? trUrl : `${base}/${l}${path}`,
-        ]),
-      ),
+      url: canonicalFor("tr", path),
+      languages: {
+        "tr-TR": canonicalFor("tr", path),
+        en: canonicalFor("en", path),
+        "de-DE": canonicalFor("de", path),
+        "x-default": canonicalFor("tr", path),
+      },
     };
   }
 

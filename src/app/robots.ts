@@ -1,16 +1,27 @@
 import type { MetadataRoute } from "next";
-import { siteConfig } from "@/lib/site";
+import { headers } from "next/headers";
+import { COM_DOMAIN, DE_DOMAIN } from "@/i18n/routing";
 
-export default function robots(): MetadataRoute.Robots {
+export default async function robots(): Promise<MetadataRoute.Robots> {
+  const h = await headers();
+  const rawHost = (
+    h.get("x-forwarded-host") ??
+    h.get("host") ??
+    COM_DOMAIN
+  ).toLowerCase();
+  const bareHost = rawHost.replace(/^www\./, "");
+  const base = `https://${rawHost}`;
+  const isDe = bareHost === DE_DOMAIN;
+
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/admin", "/api"],
+        disallow: ["/admin", "/api", ...(isDe ? ["/tr", "/en"] : ["/de"])],
       },
     ],
-    sitemap: `${siteConfig.url}/sitemap.xml`,
-    host: siteConfig.url,
+    sitemap: `${base}/sitemap.xml`,
+    host: base,
   };
 }

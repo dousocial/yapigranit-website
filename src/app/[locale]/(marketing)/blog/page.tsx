@@ -5,6 +5,8 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PageHero } from "@/components/sections/page-hero";
 import { BlogList } from "@/components/sections/blog-list";
 import { NewsletterBand } from "@/components/sections/newsletter-band";
+import { buildAlternates } from "@/lib/i18n-urls";
+import type { Locale } from "@/i18n/routing";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -18,9 +20,7 @@ export async function generateMetadata({
   return {
     title: t("title"),
     description: t("metaDescription"),
-    alternates: {
-      canonical: locale === "tr" ? "/blog" : `/${locale}/blog`,
-    },
+    alternates: buildAlternates(locale as Locale, "/blog"),
   };
 }
 

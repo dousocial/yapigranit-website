@@ -1,11 +1,20 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/sections/legal-page";
+import { buildAlternates } from "@/lib/i18n-urls";
+import type { Locale } from "@/i18n/routing";
 
-export const metadata: Metadata = {
-  title: "Kullanım Şartları",
-  description: "Yapı Granit web sitesi kullanım şartları.",
-  alternates: { canonical: "/kullanim-sartlari" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "Kullanım Şartları",
+    description: "Yapı Granit web sitesi kullanım şartları.",
+    alternates: buildAlternates(locale as Locale, "/kullanim-sartlari"),
+  };
+}
 
 export default function KullanimPage() {
   return (

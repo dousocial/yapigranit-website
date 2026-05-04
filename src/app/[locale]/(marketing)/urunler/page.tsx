@@ -12,6 +12,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { CtaBand } from "@/components/sections/cta-band";
 import { products, localizedProduct } from "@/lib/data/products";
 import type { Locale } from "@/i18n/routing";
+import { buildAlternates } from "@/lib/i18n-urls";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -26,9 +27,7 @@ export async function generateMetadata({
   return {
     title: tNav("products"),
     description: t("metaDescription"),
-    alternates: {
-      canonical: locale === "tr" ? "/urunler" : `/${locale}/urunler`,
-    },
+    alternates: buildAlternates(locale as Locale, "/urunler"),
   };
 }
 

@@ -13,6 +13,8 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { Timeline } from "@/components/sections/timeline";
 import { brandValues } from "@/lib/data/b2b";
+import { buildAlternates } from "@/lib/i18n-urls";
+import type { Locale } from "@/i18n/routing";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -26,9 +28,7 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: {
-      canonical: locale === "tr" ? "/kurumsal" : `/${locale}/kurumsal`,
-    },
+    alternates: buildAlternates(locale as Locale, "/kurumsal"),
   };
 }
 

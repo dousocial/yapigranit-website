@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 
 import { LegalPage } from "@/components/sections/legal-page";
+import { canonicalFor } from "@/lib/i18n-urls";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -17,7 +18,10 @@ export async function generateMetadata({
     title: "Impressum | YAPIGRANİT",
     description:
       "Impressum & rechtliche Hinweise — Yapi Granit & Natursteine GmbH, Troisdorf.",
-    alternates: { canonical: "/de/impressum" },
+    alternates: {
+      canonical: canonicalFor("de", "/impressum"),
+      languages: { "de-DE": canonicalFor("de", "/impressum") },
+    },
     robots: { index: true, follow: true },
   };
 }

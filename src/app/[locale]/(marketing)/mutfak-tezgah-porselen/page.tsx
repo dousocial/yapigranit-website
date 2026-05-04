@@ -21,6 +21,8 @@ import { Testimonials } from "@/components/sections/testimonials";
 import { CtaBand } from "@/components/sections/cta-band";
 import { ProductJsonLd, FaqJsonLd } from "@/components/seo/structured-data";
 import { siteConfig } from "@/lib/site";
+import { buildAlternates } from "@/lib/i18n-urls";
+import type { Locale } from "@/i18n/routing";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -63,12 +65,7 @@ export async function generateMetadata({
       "premium mutfak tezgahı",
       "yapı granit",
     ],
-    alternates: {
-      canonical:
-        locale === "tr"
-          ? "/mutfak-tezgah-porselen"
-          : `/${locale}/mutfak-tezgah-porselen`,
-    },
+    alternates: buildAlternates(locale as Locale, "/mutfak-tezgah-porselen"),
   };
 }
 

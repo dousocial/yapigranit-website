@@ -19,6 +19,7 @@ import { blogPosts, localizedPost } from "@/lib/data/blog";
 import { localizedBlogContent, type ContentBlock } from "@/lib/data/blog-content";
 import { siteConfig } from "@/lib/site";
 import { routing, type Locale } from "@/i18n/routing";
+import { buildAlternates } from "@/lib/i18n-urls";
 import { formatDate } from "@/lib/utils";
 
 interface Props {
@@ -39,12 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: l.title,
     description: l.excerpt,
-    alternates: {
-      canonical:
-        locale === "tr"
-          ? `/blog/${post.slug}`
-          : `/${locale}/blog/${post.slug}`,
-    },
+    alternates: buildAlternates(locale as Locale, `/blog/${post.slug}`),
     openGraph: {
       title: l.title,
       description: l.excerpt,
