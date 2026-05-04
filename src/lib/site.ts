@@ -4,6 +4,7 @@ export const siteConfig = {
   tagline: "Doğal Taş & Yüzey Çözümleri",
   slogan: "Taşa hayat veriyoruz...",
   url: "https://yapigranit.com",
+  altUrl: "https://yapigranit.de",
   description:
     "Doğanın sanata dönüştüğü yer. Mimar ve müteahhitler için 5 Eksen CNC, Waterjet Kesim ve Mekanik Cephe Sistemleri. Bireysel projeler için çizilmez porselen tezgahlar ve butik doğal taş tasarımları.",
   contact: {

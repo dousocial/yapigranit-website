@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { createPortal } from "react-dom";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import {
   Link,
@@ -22,7 +22,14 @@ import { Logo } from "@/components/brand/logo";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { SiteSearch } from "@/components/search/site-search";
-import { routing, localeLabels, type Locale } from "@/i18n/routing";
+import {
+  routing,
+  localeLabels,
+  localeDomainMap,
+  COM_DOMAIN,
+  DE_DOMAIN,
+  type Locale,
+} from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 interface NavItem {
@@ -73,6 +80,7 @@ export function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const params = useParams();
+  const searchParams = useSearchParams();
   const t = useTranslations("Nav");
   const tMega = useTranslations("MegaMenu");
   const tFooter = useTranslations("Footer.links");
@@ -106,7 +114,32 @@ export function Header() {
 
   function changeLocale(next: Locale) {
     setLangOpen(false);
-    router.replace(pathname, { locale: next });
+    if (typeof window === "undefined") {
+      router.replace(pathname, { locale: next });
+      return;
+    }
+
+    const host = window.location.host.toLowerCase();
+    const bareHost = host.replace(/^www\./, "");
+    const isProdHost = bareHost === COM_DOMAIN || bareHost === DE_DOMAIN;
+
+    if (!isProdHost) {
+      router.replace(pathname, { locale: next });
+      return;
+    }
+
+    const targetDomain = localeDomainMap[next];
+    if (bareHost === targetDomain) {
+      router.replace(pathname, { locale: next });
+      return;
+    }
+
+    const isDefaultOnTarget =
+      targetDomain === DE_DOMAIN ? next === "de" : next === "tr";
+    const prefix = isDefaultOnTarget ? "" : `/${next}`;
+    const path = pathname === "/" ? "" : pathname;
+    const qs = searchParams?.toString() ?? "";
+    window.location.href = `https://${targetDomain}${prefix}${path}${qs ? `?${qs}` : ""}`;
   }
 
   return (

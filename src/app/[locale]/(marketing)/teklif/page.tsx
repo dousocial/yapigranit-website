@@ -8,6 +8,8 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { QuoteForm } from "@/components/sections/quote-form";
 import { QuoteCalculator } from "@/components/sections/quote-calculator";
+import { buildAlternates } from "@/lib/i18n-urls";
+import type { Locale } from "@/i18n/routing";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -21,9 +23,7 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: {
-      canonical: locale === "tr" ? "/teklif" : `/${locale}/teklif`,
-    },
+    alternates: buildAlternates(locale as Locale, "/teklif"),
   };
 }
 

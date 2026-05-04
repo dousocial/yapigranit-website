@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { services, localizedService } from "@/lib/data/services";
 import { routing, type Locale } from "@/i18n/routing";
+import { buildAlternates } from "@/lib/i18n-urls";
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>;
@@ -33,12 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: l.title,
     description: l.description,
-    alternates: {
-      canonical:
-        locale === "tr"
-          ? `/hizmetler/${service.slug}`
-          : `/${locale}/hizmetler/${service.slug}`,
-    },
+    alternates: buildAlternates(locale as Locale, `/hizmetler/${service.slug}`),
   };
 }
 

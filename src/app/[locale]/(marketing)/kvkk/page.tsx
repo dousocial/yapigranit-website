@@ -1,12 +1,21 @@
 import type { Metadata } from "next";
 import { LegalPage } from "@/components/sections/legal-page";
+import { buildAlternates } from "@/lib/i18n-urls";
+import type { Locale } from "@/i18n/routing";
 
-export const metadata: Metadata = {
-  title: "KVKK Aydınlatma Metni",
-  description:
-    "Yapı Granit kişisel verilerin korunması (KVKK) aydınlatma metni.",
-  alternates: { canonical: "/kvkk" },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return {
+    title: "KVKK Aydınlatma Metni",
+    description:
+      "Yapı Granit kişisel verilerin korunması (KVKK) aydınlatma metni.",
+    alternates: buildAlternates(locale as Locale, "/kvkk"),
+  };
+}
 
 export default function KvkkPage() {
   return (

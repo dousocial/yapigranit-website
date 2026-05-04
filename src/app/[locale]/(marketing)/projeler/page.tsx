@@ -8,6 +8,8 @@ import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { ProjectsGallery } from "@/components/sections/projects-gallery";
 import { Building2, ShieldCheck, Clock4, Leaf } from "lucide-react";
+import { buildAlternates } from "@/lib/i18n-urls";
+import type { Locale } from "@/i18n/routing";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -36,9 +38,7 @@ export async function generateMetadata({
       "doğal taş cephe kaplama",
       "taş cephe sistemleri",
     ],
-    alternates: {
-      canonical: locale === "tr" ? "/projeler" : `/${locale}/projeler`,
-    },
+    alternates: buildAlternates(locale as Locale, "/projeler"),
   };
 }
 

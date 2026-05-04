@@ -21,6 +21,8 @@ import { Reveal } from "@/components/ui/reveal";
 import { ContactForm } from "@/components/sections/contact-form";
 import { Testimonials } from "@/components/sections/testimonials";
 import { siteConfig } from "@/lib/site";
+import { buildAlternates } from "@/lib/i18n-urls";
+import type { Locale } from "@/i18n/routing";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -34,9 +36,7 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: {
-      canonical: locale === "tr" ? "/iletisim" : `/${locale}/iletisim`,
-    },
+    alternates: buildAlternates(locale as Locale, "/iletisim"),
   };
 }
 

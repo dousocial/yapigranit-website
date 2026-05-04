@@ -7,6 +7,8 @@ import { PageHero } from "@/components/sections/page-hero";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
 import { SampleRequestForm } from "@/components/sections/sample-request-form";
+import { buildAlternates } from "@/lib/i18n-urls";
+import type { Locale } from "@/i18n/routing";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -20,9 +22,7 @@ export async function generateMetadata({
   return {
     title: t("metaTitle"),
     description: t("metaDescription"),
-    alternates: {
-      canonical: locale === "tr" ? "/numune-talep" : `/${locale}/numune-talep`,
-    },
+    alternates: buildAlternates(locale as Locale, "/numune-talep"),
   };
 }
 

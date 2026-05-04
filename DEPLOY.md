@@ -82,7 +82,12 @@ volumes:
 - [ ] `ADMIN_PASSWORD` güçlü bir şeyle değiştir
 - [ ] `DATABASE_URL` PostgreSQL'e çevir (SQLite yerine)
 - [ ] `RESEND_API_KEY` bağla — formlar gerçekten mail göndersin
-- [ ] DNS: `yapigranit.com.tr` → deploy hedefine yönlendir
+- [ ] DNS: `yapigranit.com` (apex + www) → deploy hedefine yönlendir
+- [ ] DNS: `yapigranit.de` (apex + www) → aynı deploy hedefine yönlendir
+- [ ] Vercel → Project Settings → Domains: dört kayıt da eklenmiş ve doğrulanmış (yapigranit.com, www.yapigranit.com, yapigranit.de, www.yapigranit.de)
+- [ ] Vercel UI'da locale yönlendirmesi için "Redirect" KULLANMA — middleware işi yapacak
+- [ ] Test: `https://yapigranit.com/de` → 307 redirect → `https://yapigranit.de/`; `https://yapigranit.de/tr` → `https://yapigranit.com/`
+- [ ] Google Search Console'a iki ayrı property ekle: `yapigranit.com` ve `yapigranit.de`; her birine `/sitemap.xml` gönder; International Targeting raporunda hreflang reciprocity'yi doğrula
 - [ ] SSL sertifikası (Vercel/Cloudflare otomatik halleder)
 - [ ] `siteConfig.url` (`src/lib/site.ts`) production URL'i ile güncelle
 - [ ] Google Search Console'a domain ekle

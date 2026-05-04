@@ -13,6 +13,7 @@ import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { machinery, localizedMachine } from "@/lib/data/machinery";
 import type { Locale } from "@/i18n/routing";
+import { buildAlternates } from "@/lib/i18n-urls";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -58,10 +59,7 @@ export async function generateMetadata({
       "doğal taş üretim teknolojileri",
       "denizli taş işleme",
     ],
-    alternates: {
-      canonical:
-        locale === "tr" ? "/makine-parkuru" : `/${locale}/makine-parkuru`,
-    },
+    alternates: buildAlternates(locale as Locale, "/makine-parkuru"),
   };
 }
 

@@ -15,6 +15,7 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { GalleryCarousel } from "@/components/ui/gallery-carousel";
 import { projects, localizedProject } from "@/lib/data/projects";
 import { routing, type Locale } from "@/i18n/routing";
+import { buildAlternates } from "@/lib/i18n-urls";
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>;
@@ -112,12 +113,7 @@ export async function generateMetadata({
       description: l.summary,
       images: [project.cover],
     },
-    alternates: {
-      canonical:
-        locale === "tr"
-          ? `/projeler/${project.slug}`
-          : `/${locale}/projeler/${project.slug}`,
-    },
+    alternates: buildAlternates(locale as Locale, `/projeler/${project.slug}`),
   };
 }
 

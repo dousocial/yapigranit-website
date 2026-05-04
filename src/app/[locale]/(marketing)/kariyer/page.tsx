@@ -10,6 +10,8 @@ import { Reveal } from "@/components/ui/reveal";
 import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/navigation";
 import { siteConfig } from "@/lib/site";
+import { buildAlternates } from "@/lib/i18n-urls";
+import type { Locale } from "@/i18n/routing";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -131,9 +133,7 @@ export async function generateMetadata({
   return {
     title: tx.title,
     description: tx.description,
-    alternates: {
-      canonical: locale === "tr" ? "/kariyer" : `/${locale}/kariyer`,
-    },
+    alternates: buildAlternates(locale as Locale, "/kariyer"),
   };
 }
 

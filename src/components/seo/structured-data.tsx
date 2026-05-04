@@ -23,6 +23,7 @@ export function OrganizationJsonLd() {
       availableLanguage: ["tr", "en"],
     })),
     sameAs: [
+      siteConfig.altUrl,
       siteConfig.social.instagram,
       siteConfig.social.linkedin,
       siteConfig.social.youtube,

@@ -18,6 +18,8 @@ import { Button } from "@/components/ui/button";
 import { CtaBand } from "@/components/sections/cta-band";
 import { ProductJsonLd, FaqJsonLd } from "@/components/seo/structured-data";
 import { siteConfig } from "@/lib/site";
+import { buildAlternates } from "@/lib/i18n-urls";
+import type { Locale } from "@/i18n/routing";
 
 interface Props {
   params: Promise<{ locale: string }>;
@@ -62,12 +64,7 @@ export async function generateMetadata({
       "havalandırmalı cephe sistemi",
       "denizli cami cephe",
     ],
-    alternates: {
-      canonical:
-        locale === "tr"
-          ? "/cami-cephe-kaplama"
-          : `/${locale}/cami-cephe-kaplama`,
-    },
+    alternates: buildAlternates(locale as Locale, "/cami-cephe-kaplama"),
   };
 }
 

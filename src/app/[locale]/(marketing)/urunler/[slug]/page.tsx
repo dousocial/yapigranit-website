@@ -20,6 +20,7 @@ import { products, localizedProduct } from "@/lib/data/products";
 import { projects, localizedProject } from "@/lib/data/projects";
 import { routing, type Locale } from "@/i18n/routing";
 import { siteConfig } from "@/lib/site";
+import { buildAlternates } from "@/lib/i18n-urls";
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>;
@@ -41,12 +42,7 @@ export async function generateMetadata({
   return {
     title: l.name,
     description: l.description,
-    alternates: {
-      canonical:
-        locale === "tr"
-          ? `/urunler/${product.slug}`
-          : `/${locale}/urunler/${product.slug}`,
-    },
+    alternates: buildAlternates(locale as Locale, `/urunler/${product.slug}`),
   };
 }
 

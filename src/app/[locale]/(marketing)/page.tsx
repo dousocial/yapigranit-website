@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
+import { buildAlternates } from "@/lib/i18n-urls";
+import type { Locale } from "@/i18n/routing";
 import { HeroHome } from "@/components/sections/hero-home";
 import { ProductsGrid } from "@/components/sections/products-grid";
 import { B2BSolutions } from "@/components/sections/b2b-solutions";
@@ -48,7 +50,7 @@ export async function generateMetadata({
       "otel mermer uygulama",
       "porselen kaplama",
     ],
-    alternates: { canonical: locale === "tr" ? "/" : `/${locale}` },
+    alternates: buildAlternates(locale as Locale, "/"),
   };
 }
 

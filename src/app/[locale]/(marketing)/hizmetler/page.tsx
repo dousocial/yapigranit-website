@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
 import { services, localizedService } from "@/lib/data/services";
 import { whyUs } from "@/lib/data/b2b";
+import { buildAlternates } from "@/lib/i18n-urls";
 import type { Locale } from "@/i18n/routing";
 
 interface Props {
@@ -41,9 +42,7 @@ export async function generateMetadata({
       "tezgah uygulaması",
       "denizli doğal taş hizmetleri",
     ],
-    alternates: {
-      canonical: locale === "tr" ? "/hizmetler" : `/${locale}/hizmetler`,
-    },
+    alternates: buildAlternates(locale as Locale, "/hizmetler"),
   };
 }
 
