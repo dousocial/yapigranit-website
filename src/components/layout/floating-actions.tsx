@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { MessageCircle, Phone, X, ArrowUp } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { siteConfig } from "@/lib/site";
@@ -10,6 +10,16 @@ import { trackContact } from "@/lib/tracking";
 
 export function FloatingActions() {
   const t = useTranslations("FloatingActions");
+  const locale = useLocale();
+  const deOverride =
+    locale === "de" ? siteConfig.contactByLocale.de : null;
+  const waNumber = (deOverride?.whatsapp ?? siteConfig.contact.whatsapp).replace(
+    /\D/g,
+    "",
+  );
+  const telNumber = (
+    deOverride?.phoneDisplay ?? siteConfig.contact.phones[0]
+  ).replace(/\s/g, "");
   const [open, setOpen] = React.useState(false);
   const [showTop, setShowTop] = React.useState(false);
 
@@ -47,7 +57,7 @@ export function FloatingActions() {
             className="flex flex-col gap-2"
           >
             <a
-              href={`https://wa.me/${siteConfig.contact.whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent(
+              href={`https://wa.me/${waNumber}?text=${encodeURIComponent(
                 t("whatsappMessage"),
               )}`}
               target="_blank"
@@ -59,7 +69,7 @@ export function FloatingActions() {
               {t("whatsapp")}
             </a>
             <a
-              href={`tel:${siteConfig.contact.phones[0].replace(/\s/g, "")}`}
+              href={`tel:${telNumber}`}
               onClick={() => trackContact({ method: "phone", source: "floating" })}
               className="flex items-center gap-3 bg-surface-dark hover:bg-ink text-on-dark pl-4 pr-5 h-12 rounded-full shadow-lg text-[0.85rem] font-medium"
             >

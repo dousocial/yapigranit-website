@@ -26,6 +26,19 @@ export const siteConfig = {
       lng: 29.0865,
     },
   },
+  // Locale-specific overrides for floating widget / sticky bar / contact card.
+  // Read by components that detect `useLocale()` and switch contact endpoints.
+  contactByLocale: {
+    de: {
+      whatsapp: "+905453108547",
+      phoneDisplay: "+90 545 310 8547",
+      emails: [
+        "info@yapigranit.de",
+        "m.yikilmaz@yapigranit.de",
+        "h.gulcer@yapigranit.de",
+      ],
+    },
+  },
   social: {
     instagram: "https://www.instagram.com/yapigranitmermer/",
     linkedin: "https://www.linkedin.com/company/yapigrani%CC%87t-mermer-sanayi-ve-ticaret-a-%C5%9F/",

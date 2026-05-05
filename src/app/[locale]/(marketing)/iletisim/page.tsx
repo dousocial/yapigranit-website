@@ -51,6 +51,11 @@ function IletisimContent() {
   const tNav = useTranslations("Nav");
   const locale = useLocale();
   const showTeam = locale === "de" || locale === "en";
+  const emailLines: readonly string[] =
+    locale === "de"
+      ? siteConfig.contactByLocale.de.emails
+      : [siteConfig.contact.emails.info, siteConfig.contact.emails.project];
+  const primaryEmail = emailLines[0];
 
   const trustItems: {
     icon: typeof Users2;
@@ -118,12 +123,9 @@ function IletisimContent() {
             <InfoCard
               icon={Mail}
               title={t("infoEmailTitle")}
-              lines={[
-                siteConfig.contact.emails.info,
-                siteConfig.contact.emails.project,
-              ]}
+              lines={emailLines}
               actionLabel={t("infoEmailAction")}
-              actionHref={`mailto:${siteConfig.contact.emails.info}`}
+              actionHref={`mailto:${primaryEmail}`}
             />
             <InfoCard
               icon={Clock}

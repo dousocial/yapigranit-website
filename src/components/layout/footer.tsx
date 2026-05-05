@@ -159,10 +159,16 @@ export function Footer() {
               <div className="flex gap-3">
                 <Mail className="size-4 text-gold shrink-0 mt-3" />
                 <a
-                  href={`mailto:${siteConfig.contact.emails.info}`}
+                  href={`mailto:${
+                    locale === "de"
+                      ? siteConfig.contactByLocale.de.emails[0]
+                      : siteConfig.contact.emails.info
+                  }`}
                   className="inline-flex items-center min-h-11 py-2 text-[0.88rem] text-on-dark-muted hover:text-gold transition-colors"
                 >
-                  {siteConfig.contact.emails.info}
+                  {locale === "de"
+                    ? siteConfig.contactByLocale.de.emails[0]
+                    : siteConfig.contact.emails.info}
                 </a>
               </div>
             </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { Phone, MessageCircle, MapPin, FileText } from "lucide-react";
 import { siteConfig } from "@/lib/site";
@@ -10,12 +10,20 @@ import { trackContact } from "@/lib/tracking";
 export function MobileStickyBar() {
   const pathname = usePathname();
   const t = useTranslations("MobileBar");
+  const locale = useLocale();
 
   // Admin'de gösterme
   if (pathname.startsWith("/admin")) return null;
 
-  const phone = siteConfig.contact.phones[0].replace(/\s/g, "");
-  const wa = siteConfig.contact.whatsapp.replace(/\D/g, "");
+  const deOverride =
+    locale === "de" ? siteConfig.contactByLocale.de : null;
+  const phone = (
+    deOverride?.phoneDisplay ?? siteConfig.contact.phones[0]
+  ).replace(/\s/g, "");
+  const wa = (deOverride?.whatsapp ?? siteConfig.contact.whatsapp).replace(
+    /\D/g,
+    "",
+  );
   const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${siteConfig.contact.map.lat},${siteConfig.contact.map.lng}`;
 
   const items: Array<{
