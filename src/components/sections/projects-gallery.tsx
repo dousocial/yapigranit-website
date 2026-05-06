@@ -12,7 +12,9 @@ import { Button } from "@/components/ui/button";
 import {
   projects as allProjects,
   projectCategories,
+  projectScales,
   localizedProject,
+  type ProjectScale,
 } from "@/lib/data/projects";
 import type { Locale } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
@@ -20,6 +22,7 @@ import { cn } from "@/lib/utils";
 export function ProjectsGallery() {
   const t = useTranslations("Pages.projects");
   const locale = useLocale() as Locale;
+  const [scale, setScale] = React.useState<ProjectScale>("imza");
   const [category, setCategory] = React.useState<string>("all");
   const [year, setYear] = React.useState<string>("all");
   const [yearOpen, setYearOpen] = React.useState(false);
@@ -38,19 +41,55 @@ export function ProjectsGallery() {
 
   const projects = React.useMemo(() => {
     return allProjects.filter((p) => {
+      const scaleMatch = p.scale === scale;
       const catMatch = category === "all" || p.category === category;
       const yearMatch =
         year === "all" ||
         (year === "2022" ? p.year <= 2022 : p.year === parseInt(year));
-      return catMatch && yearMatch;
+      return scaleMatch && catMatch && yearMatch;
     });
-  }, [category, year]);
+  }, [scale, category, year]);
+
+  const handleScaleChange = (next: ProjectScale) => {
+    if (next === scale) return;
+    setScale(next);
+    setCategory("all");
+    setYear("all");
+    setYearOpen(false);
+  };
 
   return (
     <section className="bg-background pt-2 pb-20 lg:pb-28">
       <Container size="wide">
+        {/* Scale tabs */}
+        <div
+          role="tablist"
+          aria-label={t("scaleTabsAriaLabel")}
+          className="flex items-stretch border-b border-line"
+        >
+          {projectScales.map((s) => {
+            const isActive = scale === s.slug;
+            return (
+              <button
+                key={s.slug}
+                role="tab"
+                aria-selected={isActive}
+                onClick={() => handleScaleChange(s.slug)}
+                className={cn(
+                  "flex-1 sm:flex-none sm:min-w-[220px] py-5 px-6 font-display text-[1.05rem] sm:text-[1.25rem] text-center transition-colors border-b-2 -mb-px",
+                  isActive
+                    ? "border-gold-deep text-ink"
+                    : "border-transparent text-ink-soft hover:text-ink",
+                )}
+              >
+                {s.label[locale] ?? s.label.tr}
+              </button>
+            );
+          })}
+        </div>
+
         {/* Filters */}
-        <div className="flex flex-wrap items-center justify-between gap-4 py-6 border-y border-line mb-8 lg:mb-10">
+        <div className="flex flex-wrap items-center justify-between gap-4 py-6 border-b border-line mb-8 lg:mb-10">
           <div className="flex flex-wrap gap-2 overflow-x-auto scrollbar-hide flex-1">
             {projectCategories.map((cat) => (
               <button

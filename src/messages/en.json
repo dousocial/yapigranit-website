@@ -247,6 +247,7 @@
       "filterCategory": "Category",
       "filterYear": "All Years",
       "filterButton": "Filter",
+      "scaleTabsAriaLabel": "Project type",
       "yearAndOlder": "{year} and older",
       "noResults": "No projects match your filters.",
       "ctaCardTitle": "Let your project be our next success story.",

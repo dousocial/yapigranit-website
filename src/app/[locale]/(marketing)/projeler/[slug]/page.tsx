@@ -134,16 +134,14 @@ function ProjectContent({ slug }: { slug: string }) {
   if (!project) return null;
   const l = localizedProject(project, locale);
 
-  // Other projects: same category first, then fill from rest — max 3
-  const sameCategory = projects.filter(
-    (p) => p.category === project.category && p.slug !== project.slug,
+  // Other projects: stay within the same scale (İmza vs Bireysel),
+  // prefer same category, then fill from the rest — max 3
+  const sameScale = projects.filter(
+    (p) => p.scale === project.scale && p.slug !== project.slug,
   );
   const otherProjects = [
-    ...sameCategory,
-    ...projects.filter(
-      (p) =>
-        p.category !== project.category && p.slug !== project.slug,
-    ),
+    ...sameScale.filter((p) => p.category === project.category),
+    ...sameScale.filter((p) => p.category !== project.category),
   ].slice(0, 3);
 
   const meta = [

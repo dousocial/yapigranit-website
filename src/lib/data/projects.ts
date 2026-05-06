@@ -10,8 +10,11 @@ export interface ProjectTranslation {
   area?: string;
 }
 
+export type ProjectScale = "imza" | "bireysel";
+
 export interface Project extends ProjectTranslation {
   slug: string;
+  scale: ProjectScale;
   category:
     | "oteller"
     | "konut"
@@ -25,6 +28,25 @@ export interface Project extends ProjectTranslation {
   gallery: string[];
   i18n?: Partial<Record<Exclude<Locale, "tr">, Partial<ProjectTranslation>>>;
 }
+
+export const projectScales = [
+  {
+    slug: "imza" as const,
+    label: {
+      tr: "İmza Projeler",
+      en: "Signature Projects",
+      de: "Signatur-Projekte",
+    },
+  },
+  {
+    slug: "bireysel" as const,
+    label: {
+      tr: "Bireysel Projeler",
+      en: "Individual Projects",
+      de: "Individuelle Projekte",
+    },
+  },
+] as const;
 
 export const projectCategories = [
   {
@@ -76,6 +98,7 @@ export const projectCategories = [
 export const projects: Project[] = [
   {
     slug: "forum-camlik-avm",
+    scale: "imza",
     title: "Forum Çamlık AVM",
     category: "ticari",
     categoryLabel: "Ticari Yapı",
@@ -125,6 +148,7 @@ export const projects: Project[] = [
   },
   {
     slug: "skycity-denizli",
+    scale: "imza",
     title: "SkyCity Denizli",
     category: "konut",
     categoryLabel: "Karma Yapı",
@@ -172,6 +196,7 @@ export const projects: Project[] = [
   },
   {
     slug: "ahmet-hulusi-efendi-kulliyesi",
+    scale: "imza",
     title: "Ahmet Hulusi Efendi Külliyesi",
     category: "kamusal",
     categoryLabel: "Külliye / Kamusal Yapı",
@@ -220,6 +245,7 @@ export const projects: Project[] = [
   },
   {
     slug: "anemon-hotel-denizli",
+    scale: "imza",
     title: "Anemon Hotel Denizli",
     category: "oteller",
     categoryLabel: "Otel",
@@ -264,6 +290,459 @@ export const projects: Project[] = [
       },
     },
   },
+
+  // -------- Bireysel Projeler --------
+
+  {
+    slug: "ceyda-tanrikulu-mutfak",
+    scale: "bireysel",
+    title: "Ceyda Tanrıkulu Mutfak Projesi",
+    category: "konut",
+    categoryLabel: "Mutfak Tezgahı",
+    type: "T-One Calacatta Gold Mutfak Tezgahı",
+    location: "Denizli",
+    year: 2025,
+    material: ["T-One Calacatta Gold", "Porselen"],
+    area: "7 m²",
+    scope:
+      "T-One Calacatta Gold porselen yüzey ile mutfak tezgah ve tezgah arası uygulaması; özel ölçü kesim, hassas birleşim detayları ve montaj, 2 plaka.",
+    summary:
+      "Modern mutfak tasarımını zamansız mermer estetiğiyle buluşturan bu projede, Ceyda Tanrıkulu'na ait yaşam alanında T-One Calacatta Gold yüzey tercih edildi. Açık tonlu zemin yapısı ve doğal altın damar geçişleriyle mekâna ferah, bütünsel ve premium bir görünüm kazandırıldı. Tezgah ve arka yüzey uygulamalarında kullanılan T-One Calacatta Gold, estetik görünümünü günlük kullanıma uygun dayanıklı yapısıyla birleştirerek projeye modern bir karakter kattı.",
+    cover:
+      "/images/projects/ceyda-tanrikulu-mutfak/ceyda-tanrikulu-mutfak-tezgah-01.webp",
+    gallery: [
+      "/images/projects/ceyda-tanrikulu-mutfak/ceyda-tanrikulu-mutfak-tezgah-02.webp",
+    ],
+    i18n: {
+      en: {
+        title: "Ceyda Tanrıkulu Kitchen Project",
+        categoryLabel: "Kitchen Countertop",
+        type: "T-One Calacatta Gold Kitchen Countertop",
+        material: ["T-One Calacatta Gold", "Porcelain"],
+        scope:
+          "Kitchen countertop and backsplash application using T-One Calacatta Gold porcelain; precision cuts, refined joinery and installation across 2 slabs.",
+        summary:
+          "This project bridges modern kitchen design with timeless marble aesthetics. T-One Calacatta Gold was chosen for Ceyda Tanrıkulu's residence — its light base and natural gold veining bringing an airy, cohesive and premium character to the space. Used on the countertop and backsplash, T-One Calacatta Gold combines refined visual appeal with the durability needed for daily use.",
+      },
+      de: {
+        title: "Ceyda Tanrıkulu Küchenprojekt",
+        categoryLabel: "Küchenarbeitsplatte",
+        type: "T-One Calacatta Gold Küchenarbeitsplatte",
+        material: ["T-One Calacatta Gold", "Porzellan"],
+        scope:
+          "Küchenarbeitsplatte und Rückwand-Verkleidung in T-One Calacatta Gold Porzellan; präzise Zuschnitte, sorgfältige Fügungen und Montage mit 2 Platten.",
+        summary:
+          "Dieses Projekt verbindet modernes Küchendesign mit zeitloser Marmorästhetik. Für die Wohnung von Ceyda Tanrıkulu wurde T-One Calacatta Gold gewählt — der helle Grundton und die natürlichen goldenen Adern verleihen dem Raum eine luftige, hochwertige Atmosphäre.",
+      },
+    },
+  },
+  {
+    slug: "dekton-kairos-mutfak",
+    scale: "bireysel",
+    title: "Dekton Kairos Mutfak Projesi",
+    category: "konut",
+    categoryLabel: "Mutfak Tezgahı",
+    type: "Dekton Kairos Mutfak Tezgahı",
+    location: "Denizli",
+    year: 2025,
+    material: ["Dekton Kairos", "Ultra-Compact Yüzey"],
+    area: "9 m²",
+    scope:
+      "Dekton Kairos ultra-kompakt yüzey ile mutfak tezgah ve tezgah arası uygulaması; özel ölçü kesim, hassas birleşim detayları ve damar devamlılığı, 3 plaka.",
+    summary:
+      "Modern çizgiler ve zamansız taş dokusunu bir araya getiren bu mutfak projesinde, yüzeylerde Dekton Kairos tercih edildi. İnce ve doğal damar geçişleriyle mekâna ferah bir görünüm kazandıran uygulama, minimalist mutfak tasarımıyla bütünleşerek güçlü bir estetik oluşturdu. Dayanıklı yapısı, düşük gözenekli yüzeyi ve uzun ömürlü kullanım avantajıyla öne çıkan Dekton Kairos; günlük kullanım konforunu modern mimari görünümle bir araya getirdi.",
+    cover:
+      "/images/projects/dekton-kairos-mutfak/dekton-kairos-mutfak-tezgah-01.webp",
+    gallery: [
+      "/images/projects/dekton-kairos-mutfak/dekton-kairos-mutfak-tezgah-02.webp",
+      "/images/projects/dekton-kairos-mutfak/dekton-kairos-mutfak-tezgah-03.webp",
+    ],
+    i18n: {
+      en: {
+        title: "Dekton Kairos Kitchen Project",
+        categoryLabel: "Kitchen Countertop",
+        type: "Dekton Kairos Kitchen Countertop",
+        material: ["Dekton Kairos", "Ultra-Compact Surface"],
+        scope:
+          "Kitchen countertop and backsplash application using Dekton Kairos ultra-compact surface; precision cuts, careful joinery and continuous veining across 3 slabs.",
+        summary:
+          "This kitchen project unites modern lines with timeless stone texture, with Dekton Kairos chosen for all surfaces. Subtle, natural veining lends the space an airy quality and integrates seamlessly with the minimalist design. With its durable, low-porosity surface and long-lasting performance, Dekton Kairos brings together everyday comfort and modern architectural presence.",
+      },
+      de: {
+        title: "Dekton Kairos Küchenprojekt",
+        categoryLabel: "Küchenarbeitsplatte",
+        type: "Dekton Kairos Küchenarbeitsplatte",
+        material: ["Dekton Kairos", "Ultra-Kompakt-Oberfläche"],
+        scope:
+          "Küchenarbeitsplatte und Rückwand-Verkleidung mit Dekton Kairos; präzise Zuschnitte, sorgfältige Fügungen und durchgehende Maserung mit 3 Platten.",
+        summary:
+          "Dieses Küchenprojekt verbindet moderne Linien mit zeitloser Steintextur — alle Oberflächen wurden in Dekton Kairos ausgeführt. Die feine, natürliche Maserung verleiht dem Raum Leichtigkeit und fügt sich nahtlos in das minimalistische Design ein. Mit seiner robusten, porenarmen Oberfläche bietet Dekton Kairos langlebigen Komfort und moderne architektonische Präsenz.",
+      },
+    },
+  },
+  {
+    slug: "bullhead-cafe",
+    scale: "bireysel",
+    title: "Bullhead Cafe Banko Projesi",
+    category: "restoran-kafe",
+    categoryLabel: "Kafe Bankosu",
+    type: "Dekton Trilium Banko Uygulaması",
+    location: "Denizli",
+    year: 2025,
+    material: ["Dekton Trilium", "Ultra-Compact Yüzey"],
+    area: "21 m²",
+    scope:
+      "Dekton Trilium ultra-kompakt yüzey ile servis bankosu ve detay birleşim uygulamaları; yoğun kullanım ortamına uygun dayanıklı yapı, kesintisiz yüzey bütünlüğü, 5 plaka.",
+    summary:
+      "Endüstriyel dokunun modern detaylarla buluştuğu Bullhead Cafe projesinde, mekânın karakterini tamamlayan özel banko uygulamalarını gerçekleştirdik. Projede tercih edilen Dekton Trilium yüzeyi; güçlü metalik geçişleri, doğal pas efektini andıran dokusu ve derin tonlarıyla mekâna özgün bir atmosfer kazandırdı. Yoğun kullanıma uygun yapısıyla öne çıkan Dekton Trilium; çizilme, ısı ve leke direnci sayesinde kafe projelerinde uzun ömürlü bir çözüm sunarken, mekânın endüstriyel konseptini de güçlü biçimde destekledi.",
+    cover:
+      "/images/projects/bullhead-cafe/bullhead-cafe-banko-dekton-trilium-01.webp",
+    gallery: [
+      "/images/projects/bullhead-cafe/bullhead-cafe-banko-dekton-trilium-02.webp",
+      "/images/projects/bullhead-cafe/bullhead-cafe-banko-dekton-trilium-03.webp",
+      "/images/projects/bullhead-cafe/bullhead-cafe-banko-dekton-trilium-04.webp",
+      "/images/projects/bullhead-cafe/bullhead-cafe-banko-dekton-trilium-05.webp",
+      "/images/projects/bullhead-cafe/bullhead-cafe-banko-dekton-trilium-06.webp",
+    ],
+    i18n: {
+      en: {
+        title: "Bullhead Cafe Counter Project",
+        categoryLabel: "Café Counter",
+        type: "Dekton Trilium Counter Application",
+        material: ["Dekton Trilium", "Ultra-Compact Surface"],
+        scope:
+          "Service counter and detail joinery in Dekton Trilium ultra-compact surface; durable build for high-traffic environments, seamless surface continuity across 5 slabs.",
+        summary:
+          "Bullhead Cafe brings industrial texture together with modern detail, and we delivered the custom counter applications that complete the venue's character. Dekton Trilium — chosen for the project — adds a distinct atmosphere with its strong metallic transitions, natural rust-effect texture and deep tones. With its scratch, heat and stain resistance, Dekton Trilium offers a long-lasting solution while reinforcing the café's industrial concept.",
+      },
+      de: {
+        title: "Bullhead Cafe Theken-Projekt",
+        categoryLabel: "Café-Theke",
+        type: "Dekton Trilium Thekenanwendung",
+        material: ["Dekton Trilium", "Ultra-Kompakt-Oberfläche"],
+        scope:
+          "Service-Theke und Detailfügungen in Dekton Trilium Ultra-Kompakt-Oberfläche; robust für stark frequentierte Bereiche, durchgehende Oberfläche mit 5 Platten.",
+        summary:
+          "Im Bullhead Cafe verbinden sich industrielle Textur und moderne Details — wir haben die maßgefertigten Theken realisiert, die den Charakter des Lokals abrunden. Das gewählte Dekton Trilium verleiht dem Raum mit seinen kräftigen metallischen Übergängen, der natürlichen Rost-Optik und den tiefen Farbtönen eine eigenständige Atmosphäre.",
+      },
+    },
+  },
+  {
+    slug: "karahanli-somine",
+    scale: "bireysel",
+    title: "Karahanlı Mimarlık Şömine Projesi",
+    category: "konut",
+    categoryLabel: "Şömine Uygulaması",
+    type: "Dekton Trilium Şömine Kaplama",
+    location: "Denizli",
+    year: 2025,
+    material: ["Dekton Trilium", "Ultra-Compact Yüzey"],
+    area: "8 m²",
+    scope:
+      "Dekton Trilium ile şömine kaplama uygulaması; minimum derz yapısı, hassas kesim ve birleşim detayları, taşın doğal yüzey hareketleriyle desteklenen mimari form, 2 plaka.",
+    summary:
+      "Karahanlı Mimarlık projesi kapsamında tasarlanan bu özel şömine uygulamasında, endüstriyel dokusu ve güçlü yüzey karakteriyle öne çıkan Dekton Trilium tercih edildi. Mekânın modern mimari çizgisine uyum sağlayan yüzey tasarımı; doğal ışıkla birlikte derinlik kazanan pas efektli dokusu sayesinde güçlü ve sofistike bir atmosfer oluşturdu. Isıya dayanıklı yapısı, düşük bakım ihtiyacı ve uzun ömürlü yüzeyi sayesinde Dekton Trilium; yaşam alanlarında hem estetik hem de fonksiyonel bir çözüm sundu.",
+    cover:
+      "/images/projects/karahanli-somine/karahanli-somine-dekton-trilium-01.webp",
+    gallery: [
+      "/images/projects/karahanli-somine/karahanli-somine-dekton-trilium-02.webp",
+      "/images/projects/karahanli-somine/karahanli-somine-dekton-trilium-03.webp",
+      "/images/projects/karahanli-somine/karahanli-somine-dekton-trilium-04.webp",
+    ],
+    i18n: {
+      en: {
+        title: "Karahanlı Architecture Fireplace Project",
+        categoryLabel: "Fireplace Cladding",
+        type: "Dekton Trilium Fireplace Cladding",
+        material: ["Dekton Trilium", "Ultra-Compact Surface"],
+        scope:
+          "Fireplace cladding in Dekton Trilium; minimal joints, precision cutting and joinery, architectural form supported by the surface's natural movement, 2 slabs.",
+        summary:
+          "For Karahanlı Architecture's bespoke fireplace, we chose Dekton Trilium for its industrial texture and strong surface character. Aligned with the modern architectural language of the space, the rust-effect texture deepens with natural light, creating a powerful and sophisticated atmosphere. Heat-resistant, low-maintenance and long-lasting, Dekton Trilium delivers both aesthetic and functional value in living spaces.",
+      },
+      de: {
+        title: "Karahanlı Architektur Kamin-Projekt",
+        categoryLabel: "Kaminverkleidung",
+        type: "Dekton Trilium Kaminverkleidung",
+        material: ["Dekton Trilium", "Ultra-Kompakt-Oberfläche"],
+        scope:
+          "Kaminverkleidung mit Dekton Trilium; minimale Fugen, präzise Zuschnitte und Fügungen, architektonische Form unterstützt durch natürliche Oberflächenbewegung, 2 Platten.",
+        summary:
+          "Für den maßgeschneiderten Kamin von Karahanlı Architektur wurde Dekton Trilium aufgrund seiner industriellen Textur und ausgeprägten Oberflächenwirkung gewählt. Im Einklang mit der modernen Architektur des Raums entsteht durch die rostartige Textur und das natürliche Licht eine kraftvolle, anspruchsvolle Atmosphäre.",
+      },
+    },
+  },
+  {
+    slug: "karanlik-villa",
+    scale: "bireysel",
+    title: "Karanlık's Villa Projesi",
+    category: "konut",
+    categoryLabel: "Villa — Bütüncül Taş Uygulaması",
+    type: "Basamak, Teras, Parapet & Mutfak Uygulamaları",
+    location: "Denizli",
+    year: 2026,
+    material: ["Dekton Onix", "T-One Marro Metallo", "Ultra-Compact Yüzey"],
+    area: "100 m²",
+    scope:
+      "Villa girişinde basamak kaplama, teras zemin, parapet detayları ve mutfak tezgahı/ada uygulaması; iç-dış mekânda dayanıklılık ve estetik bütünlüğü hedefleyen 21 plakalık bütüncül uygulama.",
+    summary:
+      "Karanlık's Villa projesinde, doğal taşın estetiği ile modern mimarinin sade çizgileri bir araya getirilerek zamansız bir yaşam alanı oluşturuldu. Kenan Karanlık'a ait bu özel projede, hem iç hem dış mekânda bütünsel bir tasarım dili benimsendi. Dış mekânda Dekton Onix; basamak, teras ve parapet uygulamalarında UV direnci ve doğal taş görünümüyle maksimum performans sağlarken, mutfakta T-One Marro Metallo modern endüstriyel dokusuyla iç mekâna güçlü bir karakter kazandırdı.",
+    cover: "/images/projects/karanlik-villa/karanlik-villa-01.webp",
+    gallery: [
+      "/images/projects/karanlik-villa/karanlik-villa-02.webp",
+      "/images/projects/karanlik-villa/karanlik-villa-03.webp",
+      "/images/projects/karanlik-villa/karanlik-villa-04.webp",
+      "/images/projects/karanlik-villa/karanlik-villa-05.webp",
+      "/images/projects/karanlik-villa/karanlik-villa-06.webp",
+      "/images/projects/karanlik-villa/karanlik-villa-07.webp",
+      "/images/projects/karanlik-villa/karanlik-villa-08.webp",
+      "/images/projects/karanlik-villa/karanlik-villa-09.webp",
+      "/images/projects/karanlik-villa/karanlik-villa-10.webp",
+      "/images/projects/karanlik-villa/karanlik-villa-11.webp",
+      "/images/projects/karanlik-villa/karanlik-villa-12.webp",
+      "/images/projects/karanlik-villa/karanlik-villa-13.webp",
+    ],
+    i18n: {
+      en: {
+        title: "Karanlık's Villa Project",
+        categoryLabel: "Villa — Comprehensive Stone Application",
+        type: "Stairs, Terrace, Parapet & Kitchen Applications",
+        material: ["Dekton Onix", "T-One Marro Metallo", "Ultra-Compact Surface"],
+        scope:
+          "Stair cladding at the villa entrance, terrace flooring, parapet details and kitchen countertop/island application; a comprehensive 21-slab installation balancing durability and aesthetic continuity across interior and exterior.",
+        summary:
+          "Karanlık's Villa unites the aesthetics of natural stone with the clean lines of modern architecture to create a timeless living environment. Kenan Karanlık's residence follows a holistic design language across interior and exterior. Outside, Dekton Onix delivers maximum performance on stairs, terrace and parapet thanks to UV resistance and a natural stone appearance, while inside the kitchen, T-One Marro Metallo brings strong character with its modern industrial texture.",
+      },
+      de: {
+        title: "Karanlık's Villa Projekt",
+        categoryLabel: "Villa — Ganzheitliche Steinanwendung",
+        type: "Treppen, Terrasse, Brüstung & Küchenanwendungen",
+        material: ["Dekton Onix", "T-One Marro Metallo", "Ultra-Kompakt-Oberfläche"],
+        scope:
+          "Treppenverkleidung am Villa-Eingang, Terrassenboden, Brüstungsdetails und Küchenarbeitsplatte/Insel; ganzheitliche Anwendung mit 21 Platten für Innen- und Außenbereiche.",
+        summary:
+          "Karanlık's Villa vereint die Ästhetik des Natursteins mit den klaren Linien moderner Architektur. Außen sorgt Dekton Onix dank UV-Beständigkeit und Natursteinoptik für Höchstleistung; innen verleiht T-One Marro Metallo der Küche mit seiner modernen industriellen Textur einen ausdrucksstarken Charakter.",
+      },
+    },
+  },
+  {
+    slug: "kirlaroglu-masa",
+    scale: "bireysel",
+    title: "Kırlaroğlu Masa Projesi",
+    category: "konut",
+    categoryLabel: "Masa Uygulaması",
+    type: "Dekton Laurent Masa Uygulaması",
+    location: "Denizli",
+    year: 2025,
+    material: ["Dekton Laurent", "Ultra-Compact Yüzey"],
+    area: "4 m²",
+    scope:
+      "Dekton Laurent ile özel ölçü masa uygulaması; tek plaka üzerinden bütüncül yüzey, hassas kesim ve detaylı işçilik.",
+    summary:
+      "Modern yaşam alanlarına karakter kazandıran bu özel masa uygulamasında, güçlü damar yapısı ve sofistike görünümüyle öne çıkan Dekton Laurent tercih edildi. Koyu yüzey üzerinde hareket eden doğal bronz geçişler, mekâna lüks ve zamansız bir atmosfer katarken tasarımın merkezinde güçlü bir odak noktası oluşturdu. Isıya, çizilmeye ve günlük kullanıma karşı yüksek dayanıklılık sunan Dekton Laurent, estetik görünümü fonksiyonellikle birleştirerek projeye premium bir dokunuş kattı.",
+    cover:
+      "/images/projects/kirlaroglu-masa/kirlaroglu-masa-dekton-laurent-01.webp",
+    gallery: [
+      "/images/projects/kirlaroglu-masa/kirlaroglu-masa-dekton-laurent-02.webp",
+    ],
+    i18n: {
+      en: {
+        title: "Kırlaroğlu Table Project",
+        categoryLabel: "Custom Table",
+        type: "Dekton Laurent Table Application",
+        material: ["Dekton Laurent", "Ultra-Compact Surface"],
+        scope:
+          "Custom-sized table application in Dekton Laurent; full-surface continuity from a single slab, precision cutting and detailed craftsmanship.",
+        summary:
+          "For this custom table that gives modern living spaces a defining character, Dekton Laurent was chosen for its strong veining and sophisticated appearance. Natural bronze transitions across the dark surface bring a luxurious, timeless atmosphere and create a powerful focal point. Highly resistant to heat, scratches and daily use, Dekton Laurent combines aesthetic appeal with functionality for a premium touch.",
+      },
+      de: {
+        title: "Kırlaroğlu Tisch-Projekt",
+        categoryLabel: "Tisch",
+        type: "Dekton Laurent Tischanwendung",
+        material: ["Dekton Laurent", "Ultra-Kompakt-Oberfläche"],
+        scope:
+          "Maßgefertigte Tischanwendung in Dekton Laurent; durchgehende Oberfläche aus einer Platte, präzise Zuschnitte und detaillierte Verarbeitung.",
+        summary:
+          "Für diesen maßgeschneiderten Tisch wurde Dekton Laurent wegen seiner kräftigen Maserung und anspruchsvollen Optik gewählt. Natürliche Bronze-Übergänge auf der dunklen Oberfläche schaffen eine luxuriöse, zeitlose Atmosphäre und einen starken Blickfang.",
+      },
+    },
+  },
+  {
+    slug: "marmaris-villa",
+    scale: "bireysel",
+    title: "Marmaris Villa Mutfak Projesi",
+    category: "konut",
+    categoryLabel: "Villa — Mutfak Tezgahı",
+    type: "Dekton Aura Mutfak Tezgahı",
+    location: "Marmaris",
+    year: 2025,
+    material: ["Dekton Aura", "Ultra-Compact Yüzey"],
+    area: "6 m²",
+    scope:
+      "Dekton Aura ile mutfak tezgah uygulaması; ince damar geçişleri, geniş yüzey bütünlüğü ve temiz işçilik detayları, 2 plaka.",
+    summary:
+      "Marmaris'in doğal ışığını ve modern mimari çizgisini tamamlayan bu özel mutfak uygulamasında, zarif damar yapısıyla öne çıkan Dekton Aura tercih edildi. Minimal tasarım anlayışıyla şekillenen projede, taşın doğal görünümü mekânın ferah atmosferiyle bütünleşerek modern ve zamansız bir görünüm oluşturdu. Yüksek dayanıklılığı, düşük gözenekli yapısı ve modern yüzey dokusuyla Dekton Aura; günlük kullanım konforu ve uzun ömürlü şıklık sundu.",
+    cover:
+      "/images/projects/marmaris-villa/marmaris-villa-mutfak-dekton-aura-01.webp",
+    gallery: [
+      "/images/projects/marmaris-villa/marmaris-villa-mutfak-dekton-aura-02.webp",
+      "/images/projects/marmaris-villa/marmaris-villa-mutfak-dekton-aura-03.webp",
+    ],
+    i18n: {
+      en: {
+        title: "Marmaris Villa Kitchen Project",
+        categoryLabel: "Villa — Kitchen Countertop",
+        type: "Dekton Aura Kitchen Countertop",
+        material: ["Dekton Aura", "Ultra-Compact Surface"],
+        scope:
+          "Kitchen countertop application in Dekton Aura; subtle veining transitions, wide-surface continuity and clean joinery, 2 slabs.",
+        summary:
+          "This kitchen project complements the natural light and modern architectural lines of Marmaris with Dekton Aura, chosen for its refined veining. Shaped by a minimal design approach, the natural appearance of the stone integrates with the open atmosphere of the space, creating a modern and timeless look.",
+      },
+      de: {
+        title: "Marmaris Villa Küchenprojekt",
+        categoryLabel: "Villa — Küchenarbeitsplatte",
+        type: "Dekton Aura Küchenarbeitsplatte",
+        material: ["Dekton Aura", "Ultra-Kompakt-Oberfläche"],
+        scope:
+          "Küchenarbeitsplatte in Dekton Aura; feine Maserungsübergänge, durchgehende Oberfläche und klare Fügungen, 2 Platten.",
+        summary:
+          "Dieses Küchenprojekt ergänzt das natürliche Licht und die moderne Architektur von Marmaris mit Dekton Aura — gewählt für seine elegante Maserung. Im minimalistischen Design fügt sich die natürliche Steinoptik in die offene Atmosphäre ein.",
+      },
+    },
+  },
+  {
+    slug: "mimar-zuhal-tv-unitesi",
+    scale: "bireysel",
+    title: "Mimar Zuhal TV Ünitesi Projesi",
+    category: "konut",
+    categoryLabel: "TV Ünitesi",
+    type: "Nouvo Corso Onice Cobalto TV Ünitesi Kaplama",
+    location: "Denizli",
+    year: 2025,
+    material: ["Nouvo Corso Onice Cobalto", "Porselen"],
+    area: "6 m²",
+    scope:
+      "Nouvo Corso Onice Cobalto ile TV ünitesi kaplama uygulaması; tek plaka üzerinden geniş ebatlı yüzey bütünlüğü, hassas kesim ve detaylı işçilik.",
+    summary:
+      "Mimar Zuhal'e özel olarak tasarlanan bu TV ünitesi uygulamasında, dikkat çekici desen yapısı ve doğal taş etkisiyle öne çıkan Nouvo Corso Onice Cobalto tercih edildi. Derin damar geçişleri ve güçlü yüzey hareketleri sayesinde yaşam alanına modern, sanatsal ve premium bir karakter kazandırıldı. Tek plaka üzerinden çalışılan geniş ebatlı yüzey yapısı, mekânda güçlü bir odak noktası oluştururken minimal mimari detaylarla kusursuz bir uyum sağladı.",
+    cover:
+      "/images/projects/mimar-zuhal-tv-unitesi/mimar-zuhal-tv-unitesi-onice-cobalto-01.webp",
+    gallery: [
+      "/images/projects/mimar-zuhal-tv-unitesi/mimar-zuhal-tv-unitesi-onice-cobalto-02.webp",
+    ],
+    i18n: {
+      en: {
+        title: "Architect Zuhal TV Unit Project",
+        categoryLabel: "TV Unit",
+        type: "Nouvo Corso Onice Cobalto TV Unit Cladding",
+        material: ["Nouvo Corso Onice Cobalto", "Porcelain"],
+        scope:
+          "TV unit cladding application in Nouvo Corso Onice Cobalto; large-format surface continuity from a single slab, precision cutting and detailed craftsmanship.",
+        summary:
+          "For this TV unit designed for Architect Zuhal, Nouvo Corso Onice Cobalto was selected for its striking pattern and natural stone effect. Deep veining and powerful surface movement bring a modern, artistic and premium character to the living space. The wide-format surface from a single slab forms a strong focal point and integrates seamlessly with the minimal architectural details.",
+      },
+      de: {
+        title: "Architektin Zuhal TV-Element Projekt",
+        categoryLabel: "TV-Element",
+        type: "Nouvo Corso Onice Cobalto TV-Element-Verkleidung",
+        material: ["Nouvo Corso Onice Cobalto", "Porzellan"],
+        scope:
+          "TV-Element-Verkleidung in Nouvo Corso Onice Cobalto; großformatige Oberflächenkontinuität aus einer Platte, präzise Zuschnitte und detaillierte Verarbeitung.",
+        summary:
+          "Für dieses TV-Element, entworfen für Architektin Zuhal, wurde Nouvo Corso Onice Cobalto wegen seines markanten Musters und der Natursteinwirkung ausgewählt. Tiefe Maserung und kräftige Oberflächenbewegung verleihen dem Wohnraum einen modernen, künstlerischen und hochwertigen Charakter.",
+      },
+    },
+  },
+  {
+    slug: "yaylali-mutfak",
+    scale: "bireysel",
+    title: "Yaylalı Mimarlık Mutfak Projesi",
+    category: "konut",
+    categoryLabel: "Mutfak Tezgahı",
+    type: "Dekton Dove Mutfak Tezgahı",
+    location: "Denizli",
+    year: 2025,
+    material: ["Dekton Dove", "Ultra-Compact Yüzey"],
+    area: "15 m²",
+    scope:
+      "Dekton Dove ile U planlı mutfak tezgah ve çalışma yüzeyi uygulaması; geniş çalışma alanları, bütünsel dönüşler ve kesintisiz yüzey geçişleri, 4 plaka.",
+    summary:
+      "Modern çizgiler ve doğal dokunun buluştuğu bu mutfak projesinde, tezgah ve tüm çalışma yüzeylerinde Dekton Dove tercih edildi. Açık tonlu taşın yumuşak dokusu; koyu renk mobilyalar ve minimal mimari detaylarla dengeli bir kontrast oluşturarak mekâna sade ama güçlü bir karakter kazandırdı. Isıya, çizilmeye ve lekeye karşı yüksek dayanım sunan Dekton Dove; modern yaşam alanları için uzun ömürlü ve premium bir çözüm sunarken, mat dokusu sayesinde doğal ışıkta yalın ve şık bir görünüm sağladı.",
+    cover:
+      "/images/projects/yaylali-mutfak/yaylali-mutfak-tezgah-dekton-dove-01.webp",
+    gallery: [
+      "/images/projects/yaylali-mutfak/yaylali-mutfak-tezgah-dekton-dove-02.webp",
+      "/images/projects/yaylali-mutfak/yaylali-mutfak-tezgah-dekton-dove-03.webp",
+    ],
+    i18n: {
+      en: {
+        title: "Yaylalı Architecture Kitchen Project",
+        categoryLabel: "Kitchen Countertop",
+        type: "Dekton Dove Kitchen Countertop",
+        material: ["Dekton Dove", "Ultra-Compact Surface"],
+        scope:
+          "U-shaped kitchen countertop and work surface application in Dekton Dove; generous working areas, integrated turns and continuous surface transitions, 4 slabs.",
+        summary:
+          "In this kitchen where modern lines meet natural texture, Dekton Dove was chosen for the countertop and all work surfaces. The soft texture of the light-toned stone forms a balanced contrast with dark-toned cabinetry and minimal architectural details, lending the space a quiet but confident character. Highly resistant to heat, scratches and stains, Dekton Dove offers a long-lasting, premium solution.",
+      },
+      de: {
+        title: "Yaylalı Architektur Küchenprojekt",
+        categoryLabel: "Küchenarbeitsplatte",
+        type: "Dekton Dove Küchenarbeitsplatte",
+        material: ["Dekton Dove", "Ultra-Kompakt-Oberfläche"],
+        scope:
+          "U-förmige Küchenarbeitsplatte und Arbeitsflächen in Dekton Dove; großzügige Arbeitsbereiche, integrierte Eckverläufe und durchgehende Übergänge, 4 Platten.",
+        summary:
+          "In dieser Küche, in der moderne Linien auf natürliche Textur treffen, wurde Dekton Dove für Arbeitsplatte und alle Arbeitsflächen gewählt. Die weiche Textur des hellen Steins bildet einen ausgewogenen Kontrast zu dunklen Möbeln und minimalen architektonischen Details.",
+      },
+    },
+  },
+  {
+    slug: "serife-hanim-mutfak",
+    scale: "bireysel",
+    title: "Şerife Hanım Mutfak Projesi",
+    category: "konut",
+    categoryLabel: "Mutfak Tezgahı",
+    type: "Bien Vortex Mutfak Tezgahı & Duvar Kaplama",
+    location: "Denizli",
+    year: 2025,
+    material: ["Bien Vortex", "Porselen"],
+    area: "11 m²",
+    scope:
+      "Bien Vortex porselen yüzey ile mutfak tezgah ve duvar kaplama uygulaması; köşe dönüşleri, backsplash detayları, kesintisiz damar geçişleri, 3 plaka.",
+    summary:
+      "Şerife Hanım'a ait bu mutfak projesinde modern çizgiler ve doğal taş estetiği bir araya getirildi. Tezgah ve duvar yüzeylerinde tercih edilen Bien Vortex porselen yüzey, mekânın ferah atmosferini güçlendirirken kesintisiz damar geçişleriyle bütüncül bir görünüm sağladı. Minimal beyaz mutfak tasarımıyla uyumlu olarak uygulanan yüzeyler, hem estetik hem de günlük kullanım dayanıklılığı açısından uzun ömürlü bir çözüm sundu.",
+    cover:
+      "/images/projects/serife-hanim-mutfak/serife-hanim-mutfak-bien-vortex-01.webp",
+    gallery: [
+      "/images/projects/serife-hanim-mutfak/serife-hanim-mutfak-bien-vortex-02.webp",
+      "/images/projects/serife-hanim-mutfak/serife-hanim-mutfak-bien-vortex-03.webp",
+    ],
+    i18n: {
+      en: {
+        title: "Şerife Hanım Kitchen Project",
+        categoryLabel: "Kitchen Countertop",
+        type: "Bien Vortex Kitchen Countertop & Wall Cladding",
+        material: ["Bien Vortex", "Porcelain"],
+        scope:
+          "Kitchen countertop and wall cladding in Bien Vortex porcelain; corner transitions, backsplash details, continuous veining, 3 slabs.",
+        summary:
+          "Şerife Hanım's kitchen project unites modern lines with natural stone aesthetics. Bien Vortex porcelain — chosen for the countertop and wall surfaces — strengthens the airy atmosphere of the space while providing a seamless look thanks to continuous veining. Aligned with the minimal white kitchen design, the surfaces deliver a long-lasting, durable solution alongside refined aesthetics.",
+      },
+      de: {
+        title: "Şerife Hanım Küchenprojekt",
+        categoryLabel: "Küchenarbeitsplatte",
+        type: "Bien Vortex Küchenarbeitsplatte & Wandverkleidung",
+        material: ["Bien Vortex", "Porzellan"],
+        scope:
+          "Küchenarbeitsplatte und Wandverkleidung in Bien Vortex Porzellan; Eckübergänge, Backsplash-Details, durchgehende Maserung, 3 Platten.",
+        summary:
+          "Das Küchenprojekt von Şerife Hanım vereint moderne Linien mit der Ästhetik des Natursteins. Bien Vortex Porzellan auf Arbeitsplatte und Wand verstärkt die luftige Atmosphäre des Raums und schafft dank durchgehender Maserung einen geschlossenen Gesamteindruck.",
+      },
+    },
+  },
 ];
 
 // Helpers
@@ -293,4 +772,13 @@ export function localizedCategoryLabel(
   const cat = projectCategories.find((c) => c.slug === slug);
   if (!cat) return slug;
   return cat.label[locale] ?? cat.label.tr;
+}
+
+export function localizedScaleLabel(
+  slug: ProjectScale,
+  locale: Locale,
+): string {
+  const s = projectScales.find((x) => x.slug === slug);
+  if (!s) return slug;
+  return s.label[locale] ?? s.label.tr;
 }

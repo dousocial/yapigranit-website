@@ -247,6 +247,7 @@
       "filterCategory": "Kategori",
       "filterYear": "Tüm Yıllar",
       "filterButton": "Filtrele",
+      "scaleTabsAriaLabel": "Proje türü",
       "yearAndOlder": "{year} ve öncesi",
       "noResults": "Seçtiğiniz filtrelere uygun proje bulunamadı.",
       "ctaCardTitle": "Sizin projeniz de bir sonraki başarı hikayemiz olsun.",
