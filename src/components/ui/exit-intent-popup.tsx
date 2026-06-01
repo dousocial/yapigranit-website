@@ -57,6 +57,9 @@ export function ExitIntentPopup() {
   const triggeredRef = React.useRef(false);
 
   React.useEffect(() => {
+    // yapigranit.de (DE) sitesinde numune pop-up'ı gösterilmez
+    if (locale === "de") return;
+
     // Daha önce gösterildi mi?
     const last = localStorage.getItem(STORAGE_KEY);
     if (last && Date.now() - parseInt(last, 10) < SHOW_AFTER_MS) return;
@@ -106,7 +109,7 @@ export function ExitIntentPopup() {
       window.removeEventListener("scroll", onScroll);
       clearTimeout(dwellTimer);
     };
-  }, []);
+  }, [locale]);
 
   function close() {
     setOpen(false);
@@ -116,6 +119,9 @@ export function ExitIntentPopup() {
     setOpen(false);
     trackEvent("exit_intent_cta_click");
   }
+
+  // yapigranit.de'de numune pop-up kaldırıldı — sadece .com (TR/EN) için render edilir
+  if (locale === "de") return null;
 
   return (
     <AnimatePresence>

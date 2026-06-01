@@ -56,6 +56,11 @@ function IletisimContent() {
       ? siteConfig.contactByLocale.de.emails
       : [siteConfig.contact.emails.info, siteConfig.contact.emails.project];
   const primaryEmail = emailLines[0];
+  // yapigranit.de'de sabit hat yerine mobil numara gösterilir
+  const phoneLines: readonly string[] =
+    locale === "de"
+      ? [siteConfig.contactByLocale.de.phoneDisplay]
+      : siteConfig.contact.phones;
 
   const trustItems: {
     icon: typeof Users2;
@@ -116,9 +121,9 @@ function IletisimContent() {
             <InfoCard
               icon={Phone}
               title={t("infoPhoneTitle")}
-              lines={siteConfig.contact.phones}
+              lines={phoneLines}
               actionLabel={t("infoPhoneAction")}
-              actionHref={`tel:${siteConfig.contact.phones[0].replace(/\s/g, "")}`}
+              actionHref={`tel:${phoneLines[0].replace(/\s/g, "")}`}
             />
             <InfoCard
               icon={Mail}

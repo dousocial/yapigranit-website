@@ -145,7 +145,10 @@ export function Footer() {
               <div className="flex gap-3">
                 <Phone className="size-4 text-gold shrink-0 mt-3" />
                 <div className="text-[0.88rem] text-on-dark-muted flex flex-col">
-                  {siteConfig.contact.phones.map((p) => (
+                  {(locale === "de"
+                    ? [siteConfig.contactByLocale.de.phoneDisplay]
+                    : siteConfig.contact.phones
+                  ).map((p) => (
                     <a
                       key={p}
                       href={`tel:${p.replace(/\s/g, "")}`}
