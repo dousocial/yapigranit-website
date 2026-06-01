@@ -123,7 +123,7 @@ export const products: Product[] = [
       "Geniş renk seçeneği",
     ],
     bestUse: "Aile mutfağı & banyo",
-    image: "/images/products/urun-ozel.webp",
+    image: "/images/products/urun-kuvars.webp",
     i18n: {
       en: {
         name: "Quartz",
