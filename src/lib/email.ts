@@ -11,24 +11,32 @@ export async function sendMail({
   html,
   replyTo,
   to,
+  attachments,
 }: {
   subject: string;
   html: string;
   replyTo?: string;
   /** Varsayılan alıcıyı (RESEND_TO) bu form için ezmek istersen. */
   to?: string;
+  attachments?: { filename: string; content: Buffer }[];
 }) {
   if (!resend) {
     console.log("[Email — RESEND_API_KEY not set, skipping]", subject);
     return { ok: true, skipped: true };
   }
-  await resend.emails.send({
+  const { error } = await resend.emails.send({
     from: fromAddress,
     to: to ?? toAddress,
     subject,
     html,
     replyTo,
+    attachments,
   });
+  if (error) {
+    // Resend hata fırlatmaz, döndürür — çağıran taraf isterse kontrol eder
+    console.error("[Email — Resend error]", subject, error);
+    return { ok: false, error };
+  }
   return { ok: true };
 }
 
