@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { IBM_Plex_Mono, Space_Grotesk } from "next/font/google";
+import localFont from "next/font/local";
 import { setRequestLocale } from "next-intl/server";
 import {
   ArrowDownRight,
@@ -26,16 +26,20 @@ import { cn } from "@/lib/utils";
 
 import s from "./ogrenci.module.css";
 
-// Sayfaya özel tipografi: öğrenci / çizim paftası dili
-const grotesk = Space_Grotesk({
-  subsets: ["latin", "latin-ext"],
-  weight: ["500", "700"],
+// Sayfaya özel tipografi: öğrenci / çizim paftası dili.
+// Font dosyaları repoda (Latin + Türkçe alt küme, OFL) — build sırasında
+// Google Fonts'a bağımlı kalmasın diye next/font/google yerine local.
+const grotesk = localFont({
+  src: "./fonts/SpaceGrotesk.woff2",
+  weight: "300 700",
   variable: "--font-grotesk",
   display: "swap",
 });
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500"],
+const plexMono = localFont({
+  src: [
+    { path: "./fonts/PlexMono-Regular.woff2", weight: "400" },
+    { path: "./fonts/PlexMono-Medium.woff2", weight: "500" },
+  ],
   variable: "--font-plex-mono",
   display: "swap",
 });
