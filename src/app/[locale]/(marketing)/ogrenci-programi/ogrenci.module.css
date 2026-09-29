@@ -1,0 +1,138 @@
+/* Öğrenci Programı — "çizim paftası" konsepti. Sadece bu sayfaya özel. */
+
+.grotesk {
+  font-family: var(--font-grotesk), "Inter", system-ui, sans-serif;
+}
+
+.mono {
+  font-family: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
+  letter-spacing: 0.08em;
+}
+
+/* Koyu çizim masası: ince + kalın grid */
+.gridDark {
+  background-color: #0b0b0c;
+  background-image:
+    linear-gradient(to right, rgba(201, 168, 118, 0.13) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(201, 168, 118, 0.13) 1px, transparent 1px),
+    linear-gradient(to right, rgba(201, 168, 118, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(201, 168, 118, 0.05) 1px, transparent 1px);
+  background-size:
+    240px 240px,
+    240px 240px,
+    24px 24px,
+    24px 24px;
+}
+
+/* Aydınger / milimetrik kâğıt */
+.gridPaper {
+  background-color: #f4f0e8;
+  background-image:
+    linear-gradient(to right, rgba(21, 17, 11, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(21, 17, 11, 0.07) 1px, transparent 1px),
+    linear-gradient(to right, rgba(21, 17, 11, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(21, 17, 11, 0.03) 1px, transparent 1px);
+  background-size:
+    160px 160px,
+    160px 160px,
+    16px 16px,
+    16px 16px;
+}
+
+/* İçi boş, kontur yazı */
+.stroke {
+  color: transparent;
+  -webkit-text-stroke: 1.5px #c9a876;
+}
+@media (min-width: 1024px) {
+  .stroke {
+    -webkit-text-stroke-width: 2px;
+  }
+}
+
+.strokeInk {
+  color: transparent;
+  -webkit-text-stroke: 1.5px #15110b;
+}
+
+/* Köşe artı (crosshair) işaretleri */
+.crosshair {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+.crosshair::before,
+.crosshair::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+}
+.crosshair::before {
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+}
+.crosshair::after {
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+}
+
+/* Ölçü çizgisi: |——— metin ———| */
+.dimension {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.dimension::before,
+.dimension::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+.dimensionWrap {
+  position: relative;
+  padding-inline: 1px;
+}
+.dimensionWrap::before,
+.dimensionWrap::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 1px;
+  height: 14px;
+  transform: translateY(-50%);
+  background: currentColor;
+  opacity: 0.8;
+}
+.dimensionWrap::before {
+  left: 0;
+}
+.dimensionWrap::after {
+  right: 0;
+}
+
+/* Kayan bant */
+.marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none;
+  }
+}

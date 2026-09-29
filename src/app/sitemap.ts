@@ -94,8 +94,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     };
   });
 
+  // Yalnızca TR yayında olan sayfalar — hreflang alternatifi yok
+  const trOnlyPages = ["/ogrenci-programi"].map((p) => ({
+    url: canonicalFor("tr", p),
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
   return [
     ...staticPages,
+    ...trOnlyPages,
     ...productPages,
     ...servicePages,
     ...projectPages,

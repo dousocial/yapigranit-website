@@ -4,11 +4,13 @@ import * as React from "react";
 import { useLocale } from "next-intl";
 import { motion, AnimatePresence } from "motion/react";
 import { X, ArrowRight, Gift } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 import { trackEvent } from "@/lib/tracking";
 
 const STORAGE_KEY = "yg_exit_popup_shown";
 const SHOW_AFTER_MS = 14 * 24 * 60 * 60 * 1000; // 14 gün boyunca tekrar gösterme
+// Numune teklifinin alakasız olduğu sayfalar (ör. öğrenci programı)
+const EXCLUDED_PATHS = ["/ogrenci-programi"];
 
 const i18n = {
   tr: {
@@ -51,6 +53,7 @@ const i18n = {
 
 export function ExitIntentPopup() {
   const locale = useLocale();
+  const pathname = usePathname();
   const tx = i18n[locale as "tr" | "en" | "de"] ?? i18n.tr;
 
   const [open, setOpen] = React.useState(false);
@@ -59,6 +62,7 @@ export function ExitIntentPopup() {
   React.useEffect(() => {
     // yapigranit.de (DE) sitesinde numune pop-up'ı gösterilmez
     if (locale === "de") return;
+    if (EXCLUDED_PATHS.some((p) => pathname.startsWith(p))) return;
 
     // Daha önce gösterildi mi?
     const last = localStorage.getItem(STORAGE_KEY);
@@ -109,7 +113,7 @@ export function ExitIntentPopup() {
       window.removeEventListener("scroll", onScroll);
       clearTimeout(dwellTimer);
     };
-  }, [locale]);
+  }, [locale, pathname]);
 
   function close() {
     setOpen(false);

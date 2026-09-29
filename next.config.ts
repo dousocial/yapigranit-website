@@ -25,6 +25,16 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: projectRoot,
   },
+  async redirects() {
+    return [
+      // Broşür / QR'da kısa yazım da çalışsın
+      {
+        source: "/ogrenci-program",
+        destination: "/ogrenci-programi",
+        permanent: true,
+      },
+    ];
+  },
   poweredByHeader: false,
   compress: true,
 };

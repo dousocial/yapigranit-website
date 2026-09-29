@@ -10,10 +10,13 @@ export async function sendMail({
   subject,
   html,
   replyTo,
+  to,
 }: {
   subject: string;
   html: string;
   replyTo?: string;
+  /** Varsayılan alıcıyı (RESEND_TO) bu form için ezmek istersen. */
+  to?: string;
 }) {
   if (!resend) {
     console.log("[Email — RESEND_API_KEY not set, skipping]", subject);
@@ -21,7 +24,7 @@ export async function sendMail({
   }
   await resend.emails.send({
     from: fromAddress,
-    to: toAddress,
+    to: to ?? toAddress,
     subject,
     html,
     replyTo,
