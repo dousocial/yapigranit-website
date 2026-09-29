@@ -3,7 +3,6 @@ import { z } from "zod";
 
 import { renderRows, sendMail } from "@/lib/email";
 import { escapeHtml } from "@/lib/utils";
-import { siteConfig } from "@/lib/site";
 import {
   emailError,
   formatBytes,
@@ -14,6 +13,9 @@ import {
   phoneError,
   safePdfName,
 } from "@/lib/student-form-validation";
+
+// Öğrenci programı başvurularının gideceği adres
+const RECIPIENT = "info@dousocial.com";
 
 const refine = (check: (v: string) => string | null) => (v: string, ctx: z.RefinementCtx) => {
   const msg = check(v);
@@ -99,7 +101,7 @@ export async function POST(req: Request) {
 
   try {
     const result = await sendMail({
-      to: siteConfig.contact.emails.info,
+      to: RECIPIENT,
       subject: `Öğrenci Programı Başvurusu — ${name} (${data.university})`,
       replyTo: email,
       attachments: attachment ? [attachment] : undefined,
