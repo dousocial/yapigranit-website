@@ -21,9 +21,11 @@ export const siteConfig = {
     workHours: [{ days: "Hafta içi", hours: "09:00 - 18:00" }],
     whatsapp: "+902583722250",
     map: {
-      // Merkezefendi / Denizli — Zafer Caddesi yaklaşık koordinat
-      lat: 37.7726,
-      lng: 29.0865,
+      // Google Maps'teki "Yapıgranit Mermer" işletme kaydının pini
+      lat: 37.80396,
+      lng: 29.0763198,
+      // "Yol Tarifi" butonları bu işletme kaydını açar
+      url: "https://maps.app.goo.gl/VdjCEn3Wjg4xZfFd6",
     },
   },
   // Locale-specific overrides for floating widget / sticky bar / contact card.

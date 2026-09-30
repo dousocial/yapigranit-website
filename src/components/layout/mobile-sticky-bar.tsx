@@ -24,7 +24,7 @@ export function MobileStickyBar() {
     /\D/g,
     "",
   );
-  const mapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${siteConfig.contact.map.lat},${siteConfig.contact.map.lng}`;
+  const mapsUrl = siteConfig.contact.map.url;
 
   const items: Array<{
     href: string;

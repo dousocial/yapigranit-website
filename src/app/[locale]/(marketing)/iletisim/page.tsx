@@ -115,7 +115,7 @@ function IletisimContent() {
                 siteConfig.contact.address.city,
               ]}
               actionLabel={t("infoCenterAction")}
-              actionHref={`https://www.google.com/maps/dir/?api=1&destination=${siteConfig.contact.map.lat},${siteConfig.contact.map.lng}`}
+              actionHref={siteConfig.contact.map.url}
               external
             />
             <InfoCard
@@ -187,7 +187,7 @@ function IletisimContent() {
                     {siteConfig.contact.address.city}
                   </p>
                   <a
-                    href={`https://www.google.com/maps/dir/?api=1&destination=${siteConfig.contact.map.lat},${siteConfig.contact.map.lng}`}
+                    href={siteConfig.contact.map.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center min-h-11 py-2 gap-1.5 text-[0.78rem] font-medium uppercase tracking-[0.15em] text-gold-deep hover:text-gold"
