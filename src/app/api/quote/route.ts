@@ -61,7 +61,7 @@ export async function POST(req: Request) {
       // ignore DB
     }
 
-    await sendMail({
+    const mail = await sendMail({
       subject: `Yeni Teklif Talebi — ${parsed.projectType} / ${parsed.applicationArea}`,
       replyTo: parsed.email,
       html: `
@@ -89,6 +89,11 @@ export async function POST(req: Request) {
         }
       `,
     });
+
+    // Mail gitmediyse başvuru sessizce kaybolmasın — form hata göstersin
+    if (!mail.ok) {
+      return NextResponse.json({ ok: false }, { status: 502 });
+    }
 
     return NextResponse.json({ ok: true });
   } catch (err) {

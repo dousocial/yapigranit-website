@@ -39,7 +39,7 @@ export async function POST(req: Request) {
       // DB henüz hazır değilse mail göndermeye devam et
     }
 
-    await sendMail({
+    const mail = await sendMail({
       subject: `Yeni iletişim mesajı — ${parsed.subject}`,
       replyTo: parsed.email,
       html: `
@@ -56,6 +56,11 @@ export async function POST(req: Request) {
         <p>${escapeHtml(parsed.message).replace(/\n/g, "<br>")}</p>
       `,
     });
+
+    // Mail gitmediyse başvuru sessizce kaybolmasın — form hata göstersin
+    if (!mail.ok) {
+      return NextResponse.json({ ok: false }, { status: 502 });
+    }
 
     return NextResponse.json({ ok: true, saved });
   } catch (err) {
