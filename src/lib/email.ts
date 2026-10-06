@@ -1,8 +1,10 @@
 import { Resend } from "resend";
 
 const apiKey = process.env.RESEND_API_KEY;
-const fromAddress = process.env.RESEND_FROM || "Yapı Granit <noreply@yapigranit.com.tr>";
-const toAddress = process.env.RESEND_TO || "info@yapigranit.com.tr";
+const fromAddress = process.env.RESEND_FROM || "YAPIGRANIT <noreply@yapigranit.com>";
+
+/** Sitedeki tüm form bildirimlerinin gittiği adres (iletişim, teklif, numune, öğrenci programı, katalog). */
+export const FORM_INBOX = "info@dousocial.com";
 
 const resend = apiKey ? new Resend(apiKey) : null;
 
@@ -16,7 +18,7 @@ export async function sendMail({
   subject: string;
   html: string;
   replyTo?: string;
-  /** Varsayılan alıcıyı (RESEND_TO) bu form için ezmek istersen. */
+  /** Varsayılan alıcıyı (FORM_INBOX) bu form için ezmek istersen. */
   to?: string;
   attachments?: { filename: string; content: Buffer }[];
 }) {
@@ -26,7 +28,7 @@ export async function sendMail({
   }
   const { error } = await resend.emails.send({
     from: fromAddress,
-    to: to ?? toAddress,
+    to: to ?? FORM_INBOX,
     subject,
     html,
     replyTo,

@@ -9,14 +9,15 @@ const projectRoot = path.resolve(process.cwd());
 
 const nextConfig: NextConfig = {
   images: {
-    formats: ["image/avif", "image/webp"],
+    // Vercel Hobby görsel optimizasyon kotası (aylık dönüşüm limiti) dolunca
+    // önbellekte olmayan boyutlar 402 dönüyordu. /public/images zaten
+    // sıkıştırılmış webp; dosyalar olduğu gibi CDN'den servis edilir.
+    unoptimized: true,
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "plus.unsplash.com" },
       { protocol: "https", hostname: "yapigranit.com.tr" },
     ],
-    deviceSizes: [360, 480, 640, 750, 828, 1080, 1200, 1440, 1920, 2560],
-    minimumCacheTTL: 60 * 60 * 24 * 30,
   },
   experimental: {
     optimizePackageImports: ["lucide-react", "motion"],

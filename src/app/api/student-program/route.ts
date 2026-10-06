@@ -14,9 +14,6 @@ import {
   safePdfName,
 } from "@/lib/student-form-validation";
 
-// Öğrenci programı başvurularının gideceği adres
-const RECIPIENT = "info@dousocial.com";
-
 const refine = (check: (v: string) => string | null) => (v: string, ctx: z.RefinementCtx) => {
   const msg = check(v);
   if (msg) ctx.addIssue({ code: "custom", message: msg });
@@ -101,7 +98,6 @@ export async function POST(req: Request) {
 
   try {
     const result = await sendMail({
-      to: RECIPIENT,
       subject: `Öğrenci Programı Başvurusu — ${name} (${data.university})`,
       replyTo: email,
       attachments: attachment ? [attachment] : undefined,

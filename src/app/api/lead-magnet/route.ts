@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
+import { renderRows, sendMail } from "@/lib/email";
+
 const schema = z.object({
   email: z.string().email(),
   name: z.string().min(2).max(80),
@@ -19,38 +21,25 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const data = schema.parse(body);
 
-    // Resend ile e-posta listesine ekle / bildirim gönder
-    const apiKey = process.env.RESEND_API_KEY;
-    const from = process.env.RESEND_FROM ?? "noreply@yapigranit.com";
-    const to = process.env.RESEND_TO ?? "info@yapigranit.com";
-
-    if (apiKey) {
-      try {
-        await fetch("https://api.resend.com/emails", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            from,
-            to: [to],
-            subject: `📥 Lead Magnet: ${data.asset}`,
-            html: `
-              <h2>Yeni Lead Magnet İndirme</h2>
-              <p><strong>Asset:</strong> ${data.asset}</p>
-              <p><strong>İsim:</strong> ${data.name}</p>
-              <p><strong>E-posta:</strong> ${data.email}</p>
-              <p><em>${new Date().toISOString()}</em></p>
-            `,
-          }),
-        });
-      } catch (err) {
-        // Email başarısız olsa bile download'a izin ver
-        console.error("[lead-magnet] resend failed:", err);
-      }
-    } else {
-      console.log("[lead-magnet]", data);
+    // Bildirim e-postası — başarısız olsa bile indirmeye izin ver
+    try {
+      await sendMail({
+        subject: `📥 Lead Magnet: ${data.asset}`,
+        replyTo: data.email,
+        html: `
+          <h2>Yeni Lead Magnet İndirme</h2>
+          <table cellpadding="0" cellspacing="0" style="font-family:system-ui;font-size:14px;width:100%;max-width:640px">
+            ${renderRows({
+              Asset: data.asset,
+              İsim: data.name,
+              "E-posta": data.email,
+              Tarih: new Date().toISOString(),
+            })}
+          </table>
+        `,
+      });
+    } catch (err) {
+      console.error("[lead-magnet] mail failed:", err);
     }
 
     const downloadUrl = `/downloads/${data.asset}`;
