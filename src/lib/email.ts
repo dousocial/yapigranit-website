@@ -23,6 +23,12 @@ export async function sendMail({
   attachments?: { filename: string; content: Buffer }[];
 }) {
   if (!resend) {
+    // Canlıda anahtar yoksa başvuru sessizce kaybolmasın: hata dön, form hata göstersin.
+    // Vercel dışında (lokal geliştirme) mail atlanır ve başarılı sayılır.
+    if (process.env.VERCEL_ENV === "production") {
+      console.error("[Email — RESEND_API_KEY not set in production]", subject);
+      return { ok: false, error: "RESEND_API_KEY missing" };
+    }
     console.log("[Email — RESEND_API_KEY not set, skipping]", subject);
     return { ok: true, skipped: true };
   }
