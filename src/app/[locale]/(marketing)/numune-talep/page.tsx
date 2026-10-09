@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PackageCheck, Truck, Layers, Palette } from "lucide-react";
+import { PackageCheck, Truck, Layers, Palette, MapPin } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
@@ -111,6 +111,25 @@ function SampleContent() {
 
             <Reveal delay={0.15} className="lg:col-span-8">
               <div className="bg-surface border border-line p-8 lg:p-10">
+                {/* Geçici gönderim kısıtı — teknik aksaklık nedeniyle yalnızca Denizli */}
+                <div
+                  role="note"
+                  className="flex items-start gap-4 border-l-2 border-gold bg-gold/10 px-5 py-4 mb-8"
+                >
+                  <MapPin
+                    className="size-5 text-gold-deep shrink-0 mt-0.5"
+                    strokeWidth={1.6}
+                    aria-hidden
+                  />
+                  <div>
+                    <p className="font-display text-[1.1rem] text-ink leading-snug">
+                      {t("shippingNoticeTitle")}
+                    </p>
+                    <p className="mt-1 text-[0.85rem] text-ink-muted leading-relaxed">
+                      {t("shippingNoticeBody")}
+                    </p>
+                  </div>
+                </div>
                 <SampleRequestForm />
               </div>
             </Reveal>

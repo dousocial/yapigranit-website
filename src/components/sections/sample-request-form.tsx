@@ -5,12 +5,16 @@ import { useLocale, useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Lock } from "lucide-react";
 import { toast } from "sonner";
 
 import { Input, Textarea } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { trackLead } from "@/lib/tracking";
+import {
+  DENIZLI_DISTRICTS,
+  SAMPLE_SHIPPING_PROVINCE,
+} from "@/lib/data/sample-shipping";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 
@@ -94,8 +98,13 @@ export function SampleRequestForm() {
         name: z.string().min(2, t("errorNameRequired")),
         email: z.string().email(t("errorEmail")),
         phone: z.string().min(7, t("errorPhoneShort")),
-        address: z.string().min(10, t("errorAddress")),
-        city: z.string().min(2, t("errorCity")),
+        district: z
+          .string()
+          .refine(
+            (v) => (DENIZLI_DISTRICTS as readonly string[]).includes(v),
+            t("errorDistrict"),
+          ),
+        address: z.string().trim().min(10, t("errorAddress")),
         projectType: z.string().min(1, t("errorProjectType")),
         materials: z.array(z.string()).min(1, t("errorMaterialMin")),
         notes: z.string().optional(),
@@ -117,6 +126,7 @@ export function SampleRequestForm() {
     resolver: zodResolver(schema),
     defaultValues: {
       customerType: "kurumsal",
+      district: "",
       materials: [],
       consent: false,
     },
@@ -139,6 +149,7 @@ export function SampleRequestForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...values,
+          city: SAMPLE_SHIPPING_PROVINCE,
           materials: values.materials.join(","),
         }),
       });
@@ -207,32 +218,62 @@ export function SampleRequestForm() {
             {...register("phone")}
           />
         </Field>
-        <Field error={errors.city?.message}>
-          <Input placeholder={`${t("labelCity")} *`} {...register("city")} />
+        <Field error={errors.projectType?.message}>
+          <select
+            {...register("projectType")}
+            className="w-full bg-transparent text-ink py-3 border-0 border-b border-line-strong focus:outline-none focus:border-gold text-[0.95rem]"
+          >
+            <option value="">{`${t("labelProjectType")} *`}</option>
+            {projectTypes.map((label) => (
+              <option key={label} value={label}>
+                {label}
+              </option>
+            ))}
+          </select>
         </Field>
       </div>
 
-      <Field error={errors.address?.message}>
-        <Textarea
-          rows={2}
-          placeholder={`${t("labelAddress")} *`}
-          {...register("address")}
-        />
-      </Field>
-
-      <Field error={errors.projectType?.message}>
-        <select
-          {...register("projectType")}
-          className="w-full bg-transparent text-ink py-3 border-0 border-b border-line-strong focus:outline-none focus:border-gold text-[0.95rem]"
-        >
-          <option value="">{`${t("labelProjectType")} *`}</option>
-          {projectTypes.map((label) => (
-            <option key={label} value={label}>
-              {label}
-            </option>
-          ))}
-        </select>
-      </Field>
+      {/* Gönderim adresi — şimdilik yalnızca Denizli il sınırları */}
+      <div>
+        <p className="text-[0.78rem] uppercase tracking-[0.18em] text-ink-soft mb-3">
+          {t("labelShippingAddress")} *
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div
+            className="flex items-center justify-between gap-3 py-3 border-b border-line text-[0.95rem]"
+            aria-label={`${t("labelProvince")}: ${SAMPLE_SHIPPING_PROVINCE}`}
+          >
+            <span className="text-ink-soft">{t("labelProvince")}</span>
+            <span className="inline-flex items-center gap-2 text-ink">
+              {SAMPLE_SHIPPING_PROVINCE}
+              <Lock className="size-3.5 text-gold-deep" strokeWidth={1.8} aria-hidden />
+            </span>
+          </div>
+          <Field error={errors.district?.message}>
+            <select
+              {...register("district")}
+              aria-label={t("labelDistrict")}
+              className="w-full bg-transparent text-ink py-3 border-0 border-b border-line-strong focus:outline-none focus:border-gold text-[0.95rem]"
+            >
+              <option value="">{`${t("labelDistrict")} *`}</option>
+              {DENIZLI_DISTRICTS.map((d) => (
+                <option key={d} value={d}>
+                  {d}
+                </option>
+              ))}
+            </select>
+          </Field>
+        </div>
+        <div className="mt-5">
+          <Field error={errors.address?.message}>
+            <Textarea
+              rows={2}
+              placeholder={`${t("labelAddress")} *`}
+              {...register("address")}
+            />
+          </Field>
+        </div>
+      </div>
 
       <div>
         <p className="text-[0.78rem] uppercase tracking-[0.18em] text-ink-soft mb-3">

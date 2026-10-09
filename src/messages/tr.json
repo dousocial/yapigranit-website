@@ -382,9 +382,11 @@
       "benefitSetTitle": "Profesyonel Numune Seti",
       "benefitSetDesc": "Mermer, granit ve porselen kategorilerinden seçim hakkı.",
       "benefitShippingTitle": "Ücretsiz Kargo",
-      "benefitShippingDesc": "Mimar ve müteahhit ofis adreslerine ücretsiz teslimat.",
+      "benefitShippingDesc": "Denizli il sınırları içindeki ofis ve proje adreslerine ücretsiz teslimat.",
       "benefitFastTitle": "Hızlı Hazırlık",
-      "benefitFastDesc": "Talep sonrası 2-3 iş günü içinde kargolanır."
+      "benefitFastDesc": "Talep sonrası 2-3 iş günü içinde kargolanır.",
+      "shippingNoticeTitle": "Şu an yalnızca Denizli'ye gönderim yapıyoruz",
+      "shippingNoticeBody": "Yaşanan teknik bir aksaklık nedeniyle numune gönderimlerini şimdilik yalnızca Denizli il sınırları içindeki adreslere yapabiliyoruz. Anlayışınız için teşekkür ederiz."
     }
   },
   "Forms": {
@@ -405,7 +407,7 @@
     "labelArea": "Yaklaşık Metraj (m²)",
     "labelDeadline": "İstenen Teslim Tarihi",
     "labelNotes": "Proje hakkında kısa not, özel istekler...",
-    "labelAddress": "Numune kargolanacak tam adres",
+    "labelAddress": "Mahalle, cadde / sokak, bina ve daire no",
     "labelMaterialPrefs": "Numune Tercihleri",
     "labelExtraNotes": "Eklemek istediğiniz notlar...",
     "labelKvkk": "Kişisel verilerin işlenmesine ilişkin",
@@ -426,7 +428,7 @@
     "errorKvkk": "Devam etmek için aydınlatma metnini onaylamalısınız.",
     "errorKvkkShort": "Aydınlatma metnini onaylayın.",
     "errorCity": "Şehir gerekli.",
-    "errorAddress": "Tam adres gerekli.",
+    "errorAddress": "Mahalle, sokak ve kapı numarasını yazın.",
     "errorProjectType": "Proje tipi seçin.",
     "errorApplicationArea": "Uygulama alanı seçin.",
     "errorMaterial": "Malzeme tercihinizi seçin.",
@@ -449,7 +451,11 @@
     "uploadAction": "seçin",
     "uploadLimits": "Maks. 5 dosya, dosya başına 10 MB",
     "uploadSizeError": "Bazı dosyalar 10 MB sınırını aşıyor.",
-    "uploadCategory": "Proje Dosyaları (DWG, PDF, görsel)"
+    "uploadCategory": "Proje Dosyaları (DWG, PDF, görsel)",
+    "labelShippingAddress": "Gönderim Adresi",
+    "labelProvince": "İl",
+    "labelDistrict": "İlçe",
+    "errorDistrict": "İlçe seçin."
   },
   "QuoteCalculator": {
     "eyebrow": "Hızlı Hesap",

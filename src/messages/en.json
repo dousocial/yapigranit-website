@@ -382,9 +382,11 @@
       "benefitSetTitle": "Professional Sample Set",
       "benefitSetDesc": "Selection from marble, granite and porcelain categories.",
       "benefitShippingTitle": "Free Shipping",
-      "benefitShippingDesc": "Free delivery to architect and contractor office addresses.",
+      "benefitShippingDesc": "Free delivery to office and project addresses within the province of Denizli.",
       "benefitFastTitle": "Fast Preparation",
-      "benefitFastDesc": "Shipped within 2-3 business days after request."
+      "benefitFastDesc": "Shipped within 2-3 business days after request.",
+      "shippingNoticeTitle": "We currently ship to Denizli only",
+      "shippingNoticeBody": "Due to a technical issue, we can currently only ship samples to addresses within the province of Denizli. Thank you for your understanding."
     }
   },
   "Forms": {
@@ -405,7 +407,7 @@
     "labelArea": "Approximate Area (m²)",
     "labelDeadline": "Desired Delivery Date",
     "labelNotes": "Brief notes about the project, special requests...",
-    "labelAddress": "Full address for sample shipping",
+    "labelAddress": "Neighbourhood, street, building and flat no.",
     "labelMaterialPrefs": "Sample Preferences",
     "labelExtraNotes": "Additional notes...",
     "labelKvkk": "I have read the",
@@ -426,7 +428,7 @@
     "errorKvkk": "You must accept the privacy notice to continue.",
     "errorKvkkShort": "Please accept the privacy notice.",
     "errorCity": "City is required.",
-    "errorAddress": "Full address is required.",
+    "errorAddress": "Please enter the neighbourhood, street and building number.",
     "errorProjectType": "Please select a project type.",
     "errorApplicationArea": "Please select an application area.",
     "errorMaterial": "Please select your material preference.",
@@ -449,7 +451,11 @@
     "uploadAction": "select",
     "uploadLimits": "Max. 5 files, 10 MB per file",
     "uploadSizeError": "Some files exceed the 10 MB limit.",
-    "uploadCategory": "Project Files (DWG, PDF, images)"
+    "uploadCategory": "Project Files (DWG, PDF, images)",
+    "labelShippingAddress": "Shipping Address",
+    "labelProvince": "Province",
+    "labelDistrict": "District",
+    "errorDistrict": "Please select a district."
   },
   "QuoteCalculator": {
     "eyebrow": "Quick Estimate",

@@ -4,6 +4,10 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { renderRows, sendMail } from "@/lib/email";
 import { escapeHtml } from "@/lib/utils";
+import {
+  DENIZLI_DISTRICTS,
+  SAMPLE_SHIPPING_PROVINCE,
+} from "@/lib/data/sample-shipping";
 
 const schema = z.object({
   customerType: z.enum(["bireysel", "kurumsal"]),
@@ -11,8 +15,10 @@ const schema = z.object({
   name: z.string().min(2),
   email: z.string().email(),
   phone: z.string().min(5),
-  address: z.string().min(10),
-  city: z.string().min(2),
+  address: z.string().trim().min(10),
+  // Teknik aksaklık nedeniyle şimdilik yalnızca Denizli il sınırları
+  city: z.literal(SAMPLE_SHIPPING_PROVINCE),
+  district: z.enum(DENIZLI_DISTRICTS),
   projectType: z.string().min(1),
   materials: z.string().min(1),
   notes: z.string().optional(),
@@ -37,7 +43,7 @@ export async function POST(req: Request) {
           email: parsed.email,
           phone: parsed.phone,
           address: parsed.address,
-          city: parsed.city,
+          city: `${parsed.district} / ${parsed.city}`,
           projectType: parsed.projectType,
           materials: parsed.materials,
           notes: parsed.notes,
@@ -59,7 +65,8 @@ export async function POST(req: Request) {
             "Ad Soyad": parsed.name,
             "E-posta": parsed.email,
             Telefon: parsed.phone,
-            Şehir: parsed.city,
+            İl: parsed.city,
+            İlçe: parsed.district,
             Adres: parsed.address,
             "Proje Tipi": parsed.projectType,
             "Numune Tercihleri": parsed.materials,

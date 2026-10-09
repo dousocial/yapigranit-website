@@ -382,9 +382,11 @@
       "benefitSetTitle": "Professionelles Musterset",
       "benefitSetDesc": "Auswahl aus Marmor-, Granit- und Porzellankategorien.",
       "benefitShippingTitle": "Kostenloser Versand",
-      "benefitShippingDesc": "Kostenlose Lieferung an Architekten- und Bauunternehmer-Büroadressen.",
+      "benefitShippingDesc": "Kostenlose Lieferung an Büro- und Projektadressen innerhalb der Provinz Denizli.",
       "benefitFastTitle": "Schnelle Vorbereitung",
-      "benefitFastDesc": "Versand innerhalb von 2-3 Werktagen nach Anfrage."
+      "benefitFastDesc": "Versand innerhalb von 2-3 Werktagen nach Anfrage.",
+      "shippingNoticeTitle": "Derzeit liefern wir nur nach Denizli",
+      "shippingNoticeBody": "Aufgrund einer technischen Störung können wir Muster vorübergehend nur an Adressen innerhalb der Provinz Denizli versenden. Vielen Dank für Ihr Verständnis."
     }
   },
   "Forms": {
@@ -405,7 +407,7 @@
     "labelArea": "Ungefähre Fläche (m²)",
     "labelDeadline": "Gewünschtes Lieferdatum",
     "labelNotes": "Kurze Notizen zum Projekt, besondere Wünsche...",
-    "labelAddress": "Vollständige Adresse für den Musterversand",
+    "labelAddress": "Viertel, Straße, Haus- und Wohnungsnr.",
     "labelMaterialPrefs": "Mustervorlieben",
     "labelExtraNotes": "Zusätzliche Notizen...",
     "labelKvkk": "Ich habe die",
@@ -426,7 +428,7 @@
     "errorKvkk": "Sie müssen den Datenschutzhinweis akzeptieren, um fortzufahren.",
     "errorKvkkShort": "Bitte akzeptieren Sie den Datenschutzhinweis.",
     "errorCity": "Stadt erforderlich.",
-    "errorAddress": "Vollständige Adresse erforderlich.",
+    "errorAddress": "Bitte geben Sie Viertel, Straße und Hausnummer an.",
     "errorProjectType": "Bitte wählen Sie einen Projekttyp.",
     "errorApplicationArea": "Bitte wählen Sie einen Anwendungsbereich.",
     "errorMaterial": "Bitte wählen Sie Ihre Materialvorliebe.",
@@ -449,7 +451,11 @@
     "uploadAction": "auswählen",
     "uploadLimits": "Max. 5 Dateien, 10 MB pro Datei",
     "uploadSizeError": "Einige Dateien überschreiten das 10-MB-Limit.",
-    "uploadCategory": "Projektdateien (DWG, PDF, Bilder)"
+    "uploadCategory": "Projektdateien (DWG, PDF, Bilder)",
+    "labelShippingAddress": "Lieferadresse",
+    "labelProvince": "Provinz",
+    "labelDistrict": "Bezirk",
+    "errorDistrict": "Bitte wählen Sie einen Bezirk."
   },
   "QuoteCalculator": {
     "eyebrow": "Schnellschätzung",
