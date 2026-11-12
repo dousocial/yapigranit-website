@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import { Toaster } from "sonner";
@@ -8,7 +7,13 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 
 import { OrganizationJsonLd, LocalBusinessJsonLd } from "@/components/seo/structured-data";
 import { Analytics } from "@/components/seo/analytics";
-import { routing, localeOgFormats, type Locale } from "@/i18n/routing";
+import {
+  routing,
+  localeOgFormats,
+  localeDomainMap,
+  COM_DOMAIN,
+  type Locale,
+} from "@/i18n/routing";
 import { buildAlternates } from "@/lib/i18n-urls";
 
 const display = Cormorant_Garamond({
@@ -42,14 +47,12 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "Site" });
   const ogLocale = localeOgFormats[locale as Locale] ?? "tr_TR";
 
-  const h = await headers();
-  const host = (
-    h.get("x-forwarded-host") ??
-    h.get("host") ??
-    "yapigranit.com"
-  ).toLowerCase();
-  const proto = h.get("x-forwarded-proto") ?? "https";
-  const metadataBase = new URL(`${proto}://${host}`);
+  // metadataBase dile göre sabit: headers() kullanmak tüm sayfaları dinamik
+  // (her istekte sunucuda render) yapıyordu → Vercel Fluid CPU limiti doluyordu.
+  // de → yapigranit.de, tr/en → yapigranit.com (canonical URL'lerle aynı mantık).
+  const metadataBase = new URL(
+    `https://${localeDomainMap[locale as Locale] ?? COM_DOMAIN}`,
+  );
 
   return {
     metadataBase,

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { LegalPage } from "@/components/sections/legal-page";
 import { buildAlternates } from "@/lib/i18n-urls";
 import type { Locale } from "@/i18n/routing";
@@ -16,7 +17,14 @@ export async function generateMetadata({
   };
 }
 
-export default function KullanimPage() {
+export default async function KullanimPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+
   return (
     <LegalPage
       title="Kullanım Şartları"
